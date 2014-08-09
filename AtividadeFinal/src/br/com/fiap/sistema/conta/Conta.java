@@ -15,6 +15,7 @@ import br.com.fiap.sistema.util.UtilProperties;
 
 public abstract class Conta{
 
+	// Saldo incial da conta no valor de R$ 10.000,00.
 	protected double saldo = 10000;
 	private int numero;
 	private int agencia;
@@ -23,6 +24,7 @@ public abstract class Conta{
 	private ArrayList<Movimentacao> movimentacoes = new ArrayList<Movimentacao>();	
 
 	/**
+	 * Construtor da classe Conta.
 	 * 
 	 * @param numero
 	 * @param agencia
@@ -38,6 +40,7 @@ public abstract class Conta{
 	}
 
 	/**
+	 * Método modificador do atributo nome.
 	 * 
 	 * @param nome
 	 */
@@ -46,22 +49,25 @@ public abstract class Conta{
 	}
 
 	/**
+	 * Método de consulta do atributo nome.
 	 * 
-	 * @return
+	 * @return nome
 	 */
 	public String getNome() {
 		return nome;
 	}
 
 	/**
+	 * Método de consulta do atributo numero.
 	 * 
-	 * @return
+	 * @return numero
 	 */
 	public int getNumero() {
 		return numero;
 	}
 
 	/**
+	 * Método para alterar o atributo numero.
 	 * 
 	 * @param numero
 	 */
@@ -69,11 +75,17 @@ public abstract class Conta{
 		this.numero = numero;
 	}
 
+	/**
+	 * Método de consulta do atributo agencia.
+	 *  
+	 * @return agencia
+	 */
 	public int getAgencia() {
 		return agencia;
 	}
 
 	/**
+	 * Método para alterar o atributo agencia.
 	 * 
 	 * @param agencia
 	 */
@@ -81,11 +93,17 @@ public abstract class Conta{
 		this.agencia = agencia;
 	}
 
+	/**
+	 * Método de consulta do atributo senha.
+	 * 
+	 * @return senha
+	 */
 	public int getSenha() {
 		return senha;
 	}
 
 	/**
+	 * Método para alterar o atributo senha.
 	 * 
 	 * @param senha
 	 */
@@ -94,6 +112,7 @@ public abstract class Conta{
 	}
 
 	/**
+	 * Método de consulta do atributo saldo.
 	 * 
 	 * @return
 	 */
@@ -102,6 +121,7 @@ public abstract class Conta{
 	}
 
 	/**
+	 * Método para o tratamento do valor de saque.
 	 * 
 	 * @param valor
 	 */
@@ -116,6 +136,7 @@ public abstract class Conta{
 	}
 
 	/**
+	 * Método para o tratamento do valor de depósito.
 	 * 
 	 * @param valor
 	 * @throws ValorInvalidoException
@@ -131,6 +152,8 @@ public abstract class Conta{
 	}
 
 	/**
+	 * Método para o adiciona uma nova
+	 * movimentação no fluxo de visualização do extrato.
 	 * 
 	 * @param m
 	 */
@@ -141,13 +164,21 @@ public abstract class Conta{
 
 
 	/**
+	 * Método para visualização de extrato na tela.
 	 * 
 	 * @throws IOException
 	 */
 	public void emiteExtratoTela() throws IOException{
 
+		/*
+		 *  Chamada do método estático UtilProperties.getProp() para implementar 
+		 *  mensagens parametrizadas em arquivo ".properties"
+		 */ 
 		Properties prop = UtilProperties.getProp();
 
+		/*
+		 *  Classe SimpleDateFormat implementada para formatar a data/hora.
+		 */
 		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");	
 		SimpleDateFormat formatador2 = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 		Date d = new Date();
@@ -168,7 +199,11 @@ public abstract class Conta{
 				prop.getProperty("prop.conta.cabecalho.saldo")
 				);
 		System.out.println(prop.getProperty("prop.conta.layout.barra"));
-		// imprime movimentações
+
+		/*
+		 *  Implementado a função ArrayList (List), com finalidade de exibir todos arranjo
+		 *  de movimentações realizadas pelo cliente.
+		 */
 		for (Movimentacao m : this.movimentacoes) {
 			System.out.printf("%-15s%-17s%-14.2f%14.2f \n",formatador.format(m.getData()), m.getMovimento().getDescricao(), m.getValor(), m.getSaldo());
 		}
@@ -178,17 +213,30 @@ public abstract class Conta{
 	}
 
 	/**
+	 * Método para emissão de extrato em arquivo do tipo ".txt"
 	 * 
 	 * @throws IOException
 	 */
 	public void emiteExtratoArquivo() throws IOException{
-		
+
+		/*
+		 *   Chamada do método estático UtilProperties.getProp() para implementar 
+		 *  mensagens parametrizadas em arquivo ".properties"
+		 */ 
 		Properties prop = UtilProperties.getProp();
 
+		/*
+		 *  Classe SimpleDateFormat implementada para formatar a data/hora.
+		 */
 		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");	
 		SimpleDateFormat formatador2 = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 		Date d = new Date();
 
+		/**
+		 * Classe FileWriter implementada para inserir fluxos de caracteres
+		 * em arquivos, exemplo ".txt".
+		 */
+		
 		FileWriter fw = new FileWriter("extrato.txt");
 		PrintWriter out = new PrintWriter(fw);
 
@@ -205,7 +253,12 @@ public abstract class Conta{
 				prop.getProperty("prop.conta.cabecalho.valor"),
 				prop.getProperty("prop.conta.cabecalho.saldo")
 				);
-		out.println(prop.getProperty("prop.conta.layout.barra"));			
+		out.println(prop.getProperty("prop.conta.layout.barra"));
+		
+		/*
+		 *  Implementado a função ArrayList (List), com finalidade de exibir todos arranjo
+		 *  de movimentações realizadas pelo cliente.
+		 */
 		for (Movimentacao m : this.movimentacoes) {
 			out.printf("%-15s%-17s%-14.2f%14.2f \n",formatador.format(m.getData()), m.getMovimento().getDescricao(), m.getValor(), m.getSaldo());
 		}

@@ -10,6 +10,7 @@ public class Movimentacao {
 	private Movimento movimento;
 
 	/**
+	 * Construtor da classe Movimentacao.
 	 * 
 	 * @param data
 	 * @param valor
@@ -25,6 +26,7 @@ public class Movimentacao {
 	}
 
 	/**
+	 * Método de consulta do atributo data.
 	 * 
 	 * @return
 	 */
@@ -33,6 +35,7 @@ public class Movimentacao {
 	}
 
 	/**
+	 * Método para alterar o atributo data.
 	 * 
 	 * @param data
 	 */
@@ -41,14 +44,16 @@ public class Movimentacao {
 	}
 
 	/**
+	 * Método de consulta do atributo valor.
 	 * 
-	 * @return
+	 * @return valor
 	 */
 	public double getValor() {
 		return valor;
 	}
 
 	/**
+	 * Método para alterar o atributo valor.
 	 * 
 	 * @param valor
 	 */
@@ -57,14 +62,16 @@ public class Movimentacao {
 	}
 
 	/**
+	 * Método de consulta do atributo saldo.
 	 * 
-	 * @return
+	 * @return saldo
 	 */
 	public double getSaldo() {
 		return saldo;
 	}
 
 	/**
+	 * Método para alterar o atributo saldo.
 	 * 
 	 * @param saldo
 	 */
@@ -73,6 +80,7 @@ public class Movimentacao {
 	}
 
 	/**
+	 * Método de consulta da classe Movimento.
 	 * 
 	 * @return
 	 */
@@ -81,6 +89,7 @@ public class Movimentacao {
 	}
 
 	/**
+	 * Método para alterar o atributo movimento.
 	 * 
 	 * @param movimento
 	 */

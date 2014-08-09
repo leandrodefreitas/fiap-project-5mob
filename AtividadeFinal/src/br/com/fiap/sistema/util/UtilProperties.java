@@ -7,6 +7,8 @@ import java.util.Properties;
 public class UtilProperties {
 	
 	/**
+	 * Método getProp() é resposável por acessar o arquivo de extensão 
+	 * ".properties" 
 	 * 
 	 * @return
 	 * @throws IOException
