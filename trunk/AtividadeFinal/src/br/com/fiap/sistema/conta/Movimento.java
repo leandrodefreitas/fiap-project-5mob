@@ -1,5 +1,11 @@
 package br.com.fiap.sistema.conta;
 
+/*
+ * Instância do tipo enum.
+ * Utilizada para uma lista constante dos itens CREDITO
+ * e DEBITO, com o seus respectivos códigose e descrições.
+ * 
+ */
 public enum Movimento {
 
 	CREDITO("Depósito", 1), DEBITO("Saque   ", 2);
@@ -8,6 +14,8 @@ public enum Movimento {
 	private int codigo;
 
 	/**
+	 * Método Movimento, que altera os atributos
+	 * descrição e codigo
 	 * 
 	 * @param descricao
 	 * @param codigo
@@ -18,16 +26,18 @@ public enum Movimento {
 	}
 
 	/**
+	 * Método de consulta do atributo codigo.
 	 * 
-	 * @return
+	 * @return codigo
 	 */
 	public int getCodigo() {
 		return codigo;
 	}
 
 	/**
+	 * Método de consulta do atributo descricao.
 	 * 
-	 * @return
+	 * @return descricao
 	 */
 	public String getDescricao() {
 		return descricao;
