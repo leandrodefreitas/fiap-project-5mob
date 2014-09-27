@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="hello">Hello World</string>
+    <string name="app_name">Agenda</string>
+    <string name="ContextoDados_onCreate">
+		CREATE TABLE Contatos (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nome TEXT,	Telefone TEXT, Endereco TEXT);
+	</string>
+	<string name="ContextoDados_onUpgrade">"
+		DROP TABLE IF EXISTS Contatos
+	</string>
+	<string name="contatos">Contatos</string>
+	<string name="lblNome">Nome:</string>
+	<string name="lblTelefone">Telefone:</string>
+	<string name="lblEndereco">Endereço:</string>
+	<string name="btnSalvar">Salvar</string>
+	<string name="btnCancelar">Cancelar</string>
+	
+	
+    <color name="holo_white">#ffffff</color>
+    <color name="holo_black">#000000</color>
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <color name="holo_green_light">#ff99cc00</color>
+    <color name="holo_red_light">#ffff4444</color>
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <color name="holo_green_dark">#ff669900</color>
+    <color name="holo_red_dark">#ffcc0000</color>
+    <color name="holo_purple">#ffaa66cc</color>
+    <color name="holo_orange_light">#ffffbb33</color>
+    <color name="holo_orange_dark">#ffff8800</color>
+    <color name="holo_blue_bright">#ff00ddff</color>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="txt_splash">Check Megasena</string>
+    <string name="title_activity_splash">Check Megasena</string>
+    
+    <string name="title_activity_consultar_concurso">Consultar Concurso</string>
+    <string name="consultar">Consultar</string>
+    <string name="ultimo_concurso">Último Concurso</string>
+    <string name="numero_concurso">Número do Concurso</string>
+    <string name="concurso">Concurso:</string>
+    <string name="data">Data:</string>
+    <string name="dezenas">Dezenas:</string>
+    <string name="limpar">Limpar</string>
+    <string name="title_activity_cadastrar_jogo">Cadastrar Jogo</string>
+    <string name="nome_jogo">Digite um nome para o jogo</string>
+    <string name="numero1">Número 1</string>
+    <string name="numero2">Número 2</string>
+    <string name="numero3">Número 3</string>
+    <string name="numero4">Número 4</string>
+    <string name="numero5">Número 5</string>
+    <string name="numero6">Número 6</string>
+    <string name="salvar">Salvar</string>
+    <string name="title_activity_escolher_jogo">Escolher Jogo</string>
+    <string name="title_activity_main">Check Megasena</string>
+    <string name="consultarConcurso">Consultar Concurso</string>
+    <string name="cadastrarJogo">Cadastrar Jogo</string>
+    <string name="conferirJogo">Conferir Jogo</string>
+    <string name="title_activity_conferir_jogo">Conferir Jogo</string>
+    
+    <string name="title_activity_gerar_surpresinha">Gerar Surpresinha</string>
+    <string name="gerarSurpresinha">Gerar Surpresinha</string>
+    <string name="gerar">Gerar</string>
+</resources>
