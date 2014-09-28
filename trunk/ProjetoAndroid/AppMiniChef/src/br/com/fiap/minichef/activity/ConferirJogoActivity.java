@@ -11,7 +11,7 @@ import android.os.Bundle ;
 import android.util.Log ;
 import android.widget.TextView ;
 import android.widget.Toast ;
-import br.com.fiap.exemplo.activity.R;
+import br.com.fiap.minichef.activity.R;
 import br.com.fiap.minichef.common.vo.JogoVO;
 import br.com.fiap.minichef.common.vo.Sorteio;
 import br.com.fiap.minichef.util.Util;

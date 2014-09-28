@@ -9,7 +9,7 @@ import android.view.View ;
 import android.view.ViewGroup ;
 import android.widget.ArrayAdapter ;
 import android.widget.TextView ;
-import br.com.fiap.exemplo.activity.R ;
+import br.com.fiap.minichef.activity.R;
 import br.com.fiap.minichef.common.vo.JogoVO;
 
 public class JogoAdapter extends ArrayAdapter<JogoVO>
