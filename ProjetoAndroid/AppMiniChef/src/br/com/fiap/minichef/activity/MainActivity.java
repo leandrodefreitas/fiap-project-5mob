@@ -1,6 +1,6 @@
 package br.com.fiap.minichef.activity ;
 
-import br.com.fiap.exemplo.activity.R;
+import br.com.fiap.minichef.activity.R;
 import android.app.Activity ;
 import android.content.Intent ;
 import android.os.Bundle ;

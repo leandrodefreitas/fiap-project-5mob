@@ -17,7 +17,7 @@ import android.widget.AdapterView.OnItemLongClickListener ;
 import android.widget.LinearLayout ;
 import android.widget.ListView ;
 import android.widget.TextView ;
-import br.com.fiap.exemplo.activity.R;
+import br.com.fiap.minichef.activity.R;
 import br.com.fiap.minichef.adapter.JogoAdapter;
 import br.com.fiap.minichef.common.vo.JogoVO;
 import br.com.fiap.minichef.common.vo.Sorteio;

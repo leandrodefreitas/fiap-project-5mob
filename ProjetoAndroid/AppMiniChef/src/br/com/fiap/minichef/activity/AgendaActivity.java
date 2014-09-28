@@ -11,7 +11,7 @@ import android.view.View.OnClickListener ;
 import android.widget.Button ;
 import android.widget.EditText ;
 import android.widget.TextView ;
-import br.com.fiap.exemplo.activity.R;
+import br.com.fiap.minichef.activity.R;
 import br.com.fiap.minichef.common.vo.ContatoVO;
 import br.com.fiap.minichef.services.scn.CadastroSCN;
 
