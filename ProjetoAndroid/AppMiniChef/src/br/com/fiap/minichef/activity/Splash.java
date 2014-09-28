@@ -23,7 +23,7 @@ public class Splash extends Activity implements Runnable
 
 	public void run( )
 	{
-		startActivity( new Intent( ".MainActivity" ) ) ;
+		startActivity( new Intent( ".MenuActivity" ) ) ;
 
 		finish( ) ;
 	}
