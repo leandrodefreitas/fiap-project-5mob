@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <br.com.fiap.minichef.view.DashboardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_gradiente"
+        >
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_massa"
+            android:text="@string/btnMassas"
+            android:drawableTop="@drawable/img_btn_massa"
+            android:onClick="onClickMassa"
+            android:textColor="#cfff101a"
+            android:textSize="20sp" />
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_lanche"
+            android:text="@string/btnLanches"
+            android:drawableTop="@drawable/img_btn_lanche"
+            android:onClick="2"
+            android:textColor="#cfff101a"
+            android:textSize="20sp" />
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_carne"
+            android:text="@string/btnCarnes"
+            android:drawableTop="@drawable/img_btn_carne"
+            android:onClick="3"
+            android:textColor="#cfff101a"
+            android:textSize="20sp" />
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_salada"
+            android:text="@string/btnSaladas"
+            android:drawableTop="@drawable/img_btn_salada"
+            android:onClick="4"
+            android:textColor="#cfff101a"
+            android:textSize="20sp" />
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_sopa"
+            android:text="@string/btnSopas"
+            android:drawableTop="@drawable/img_btn_sopa"
+            android:onClick="5"
+            android:textColor="#cfff101a"
+            android:textSize="20sp" />
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_petisco"
+            android:text="@string/btnPetiscos"
+            android:drawableTop="@drawable/img_btn_petisco"
+            android:onClick="6"
+            android:textColor="#cfff101a"
+            android:textSize="20sp" />
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_sobremesa"
+            android:text="@string/btnSobremesas"
+            android:drawableTop="@drawable/img_btn_sobremesa"
+            android:onClick="7"
+            android:textColor="#cfff101a"
+            android:textSize="20sp" />
+        <Button
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_refeicao_completa"
+            android:text="@string/btnRefeicaoCompleta"
+            android:drawableTop="@drawable/img_btn_refeicao_completa"
+            android:onClick="8"
+            android:textColor="#cfff101a"
+            android:textSize="20sp" />
+
+    </br.com.fiap.minichef.view.DashboardLayout>
+</LinearLayout>
