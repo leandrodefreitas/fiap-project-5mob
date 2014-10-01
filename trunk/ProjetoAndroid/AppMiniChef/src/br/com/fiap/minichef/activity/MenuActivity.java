@@ -15,11 +15,11 @@ public class MenuActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.menu);
+		setContentView(R.layout.outro_menu);
 		
-		imgMassas = (ImageView) findViewById(R.id.imageView1);
+		//imgMassas = (ImageView) findViewById(R.id.imageView1);
 		
-		imgMassas.setOnClickListener(this);
+		//imgMassas.setOnClickListener(this);
 		
 		
 	}

@@ -62,4 +62,25 @@
     <string name="title_activity_gerar_surpresinha">Gerar Surpresinha</string>
     <string name="gerarSurpresinha">Gerar Surpresinha</string>
     <string name="gerar">Gerar</string>
+    
+    
+    <string name="txtCategoria">Categoria</string>
+    <string name="lblMassas">Massas</string>
+    <string name="lblLanches">Lanches</string>
+    <string name="lblCarnes">Carnes</string>
+    <string name="lblSaladas">Saladas</string>
+    <string name="lblSopas">Sopas</string>
+    <string name="lblPetiscos">Petiscos</string>
+    <string name="lblSobremesas">Sobremesas</string>
+    <string name="lblRefeicaoCompleta">Completa</string>
+
+    <string name="btnMassas">Massas</string>
+    <string name="btnLanches">Lanches</string>
+    <string name="btnCarnes">Carnes</string>
+    <string name="btnSaladas">Saladas</string>
+    <string name="btnSopas">Sopas</string>
+    <string name="btnPetiscos">Petiscos</string>
+    <string name="btnSobremesas">Sobremesas</string>
+    <string name="btnRefeicaoCompleta">Completa</string>
+        
 </resources>
