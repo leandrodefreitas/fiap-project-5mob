@@ -53,6 +53,15 @@
             </intent-filter>
         </activity> 
         <activity
+            android:name=".CategoriaActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name=".CategoriaActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>        
+        <activity
             android:name="br.com.fiap.minichef.activity.EscolherPratoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
