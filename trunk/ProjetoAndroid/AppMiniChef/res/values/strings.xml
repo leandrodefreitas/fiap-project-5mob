@@ -30,7 +30,7 @@
     <color name="holo_blue_bright">#ff00ddff</color>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuração</string>
     
     <string name="txt_splash">MiniChef</string>
     <string name="title_activity_splash">MiniChef</string>
