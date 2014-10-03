@@ -15,7 +15,6 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.Toast;
 
 public class MeuFragment extends Fragment {
 	
@@ -65,6 +64,8 @@ public class MeuFragment extends Fragment {
         		ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         		expandableListView.setAdapter(new br.com.fiap.minichef.adapter.ExpandableAdapter(context.getApplicationContext(), listGroup, listData));
         		
+        		expandableListView.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
+        		
         		expandableListView.setOnChildClickListener(new OnChildClickListener(){
         			@Override
         			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -110,7 +111,7 @@ public class MeuFragment extends Fragment {
 			List<String> auxList = new ArrayList<String>();
 			auxList.add("Arroz");
 			auxList.add("Atum");
-			auxList.add("Açaí");
+			auxList.add("Acaií");
 			auxList.add("Azeitona");
 			listData.put(listGroup.get(0), auxList);
 			
@@ -124,7 +125,7 @@ public class MeuFragment extends Fragment {
 			auxList = new ArrayList<String>();
 			auxList.add("Cebola");
 			auxList.add("Champignon");
-			auxList.add("Chouriço");
+			auxList.add("Chourico");
 			auxList.add("Costela de Porco");
 			listData.put(listGroup.get(2), auxList);
 			
