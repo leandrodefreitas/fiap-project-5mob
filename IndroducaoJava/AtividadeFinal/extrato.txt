@@ -1,8 +1,0 @@
-                  Sistema de Auto-Atendimento 
-Extrato de Conta Corrente              07/08/2014 - 22:15:08 
-Agência: 123        Conta: 456          Cliente: Leandro 
-Data           Descrição        Valor                  Saldo
-____________________________________________________________
-____________________________________________________________
-Saldo Final                                          1000,00 
-
