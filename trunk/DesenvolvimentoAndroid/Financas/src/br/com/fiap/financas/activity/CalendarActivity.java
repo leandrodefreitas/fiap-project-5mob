@@ -14,10 +14,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.View.OnCreateContextMenuListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
@@ -30,6 +34,9 @@ public class CalendarActivity extends Activity {
 	public CalendarAdapter adapter;
 	public Handler handler;
 	public ArrayList<String> items;
+	
+	private static final int GANHO_ID = Menu.FIRST;
+	private static final int GASTO_ID = Menu.FIRST + 1;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +51,7 @@ public class CalendarActivity extends Activity {
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		gridview.setAdapter(adapter);
 		
-		registerForContextMenu(gridview);
+		//registerForContextMenu(gridview);
 
 		handler = new Handler();
 		handler.post(calendarUpdater);
@@ -99,6 +106,19 @@ public class CalendarActivity extends Activity {
 
 			}
 		});
+		
+		gridview.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
+			@Override
+			public void onCreateContextMenu(ContextMenu menu, View v,
+					ContextMenuInfo menuInfo) {
+				
+				menu.setHeaderTitle("Menu");
+				menu.add(0, GANHO_ID, 0, "Novo Ganho");
+				menu.add(0, GASTO_ID, 0, "Novo Gasto");				
+			}
+		}) ;
+		
+		
 	}
 
 	protected void setNextMonth() {
@@ -167,23 +187,23 @@ public class CalendarActivity extends Activity {
 	};
 
 
-
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenu.ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.setHeaderTitle("Context Menu");
-		menu.add(0, v.getId(), 0, "Action 1");
-		menu.add(0, v.getId(), 0, "Action 2");
-	};
-
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-
-		if (item.getTitle() == "Action 1") {
-			Log.i("teste","acao1");
-		} else if (item.getTitle() == "Action 2") {
-			Log.i("teste","acao1");
+		
+		// para pegar o item que foi selecionado
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    int index = info.position;
+	    
+		if (item.getItemId() == GANHO_ID) {
+			Log.i("teste","acao1 " + GANHO_ID);
+			String selectedGridDate = CalendarAdapter.dayString
+					.get(index);
+			showToast(selectedGridDate);
+		} else if (item.getItemId() == GASTO_ID) {
+			Log.i("teste","acao2 " + GASTO_ID);
+			String selectedGridDate = CalendarAdapter.dayString
+					.get(index);
+			showToast(selectedGridDate);
 		} else {
 			return false;
 		}
