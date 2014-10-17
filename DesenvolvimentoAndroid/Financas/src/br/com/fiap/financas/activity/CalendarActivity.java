@@ -112,7 +112,7 @@ public class CalendarActivity extends Activity {
 			public void onCreateContextMenu(ContextMenu menu, View v,
 					ContextMenuInfo menuInfo) {
 				
-				menu.setHeaderTitle("Menu");
+				menu.setHeaderTitle("Registrar");
 				menu.add(0, GANHO_ID, 0, "Novo Ganho");
 				menu.add(0, GASTO_ID, 0, "Novo Gasto");				
 			}
