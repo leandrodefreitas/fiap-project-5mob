@@ -4,8 +4,10 @@ import br.com.fiap.R;
 import android.app.Activity ;
 import android.content.Intent;
 import android.os.Bundle ;
+import android.util.Log;
 import android.view.Menu ;
 import android.view.MenuItem ;
+import android.view.View;
 
 public class LoginActivity extends Activity {
 
@@ -34,9 +36,13 @@ public class LoginActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void onClickEntrar() {
-		Intent i = new Intent();
-		i.setClass(LoginActivity.this, CalendarActivity.class);
+	public void onClickEntrar(View v) {
+		
+		Log.i("Click", "Clicou botão entrar login");
+		
+		finish();
+		
+		Intent i = new Intent(this, DashboardActivity.class);
 		startActivity(i);
 	}
 	

@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        style="@style/TitleBar" >
+
+        <ImageView
+            android:id="@+id/img1"
+            style="@style/TitleBarLogo"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="5dip"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:onClick="onClickHome"
+            android:paddingBottom="2dip"
+            android:paddingLeft="5dip"
+            android:paddingRight="7dip"
+            android:src="@drawable/appicon" />
+
+        <TextView
+            android:id="@+id/tv1"
+            style="@style/TitleBarText"
+            android:paddingLeft="8dip"
+            android:text="DASHBoard" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llRodape"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout1" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/ivVenda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@null"
+                    android:onClick="onClickVenda"
+                    android:src="@drawable/ic_categoria" />
+
+                <ImageView
+                    android:id="@+id/ivConsulta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@null"
+                    android:onClick="onClickConsulta"
+                    android:src="@drawable/ic_calendario" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tvVenda"
+                    style="@style/HomeText"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="0dip"
+                    android:layout_weight="1"
+                    android:text="Categoria" />
+
+                <TextView
+                    android:id="@+id/tvConsulta"
+                    style="@style/HomeText"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="0dip"
+                    android:layout_weight="1"
+                    android:text="Calendário" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/ivConfig"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@null"
+                    android:onClick="onClickConfig"
+                    android:src="@drawable/ic_financas" />
+
+                <ImageView
+                    android:id="@+id/ivSobre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@null"
+                    android:onClick="onClickSobre"
+                    android:src="@drawable/ic_informacoes" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tvConfig"
+                    style="@style/HomeText"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="0dip"
+                    android:layout_weight="1"
+                    android:text="Finanças" />
+
+                <TextView
+                    android:id="@+id/tvSobre"
+                    style="@style/HomeText"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="0dip"
+                    android:layout_weight="1"
+                    android:text="Informações" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llRodape"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvRodape"
+            style="@style/TitleBarText"
+            android:layout_width="fill_parent"
+            android:background="@color/title_background"
+            android:text="TESTE" />
+    </LinearLayout>
+
+</RelativeLayout>
