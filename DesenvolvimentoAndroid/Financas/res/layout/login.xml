@@ -124,6 +124,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/shapebutton"
                 android:text="Entrar"
+                android:contentDescription="@null"
                 android:onClick="onCLickEntrar" />
         </RelativeLayout>
     </LinearLayout>

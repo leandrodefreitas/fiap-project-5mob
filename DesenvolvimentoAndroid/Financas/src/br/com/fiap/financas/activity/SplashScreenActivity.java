@@ -24,7 +24,7 @@ public class SplashScreenActivity extends Activity {
 					synchronized (this) {
 						// Espera por 5 segundos or sai quando
 						// o usuário tocar na tela
-						wait( 5000 );
+						wait(3000);
 						mblnClicou = true;
 					}
 				} catch (InterruptedException ex) {
@@ -33,7 +33,7 @@ public class SplashScreenActivity extends Activity {
 
 				if (mblnClicou) {
 					// fechar a tela de Splash
-					finish() ;
+					finish();
 
 					// Carrega a Activity Principal
 					Intent i = new Intent();
