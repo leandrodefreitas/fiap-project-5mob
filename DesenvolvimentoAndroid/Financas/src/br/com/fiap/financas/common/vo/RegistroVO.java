@@ -12,35 +12,33 @@ public class RegistroVO {
 		GANHO, GASTO;
 	}
 	
-	private int codigo;
+	private Integer codigo;
 	private Tipo tipo;
 	private String descricao;
-	private double valor;
+	private Double valor;
 	private Date data;
 	private ArrayList<CategoriaVO> categorias;	
-	private int parcela;
-	private int numParcelas;
+	private Integer parcela;
+	private Integer numParcelas;
 	private String local;
 	private String foto;
 	
-	public int getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 	
-	public void setCodigo(int codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 	
 	
-	public void tipo( int opcao )
-	{
+	public void tipo(Integer opcao) {
 		Log.i( "", "Despesas:----------------------- " + opcao ) ;
-		switch (opcao)
-		{
-		case 0:
-			this.tipo = Tipo.GANHO;
-		case 1:
-			this.tipo = Tipo.GASTO;
+		switch (opcao) {
+			case 0:
+				this.tipo = Tipo.GANHO;
+			case 1:
+				this.tipo = Tipo.GASTO;
 		}
 	}	
 	
@@ -62,11 +60,11 @@ public class RegistroVO {
 	}
 	
 	
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
 	
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 	
@@ -79,22 +77,18 @@ public class RegistroVO {
 		this.data = data;
 	}
 	
-	public String getDataFormatted( )
-	{
-		SimpleDateFormat sdf = new SimpleDateFormat( "dd/MM/yyyy" ) ;
-		return sdf.format( data ) ;
+	public String getDataFormatted() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf.format(data);
 	}
 
-	public void setData( String data )
-	{
-		SimpleDateFormat sdf = new SimpleDateFormat( "dd/MM/yyyy" ) ;
-		try
-		{
-			this.data = sdf.parse( data ) ;
+	public void setData(String data) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			this.data = sdf.parse(data);
 		}
-		catch (Exception e)
-		{
-			Log.e( "erro", e.getMessage( ) ) ;
+		catch (Exception e) {
+			Log.e("erro", e.getMessage());
 		}
 	}	
 	
@@ -106,20 +100,20 @@ public class RegistroVO {
 		this.categorias = categorias;
 	}
 
-	public int getParcela() {
+	public Integer getParcela() {
 		return parcela;
 	}
 	
-	public void setParcela(int parcela) {
+	public void setParcela(Integer parcela) {
 		this.parcela = parcela;
 	}
 	
 	
-	public int getNumParcelas() {
+	public Integer getNumParcelas() {
 		return numParcelas;
 	}
 	
-	public void setNumParcelas(int numParcelas) {
+	public void setNumParcelas(Integer numParcelas) {
 		this.numParcelas = numParcelas;
 	}
 	
