@@ -125,7 +125,7 @@
                 android:background="@drawable/shapebutton"
                 android:text="Entrar"
                 android:contentDescription="@null"
-                android:onClick="onCLickEntrar" />
+                android:onClick="onClickEntrar"/>
         </RelativeLayout>
     </LinearLayout>
 

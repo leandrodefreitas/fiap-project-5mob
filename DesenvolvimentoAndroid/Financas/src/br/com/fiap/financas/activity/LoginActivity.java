@@ -1,20 +1,39 @@
 package br.com.fiap.financas.activity;
 
-import br.com.fiap.R;
-import android.app.Activity ;
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle ;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu ;
-import android.view.MenuItem ;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import br.com.fiap.R;
 
 public class LoginActivity extends Activity {
 
+	Button btEntrar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
+		/*
+		btEntrar = (Button) findViewById(R.id.btEntrar);
+		
+		btEntrar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Log.i("Click", "Clicou botão entrar login");
+				
+				//finish();
+				
+				Intent i = new Intent(LoginActivity.this,DashboardActivity.class);
+				startActivity(i);				
+			}
+		});*/
 	}
 
 	@Override
@@ -36,14 +55,15 @@ public class LoginActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+
 	public void onClickEntrar(View v) {
 		
 		Log.i("Click", "Clicou botão entrar login");
 		
-		finish();
+		//finish();
 		
-		Intent i = new Intent(this, DashboardActivity.class);
+		Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
 		startActivity(i);
 	}
-	
+
 }
