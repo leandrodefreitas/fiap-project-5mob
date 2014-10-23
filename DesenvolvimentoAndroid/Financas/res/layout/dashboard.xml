@@ -4,41 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        style="@style/TitleBar" >
-
-        <ImageView
-            android:id="@+id/img1"
-            style="@style/TitleBarLogo"
-            android:layout_gravity="center"
-            android:layout_marginBottom="4dip"
-            android:layout_marginLeft="5dip"
-            android:layout_marginRight="5dip"
-            android:layout_marginTop="5dip"
-            android:background="@null"
-            android:contentDescription="@null"
-            android:onClick="onClickHome"
-            android:paddingBottom="2dip"
-            android:paddingLeft="5dip"
-            android:paddingRight="7dip"
-            android:src="@drawable/appicon" />
-
-        <TextView
-            android:id="@+id/tv1"
-            style="@style/TitleBarText"
-            android:paddingLeft="8dip"
-            android:text="DASHBoard" />
-    </LinearLayout>
-
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llRodape"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/linearLayout1" >
+        android:layout_alignParentRight="true" >
 
         <LinearLayout
             android:id="@+id/LinearLayout1"
@@ -55,21 +27,21 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    android:id="@+id/ivVenda"
+                    android:id="@+id/ivCategoria"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@null"
-                    android:onClick="onClickVenda"
+                    android:onClick="onClickCategorias"
                     android:src="@drawable/ic_categoria" />
 
                 <ImageView
-                    android:id="@+id/ivConsulta"
+                    android:id="@+id/ivCalendario"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@null"
-                    android:onClick="onClickConsulta"
+                    android:onClick="onClickCalendario"
                     android:src="@drawable/ic_calendario" />
             </LinearLayout>
 
@@ -77,24 +49,24 @@
                 android:id="@+id/LinearLayout3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="30dp"
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/tvVenda"
+                    android:id="@+id/tvCategoria"
                     style="@style/HomeText"
                     android:layout_width="0dp"
                     android:layout_marginTop="0dip"
                     android:layout_weight="1"
-                    android:text="Categoria" />
+                    android:text="@string/ic_categoria" />
 
                 <TextView
-                    android:id="@+id/tvConsulta"
+                    android:id="@+id/tvCalendario"
                     style="@style/HomeText"
                     android:layout_width="0dp"
                     android:layout_marginTop="0dip"
                     android:layout_weight="1"
-                    android:text="Calendário" />
+                    android:text="@string/ic_calendario" />
             </LinearLayout>
 
             <LinearLayout
@@ -105,47 +77,98 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    android:id="@+id/ivConfig"
+                    android:id="@+id/ivFinancas"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@null"
-                    android:onClick="onClickConfig"
+                    android:onClick="onClickFinancas"
                     android:src="@drawable/ic_financas" />
 
                 <ImageView
-                    android:id="@+id/ivSobre"
+                    android:id="@+id/ivGrafico"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@null"
-                    android:onClick="onClickSobre"
-                    android:src="@drawable/ic_informacoes" />
+                    android:onClick="onClickGraficos"
+                    android:src="@drawable/ic_grafico" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/LinearLayout5"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="30dp"
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/tvConfig"
+                    android:id="@+id/tvFinancas"
                     style="@style/HomeText"
                     android:layout_width="0dp"
                     android:layout_marginTop="0dip"
                     android:layout_weight="1"
-                    android:text="Finanças" />
+                    android:text="@string/ic_financas" />
 
                 <TextView
-                    android:id="@+id/tvSobre"
+                    android:id="@+id/tvGrafico"
                     style="@style/HomeText"
                     android:layout_width="0dp"
                     android:layout_marginTop="0dip"
                     android:layout_weight="1"
-                    android:text="Informações" />
+                    android:text="@string/ic_graficos" />
             </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/LinearLayout6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/ivBackup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@null"
+                    android:onClick="onClickBackup"
+                    android:src="@drawable/ic_backup" />
+
+                <ImageView
+                    android:id="@+id/ivInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@null"
+                    android:onClick="onClickInfo"
+                    android:src="@drawable/ic_informacoes" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout7"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tvBackup"
+                    style="@style/HomeText"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/ic_backup" />
+
+                <TextView
+                    android:id="@+id/tvInfo"
+                    style="@style/HomeText"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/ic_informacoes" />
+            </LinearLayout>
+            
         </LinearLayout>
     </RelativeLayout>
 
@@ -162,7 +185,7 @@
             style="@style/TitleBarText"
             android:layout_width="fill_parent"
             android:background="@color/title_background"
-            android:text="TESTE" />
+            android:text="@string/radape" />
     </LinearLayout>
 
 </RelativeLayout>

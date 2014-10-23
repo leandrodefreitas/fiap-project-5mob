@@ -2,6 +2,7 @@ package br.com.fiap.financas.activity;
 
 import br.com.fiap.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -14,38 +15,33 @@ public class DashboardActivity extends Activity {
 		setContentView(R.layout.dashboard);
 	}
 
-	public void onClickVenda( View v )
-	{
-		trace( "Venda" ) ;
+	public void onClickCategorias(View v) {
+		trace("Categorias");
 	}
 
-	public void onClickConsulta( View v )
-	{
-		trace( "Consulta" ) ;
+	public void onClickFinancas(View v) {
+		trace("Finanças");
+	}
+	
+	public void onClickGraficos(View v) {
+		trace("Gráficos");
 	}
 
-	public void onClickConfig( View v )
-	{
-		trace( "Configurações" ) ;
+	public void onClickBackup(View v) {
+		trace("Backup") ;
 	}
 
-	public void onClickSobre( View v )
-	{
-		trace( "Sobre" ) ;
+	public void onClickInfo(View v) {
+		trace("Informações") ;
 	}
-
-	public void onClickHome( View v )
-	{
-		trace( "Home" ) ;
+	
+	public void onClickCalendario(View v) {
+		Intent i = new Intent(DashboardActivity.this, CalendarActivity.class);
+		startActivity(i);
 	}
-
-	public void toast( String msg )
-	{
-		Toast.makeText( getApplicationContext( ), msg, Toast.LENGTH_SHORT ).show( ) ;
+	
+	private void trace(String msg) {
+		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 	}
-
-	private void trace( String msg )
-	{
-		toast( msg ) ;
-	}
+	
 }
