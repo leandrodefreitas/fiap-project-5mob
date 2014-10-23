@@ -1,72 +1,31 @@
 package br.com.fiap.financas.activity;
 
 import br.com.fiap.R;
-import android.app.Activity ;
-import android.content.Intent ;
-import android.os.Bundle ;
-import android.view.MotionEvent ;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 
-public class SplashScreenActivity extends Activity {
-	private Thread mSplashThread ;
-	private boolean mblnClicou = false ;
+public class SplashScreenActivity extends Activity implements Runnable {
 
-	/** Evento chamado quando a activity é executada pela primeira vez */
+	private final int splashTime = 5000;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splashscreen);
-
-		// thread para mostrar uma tela de Splash
-		mSplashThread = new Thread() {
-			@Override
-			public void run() {
-				try {
-					synchronized (this) {
-						// Espera por 5 segundos or sai quando
-						// o usuário tocar na tela
-						wait(3000);
-						mblnClicou = true;
-					}
-				} catch (InterruptedException ex) {
-					
-				}
-
-				if (mblnClicou) {
-					// fechar a tela de Splash
-					finish();
-
-					// Carrega a Activity Principal
-					Intent i = new Intent();
-					i.setClass(SplashScreenActivity.this, LoginActivity.class);
-					startActivity(i);
-				}
-			}
-		};
-
-		mSplashThread.start();
+		
+		Handler h = new Handler();
+		h.postDelayed(this, splashTime);
 	}
+	
+	public void run() {
+		
+		Intent i = new Intent();
+		i.setClass(SplashScreenActivity.this, LoginActivity.class);
+		startActivity(i);
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		// garante que quando o usuário clicar no botão
-		// "Voltar" o sistema deve finalizar a thread
-		mSplashThread.interrupt();
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			// o método abaixo está relacionado a thread de splash
-			synchronized (mSplashThread) {
-				mblnClicou = true ;
-
-				// o método abaixo finaliza o comando wait
-				// mesmo que ele não tenha terminado sua espera
-				mSplashThread.notifyAll();
-			}
-		}
-		return true;
+		finish();
 	}
 
 }

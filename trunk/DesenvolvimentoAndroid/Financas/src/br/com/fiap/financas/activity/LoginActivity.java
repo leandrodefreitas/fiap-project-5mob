@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import br.com.fiap.R;
 
@@ -60,10 +59,10 @@ public class LoginActivity extends Activity {
 		
 		Log.i("Click", "Clicou botão entrar login");
 		
-		//finish();
-		
 		Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
 		startActivity(i);
+		
+		finish();
 	}
 
 }
