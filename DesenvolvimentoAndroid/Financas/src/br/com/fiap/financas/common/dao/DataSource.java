@@ -1,11 +1,11 @@
-package br.com.fiap.financas.common.dao ;
+package br.com.fiap.financas.common.dao;
 
-import java.io.File ;
+import java.io.File;
 
-import android.content.Context ;
-import android.database.sqlite.SQLiteDatabase ;
-import android.database.sqlite.SQLiteOpenHelper ;
-import android.os.Environment ;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
 public class DataSource extends SQLiteOpenHelper {
 	protected Context context;
@@ -14,7 +14,7 @@ public class DataSource extends SQLiteOpenHelper {
 	public static String DATABASE_COMPLETE = "";
 	public static final String DATABASE_NAME = "financas.db";
 	public static final String DATABASE_NAME_JOURNAL = "financas.db-journal";
-	public static final int DATABASE_VERSION = 1 ;
+	public static final int DATABASE_VERSION = 1;
 
 	protected static final String TABLE_REGISTROS = "REGISTROS";
 	protected static final String TABLE_CATEGORIAS = "CATEGORIAS";
@@ -22,7 +22,7 @@ public class DataSource extends SQLiteOpenHelper {
 
 	static {
 		if (br.com.fiap.financas.util.Environment.DEVELOPMENT) {
-			DATABASE_COMPLETE = DATABASE_NAME ;
+			DATABASE_COMPLETE = DATABASE_NAME;
 		} else {
 			DATABASE_COMPLETE = Environment.getExternalStorageDirectory().getPath()
 					+ File.separator + DATABASE_NAME;
@@ -66,4 +66,5 @@ public class DataSource extends SQLiteOpenHelper {
 	public void close() {
 		this.database.close();
 	}
+	
 }
