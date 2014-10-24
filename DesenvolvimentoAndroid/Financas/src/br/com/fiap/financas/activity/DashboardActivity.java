@@ -30,27 +30,35 @@ public class DashboardActivity extends Activity {
 	}
 
 	public void onClickBackup(View v) {
-		trace("Backup") ;
+		
+		new AlertDialog.Builder(this)
+    	.setTitle("Backup")
+    	.setMessage("Deseja realmente realizar o backup?")
+    	.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+    		@Override
+    		public void onClick(DialogInterface dialog, int which) {
+    			trace("Backup");   
+    		}
+    	})
+    	.setNegativeButton("Não", null)
+    	.show();
+		
 	}
 	
-	public void onClickExcluirDados() {
+	public void onClickExcluirDados(View v) {
+		
 		new AlertDialog.Builder(this)
-	    	.setMessage("Você deseja realmente excluir todos os registros?")
-	        .setCancelable(false)
-	        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
-				}
-	        	//public void onClick(DialogInterface dialog, int id) {
-	        		//DashboardActivity.this.finish();
-	        		//trace("Excluir dados");
-	            //}	
-	        })
-	        .setNegativeButton("Não", null)
-	        .show();
+        	.setTitle("Excluir registros!")
+        	.setMessage("Deseja realmente excluir todos os registros?")
+        	.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+        		@Override
+        		public void onClick(DialogInterface dialog, int which) {
+        			trace("Excluindo Registros!");    
+        		}
+        	})
+        	.setNegativeButton("Não", null)
+        	.show();
+		
 	}
 
 	public void onClickInfo(View v) {
