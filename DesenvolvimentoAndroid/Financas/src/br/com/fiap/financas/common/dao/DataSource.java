@@ -47,10 +47,10 @@ public class DataSource extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL( "CREATE TABLE "
 				+ TABLE_REGISTROS
-				+ " (codigo INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tipo INTEGER, descricao TEXT, valor DOUBLE, data TEXT, parcela INTEGER, num_parcelas INTEGER, local TEXT, foto TEXT )");
+				+ " (codigo INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tipo INTEGER, descricao TEXT NOT NULL, valor DOUBLE, data TEXT, parcela INTEGER, num_parcelas INTEGER, local TEXT, foto TEXT )");
 		db.execSQL( "CREATE TABLE "
 				+ TABLE_CATEGORIAS
-				+ " (codigo INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, descricao TEXT )" );
+				+ " (codigo INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, descricao TEXT NOT NULL )" );
 		db.execSQL( "CREATE TABLE "
 				+ TABLE_REGISTRO_CATEGORIA
 				+ " (codigo INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cod_reg INTEGER, cod_cat INTEGER )" );

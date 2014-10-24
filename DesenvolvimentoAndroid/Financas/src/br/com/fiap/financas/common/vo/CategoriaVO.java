@@ -2,14 +2,14 @@ package br.com.fiap.financas.common.vo;
 
 public class CategoriaVO {
 	
-	private int codigo;
+	private Integer codigo;
 	private String descricao;
 	
-	public int getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 	
-	public void setCodigo(int codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 	

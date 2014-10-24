@@ -13,7 +13,7 @@ public class RegistroDAO extends DataSource {
 	private static final String INSERT = "insert into "
 			+ TABLE_REGISTROS
 			+ " (codigo, tipo, descricao, valor, data, parcela, num_parcelas, local, foto) values ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-	private static final String SELECT = "select codigo, tipo, descricao, valor, data, parcela, num_parcelas, local, foto from "
+	private static final String SELECT_ALL = "select codigo, tipo, descricao, valor, data, parcela, num_parcelas, local, foto from "
 			+ TABLE_REGISTROS;
 	private static final String SELECT_BY_DATA = "select codigo, tipo, descricao, valor, data, parcela, num_parcelas, local, foto from "
 			+ TABLE_REGISTROS + " order by data ASC";
