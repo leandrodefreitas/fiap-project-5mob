@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="@null"
-                    android:onClick="onClickInfo"
+                    android:onClick="onClickExcluirDados"
                     android:src="@drawable/ic_excluir" />
             </LinearLayout>
 

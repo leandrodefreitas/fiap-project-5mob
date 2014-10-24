@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llRodape"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+            
+            <LinearLayout
+                android:id="@+id/LinearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/lbltitle"
+                    style="@style/HomeText"
+                    android:text="Desenvolvedores:" />
+            </LinearLayout>
+            
+            <TextView
+                    android:id="@+id/lblnome1"
+                    style="@style/HomeText"
+                    android:layout_marginBottom="15dp"
+                    android:text="Flavio Ota" />
+            
+            <TextView
+                    android:id="@+id/lblnome2"
+                    style="@style/HomeText"
+                    android:layout_marginBottom="15dp"
+                    android:text="Leandro de Freitas" />
+            
+            <TextView
+                    android:id="@+id/lblnome3"
+                    style="@style/HomeText"
+                    android:layout_marginBottom="15dp"
+                    android:text="Rodrigo Ota" />
+            
+            <TextView
+                    android:id="@+id/lblnome4"
+                    style="@style/HomeText"
+                    android:layout_marginBottom="15dp"
+                    android:text="Wellington Santos" />
+            
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llRodape"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvRodape"
+            style="@style/TitleBarText"
+            android:layout_width="fill_parent"
+            android:background="@color/title_background"
+            android:text="@string/radape" />
+    </LinearLayout>
+
+</RelativeLayout>
