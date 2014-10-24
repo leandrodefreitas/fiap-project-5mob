@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import br.com.fiap.R;
 import br.com.fiap.financas.adapter.CalendarAdapter;
+import br.com.fiap.financas.common.vo.RegistroVO.Tipo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,8 +37,8 @@ public class CalendarActivity extends Activity {
 	public Handler handler;
 	public ArrayList<String> items;
 	
-	private static final int GANHO_ID = Menu.FIRST;
-	private static final int GASTO_ID = Menu.FIRST + 1;
+	private static final int GANHO_ID = Tipo.GANHO.ordinal();
+	private static final int GASTO_ID = Tipo.GASTO.ordinal();
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -196,17 +197,23 @@ public class CalendarActivity extends Activity {
 	    int index = info.position;
 	    
 		if (item.getItemId() == GANHO_ID) {
+			
 			Log.i("teste","acao1 " + GANHO_ID);
 			String selectedGridDate = CalendarAdapter.dayString
 					.get(index);
 			showToast(selectedGridDate);
+			Intent i = new Intent(CalendarActivity.this, NovoRegistroActivity.class);
+			startActivity(i);
+			
 		} else if (item.getItemId() == GASTO_ID) {
+			
 			Log.i("teste","acao2 " + GASTO_ID);
 			String selectedGridDate = CalendarAdapter.dayString
 					.get(index);
 			showToast(selectedGridDate);
 			Intent i = new Intent(CalendarActivity.this, CadastrarGastoActivity.class);
 			startActivity(i);
+			
 		} else {
 			return false;
 		}

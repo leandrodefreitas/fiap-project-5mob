@@ -57,6 +57,15 @@
             </intent-filter>
         </activity>
         
+        <activity
+            android:name="br.com.fiap.financas.activity.NovoRegistroActivity"
+            android:label="@string/novo_gasto" 
+            android:icon="@drawable/appicon">
+            <intent-filter>
+				<category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>        
+        
     </application>
 
 </manifest>
