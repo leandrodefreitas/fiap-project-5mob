@@ -10,6 +10,7 @@ import br.com.fiap.R;
 import br.com.fiap.financas.adapter.CalendarAdapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -204,6 +205,8 @@ public class CalendarActivity extends Activity {
 			String selectedGridDate = CalendarAdapter.dayString
 					.get(index);
 			showToast(selectedGridDate);
+			Intent i = new Intent(CalendarActivity.this, CadastrarGastoActivity.class);
+			startActivity(i);
 		} else {
 			return false;
 		}

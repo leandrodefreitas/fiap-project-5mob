@@ -12,6 +12,7 @@
     <string name="ic_financas">Finanças</string>
     <string name="ic_graficos">Gráficos</string>
     <string name="ic_backup">Backup</string>
+    <string name="ic_excluir">Excluir dados</string>
     <string name="ic_informacoes">Informações</string>
     
     <string name="btn_entrar">Entrar</string>
@@ -19,6 +20,8 @@
     <string name="rot_user">Usuário : </string>
     <string name="rot_senha">Senha : </string>
     <string name="lbl_login">Login</string>
+    
+    <string name="novo_gasto">Novo Gasto</string>
     
 
 </resources>
