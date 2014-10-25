@@ -75,6 +75,33 @@
             </intent-filter>
         </activity>
         
+        <activity
+            android:name="br.com.fiap.financas.activity.FinancasFragActivity"
+            android:label="@string/ic_financas" 
+            android:icon="@drawable/ic_financas">
+            <intent-filter>
+				<category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="br.com.fiap.financas.activity.CategoriasActivity"
+            android:label="@string/ic_categoria" 
+            android:icon="@drawable/ic_categoria">
+            <intent-filter>
+				<category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="br.com.fiap.financas.activity.GraficosActivity"
+            android:label="@string/ic_graficos" 
+            android:icon="@drawable/ic_grafico">
+            <intent-filter>
+				<category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
