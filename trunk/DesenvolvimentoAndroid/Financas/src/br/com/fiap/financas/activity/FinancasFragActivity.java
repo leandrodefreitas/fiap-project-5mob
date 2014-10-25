@@ -1,68 +1,73 @@
 package br.com.fiap.financas.activity;
 
-import android.content.Intent;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 import br.com.fiap.R;
-import br.com.fiap.financas.adapter.FinancasFragmentPagerAdapter;
+import br.com.fiap.financas.adapter.TabsPagerAdapter;
 
-public class FinancasFragActivity extends FragmentActivity {
+public class FinancasFragActivity extends FragmentActivity implements ActionBar.TabListener{
+    private ViewPager viewPager;
+    private TabsPagerAdapter mAdapter;
+    private ActionBar actionBar;
+    // Tab titles
+    private String[] tabs = { "Ganhos", "Gastos", "Totais" };
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.financas_frag);
+        setContentView(R.layout.activity_main);
+ 
+        // Inicializa a view
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        actionBar = getActionBar();
+        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+ 
+        viewPager.setAdapter(mAdapter);
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);       
+ 
+        // Adiciona as tabs
+        for (String tab_name : tabs) {
+            actionBar.addTab(actionBar.newTab().setText(tab_name)
+                    .setTabListener(this));
+        }
+ 
+        /**
+         * Define a tab selecionada
+         **/
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+ 
+            @Override
+            public void onPageSelected(int position) {
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-
-        FragmentManager fm = getSupportFragmentManager();
-
-        // Instancioa o FragmentPagerAdapter
-        FinancasFragmentPagerAdapter adapter = new FinancasFragmentPagerAdapter(fm);
-
-        // Seta o adapter do ViewPager
-        viewPager.setAdapter(adapter);
-
+                actionBar.setSelectedNavigationItem(position);
+            }
+ 
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+ 
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+            }
+        });
     }
-
+ 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        /*getMenuInflater().inflate(R.menu.menu, menu);
-        
-		SearchView sv = (SearchView) menu.findItem(R.id.item1).getActionView();
-		sv.setOnQueryTextListener(new SearchFiltro());*/
-		
-        return true;
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
     }
-
-    public void onClickMassa(View view) {
-        Log.i("Click", "Clicou na opção massa");
-
-        Intent intentPrato = new Intent(this,DashboardActivity.class);
-        intentPrato.putExtra("tipoPrato", "Massas");
-        startActivity(intentPrato);
+ 
+    @Override
+    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+    	
+        viewPager.setCurrentItem(tab.getPosition());
     }
-    
-	private class SearchFiltro implements OnQueryTextListener{
-
-		@Override
-		public boolean onQueryTextSubmit(String query) {
-			Log.i("SearchView", "onQueryTextSubmit -> "+query);
-			return false;
-		}
-
-		@Override
-		public boolean onQueryTextChange(String newText) {
-			Log.i("SearchView", "onQueryTextChange -> "+newText);
-			return false;
-		}
-		
-	}
+ 
+    @Override
+    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+    }
 }

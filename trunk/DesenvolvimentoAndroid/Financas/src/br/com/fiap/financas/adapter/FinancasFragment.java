@@ -1,13 +1,17 @@
 package br.com.fiap.financas.adapter;
 
-import br.com.fiap.R;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import br.com.fiap.R;
+import br.com.fiap.financas.activity.DashboardActivity;
+import br.com.fiap.financas.activity.FinancasFragActivity;
+import br.com.fiap.financas.activity.GastosFragment;
 
 public class FinancasFragment extends Fragment {
 	
@@ -45,7 +49,8 @@ public class FinancasFragment extends Fragment {
                 view = inflater.inflate(R.layout.financas_ganhos, container, false);
                 break;
             case 2:
-                view = inflater.inflate(R.layout.financas_gasros, container, false);
+               // view = inflater.inflate(R.layout.financas_gastos, container, false);
+        		new GastosFragment();
                 break;
             case 3:
                 view = inflater.inflate(R.layout.financas_totais, container, false);

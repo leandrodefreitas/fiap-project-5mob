@@ -1,6 +1,13 @@
 package br.com.fiap.financas.activity;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import br.com.fiap.R;
+import br.com.fiap.financas.common.dao.CategoriaDAO;
+import br.com.fiap.financas.common.dao.RegistroDAO;
+import br.com.fiap.financas.common.vo.CategoriaVO;
+import br.com.fiap.financas.common.vo.RegistroVO;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,6 +22,7 @@ public class DashboardActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
+		
 	}
 
 	public void onClickCategorias(View v) {
