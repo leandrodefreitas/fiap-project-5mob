@@ -19,14 +19,20 @@ public class DashboardActivity extends Activity {
 
 	public void onClickCategorias(View v) {
 		trace("Categorias");
+		Intent i = new Intent(DashboardActivity.this, CategoriasActivity.class);
+		startActivity(i);
 	}
 
 	public void onClickFinancas(View v) {
 		trace("Finanças");
+		Intent i = new Intent(DashboardActivity.this, FinancasFragActivity.class);
+		startActivity(i);
 	}
 	
 	public void onClickGraficos(View v) {
 		trace("Gráficos");
+		Intent i = new Intent(DashboardActivity.this, GraficosActivity.class);
+		startActivity(i);
 	}
 
 	public void onClickBackup(View v) {
