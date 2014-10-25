@@ -114,7 +114,10 @@ public class CalendarActivity extends Activity {
 			public void onCreateContextMenu(ContextMenu menu, View v,
 					ContextMenuInfo menuInfo) {
 				
-				menu.setHeaderTitle("Registrar");
+				AdapterContextMenuInfo info =  (AdapterContextMenuInfo) menuInfo;
+				String selectedGridDate = CalendarAdapter.dayString
+				.get(info.position);
+				menu.setHeaderTitle("Registro " + selectedGridDate);
 				menu.add(0, GANHO_ID, 0, "Novo Ganho");
 				menu.add(0, GASTO_ID, 0, "Novo Gasto");				
 			}
@@ -202,7 +205,8 @@ public class CalendarActivity extends Activity {
 			String selectedGridDate = CalendarAdapter.dayString
 					.get(index);
 			showToast(selectedGridDate);
-			Intent i = new Intent(CalendarActivity.this, NovoRegistroActivity.class);
+			Intent i = new Intent(CalendarActivity.this, CadastrarGanhoActivity.class);
+			i.putExtra(selectedGridDate, "data");
 			startActivity(i);
 			
 		} else if (item.getItemId() == GASTO_ID) {
@@ -212,6 +216,7 @@ public class CalendarActivity extends Activity {
 					.get(index);
 			showToast(selectedGridDate);
 			Intent i = new Intent(CalendarActivity.this, CadastrarGastoActivity.class);
+			i.putExtra(selectedGridDate, "data");
 			startActivity(i);
 			
 		} else {
