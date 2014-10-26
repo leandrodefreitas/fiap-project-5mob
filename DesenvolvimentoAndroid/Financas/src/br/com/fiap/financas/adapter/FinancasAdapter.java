@@ -7,9 +7,9 @@ import br.com.fiap.financas.activity.GanhosFragment;
 import br.com.fiap.financas.activity.GastosFragment;
 import br.com.fiap.financas.activity.TotalFragment;
  
-public class TabsPagerAdapter extends FragmentPagerAdapter {
+public class FinancasAdapter extends FragmentPagerAdapter {
  
-    public TabsPagerAdapter(FragmentManager fm) {
+    public FinancasAdapter(FragmentManager fm) {
         super(fm);
     }
  

@@ -6,5 +6,9 @@
     
     <dimen name="chart_padding">16dp</dimen>
     <dimen name="min_chart_size">100dp</dimen>
+    <dimen name="descricao">17dp</dimen>
+    <dimen name="local">15dip</dimen>
+    <dimen name="data">13dip</dimen>
+    <dimen name="valor">12dip</dimen>
 
 </resources>
