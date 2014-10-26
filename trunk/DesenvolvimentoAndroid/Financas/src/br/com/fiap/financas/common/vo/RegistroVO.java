@@ -33,7 +33,7 @@ public class RegistroVO {
 	
 	
 	public void tipo(Integer opcao) {
-		Log.i( "", "Despesas:----------------------- " + opcao ) ;
+		Log.i( "", "REGISTRO:----------------------- " + opcao ) ;
 		switch (opcao) {
 			case 0:
 				this.tipo = Tipo.GANHO;

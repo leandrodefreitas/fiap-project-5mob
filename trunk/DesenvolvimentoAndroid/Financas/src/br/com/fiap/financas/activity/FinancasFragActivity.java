@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import br.com.fiap.R;
-import br.com.fiap.financas.adapter.TabsPagerAdapter;
+import br.com.fiap.financas.adapter.FinancasAdapter;
 
 public class FinancasFragActivity extends FragmentActivity implements ActionBar.TabListener{
     private ViewPager viewPager;
-    private TabsPagerAdapter mAdapter;
+    private FinancasAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
     private String[] tabs = { "Ganhos", "Gastos", "Totais" };
@@ -24,7 +24,7 @@ public class FinancasFragActivity extends FragmentActivity implements ActionBar.
         // Inicializa a view
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        mAdapter = new FinancasAdapter(getSupportFragmentManager());
  
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);

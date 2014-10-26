@@ -48,6 +48,39 @@ public class RegistroDAO extends DataSource {
 	public void deleteAll() {
 		super.database.delete(TABLE_REGISTROS, null, null);
 	}
+	
+	public List<RegistroVO> selectByType(int tipo) {
+		
+		List<RegistroVO> list = new ArrayList<RegistroVO>();
+		
+		String[] colunas = new String[]{"codigo", "tipo", "descricao", "valor", "data", "parcela", "num_parcelas", "local", "foto"};
+		String[ ] args = new String[ ]
+		{ String.valueOf(tipo) } ;
+		
+		Cursor cursor = this.database.query(TABLE_REGISTROS, colunas, "tipo=?", args, null, null, "codigo");
+		
+		if (cursor.moveToFirst()) {
+			do {
+				RegistroVO registro = new RegistroVO();
+				registro.setCodigo(cursor.getInt(0));
+				registro.tipo(cursor.getInt(1));
+				registro.setDescricao(cursor.getString(2));
+				registro.setValor(cursor.getDouble(3));
+				registro.setData(cursor.getString(4));
+				registro.setParcela(cursor.getInt(5));
+				registro.setNumParcelas(cursor.getInt(6));
+				registro.setLocal(cursor.getString(7));
+				registro.setFoto(cursor.getString(8));
+
+				list.add(registro);
+				
+			} while (cursor.moveToNext());
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}
+		return list;
+	}
 
 	public List<RegistroVO> selectAll() {
 		
