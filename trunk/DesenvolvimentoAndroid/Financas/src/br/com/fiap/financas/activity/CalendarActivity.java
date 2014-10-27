@@ -206,7 +206,7 @@ public class CalendarActivity extends Activity {
 					.get(index);
 			showToast(selectedGridDate);
 			Intent i = new Intent(CalendarActivity.this, CadastrarGanhoActivity.class);
-			i.putExtra(selectedGridDate, "data");
+			i.putExtra("data", selectedGridDate);
 			startActivity(i);
 			
 		} else if (item.getItemId() == GASTO_ID) {
@@ -216,7 +216,7 @@ public class CalendarActivity extends Activity {
 					.get(index);
 			showToast(selectedGridDate);
 			Intent i = new Intent(CalendarActivity.this, CadastrarGastoActivity.class);
-			i.putExtra(selectedGridDate, "data");
+			i.putExtra("data", selectedGridDate);
 			startActivity(i);
 			
 		} else {

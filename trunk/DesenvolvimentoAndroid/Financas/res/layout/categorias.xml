@@ -4,6 +4,30 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp" >
+
+        <Button
+            android:id="@+id/btnNovaCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Nova Categoria"
+            android:width="100dp" />
+
+        <Button
+            android:id="@+id/btnListaCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:text="Lista de Categorias"
+            android:width="100dp" />
+
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="wrap_content"
@@ -12,29 +36,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true" >
 
-        <LinearLayout
-            android:id="@+id/LinearLayout1"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical" >
-            
-            <LinearLayout
-                android:id="@+id/LinearLayout3"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:orientation="horizontal" >
 
-                <TextView
-                    android:id="@+id/lbltitle"
-                    style="@style/HomeText"
-                    android:text="CATEGORIAS" />
-            </LinearLayout>
-            
-
-            
-        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout

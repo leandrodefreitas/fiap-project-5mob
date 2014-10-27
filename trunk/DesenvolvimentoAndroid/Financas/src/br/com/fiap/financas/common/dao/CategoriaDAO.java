@@ -24,8 +24,7 @@ public class CategoriaDAO extends DataSource {
 
 	public long insert(CategoriaVO vo) {
 		this.insertStmt = super.database.compileStatement(INSERT);
-		this.insertStmt.bindLong(1, vo.getCodigo());
-		this.insertStmt.bindString(2, vo.getDescricao());
+		this.insertStmt.bindString(1, vo.getDescricao());
 		return this.insertStmt.executeInsert();
 	}
 

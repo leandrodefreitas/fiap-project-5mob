@@ -29,15 +29,14 @@ public class RegistroDAO extends DataSource {
 
 	public long insert(RegistroVO vo) {
 		this.insertStmt = super.database.compileStatement(INSERT);
-		this.insertStmt.bindLong(1, vo.getCodigo());
-		this.insertStmt.bindLong(2, vo.getTipo().ordinal());
-		this.insertStmt.bindString(3, vo.getDescricao());
-		this.insertStmt.bindDouble(4, vo.getValor());
-		this.insertStmt.bindString(5, vo.getDataFormatted());
-		this.insertStmt.bindLong(6, vo.getParcela());
-		this.insertStmt.bindLong(7, vo.getNumParcelas());
-		this.insertStmt.bindString(8, vo.getLocal());
-		this.insertStmt.bindString(9, vo.getFoto());
+		this.insertStmt.bindLong(1, vo.getTipo().ordinal());
+		this.insertStmt.bindString(2, vo.getDescricao());
+		this.insertStmt.bindDouble(3, vo.getValor());
+		//this.insertStmt.bindString(4, vo.getDataFormatted());
+		//this.insertStmt.bindLong(5, vo.getParcela());
+		//this.insertStmt.bindLong(6, vo.getNumParcelas());
+		//this.insertStmt.bindString(7, vo.getLocal());
+		//this.insertStmt.bindString(8, vo.getFoto());
 		return this.insertStmt.executeInsert();
 	}
 
