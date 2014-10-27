@@ -78,12 +78,12 @@ public class RegistroVO {
 	}
 	
 	public String getDataFormatted() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(data);
 	}
 
 	public void setData(String data) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			this.data = sdf.parse(data);
 		}
