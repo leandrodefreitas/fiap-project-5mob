@@ -5,9 +5,9 @@ import java.util.Date;
 
 import br.com.fiap.R;
 import br.com.fiap.financas.common.dao.CategoriaDAO;
-import br.com.fiap.financas.common.dao.RegistroDAO;
+import br.com.fiap.financas.common.dao.GastoDAO;
 import br.com.fiap.financas.common.vo.CategoriaVO;
-import br.com.fiap.financas.common.vo.RegistroVO;
+import br.com.fiap.financas.common.vo.GastoVO;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;

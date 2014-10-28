@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="Nova Categoria"
-            android:width="100dp" />
+            android:width="100dp" 
+            android:onClick="onClickNova"/>
 
         <Button
             android:id="@+id/btnListaCategoria"
@@ -24,7 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
             android:text="Lista de Categorias"
-            android:width="100dp" />
+            android:width="100dp" 
+            android:onClick="onClickLista"/>
 
     </LinearLayout>
 

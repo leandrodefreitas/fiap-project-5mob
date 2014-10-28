@@ -15,9 +15,10 @@ public class DataSource extends SQLiteOpenHelper {
 	public static final String DATABASE_NAME = "financas.db";
 	public static final String DATABASE_NAME_JOURNAL = "financas.db-journal";
 	public static final int DATABASE_VERSION = 1;
-
-	protected static final String TABLE_REGISTROS = "REGISTROS";
+	
 	protected static final String TABLE_CATEGORIAS = "CATEGORIAS";
+	protected static final String TABLE_GANHOS = "GANHOS";
+	protected static final String TABLE_GASTOS = "GASTOS";
 	protected static final String TABLE_REGISTRO_CATEGORIA = "REGISTRO_CATEGORIA";
 
 	static {
@@ -45,20 +46,44 @@ public class DataSource extends SQLiteOpenHelper {
 	}
 
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL( "CREATE TABLE "
-				+ TABLE_REGISTROS
-				+ " (codigo INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tipo INTEGER, descricao TEXT NOT NULL, valor DOUBLE, data TEXT, parcela INTEGER, num_parcelas INTEGER, local TEXT, foto TEXT )");
+		
 		db.execSQL( "CREATE TABLE "
 				+ TABLE_CATEGORIAS
-				+ " (codigo INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, descricao TEXT NOT NULL )" );
+				+ " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " 
+				+ "descricao TEXT NOT NULL )" );
+
+		db.execSQL( "CREATE TABLE "
+				+ TABLE_GANHOS
+				+ " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+				+ "descricao TEXT NOT NULL, " 
+				+ "valor DOUBLE NOT NULL, " 
+				+ "data TEXT NOT NULL, "
+				+ "parcela INTEGER, " 
+				+ "num_parcelas INTEGER )" );
+		
+		db.execSQL( "CREATE TABLE "
+				+ TABLE_GASTOS
+				+ " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+				+ "descricao TEXT NOT NULL, "
+				+ "valor DOUBLE NOT NULL, "
+				+ "data TEXT NOT NULL, "
+				+ "parcela INTEGER, "
+				+ "num_parcelas INTEGER, "
+				+ "id_ganho INTEGER NOT NULL, "
+				+ "local TEXT, "
+				+ "foto TEXT )");
+		
 		db.execSQL( "CREATE TABLE "
 				+ TABLE_REGISTRO_CATEGORIA
-				+ " (codigo INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cod_reg INTEGER, cod_cat INTEGER )" );
+				+ " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+				+ "id_registro INTEGER, "
+				+ "id_categoria INTEGER )");
 	}
 
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_REGISTROS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORIAS);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_GANHOS);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_GASTOS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_REGISTRO_CATEGORIA);
 		onCreate(db);
 	}

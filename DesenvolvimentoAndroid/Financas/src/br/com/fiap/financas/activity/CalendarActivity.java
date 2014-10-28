@@ -6,20 +6,16 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import br.com.fiap.R;
-import br.com.fiap.financas.adapter.CalendarAdapter;
-import br.com.fiap.financas.common.vo.RegistroVO.Tipo;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
 import android.widget.AdapterView;
@@ -29,6 +25,8 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.fiap.R;
+import br.com.fiap.financas.adapter.CalendarAdapter;
 
 public class CalendarActivity extends Activity {
 	public GregorianCalendar month, itemmonth;
@@ -37,8 +35,8 @@ public class CalendarActivity extends Activity {
 	public Handler handler;
 	public ArrayList<String> items;
 	
-	private static final int GANHO_ID = Tipo.GANHO.ordinal();
-	private static final int GASTO_ID = Tipo.GASTO.ordinal();
+	private static final int GANHO_ID = Menu.FIRST;
+	private static final int GASTO_ID = Menu.FIRST + 1;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

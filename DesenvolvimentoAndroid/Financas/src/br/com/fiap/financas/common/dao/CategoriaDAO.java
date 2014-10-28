@@ -11,10 +11,10 @@ import br.com.fiap.financas.common.vo.CategoriaVO;
 public class CategoriaDAO extends DataSource {
 
 	private static final String INSERT = "insert into " + TABLE_CATEGORIAS
-			+ " (codigo, descricao) values ( ?, ?)";
+			+ " (descricao) values (?)";
 
-	private static final String SELECT_ALL = "select (codigo, descricao) from "
-			+ TABLE_CATEGORIAS + "order by codigo";
+	private static final String SELECT_ALL = "select id, descricao from "
+			+ TABLE_CATEGORIAS + " order by descricao";
 
 	private SQLiteStatement insertStmt;
 
@@ -40,17 +40,12 @@ public class CategoriaDAO extends DataSource {
 
 		List<CategoriaVO> list = new ArrayList<CategoriaVO>();
 
-		String[] args = {""};
-		Cursor cursor = database.rawQuery(SELECT_ALL, args);
-
-		// String[] colunas = new String[]{"codigo", "descricao"};
-		// Cursor cursor = this.database.query(TABLE_CATEGORIAS, colunas, null,
-		// null,null, null, "codigo");
+		Cursor cursor = database.rawQuery(SELECT_ALL, null);
 
 		if (cursor.moveToFirst()) {
 			do {
 				CategoriaVO categoria = new CategoriaVO();
-				categoria.setCodigo(cursor.getInt(0));
+				categoria.setId(cursor.getInt(0));
 				categoria.setDescricao(cursor.getString(1));
 
 				list.add(categoria);

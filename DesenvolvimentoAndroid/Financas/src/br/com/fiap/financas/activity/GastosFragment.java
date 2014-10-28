@@ -13,14 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import br.com.fiap.R;
 import br.com.fiap.financas.adapter.FinancasGanhosListAdapter;
-import br.com.fiap.financas.common.vo.RegistroVO;
+import br.com.fiap.financas.common.vo.GastoVO;
 import br.com.fiap.financas.services.scn.RegistroSCN;
 
 public class GastosFragment extends Fragment {
 
 	Context thiscontext;
 
-	private List<RegistroVO> registroList = new ArrayList<RegistroVO>();
+	private List<GastoVO> registroList = new ArrayList<GastoVO>();
 	private ListView listView;
 	private FinancasGanhosListAdapter adapter;
 
