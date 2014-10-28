@@ -1,9 +1,5 @@
 package br.com.fiap.financas.activity;
 
-import br.com.fiap.R;
-import br.com.fiap.financas.common.dao.RegistroDAO;
-import br.com.fiap.financas.common.vo.RegistroVO;
-import br.com.fiap.financas.common.vo.RegistroVO.Tipo;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,11 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.fiap.R;
+import br.com.fiap.financas.common.dao.GanhoDAO;
+import br.com.fiap.financas.common.dao.RegCatDAO;
+import br.com.fiap.financas.common.vo.GanhoVO;
+import br.com.fiap.financas.common.vo.RegCatVO;
 
 public class CadastrarGanhoActivity extends Activity{
 	
-	private static final Tipo ganho = Tipo.GANHO;	
-	private RegistroVO registroGanho = new RegistroVO();
+	private GanhoVO ganho = new GanhoVO();
+	private RegCatVO regcat = new RegCatVO();
 	private TextView dataGanho;
 	private EditText edtDescricao;
 	private EditText edtValor;
@@ -30,10 +31,11 @@ public class CadastrarGanhoActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cadastro_ganho);
 		
-		final RegistroDAO dao = new RegistroDAO(this);
+		final GanhoDAO ganhoDao = new GanhoDAO(this);
+		final RegCatDAO regCatDao = new RegCatDAO(this);
 		
 		Bundle param = getIntent().getExtras();
-		String data = param.getString("data");
+		final String data = param.getString("data");
 		dataGanho = (TextView) findViewById(R.id.lblDataGanho);
 		Log.i("Teste", data);
 		dataGanho.setText(data);
@@ -46,13 +48,21 @@ public class CadastrarGanhoActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				registroGanho.setTipo(ganho);
-				registroGanho.setDescricao(edtDescricao.getText().toString());
-				registroGanho.setValor(Double.valueOf(edtValor.getText().toString()));
 				
-				//registroGanho.setCodigo(1);
+				ganho.setDescricao(edtDescricao.getText().toString());
+				ganho.setValor(Double.valueOf(edtValor.getText().toString()));
+				ganho.setData(data);
+				//ganho.setCategoria();
+				ganho.setParcela(Integer.valueOf("1"));
+				ganho.setNumParcelas(Integer.valueOf("10"));
 				
-				dao.insert(registroGanho);
+				Long id = ganhoDao.insert(ganho);
+				
+				regcat.setIdRegistro(Integer.valueOf(id.toString()));
+				regcat.setIdCategoria(Integer.valueOf("1"));
+				
+				regCatDao.insert(regcat);
+				
 				Log.i("Teste", edtDescricao.getText().toString());
 				Log.i("Teste", edtValor.getText().toString());
 				

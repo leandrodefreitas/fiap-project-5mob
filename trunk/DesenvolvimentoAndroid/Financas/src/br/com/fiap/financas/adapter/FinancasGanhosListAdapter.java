@@ -9,14 +9,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.com.fiap.R;
 import br.com.fiap.financas.activity.GastosFragment;
-import br.com.fiap.financas.common.vo.RegistroVO;
+import br.com.fiap.financas.common.vo.GastoVO;
 
 public class FinancasGanhosListAdapter extends BaseAdapter {
 	private GastosFragment gastosFragment;
 	private LayoutInflater inflater;
-	private List<RegistroVO> ganhosItems;
+	private List<GastoVO> ganhosItems;
 
-	public FinancasGanhosListAdapter(GastosFragment gastosFragment, List<RegistroVO> ganhosItems) {
+	public FinancasGanhosListAdapter(GastosFragment gastosFragment, List<GastoVO> ganhosItems) {
 		this.gastosFragment = gastosFragment;
 		this.ganhosItems = ganhosItems;
 	}
@@ -51,7 +51,7 @@ public class FinancasGanhosListAdapter extends BaseAdapter {
 		TextView data = (TextView) convertView.findViewById(R.id.data);
 		TextView valor = (TextView) convertView.findViewById(R.id.registrovalor);
 
-		RegistroVO vo = ganhosItems.get(position);
+		GastoVO vo = ganhosItems.get(position);
 		descricao.setText(vo.getDescricao());
 		local.setText("Local: " + String.valueOf(vo.getLocal()));
 		data.setText(vo.getDataFormatted());

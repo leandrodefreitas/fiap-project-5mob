@@ -62,7 +62,7 @@
                 
         <activity
             android:name="br.com.fiap.financas.activity.CadastrarGanhoActivity"
-            android:label="@string/novo_gasto" 
+            android:label="@string/novo_ganho" 
             android:icon="@drawable/appicon">
             <intent-filter>
 				<category android:name="android.intent.category.DEFAULT" />
@@ -95,6 +95,15 @@
 				<category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="br.com.fiap.financas.activity.ListarCategoriasActivity"
+            android:label="@string/ic_categoria" 
+            android:icon="@drawable/ic_categoria">
+            <intent-filter>
+				<category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>        
         
         <activity
             android:name="br.com.fiap.financas.activity.GraficosActivity"

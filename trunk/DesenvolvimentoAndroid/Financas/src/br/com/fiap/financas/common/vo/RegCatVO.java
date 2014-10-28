@@ -2,32 +2,32 @@ package br.com.fiap.financas.common.vo;
 
 public class RegCatVO {
 	
-	private Integer codigo;
-	private Integer cod_reg;
-	private Integer cod_cat;
+	private Integer id;
+	private Integer idRegistro;
+	private Integer idCategoria;
 	
-	public Integer getCodigo() {
-		return codigo;
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public Integer getIdRegistro() {
+		return idRegistro;
 	}
 	
-	public Integer getCod_reg() {
-		return cod_reg;
+	public void setIdRegistro(Integer idRegistro) {
+		this.idRegistro = idRegistro;
 	}
 	
-	public void setCod_reg(Integer cod_reg) {
-		this.cod_reg = cod_reg;
+	public Integer getIdCategoria() {
+		return idCategoria;
 	}
 	
-	public Integer getCod_cat() {
-		return cod_cat;
-	}
-	
-	public void setCod_cat(Integer cod_cat) {
-		this.cod_cat = cod_cat;
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 	
 }

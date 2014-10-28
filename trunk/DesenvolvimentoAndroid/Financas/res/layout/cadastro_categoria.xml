@@ -4,5 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nova Categoria" />
+
+    <EditText
+        android:id="@+id/fCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite a nova Categoria" >
+
+        <requestFocus />
+    </EditText>  
+    
+    <Button
+        android:id="@+id/btnSalvarCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar Categoria" 
+        android:layout_gravity="right"
+        android:onClick="onSalvarCategoria" />    
 
 </LinearLayout>

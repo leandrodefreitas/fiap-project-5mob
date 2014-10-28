@@ -6,50 +6,26 @@ import java.util.Date;
 
 import android.util.Log;
 
-public class RegistroVO {
+public class GastoVO {
 	
-	public static enum Tipo {
-		GANHO, GASTO;
-	}
-	
-	private Integer codigo;
-	private Tipo tipo;
+	private Integer id;
 	private String descricao;
 	private Double valor;
 	private Date data;
 	private ArrayList<CategoriaVO> categorias;	
 	private Integer parcela;
 	private Integer numParcelas;
+	private Integer idGanho;
 	private String local;
 	private String foto;
 	
-	public Integer getCodigo() {
-		return codigo;
+	public Integer getId() {
+		return id;
 	}
 	
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	
-	
-	public void tipo(Integer opcao) {
-		Log.i( "", "REGISTRO:----------------------- " + opcao ) ;
-		switch (opcao) {
-			case 0:
-				this.tipo = Tipo.GANHO;
-			case 1:
-				this.tipo = Tipo.GASTO;
-		}
-	}	
-	
-	public Tipo getTipo() {
-		return tipo;
-	}
-	
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
-	
 	
 	public String getDescricao() {
 		return descricao;
@@ -118,6 +94,14 @@ public class RegistroVO {
 	}
 	
 	
+	public Integer getIdGanho() {
+		return idGanho;
+	}
+
+	public void setIdGanho(Integer idGanho) {
+		this.idGanho = idGanho;
+	}
+
 	public String getLocal() {
 		return local;
 	}
