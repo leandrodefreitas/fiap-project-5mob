@@ -19,7 +19,7 @@ public class FinancasFragActivity extends FragmentActivity implements ActionBar.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.financas_frag);
  
         // Inicializa a view
         viewPager = (ViewPager) findViewById(R.id.pager);
