@@ -10,9 +10,11 @@ import br.com.fiap.financas.common.vo.CategoriaVO;
 import br.com.fiap.financas.common.vo.RegistroVO;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -74,10 +76,36 @@ public class DashboardActivity extends Activity {
         	.show();
 		
 	}
+	
+	private AlertDialog alerta;
 
 	public void onClickInfo(View v) {
-		Intent i = new Intent(DashboardActivity.this, InformacoesActivity.class);
-		startActivity(i);
+		/*Intent i = new Intent(DashboardActivity.this, InformacoesActivity.class);
+		startActivity(i);*/
+		
+		/*new AlertDialog.Builder(this)
+    	.setTitle("Informações")
+    	.setMessage("Desenvolvedores: \n \n Flavio Ota \n Leandro de Freitas \n Rodrigo Ota \n Wellington Santos")
+    	.setIcon(R.drawable.ic_informacoes)
+    	.setNegativeButton("Voltar", null)
+    	.show();*/
+		
+		//LayoutInflater é utilizado para inflar nosso layout em uma view. 
+		//-pegamos nossa instancia da classe 
+		LayoutInflater li = getLayoutInflater(); 
+		//inflamos o layout LAYOUT na view 
+		View view = li.inflate(R.layout.informacoes, null); 
+		//definimos para o botão do layout um clickListener 
+		view.findViewById(R.id.btVoltar).setOnClickListener(new View.OnClickListener() { 
+			public void onClick(View arg0) { alerta.dismiss(); } 
+		}); 
+		AlertDialog.Builder builder = new AlertDialog.Builder(this); 
+		builder.setTitle("Informações");
+		builder.setIcon(R.drawable.ic_informacoes);
+		builder.setView(view); 
+		alerta = builder.create(); 
+		alerta.show();
+	
 	}
 	
 	public void onClickCalendario(View v) {

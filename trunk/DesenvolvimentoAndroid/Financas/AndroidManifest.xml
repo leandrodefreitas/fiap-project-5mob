@@ -7,6 +7,8 @@
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -42,7 +44,8 @@
         
         <activity
             android:name="br.com.fiap.financas.activity.CalendarActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:label="@string/ic_calendario"
+            android:icon="@drawable/ic_calendario">
             <intent-filter>
 				<category android:name="android.intent.category.DEFAULT" />                
             </intent-filter>
@@ -103,8 +106,6 @@
         </activity>
         <activity android:name="org.achartengine.GraphicalActivity" />
         
-        
     </application>
     
-
 </manifest>
