@@ -57,7 +57,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
-            android:id="@+id/spnCategoria"
+            android:id="@+id/spnCategoriaGanho"
             android:layout_width="match_parent"
             android:layout_height="46dp" />
 

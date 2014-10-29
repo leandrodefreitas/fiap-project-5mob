@@ -10,7 +10,7 @@ import br.com.fiap.financas.common.vo.RegCatVO;
 
 public class RegCatDAO extends DataSource{
 
-	private static final String INSERT = "insert into" + TABLE_REGISTRO_CATEGORIA + " (id_registro, id_categoria) values (?, ?) ";
+	private static final String INSERT = "insert into " + TABLE_REGISTRO_CATEGORIA + " (id_registro, id_categoria) values (?, ?) ";
 	
 	private static final String SELECT_ALL = "select id, id_registro, id_categoria from " + TABLE_REGISTRO_CATEGORIA + "order by id";
 	
