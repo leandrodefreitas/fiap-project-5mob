@@ -38,9 +38,8 @@ public class CadastrarGanhoActivity extends Activity{
 	private EditText edtParcela;
 	private EditText edtNumParcelas;
 	private List<CategoriaVO> lista;
-	private List<String> categorias = new ArrayList<String>();
-	
-	
+	private List<String> categorias;
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,11 +60,20 @@ public class CadastrarGanhoActivity extends Activity{
 		
 		//populando spinner de categorias
 		lista = catDao.selectAll();
+		categorias = new ArrayList<String>();
 		for (CategoriaVO categoria: lista){
 			categorias.add(categoria.getDescricao());
 		}
 		
-		spnCategoria.setAdapter(new ArrayAdapter<CategoriaVO>(getApplicationContext(), android.R.layout.simple_spinner_item, lista));
+		if (categorias.isEmpty()) {
+			Log.i("Spinner", "lista categorias vazia..");
+		}
+		
+		spnCategoria = (Spinner) findViewById(R.id.spnCategoriaGanho);
+		
+		ArrayAdapter<String> catAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
+		
+		spnCategoria.setAdapter(catAdapter);
 		
 		spnCategoria.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -79,7 +87,7 @@ public class CadastrarGanhoActivity extends Activity{
 						categoria = cat;
 					}
 				}
-				
+				Log.i("Spinner", "Item selecionado: " + categoria.getDescricao() + " com id: " + categoria.getId());
 			}
 
 			@Override
@@ -99,24 +107,44 @@ public class CadastrarGanhoActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				
-				ganho.setDescricao(edtDescricao.getText().toString());
-				ganho.setValor(Double.valueOf(edtValor.getText().toString()));
-				ganho.setData(data);
-				ganho.setCategoria(categoria);
-				ganho.setParcela(Integer.valueOf(edtParcela.getText().toString()));
-				ganho.setNumParcelas(Integer.valueOf(edtNumParcelas.getText().toString()));
 				
-				Long id = ganhoDao.insert(ganho);
-				
-				regcat.setIdRegistro(Integer.valueOf(id.toString()));
-				regcat.setIdCategoria(Integer.valueOf(categoria.getId()));
-				
-				regCatDao.insert(regcat);
-				
-				Log.i("Teste", edtDescricao.getText().toString());
-				Log.i("Teste", edtValor.getText().toString());
-				
-				Toast.makeText(getApplicationContext(), "Cadastro realizado", Toast.LENGTH_SHORT).show();
+				if (edtDescricao.getText().toString().length() == 0){
+					edtDescricao.setError("Campo obrigatório");
+					edtDescricao.requestFocus();
+				} else	
+				if (edtValor.getText().toString().length() == 0){
+					edtValor.setError("Campo obrigatório");
+					edtValor.requestFocus();
+				} 
+				else {
+								
+					ganho.setDescricao(edtDescricao.getText().toString());
+					ganho.setValor(Double.valueOf(edtValor.getText().toString()));
+					ganho.setData(data);
+					ganho.setCategoria(categoria);
+					
+					if (!(edtParcela.getText().toString().length() == 0)){
+						ganho.setParcela(Integer.valueOf(edtParcela.getText().toString()));						
+					} else {
+						ganho.setParcela(0);
+					}
+					
+					if (!(edtNumParcelas.getText().toString().length() == 0)){
+						ganho.setNumParcelas(Integer.valueOf(edtNumParcelas.getText().toString()));					
+					} else {
+						ganho.setNumParcelas(0);
+					}
+
+					Long id = ganhoDao.insert(ganho);
+					
+					regcat.setIdRegistro(Integer.valueOf(id.toString()));
+					regcat.setIdCategoria(Integer.valueOf(categoria.getId()));
+					
+					regCatDao.insert(regcat);
+					
+					Toast.makeText(getApplicationContext(), "Cadastro realizado", Toast.LENGTH_SHORT).show();
+					
+				}
 			}
 		});
 		

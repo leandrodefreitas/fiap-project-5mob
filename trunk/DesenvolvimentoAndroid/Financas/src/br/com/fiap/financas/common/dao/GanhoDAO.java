@@ -34,8 +34,16 @@ public class GanhoDAO extends DataSource {
 		this.insertStmt.bindString(1, vo.getDescricao());
 		this.insertStmt.bindDouble(2, vo.getValor());
 		this.insertStmt.bindString(3, vo.getDataFormatted());
-		this.insertStmt.bindLong(4, vo.getParcela());
-		this.insertStmt.bindLong(5, vo.getNumParcelas());
+		if ((vo.getParcela().equals(null)) || (vo.getParcela() == 0)){
+			this.insertStmt.bindNull(4);
+		} else {
+			this.insertStmt.bindLong(4, vo.getParcela());			
+		}
+		if ((vo.getNumParcelas().equals(null)) || (vo.getNumParcelas() == 0)) {
+			this.insertStmt.bindNull(5);
+		} else {
+			this.insertStmt.bindLong(5, vo.getNumParcelas());			
+		}
 		return this.insertStmt.executeInsert();
 	}
 
