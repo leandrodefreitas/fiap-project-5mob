@@ -27,6 +27,7 @@
             android:id="@+id/fDescricaoGanho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Descrição"
             android:inputType="text" >
 
             <requestFocus />
@@ -44,6 +45,7 @@
             android:id="@+id/fValorGanho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Valor"
             android:inputType="numberDecimal" >
         </EditText>
 
@@ -55,9 +57,46 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/spnCategoria"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="46dp" />
+
+        <LinearLayout
+            android:id="@+id/layoutParcelas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="Parcelas:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/fParcelaGanho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Parcela"
+                android:inputType="number" >
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="/"
+                android:textAppearance="?android:attr/textAppearanceMedium" />            
+            
+            <EditText
+                android:id="@+id/fNumParcelasGanho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Total"
+                android:inputType="number" >
+            </EditText>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutButtons"
