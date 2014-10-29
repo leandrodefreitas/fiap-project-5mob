@@ -5,89 +5,174 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/lblDescricao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Descrição"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    <EditText
-        android:id="@+id/fDescricao"
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/lblDataGasto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/lbl_descricao"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/fDescricaoGasto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbl_descricao"
+                android:inputType="text" >
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/lblValor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/lbl_valor"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/fValorGasto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbl_valor"
+                android:inputType="numberDecimal" >
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/lbl_categoria"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <!-- Criar um linearlayout dinamico para criar varias chekboxs para selecionar categorias -->
+
+            <Spinner
+                android:id="@+id/spnCategoriaGasto"
+                android:layout_width="match_parent"
+                android:layout_height="46dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/lbl_ganho"
+                android:textAppearance="?android:attr/textAppearanceMedium" />            
+            <Spinner
+                android:id="@+id/spnGanhoSelecao"
+                android:layout_width="match_parent"
+                android:layout_height="46dp" />
+
+            <LinearLayout
+                android:id="@+id/layoutParcelas"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="@string/lbl_parcelas"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/fParcelaGasto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lbl_parcela"
+                    android:inputType="number" >
+                </EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="@string/lbl_barra"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/fNumParcelasGasto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lbl_total"
+                    android:inputType="number" >
+                </EditText>
+            </LinearLayout>
+            
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/lbl_local"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+             
+             
+             
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/lbl_foto"
+                android:textAppearance="?android:attr/textAppearanceMedium" />             
+            
+            
+            
+        </LinearLayout>
+    </ScrollView>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/lblValor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Valor"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/fValor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal" >
-    </EditText>
-
-    <TextView
-        android:id="@+id/lblCategoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Categoria"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-	<Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-	
-	<TextView
-        android:id="@+id/lbllocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Local"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-	
-	
-	<TextView
-        android:id="@+id/lblFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Foto"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_height="1dip"
+        android:background="?android:attr/dividerVertical" />
 
     <LinearLayout
-        android:id="@+id/layoutButtons"
+        android:id="@+id/linearLayout1"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:paddingTop="10dp" >
+        android:gravity="bottom"
+        android:measureWithLargestChild="true"
+        android:orientation="horizontal"
+        android:paddingLeft="2dip"
+        android:paddingRight="2dip"
+        android:paddingTop="0dip" >
 
         <Button
-            android:id="@+id/btnSalvar"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnSairGasto"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:text="Salvar"
-            android:width="100dp" />
+            android:layout_weight="1"
+            android:text="@string/btn_voltar" />
 
         <Button
-            android:id="@+id/btnSair"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnSalvarGasto"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:text="Voltar"
-            android:width="100dp" />
+            android:layout_weight="1"
+            android:text="@string/btn_salvar" />
     </LinearLayout>
 
 </LinearLayout>

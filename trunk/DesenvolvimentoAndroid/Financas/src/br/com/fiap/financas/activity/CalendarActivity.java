@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import br.com.fiap.R;
 import br.com.fiap.financas.adapter.CalendarAdapter;
+import br.com.fiap.financas.util.Util;
 
 public class CalendarActivity extends Activity {
 	public GregorianCalendar month, itemmonth;
@@ -102,7 +103,7 @@ public class CalendarActivity extends Activity {
 				}
 				((CalendarAdapter) parent.getAdapter()).setSelected(v);
 
-				showToast(selectedGridDate);
+				showToast(Util.imprimeDataFormatoBR(selectedGridDate));
 
 			}
 		});
@@ -115,7 +116,7 @@ public class CalendarActivity extends Activity {
 				AdapterContextMenuInfo info =  (AdapterContextMenuInfo) menuInfo;
 				String selectedGridDate = CalendarAdapter.dayString
 				.get(info.position);
-				menu.setHeaderTitle("Registro " + selectedGridDate);
+				menu.setHeaderTitle("Registro " + Util.imprimeDataFormatoBR(selectedGridDate));
 				menu.add(0, GANHO_ID, 0, "Novo Ganho");
 				menu.add(0, GASTO_ID, 0, "Novo Gasto");				
 			}

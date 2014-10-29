@@ -5,14 +5,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/lblDataGanho"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:paddingTop="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -20,14 +20,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:text="Descrição"
+            android:text="@string/lbl_descricao"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
 
         <EditText
             android:id="@+id/fDescricaoGanho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Descrição"
+            android:hint="@string/lbl_descricao"
             android:inputType="text" >
 
             <requestFocus />
@@ -38,14 +39,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:text="Valor"
+            android:text="@string/lbl_valor"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
             android:id="@+id/fValorGanho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Valor"
+            android:hint="@string/lbl_valor"
             android:inputType="numberDecimal" >
         </EditText>
 
@@ -53,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:text="Categoria"
+            android:text="@string/lbl_categoria"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
@@ -71,14 +72,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="Parcelas:"
+                android:text="@string/lbl_parcelas"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/fParcelaGanho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Parcela"
+                android:hint="@string/lbl_parcela"
                 android:inputType="number" >
             </EditText>
 
@@ -86,20 +87,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="/"
-                android:textAppearance="?android:attr/textAppearanceMedium" />            
-            
+                android:text="@string/lbl_barra"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <EditText
                 android:id="@+id/fNumParcelasGanho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Total"
+                android:hint="@string/lbl_total"
                 android:inputType="number" >
             </EditText>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutButtons"
+            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -108,18 +110,22 @@
 
             <Button
                 android:id="@+id/btnSalvarGanho"
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Salvar"
+                android:text="@string/btn_salvar"
                 android:width="100dp" />
 
             <Button
                 android:id="@+id/btnSairGanho"
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Voltar"
+                android:text="@string/btn_voltar"
                 android:width="100dp" />
         </LinearLayout>
+
+
     </LinearLayout>
 
 </ScrollView>

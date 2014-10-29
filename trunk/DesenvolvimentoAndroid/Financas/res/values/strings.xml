@@ -26,5 +26,20 @@
     
     <string name="lbl_financas">Image</string>
     
+    <string name="lbl_descricao">Descrição</string>
+    <string name="lbl_valor">Valor</string>
+    <string name="lbl_categoria">Categoria</string>
+    <string name="lbl_parcelas">Parcelas:</string>
+    <string name="lbl_parcela">Parcela</string>
+    <string name="lbl_total">Total</string>
+    <string name="lbl_barra">/</string>
+    <string name="lbl_ganho">Descontar do ganho:</string>    
+	<string name="lbl_local">Local</string>
+	<string name="lbl_foto">Foto</string>
+	
+    <string name="btn_salvar">Salvar</string>
+    <string name="btn_voltar">Voltar</string>   
+
+    
 
 </resources>
