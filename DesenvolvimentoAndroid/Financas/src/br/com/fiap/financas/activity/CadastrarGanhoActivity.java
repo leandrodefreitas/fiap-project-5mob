@@ -23,6 +23,7 @@ import br.com.fiap.financas.common.dao.RegCatDAO;
 import br.com.fiap.financas.common.vo.CategoriaVO;
 import br.com.fiap.financas.common.vo.GanhoVO;
 import br.com.fiap.financas.common.vo.RegCatVO;
+import br.com.fiap.financas.util.Util;
 
 public class CadastrarGanhoActivity extends Activity{
 	
@@ -53,7 +54,8 @@ public class CadastrarGanhoActivity extends Activity{
 		final String data = param.getString("data");
 		dataGanho = (TextView) findViewById(R.id.lblDataGanho);
 		Log.i("Teste", data);
-		dataGanho.setText(data);
+		Log.i("Teste", Util.imprimeDataFormatoBR(data));
+		dataGanho.setText(Util.imprimeDataFormatoBR(data));
 		
 		edtDescricao = (EditText) findViewById(R.id.fDescricaoGanho);
 		edtValor = (EditText) findViewById(R.id.fValorGanho);
