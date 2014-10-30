@@ -7,6 +7,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="radape">RF</string>
     
+    <string name="campo_obrigatorio">Campo Obrigatório</string>
+    
     <string name="ic_categoria">Categorias</string>
     <string name="ic_calendario">Calendário</string>
     <string name="ic_financas">Finanças</string>

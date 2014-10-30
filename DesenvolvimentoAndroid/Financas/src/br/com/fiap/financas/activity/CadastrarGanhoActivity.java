@@ -111,11 +111,11 @@ public class CadastrarGanhoActivity extends Activity{
 				
 				
 				if (edtDescricao.getText().toString().length() == 0){
-					edtDescricao.setError("Campo obrigatório");
+					edtDescricao.setError(getString(R.string.campo_obrigatorio));
 					edtDescricao.requestFocus();
 				} else	
 				if (edtValor.getText().toString().length() == 0){
-					edtValor.setError("Campo obrigatório");
+					edtValor.setError(getString(R.string.campo_obrigatorio));
 					edtValor.requestFocus();
 				} 
 				else {

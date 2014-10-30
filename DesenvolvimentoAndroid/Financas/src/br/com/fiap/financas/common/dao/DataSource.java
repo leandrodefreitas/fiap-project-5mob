@@ -14,7 +14,7 @@ public class DataSource extends SQLiteOpenHelper {
 	public static String DATABASE_COMPLETE = "";
 	public static final String DATABASE_NAME = "financas.db";
 	public static final String DATABASE_NAME_JOURNAL = "financas.db-journal";
-	public static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 2;
 	
 	protected static final String TABLE_CATEGORIAS = "CATEGORIAS";
 	protected static final String TABLE_GANHOS = "GANHOS";

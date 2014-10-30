@@ -42,14 +42,24 @@ public class CategoriasActivity extends Activity {
     	
     	edtCategoria = (EditText) findViewById(R.id.fCategoria);
     	
-    	categoria.setDescricao(edtCategoria.getText().toString());
     	
-    	CategoriaDAO dao = new CategoriaDAO(this);
-    	long id = dao.insert(categoria);   	
+		if (edtCategoria.getText().toString().length() == 0){
+			edtCategoria.setError(getString(R.string.campo_obrigatorio));
+			edtCategoria.requestFocus();
+		} else {
+			
+	    	categoria.setDescricao(edtCategoria.getText().toString());
+	    	
+	    	CategoriaDAO dao = new CategoriaDAO(this);
+	    	long id = dao.insert(categoria);   	
+	    	
+	    	if (id != -1) {
+	        	Toast.makeText(getApplicationContext(), "Categoria salva", Toast.LENGTH_SHORT).show();
+	        	setContentView(R.layout.categorias);
+	    	}  	
+	    	
+		}
     	
-    	if (id != -1) {
-        	Toast.makeText(getApplicationContext(), "Categoria salva", Toast.LENGTH_SHORT).show();
-        	setContentView(R.layout.categorias);
-    	}  	
+
     }
 }
