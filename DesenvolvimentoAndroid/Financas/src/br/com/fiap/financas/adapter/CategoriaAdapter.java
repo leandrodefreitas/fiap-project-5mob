@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import br.com.fiap.R;
@@ -43,8 +45,9 @@ public class CategoriaAdapter extends BaseAdapter {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.lista_categoria, null);
 		
-		TextView tv = (TextView) layout.findViewById(R.id.categoriaItem);
+		CheckedTextView tv = (CheckedTextView) layout.findViewById(R.id.categoriaItem);
 		tv.setText(lista.get(position).getDescricao());
+
 		
 		return layout;
 	}

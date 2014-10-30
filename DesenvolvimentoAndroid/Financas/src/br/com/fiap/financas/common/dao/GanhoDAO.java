@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
+import br.com.fiap.financas.common.vo.CategoriaVO;
 import br.com.fiap.financas.common.vo.GanhoVO;
 
 public class GanhoDAO extends DataSource {
@@ -20,8 +21,8 @@ public class GanhoDAO extends DataSource {
 	private static final String SELECT_BY_DATA = "select id, descricao, valor, data, parcela, num_parcelas from "
 			+ TABLE_GANHOS + " order by data ASC";
 
-	private static final String SELECT_BY_TIPO = "select id, descricao, valor, data, parcela, num_parcelas from "
-			+ TABLE_GANHOS + " where tipo = ";
+	private static final String SELECT_BY_ID = "select id, descricao, valor, data, parcela, num_parcelas from "
+			+ TABLE_GANHOS + " where id = ?";
 
 	private SQLiteStatement insertStmt;
 
@@ -85,4 +86,30 @@ public class GanhoDAO extends DataSource {
 		return list;
 	}
 
+	
+	public GanhoVO selectById(int id) {
+
+		GanhoVO ganho = new GanhoVO();
+		
+		String[] args = new String[] { String.valueOf(id) };
+		Cursor cursor = database.rawQuery(SELECT_BY_ID, args);
+
+		if (cursor.moveToFirst()) {
+			do {
+				
+				ganho.setId(cursor.getInt(0));
+				ganho.setDescricao(cursor.getString(1));
+				ganho.setValor(cursor.getDouble(2));
+				ganho.setData(cursor.getString(3));
+				ganho.setParcela(cursor.getInt(4));
+				ganho.setNumParcelas(cursor.getInt(5));
+				
+			} while (cursor.moveToNext());
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}
+		return ganho;
+	}	
+	
 }

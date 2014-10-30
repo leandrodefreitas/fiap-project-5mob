@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
+import br.com.fiap.financas.common.vo.GanhoVO;
 import br.com.fiap.financas.common.vo.GastoVO;
 
 public class GastoDAO extends DataSource {
@@ -37,7 +38,7 @@ public class GastoDAO extends DataSource {
 		this.insertStmt.bindString(3, vo.getDataFormatted());
 		this.insertStmt.bindLong(4, vo.getParcela());
 		this.insertStmt.bindLong(5, vo.getNumParcelas());
-		this.insertStmt.bindLong(6, vo.getIdGanho());
+		this.insertStmt.bindLong(6, vo.getGanhoDescontar().getId());
 		this.insertStmt.bindString(7, vo.getLocal());
 		this.insertStmt.bindString(8, vo.getFoto());
 		return this.insertStmt.executeInsert();
@@ -63,6 +64,8 @@ public class GastoDAO extends DataSource {
 		
 		if (cursor.moveToFirst()) {
 			do {
+
+				
 				GastoVO gasto = new GastoVO();
 				gasto.setId(cursor.getInt(0));
 				gasto.setDescricao(cursor.getString(1));
@@ -70,7 +73,12 @@ public class GastoDAO extends DataSource {
 				gasto.setData(cursor.getString(3));
 				gasto.setParcela(cursor.getInt(4));
 				gasto.setNumParcelas(cursor.getInt(5));
-				gasto.setIdGanho(cursor.getInt(6));
+				
+				GanhoVO ganho = new GanhoVO();
+				GanhoDAO ganhoDao = new GanhoDAO(context);
+				ganho = ganhoDao.selectById(cursor.getInt(6));
+				gasto.setGanhoDescontar(ganho);
+				
 				gasto.setLocal(cursor.getString(7));
 				gasto.setFoto(cursor.getString(8));
 
@@ -101,7 +109,12 @@ public class GastoDAO extends DataSource {
 				gasto.setData(cursor.getString(3));
 				gasto.setParcela(cursor.getInt(4));
 				gasto.setNumParcelas(cursor.getInt(5));
-				gasto.setIdGanho(cursor.getInt(6));
+				
+				GanhoVO ganho = new GanhoVO();
+				GanhoDAO ganhoDao = new GanhoDAO(context);
+				ganho = ganhoDao.selectById(cursor.getInt(6));
+				gasto.setGanhoDescontar(ganho);
+				
 				gasto.setLocal(cursor.getString(7));
 				gasto.setFoto(cursor.getString(8));
 

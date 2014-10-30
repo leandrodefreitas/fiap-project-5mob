@@ -35,7 +35,7 @@
     <string name="lbl_parcela">Parcela</string>
     <string name="lbl_total">Total</string>
     <string name="lbl_barra">/</string>
-    <string name="lbl_ganho">Descontar do ganho:</string>    
+    <string name="lbl_ganho">Ganho a descontar:</string>    
 	<string name="lbl_local">Local</string>
 	<string name="lbl_foto">Foto</string>
 	
