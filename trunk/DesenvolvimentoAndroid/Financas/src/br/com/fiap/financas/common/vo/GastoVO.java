@@ -15,7 +15,7 @@ public class GastoVO {
 	private ArrayList<CategoriaVO> categorias;	
 	private Integer parcela;
 	private Integer numParcelas;
-	private Integer idGanho;
+	private GanhoVO ganhoDescontar;
 	private String local;
 	private String foto;
 	
@@ -92,14 +92,13 @@ public class GastoVO {
 	public void setNumParcelas(Integer numParcelas) {
 		this.numParcelas = numParcelas;
 	}
-	
-	
-	public Integer getIdGanho() {
-		return idGanho;
+
+	public GanhoVO getGanhoDescontar() {
+		return ganhoDescontar;
 	}
 
-	public void setIdGanho(Integer idGanho) {
-		this.idGanho = idGanho;
+	public void setGanhoDescontar(GanhoVO ganhoDescontar) {
+		this.ganhoDescontar = ganhoDescontar;
 	}
 
 	public String getLocal() {

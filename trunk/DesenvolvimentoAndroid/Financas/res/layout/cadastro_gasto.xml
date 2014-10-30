@@ -64,12 +64,12 @@
                 android:text="@string/lbl_categoria"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <!-- Criar um linearlayout dinamico para criar varias chekboxs para selecionar categorias -->
-
-            <Spinner
-                android:id="@+id/spnCategoriaGasto"
+            <ListView
+                android:id="@+id/listViewCategorias"
                 android:layout_width="match_parent"
-                android:layout_height="46dp" />
+                android:layout_height="100dp"
+                android:choiceMode="multipleChoice" >
+            </ListView>
 
             <TextView
                 android:layout_width="wrap_content"
