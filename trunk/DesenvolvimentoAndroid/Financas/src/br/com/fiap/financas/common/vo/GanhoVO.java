@@ -1,10 +1,10 @@
 package br.com.fiap.financas.common.vo;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import android.util.Log;
+import br.com.fiap.financas.util.Util;
 
 public class GanhoVO {
 	
@@ -90,6 +90,12 @@ public class GanhoVO {
 	
 	public void setNumParcelas(Integer numParcelas) {
 		this.numParcelas = numParcelas;
+	}
+	
+	@Override
+	public String toString() {
+
+		return this.getDescricao() + " de " + Util.imprimeDataFormatoBR(this.getDataFormatted());
 	}
 
 }

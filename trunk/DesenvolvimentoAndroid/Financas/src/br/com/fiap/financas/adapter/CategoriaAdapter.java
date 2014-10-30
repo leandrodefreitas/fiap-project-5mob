@@ -3,8 +3,10 @@ package br.com.fiap.financas.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -18,6 +20,7 @@ public class CategoriaAdapter extends BaseAdapter {
 	
 	private Context context;
 	private List<CategoriaVO> lista;
+	private CheckedTextView tv;
 	
 	public CategoriaAdapter(Context context, List<CategoriaVO> lista){
 		this.context = context;
@@ -41,15 +44,30 @@ public class CategoriaAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.lista_categoria, null);
+		final int auxposition = position;
 		
-		CheckedTextView tv = (CheckedTextView) layout.findViewById(R.id.categoriaItem);
+		View v = convertView;		
+		
+		if (v == null){
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		    v = inflater.inflate(R.layout.lista_categoria, null);
+		}
+		
+		tv = (CheckedTextView) v.findViewById(R.id.categoriaItem);
 		tv.setText(lista.get(position).getDescricao());
-
 		
-		return layout;
+		/*
+		tv.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				tv.toggle();
+				Log.i("teste click", lista.get(auxposition).getDescricao());
+			}
+		});
+*/
+		
+		return v;
 	}
 
 }

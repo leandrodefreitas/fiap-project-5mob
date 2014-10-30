@@ -125,13 +125,6 @@
         android:paddingRight="2dip"
         android:paddingTop="0dip" >
 
-        <Button
-            android:id="@+id/btnSalvarGanho"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btn_salvar" />
 
         <Button
             android:id="@+id/btnSairGanho"
@@ -140,6 +133,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/btn_voltar" />
+        
+        <Button
+            android:id="@+id/btnSalvarGanho"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_salvar" />        
+        
     </LinearLayout>
 
 </LinearLayout>
