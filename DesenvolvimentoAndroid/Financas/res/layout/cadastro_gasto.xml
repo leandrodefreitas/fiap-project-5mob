@@ -67,8 +67,9 @@
             <ListView
                 android:id="@+id/listViewCategorias"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:choiceMode="multipleChoice" >
+                android:layout_height="match_parent"
+                android:choiceMode="multipleChoice" 
+                android:clickable="true">
             </ListView>
 
             <TextView

@@ -56,7 +56,7 @@ public class GanhoDAO extends DataSource {
 		super.database.delete(TABLE_GANHOS, null, null);
 	}
 
-	public List<GanhoVO> selectAll(int tipo) {
+	public List<GanhoVO> selectAll() {
 
 		List<GanhoVO> list = new ArrayList<GanhoVO>();
 

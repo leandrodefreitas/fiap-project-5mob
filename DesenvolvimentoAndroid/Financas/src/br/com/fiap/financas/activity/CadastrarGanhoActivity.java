@@ -38,7 +38,7 @@ public class CadastrarGanhoActivity extends Activity{
 	private Spinner spnCategoria;
 	private EditText edtParcela;
 	private EditText edtNumParcelas;
-	private List<CategoriaVO> lista;
+	private List<CategoriaVO> listaCategorias;
 	private List<String> categorias;
 		
 	@Override
@@ -61,9 +61,9 @@ public class CadastrarGanhoActivity extends Activity{
 		edtValor = (EditText) findViewById(R.id.fValorGanho);
 		
 		//populando spinner de categorias
-		lista = catDao.selectAll();
+		listaCategorias = catDao.selectAll();
 		categorias = new ArrayList<String>();
-		for (CategoriaVO categoria: lista){
+		for (CategoriaVO categoria: listaCategorias){
 			categorias.add(categoria.getDescricao());
 		}
 		
@@ -84,7 +84,7 @@ public class CadastrarGanhoActivity extends Activity{
 					int position, long id) {
 				
 				String selecionado = parent.getItemAtPosition(position).toString();
-				for (CategoriaVO cat : lista){
+				for (CategoriaVO cat : listaCategorias){
 					if (cat.getDescricao() == selecionado){
 						categoria = cat;
 					}
