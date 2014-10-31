@@ -40,7 +40,6 @@ public class CadastrarGastoActivity extends Activity {
 	private ListView listViewCategorias;
 	private GastoVO gasto = new GastoVO();
 	private GanhoVO ganhoDescontar = new GanhoVO();
-	private RegCatVO regcat = new RegCatVO();
 	private CategoriaVO categoria = new CategoriaVO();
 	private TextView dataGanho;
 	private EditText edtDescricao;
@@ -204,7 +203,7 @@ public class CadastrarGastoActivity extends Activity {
 						regCatVO.setIdRegistro(idGasto);
 						regCatVO.setIdCategoria(catVO.getId());
 						
-						regCatDao.insert(regcat);						
+						regCatDao.insert(regCatVO);						
 					}
 					
 					Toast.makeText(getApplicationContext(), "Cadastro realizado", Toast.LENGTH_SHORT).show();					
