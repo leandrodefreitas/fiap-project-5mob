@@ -5,6 +5,7 @@ public class RegCatVO {
 	private Integer id;
 	private Integer idRegistro;
 	private Integer idCategoria;
+	private Integer tipo;
 	
 	public Integer getId() {
 		return id;
@@ -28,6 +29,14 @@ public class RegCatVO {
 	
 	public void setIdCategoria(Integer idCategoria) {
 		this.idCategoria = idCategoria;
+	}
+
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 	
 }

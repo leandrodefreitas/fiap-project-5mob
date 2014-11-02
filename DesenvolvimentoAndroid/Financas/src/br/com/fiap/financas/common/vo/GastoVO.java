@@ -1,18 +1,20 @@
 package br.com.fiap.financas.common.vo;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import android.util.Log;
 
 public class GastoVO {
 	
+	public final static int GASTO = 2;	
+	
 	private Integer id;
 	private String descricao;
 	private Double valor;
 	private Date data;
-	private ArrayList<CategoriaVO> categorias;	
+	private List<CategoriaVO> categorias;	
 	private Integer parcela;
 	private Integer numParcelas;
 	private GanhoVO ganhoDescontar;
@@ -68,11 +70,11 @@ public class GastoVO {
 		}
 	}	
 	
-	public ArrayList<CategoriaVO> getCategorias() {
+	public List<CategoriaVO> getCategorias() {
 		return categorias;
 	}
 
-	public void setCategorias(ArrayList<CategoriaVO> categorias) {
+	public void setCategorias(List<CategoriaVO> categorias) {
 		this.categorias = categorias;
 	}
 	

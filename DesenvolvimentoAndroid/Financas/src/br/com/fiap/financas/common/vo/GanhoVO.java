@@ -8,6 +8,8 @@ import br.com.fiap.financas.util.Util;
 
 public class GanhoVO {
 	
+	public final static int GANHO = 1;
+	
 	private Integer id;
 	private String descricao;
 	private Double valor;

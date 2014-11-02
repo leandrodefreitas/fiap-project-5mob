@@ -25,14 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import br.com.fiap.R;
 import br.com.fiap.financas.adapter.CategoriaAdapter;
-import br.com.fiap.financas.common.dao.CategoriaDAO;
-import br.com.fiap.financas.common.dao.GanhoDAO;
-import br.com.fiap.financas.common.dao.GastoDAO;
-import br.com.fiap.financas.common.dao.RegCatDAO;
 import br.com.fiap.financas.common.vo.CategoriaVO;
 import br.com.fiap.financas.common.vo.GanhoVO;
 import br.com.fiap.financas.common.vo.GastoVO;
-import br.com.fiap.financas.common.vo.RegCatVO;
+import br.com.fiap.financas.services.scn.CategoriaSCN;
+import br.com.fiap.financas.services.scn.GanhoSCN;
+import br.com.fiap.financas.services.scn.GastoSCN;
 import br.com.fiap.financas.util.Util;
 
 public class CadastrarGastoActivity extends Activity {
@@ -40,7 +38,6 @@ public class CadastrarGastoActivity extends Activity {
 	private ListView listViewCategorias;
 	private GastoVO gasto = new GastoVO();
 	private GanhoVO ganhoDescontar = new GanhoVO();
-	private CategoriaVO categoria = new CategoriaVO();
 	private TextView dataGanho;
 	private EditText edtDescricao;
 	private EditText edtValor;
@@ -56,12 +53,6 @@ public class CadastrarGastoActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		
-		GanhoDAO ganhoDao = new GanhoDAO(this);
-		final GastoDAO gastoDao = new GastoDAO(this);
-		final RegCatDAO regCatDao = new RegCatDAO(this);
-		CategoriaDAO catDao = new CategoriaDAO(this);		
-		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cadastro_gasto);
 
@@ -76,15 +67,23 @@ public class CadastrarGastoActivity extends Activity {
 		edtNumParcelas = (EditText) findViewById(R.id.fNumParcelasGasto);
 
 		// ListView de categorias
-		List<CategoriaVO> listaCategorias = catDao.selectAll();
+		CategoriaSCN controleCategoria = new CategoriaSCN(getApplicationContext());
+		List<CategoriaVO> listaCategorias = controleCategoria.obterTodasCategorias();
 		listViewCategorias = (ListView) findViewById(R.id.listViewCategorias);
 		listViewCategorias.setAdapter(new CategoriaAdapter(this, listaCategorias));
 		// metodo para mostrar todos as categorias no listview
 		calculeHeightListView();
 		
+		if (listaCategorias.isEmpty()) {
+			Log.i("Spinner", "lista categorias vazia..");
+			Toast.makeText(getApplicationContext(),
+					"Nenhuma categoria cadastrada...", Toast.LENGTH_SHORT).show();
+			finish();
+		}		
 		
 		// Populando spinner de ganhos
-		listaGanhos = ganhoDao.selectAll();
+		GanhoSCN controleGanho = new GanhoSCN(getApplicationContext());
+		listaGanhos = controleGanho.obterTodosGanhos();
 		listaGanhosString = new ArrayList<String>();
 		for (GanhoVO ganho: listaGanhos){
 			listaGanhosString.add(ganho.getDescricao() + " de " + Util.imprimeDataFormatoBR(ganho.getDataFormatted()));
@@ -193,21 +192,12 @@ public class CadastrarGastoActivity extends Activity {
 					
 					gasto.setFoto("foto");
 
+					GastoSCN controle = new GastoSCN(getApplicationContext());
+					Long id = controle.salvarGasto(gasto);				
 					
-					Long id = gastoDao.insert(gasto);
-					
-					Integer idGasto = Integer.valueOf(id.toString());
-					
-					for (CategoriaVO catVO : categoriasSelecionadas) {
-						RegCatVO regCatVO = new RegCatVO();
-						regCatVO.setIdRegistro(idGasto);
-						regCatVO.setIdCategoria(catVO.getId());
-						
-						regCatDao.insert(regCatVO);						
-					}
-					
-					Toast.makeText(getApplicationContext(), "Cadastro realizado", Toast.LENGTH_SHORT).show();					
-
+			    	if (id != -1) {
+			    		Toast.makeText(getApplicationContext(), "Cadastro realizado", Toast.LENGTH_SHORT).show();					
+			    	}
 				}
 			}
 		});

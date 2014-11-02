@@ -14,7 +14,7 @@ public class DataSource extends SQLiteOpenHelper {
 	public static String DATABASE_COMPLETE = "";
 	public static final String DATABASE_NAME = "financas.db";
 	public static final String DATABASE_NAME_JOURNAL = "financas.db-journal";
-	public static final int DATABASE_VERSION = 2;
+	public static final int DATABASE_VERSION = 3;
 	
 	protected static final String TABLE_CATEGORIAS = "CATEGORIAS";
 	protected static final String TABLE_GANHOS = "GANHOS";
@@ -77,7 +77,8 @@ public class DataSource extends SQLiteOpenHelper {
 				+ TABLE_REGISTRO_CATEGORIA
 				+ " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
 				+ "id_registro INTEGER, "
-				+ "id_categoria INTEGER )");
+				+ "id_categoria INTEGER, "
+				+ "tipo INTEGER NOT NULL )");
 	}
 
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
