@@ -16,7 +16,7 @@ public class RegCatDAO extends DataSource{
 	
 	private static final String SELECT_ALL = "select id, id_registro, id_categoria, tipo from " + TABLE_REGISTRO_CATEGORIA + " order by id";
 
-	private static final String SELECT_BY_ID_TIPO = "select id, id_registro, id_categoria, tipo from " + TABLE_REGISTRO_CATEGORIA + " where id = ? and tipo = ?";
+	private static final String SELECT_BY_ID_REGISTRO_TIPO = "select id, id_registro, id_categoria, tipo from " + TABLE_REGISTRO_CATEGORIA + " where id_registro = ? and tipo = ?";
 	
 	
 	private SQLiteStatement insertStmt;
@@ -70,7 +70,7 @@ public class RegCatDAO extends DataSource{
 		List<RegCatVO> list = new ArrayList<RegCatVO>();
 
 		String[] args = {String.valueOf(id), String.valueOf(tipo)};
-		Cursor cursor = database.rawQuery(SELECT_BY_ID_TIPO, args);
+		Cursor cursor = database.rawQuery(SELECT_BY_ID_REGISTRO_TIPO, args);
 
 		if (cursor.moveToFirst()) {
 			do {
