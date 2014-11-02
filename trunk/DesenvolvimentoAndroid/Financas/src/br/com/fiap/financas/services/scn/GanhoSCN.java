@@ -44,7 +44,9 @@ public class GanhoSCN {
 		
 		for (GanhoVO ganhoVO : ganhos) {
 			
-			ganhoVO.setCategoria(obterCategoriasPorId(ganhoVO.getId()).get(0));
+			CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
+			
+			ganhoVO.setCategoria(catVo);
 		}
 		
 		return ganhos;
@@ -62,9 +64,9 @@ public class GanhoSCN {
 		List<RegCatVO> rcLista = rcDao.selectByIdTipo(id, GanhoVO.GANHO);
 		rcDao.close();
 		
+		CategoriaSCN catSCN = new CategoriaSCN(context);		
 		List<CategoriaVO> categorias = new ArrayList<CategoriaVO>();
 		for (RegCatVO regCatVO : rcLista) {
-			CategoriaSCN catSCN = new CategoriaSCN(context);
 			categorias.add(catSCN.obterCategoriaPorId(regCatVO.getIdCategoria()));
 		}
 		
