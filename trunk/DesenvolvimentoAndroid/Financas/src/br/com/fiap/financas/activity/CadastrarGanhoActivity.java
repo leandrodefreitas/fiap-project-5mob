@@ -1,6 +1,5 @@
 package br.com.fiap.financas.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -39,7 +38,6 @@ public class CadastrarGanhoActivity extends Activity{
 	private EditText edtParcela;
 	private EditText edtNumParcelas;
 	private List<CategoriaVO> listaCategorias;
-	private List<String> categorias;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,21 +60,16 @@ public class CadastrarGanhoActivity extends Activity{
 		
 		//populando spinner de categorias
 		listaCategorias = catDao.selectAll();
-		categorias = new ArrayList<String>();
-		for (CategoriaVO categoria: listaCategorias){
-			categorias.add(categoria.getDescricao());
-		}
 		
-		if (categorias.isEmpty()) {
+		if (listaCategorias.isEmpty()) {
 			Log.i("Spinner", "lista categorias vazia..");
+			Toast.makeText(getApplicationContext(), "Nenhuma categoria cadastrada", Toast.LENGTH_SHORT).show();	
+			finish();
 		}
 		
 		spnCategoria = (Spinner) findViewById(R.id.spnCategoriaGanho);
-		
-		ArrayAdapter<String> catAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
-		
-		spnCategoria.setAdapter(catAdapter);
-		
+		ArrayAdapter<CategoriaVO> catAdapter = new ArrayAdapter<CategoriaVO>(this,android.R.layout.simple_spinner_dropdown_item, listaCategorias);		
+		spnCategoria.setAdapter(catAdapter);		
 		spnCategoria.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override

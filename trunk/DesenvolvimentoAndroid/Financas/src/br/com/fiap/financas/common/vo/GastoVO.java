@@ -75,6 +75,17 @@ public class GastoVO {
 	public void setCategorias(ArrayList<CategoriaVO> categorias) {
 		this.categorias = categorias;
 	}
+	
+	public String getCategoriasString() {
+		String strCategorias = "";
+		for (CategoriaVO catVO : categorias) {
+			if (strCategorias == "")
+				strCategorias = catVO.getDescricao();
+			else
+				strCategorias = strCategorias + " / " +catVO.getDescricao();				
+		}
+		return strCategorias;
+	}
 
 	public Integer getParcela() {
 		return parcela;
