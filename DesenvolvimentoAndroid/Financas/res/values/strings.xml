@@ -8,6 +8,9 @@
     <string name="radape">RF</string>
     
     <string name="campo_obrigatorio">Campo Obrigatório</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="informacoes">Informações</string>
     
     <string name="ic_categoria">Categorias</string>
     <string name="ic_calendario">Calendário</string>
@@ -38,9 +41,10 @@
     <string name="lbl_ganho">Ganho a descontar:</string>    
 	<string name="lbl_local">Local</string>
 	<string name="lbl_foto">Foto</string>
+	<string name="lbl_hint_categoria">Digite a nova Categoria</string>
 	
     <string name="btn_salvar">Salvar</string>
-    <string name="btn_voltar">Voltar</string>   
+    <string name="btn_voltar">Voltar</string>  
 
     
 

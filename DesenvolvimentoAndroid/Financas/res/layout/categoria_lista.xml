@@ -4,28 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/lvCategoriasLista"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lbl_categoria" />
-
-        <EditText
-            android:id="@+id/fCategoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/lbl_hint_categoria" >
-
-            <requestFocus />
-        </EditText>
-        
-    </LinearLayout>
+        android:layout_weight="1" >
+    </ListView>
 
     <View
         android:layout_width="match_parent"
@@ -44,22 +28,14 @@
         android:paddingTop="0dip" >
 
         <Button
-            android:id="@+id/btnSairCategoria"
+            android:id="@+id/btnSairListaCategoria"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onSairCategoria"
             android:text="@string/btn_voltar" />
-
-        <Button
-            android:id="@+id/btnSalvarCategoria"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onSalvarCategoria"
-            android:text="@string/btn_salvar" />
+        
     </LinearLayout>
 
 </LinearLayout>
