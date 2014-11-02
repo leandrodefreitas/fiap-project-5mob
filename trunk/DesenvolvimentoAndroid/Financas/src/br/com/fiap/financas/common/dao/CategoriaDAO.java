@@ -15,6 +15,9 @@ public class CategoriaDAO extends DataSource {
 
 	private static final String SELECT_ALL = "select id, descricao from "
 			+ TABLE_CATEGORIAS + " order by descricao";
+	
+	private static final String SELECT_BY_ID = "select id, descricao from "
+			+ TABLE_CATEGORIAS + " where id = ? ";
 
 	private SQLiteStatement insertStmt;
 
@@ -57,5 +60,23 @@ public class CategoriaDAO extends DataSource {
 		}
 		return list;
 	}
+	
+	public CategoriaVO selectById(Integer id) {
+		
+		String[] args = {String.valueOf(id)};
+		Cursor cursor = database.rawQuery(SELECT_BY_ID, args);
+
+		if (cursor.moveToFirst()) {
+			
+			CategoriaVO categoria = new CategoriaVO();
+			categoria.setId(cursor.getInt(0));
+			categoria.setDescricao(cursor.getString(1));
+			return categoria;
+			
+		} else {
+			
+			return null;
+		}
+	}	
 
 }

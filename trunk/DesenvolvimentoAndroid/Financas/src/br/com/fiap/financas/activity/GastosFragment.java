@@ -14,7 +14,7 @@ import android.widget.ListView;
 import br.com.fiap.R;
 import br.com.fiap.financas.adapter.FinancasGanhosListAdapter;
 import br.com.fiap.financas.common.vo.GastoVO;
-import br.com.fiap.financas.services.scn.RegistroSCN;
+import br.com.fiap.financas.services.scn.GastoSCN;
 
 public class GastosFragment extends Fragment {
 
