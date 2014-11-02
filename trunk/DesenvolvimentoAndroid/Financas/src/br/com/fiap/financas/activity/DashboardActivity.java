@@ -1,22 +1,14 @@
 package br.com.fiap.financas.activity;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import br.com.fiap.R;
-import br.com.fiap.financas.common.dao.CategoriaDAO;
-import br.com.fiap.financas.common.dao.GastoDAO;
-import br.com.fiap.financas.common.vo.CategoriaVO;
-import br.com.fiap.financas.common.vo.GastoVO;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
+import br.com.fiap.R;
 
 public class DashboardActivity extends Activity {
 
@@ -50,13 +42,13 @@ public class DashboardActivity extends Activity {
 		new AlertDialog.Builder(this)
     	.setTitle("Backup")
     	.setMessage("Deseja realmente realizar o backup?")
-    	.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+    	.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() {
     		@Override
     		public void onClick(DialogInterface dialog, int which) {
     			trace("Backup");   
     		}
     	})
-    	.setNegativeButton("Não", null)
+    	.setNegativeButton(getString(R.string.nao), null)
     	.show();
 		
 	}
@@ -66,13 +58,13 @@ public class DashboardActivity extends Activity {
 		new AlertDialog.Builder(this)
         	.setTitle("Excluir registros!")
         	.setMessage("Deseja realmente excluir todos os registros?")
-        	.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+        	.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() {
         		@Override
         		public void onClick(DialogInterface dialog, int which) {
         			trace("Excluindo Registros!");    
         		}
         	})
-        	.setNegativeButton("Não", null)
+        	.setNegativeButton(getString(R.string.nao), null)
         	.show();
 		
 	}
@@ -100,7 +92,7 @@ public class DashboardActivity extends Activity {
 			public void onClick(View arg0) { alerta.dismiss(); } 
 		}); 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this); 
-		builder.setTitle("Informações");
+		builder.setTitle(getString(R.string.informacoes));
 		builder.setIcon(R.drawable.ic_informacoes);
 		builder.setView(view); 
 		alerta = builder.create(); 

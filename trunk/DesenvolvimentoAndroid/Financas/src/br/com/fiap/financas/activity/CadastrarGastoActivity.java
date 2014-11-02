@@ -69,7 +69,7 @@ public class CadastrarGastoActivity extends Activity {
 		// ListView de categorias
 		CategoriaSCN controleCategoria = new CategoriaSCN(getApplicationContext());
 		List<CategoriaVO> listaCategorias = controleCategoria.obterTodasCategorias();
-		listViewCategorias = (ListView) findViewById(R.id.listViewCategorias);
+		listViewCategorias = (ListView) findViewById(R.id.lvCategoriasGasto);
 		listViewCategorias.setAdapter(new CategoriaAdapter(this, listaCategorias));
 		// metodo para mostrar todos as categorias no listview
 		calculeHeightListView();

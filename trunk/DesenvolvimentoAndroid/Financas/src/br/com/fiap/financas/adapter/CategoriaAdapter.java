@@ -50,22 +50,12 @@ public class CategoriaAdapter extends BaseAdapter {
 		
 		if (v == null){
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		    v = inflater.inflate(R.layout.lista_categoria, null);
+		    v = inflater.inflate(R.layout.categoria_item, null);
 		}
 		
 		tv = (CheckedTextView) v.findViewById(R.id.categoriaItem);
 		tv.setText(lista.get(position).getDescricao());
 		
-		/*
-		tv.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				tv.toggle();
-				Log.i("teste click", lista.get(auxposition).getDescricao());
-			}
-		});
-*/
 		
 		return v;
 	}

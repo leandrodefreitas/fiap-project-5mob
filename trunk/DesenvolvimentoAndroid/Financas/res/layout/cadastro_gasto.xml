@@ -65,7 +65,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ListView
-                android:id="@+id/listViewCategorias"
+                android:id="@+id/lvCategoriasGasto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:choiceMode="multipleChoice" 
