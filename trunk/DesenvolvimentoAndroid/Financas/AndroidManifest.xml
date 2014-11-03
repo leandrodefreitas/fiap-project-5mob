@@ -27,7 +27,8 @@
         
         <activity
             android:name="br.com.fiap.financas.activity.LoginActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:noHistory="true" >
             <intent-filter>
 				<category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
