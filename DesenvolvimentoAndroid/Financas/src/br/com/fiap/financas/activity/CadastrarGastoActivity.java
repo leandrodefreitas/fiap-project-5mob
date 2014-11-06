@@ -1,10 +1,25 @@
 package br.com.fiap.financas.activity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -15,8 +30,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -49,20 +68,34 @@ public class CadastrarGastoActivity extends Activity {
 	private Spinner spnGanhos;
 	private List<GanhoVO> listaGanhos;
 	private List<String> listaGanhosString;
+	private CheckBox checkLocal;
+	private TextView latitude;
+	private TextView longitude;
+	private String localizacao;
+	private Button btnTirarFoto;
+	private ImageView ivFoto;
+	private String fotoPath;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cadastro_gasto);
+		
+	     if(savedInstanceState != null) {
+	    	 	ivFoto = (ImageView) findViewById(R.id.ivFoto);
+		        Bitmap bitmap = savedInstanceState.getParcelable("fotoGasto");
+		        ivFoto.setImageBitmap(bitmap);
+		  }		
 
 		Bundle param = getIntent().getExtras();
 		final String data = param.getString("data");
 		dataGanho = (TextView) findViewById(R.id.lblDataGasto);
 		dataGanho.setText(Util.imprimeDataFormatoBR(data));
-
+		
 		edtDescricao = (EditText) findViewById(R.id.fDescricaoGasto);
 		edtValor = (EditText) findViewById(R.id.fValorGasto);
+		
 		edtParcela = (EditText) findViewById(R.id.fParcelaGasto);
 		edtNumParcelas = (EditText) findViewById(R.id.fNumParcelasGasto);
 
@@ -94,7 +127,6 @@ public class CadastrarGastoActivity extends Activity {
 			Log.i("Spinner", "lista ganhos vazia..");
 		}
 		spnGanhos = (Spinner) findViewById(R.id.spnGanhoSelecao);
-		//ArrayAdapter<String> ganhoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listaGanhosString);
 		ArrayAdapter<GanhoVO> ganhoAdapter = new ArrayAdapter<GanhoVO>(this, android.R.layout.simple_spinner_dropdown_item, listaGanhos);
 		spnGanhos.setAdapter(ganhoAdapter);
 		spnGanhos.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -146,6 +178,126 @@ public class CadastrarGastoActivity extends Activity {
 				
 			}
 		});
+		
+		
+		// Setando localização atual
+		checkLocal = (CheckBox) findViewById(R.id.chkLocal);
+		checkLocal.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				
+				latitude = (TextView) findViewById(R.id.txtLatitude);
+				longitude = (TextView) findViewById(R.id.txtLongitude);		
+				
+				if (isChecked) {
+					
+					LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
+					locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
+						
+						@Override
+						public void onStatusChanged(String provider, int status, Bundle extras) {
+							Toast.makeText(getApplicationContext(), "Status alterado", Toast.LENGTH_SHORT).show();	
+						}
+						
+						@Override
+						public void onProviderEnabled(String provider) {
+							Toast.makeText(getApplicationContext(), "GPS Habilitado!", Toast.LENGTH_SHORT).show();
+						}
+						
+						@Override
+						public void onProviderDisabled(String provider) {
+							
+							AlertDialog.Builder alert = new AlertDialog.Builder(CadastrarGastoActivity.this) ;
+
+							alert.setTitle("Atenção");
+							alert.setMessage("O GPS está desabilitado. Deseja abrir as configurações para ativá-lo?" );
+							
+							alert.setPositiveButton("Sim", new DialogInterface.OnClickListener(){
+
+								@Override
+								public void onClick(DialogInterface dialog,	int which) {
+									Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+									startActivity(intent);
+								}
+							});
+							
+							alert.setNegativeButton("Não", new DialogInterface.OnClickListener(){
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									checkLocal.setChecked(false);
+									dialog.dismiss( ) ;
+								}
+							});
+							alert.show( ) ;							
+							
+						}
+						
+						@Override
+						public void onLocationChanged(Location location) {
+
+							if( location != null ){
+								Log.i("GPS","location ok");
+								latitude.setText( "Latitude: "+location.getLatitude() );
+								longitude.setText( "Longitude: "+location.getLongitude() );
+								
+								localizacao = location.getLatitude() + ", " + location.getLongitude();
+								Log.i("GPS","localizacao: "+ localizacao);
+								
+								
+								String lat = localizacao.substring(0,localizacao.indexOf(","));
+								
+								Log.i("GPS", "latitude: " + lat);
+								
+								String lng = localizacao.substring(localizacao.indexOf(",")+1,localizacao.length());
+								
+								Log.i("GPS", "longitude: " + lng);
+
+								
+								Log.i("GPS", "latitude em double: " + Double.parseDouble(lat));	
+								Log.i("GPS", "longitude em double: " + Double.parseDouble(lng));	
+								
+							}
+							
+						}
+					}, null);				
+										
+				} else {
+					latitude.setText("Latitude: ");
+					longitude.setText("Longitude: ");	
+					localizacao = "";
+				}
+				
+			}
+		});
+		
+		
+		btnTirarFoto = (Button) findViewById(R.id.btnTirarFoto);
+		btnTirarFoto.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				Log.i("Camera", "Diretorio Extrerno Absolute path: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath());
+
+				File picsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+				
+				GastoSCN gastoScn = new GastoSCN(getApplicationContext());
+				int id = gastoScn.obterProximoId();
+				String nomeFoto = "gasto" + id + ".jpg";
+				
+				File imageFile = new File(picsDir, nomeFoto);
+				
+				fotoPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + File.separator + nomeFoto;
+						
+				Intent i = new Intent("android.media.action.IMAGE_CAPTURE");
+				i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
+				startActivityForResult(i, 0);					
+			}
+		});
+		
+		
+	
 
 		btnSalvar = (Button) findViewById(R.id.btnSalvarGasto);
 		btnSalvar.setOnClickListener(new OnClickListener() {
@@ -188,16 +340,21 @@ public class CadastrarGastoActivity extends Activity {
 						gasto.setNumParcelas(0);
 					}
 					
-					gasto.setLocal("um lugar no meio do nada");
+					gasto.setLocal(localizacao);
 					
-					gasto.setFoto("foto");
+					gasto.setFoto(fotoPath);
 
 					GastoSCN controle = new GastoSCN(getApplicationContext());
 					Long id = controle.salvarGasto(gasto);				
 					
 			    	if (id != -1) {
-			    		Toast.makeText(getApplicationContext(), "Cadastro realizado", Toast.LENGTH_SHORT).show();					
+			    		Toast.makeText(getApplicationContext(), "Gasto cadastrado.", Toast.LENGTH_SHORT).show();
+			    		//TODO Criar notifications
+			    	} else {
+			    		Toast.makeText(getApplicationContext(), "Erro no cadastro do Gasto. Tente novamente.", Toast.LENGTH_SHORT).show();				    		
 			    	}
+			    	
+			    	finish();
 				}
 			}
 		});
@@ -210,8 +367,31 @@ public class CadastrarGastoActivity extends Activity {
 				finish();
 			}
 		});
-
 	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//PARA SETAR IMAGEM COM O PATH
+		if(resultCode == Activity.RESULT_OK) {
+						
+			Bitmap bitmap = BitmapFactory.decodeFile(fotoPath);
+			ivFoto = (ImageView) findViewById(R.id.ivFoto);
+			ivFoto.setImageBitmap(bitmap);			
+		}
+	}
+	
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);		
+		ivFoto = (ImageView) findViewById(R.id.ivFoto);
+	    BitmapDrawable drawable = (BitmapDrawable) ivFoto.getDrawable();
+	    if (drawable != null) {
+		    Bitmap bitmap = drawable.getBitmap();
+		    outState.putParcelable("fotoGasto", bitmap);	    	
+	    }
+	}	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -19,12 +19,14 @@ public class GastoDAO extends DataSource {
 	private static final String SELECT_ALL = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
 			+ TABLE_GASTOS;
 	
+	private static final String SELECT_MAX_ID = "select max(id) from " + TABLE_GASTOS;	
+	
 	private static final String SELECT_BY_DATA = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
-			+ TABLE_GASTOS + " order by data ASC";
-
-	private static final String SELECT_BY_TIPO = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
-			+ TABLE_GASTOS + " where tipo = ";
-
+			+ TABLE_GASTOS + " where data = ? order by id";
+	
+	private static final String SELECT_BY_MES_ANO = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
+			+ TABLE_GASTOS + " where substr(data,6,2) = ? and substr(data,1,4) = ? order by id";
+	
 	private SQLiteStatement insertStmt;
 
 	public GastoDAO(Context context) {
@@ -51,54 +53,12 @@ public class GastoDAO extends DataSource {
 	public void deleteAll() {
 		super.database.delete(TABLE_GASTOS, null, null);
 	}
-	
-	public List<GastoVO> selectByType(int tipo) {
-		
-		List<GastoVO> list = new ArrayList<GastoVO>();
-		
-		String[] colunas = new String[]{"codigo", "tipo", "descricao", "valor", "data", "parcela", "num_parcelas", "local", "foto"};
-		String[ ] args = new String[ ]
-		{ String.valueOf(tipo) } ;
-		
-		Cursor cursor = this.database.query(TABLE_GASTOS, colunas, "tipo=?", args, null, null, "codigo");
-		
-		if (cursor.moveToFirst()) {
-			do {
-
-				
-				GastoVO gasto = new GastoVO();
-				gasto.setId(cursor.getInt(0));
-				gasto.setDescricao(cursor.getString(1));
-				gasto.setValor(cursor.getDouble(2));
-				gasto.setData(cursor.getString(3));
-				gasto.setParcela(cursor.getInt(4));
-				gasto.setNumParcelas(cursor.getInt(5));
-				
-				GanhoVO ganho = new GanhoVO();
-				GanhoDAO ganhoDao = new GanhoDAO(context);
-				ganho = ganhoDao.selectById(cursor.getInt(6));
-				gasto.setGanhoDescontar(ganho);
-				
-				gasto.setLocal(cursor.getString(7));
-				gasto.setFoto(cursor.getString(8));
-
-				list.add(gasto);
-				
-			} while (cursor.moveToNext());
-		}
-		if (cursor != null && !cursor.isClosed()) {
-			cursor.close();
-		}
-		return list;
-	}
 
 	public List<GastoVO> selectAll() {
 		
 		List<GastoVO> list = new ArrayList<GastoVO>();
 		
-		String[] colunas = new String[]{"id", "descricao", "valor", "data", "parcela", "num_parcelas", "id_ganho", "local", "foto"};
-		
-		Cursor cursor = this.database.query(TABLE_GASTOS, colunas, null, null,null, null, "codigo");
+		Cursor cursor = database.rawQuery(SELECT_ALL, null);
 		
 		if (cursor.moveToFirst()) {
 			do {
@@ -127,5 +87,93 @@ public class GastoDAO extends DataSource {
 		}
 		return list;
 	}
+
+	
+	public Integer selectMaxId(){
+		
+		Integer maxId = 0;
+		
+		Cursor cursor = database.rawQuery(SELECT_MAX_ID, null);		
+		
+		if (cursor.moveToFirst()) {
+			maxId = cursor.getInt(0);
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}		
+		return maxId;
+	}
+	
+	
+	public List<GastoVO> selectByData(String data) {
+		
+		List<GastoVO> list = new ArrayList<GastoVO>();
+
+		String[] args = new String[]{data};
+		Cursor cursor = database.rawQuery(SELECT_BY_DATA, args);
+		
+		if (cursor.moveToFirst()) {
+			do {
+				GastoVO gasto = new GastoVO();
+				gasto.setId(cursor.getInt(0));
+				gasto.setDescricao(cursor.getString(1));
+				gasto.setValor(cursor.getDouble(2));
+				gasto.setData(cursor.getString(3));
+				gasto.setParcela(cursor.getInt(4));
+				gasto.setNumParcelas(cursor.getInt(5));
+				
+				GanhoVO ganho = new GanhoVO();
+				GanhoDAO ganhoDao = new GanhoDAO(context);
+				ganho = ganhoDao.selectById(cursor.getInt(6));
+				gasto.setGanhoDescontar(ganho);
+				
+				gasto.setLocal(cursor.getString(7));
+				gasto.setFoto(cursor.getString(8));
+
+				list.add(gasto);
+				
+			} while (cursor.moveToNext());
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}
+		return list;
+	}
+	
+	
+	public List<GastoVO> selectByMesAno(String mes, String ano) {
+		
+		List<GastoVO> list = new ArrayList<GastoVO>();
+
+		String[] args = new String[]{mes, ano};
+		Cursor cursor = database.rawQuery(SELECT_BY_MES_ANO, args);
+		
+		if (cursor.moveToFirst()) {
+			do {
+				GastoVO gasto = new GastoVO();
+				gasto.setId(cursor.getInt(0));
+				gasto.setDescricao(cursor.getString(1));
+				gasto.setValor(cursor.getDouble(2));
+				gasto.setData(cursor.getString(3));
+				gasto.setParcela(cursor.getInt(4));
+				gasto.setNumParcelas(cursor.getInt(5));
+				
+				GanhoVO ganho = new GanhoVO();
+				GanhoDAO ganhoDao = new GanhoDAO(context);
+				ganho = ganhoDao.selectById(cursor.getInt(6));
+				gasto.setGanhoDescontar(ganho);
+				
+				gasto.setLocal(cursor.getString(7));
+				gasto.setFoto(cursor.getString(8));
+
+				list.add(gasto);
+				
+			} while (cursor.moveToNext());
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}
+		return list;
+	}	
 
 }

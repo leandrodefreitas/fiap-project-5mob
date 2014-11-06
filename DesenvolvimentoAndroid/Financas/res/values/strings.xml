@@ -39,10 +39,14 @@
     <string name="lbl_total">Total</string>
     <string name="lbl_barra">/</string>
     <string name="lbl_ganho">Ganho a descontar:</string>    
-	<string name="lbl_local">Local</string>
-	<string name="lbl_foto">Foto</string>
+	<string name="lbl_local">Localização:</string>
+	<string name="chk_local">Salvar localização</string>
+	<string name="lbl_latitude">Latitude:</string>	
+	<string name="lbl_longitude">Longitude:</string>	
+	<string name="lbl_foto">Foto:</string>
 	<string name="lbl_hint_categoria">Digite a nova Categoria</string>
 	
+    <string name="btn_foto">Tirar Foto</string>
     <string name="btn_salvar">Salvar</string>
     <string name="btn_voltar">Voltar</string>  
 

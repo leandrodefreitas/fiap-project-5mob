@@ -135,11 +135,14 @@ public class CadastrarGanhoActivity extends Activity {
 					Long id = controleGanho.salvarGanho(ganho);
 
 					// se salvou
-					if (id != -1) {
-						Toast.makeText(getApplicationContext(),
-								"Cadastro realizado", Toast.LENGTH_SHORT)
-								.show();
-					}
+			    	if (id != -1) {
+			    		Toast.makeText(getApplicationContext(), "Ganho cadastrado.", Toast.LENGTH_SHORT).show();
+			    		//TODO Criar notifications
+			    	} else {
+			    		Toast.makeText(getApplicationContext(), "Erro no cadastro do Ganho. Tente novamente.", Toast.LENGTH_SHORT).show();				    		
+			    	}
+			    	
+			    	finish();
 				}
 			}
 		});

@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import br.com.fiap.financas.common.dao.GanhoDAO;
+import br.com.fiap.financas.common.dao.GastoDAO;
 import br.com.fiap.financas.common.dao.RegCatDAO;
 import br.com.fiap.financas.common.vo.CategoriaVO;
 import br.com.fiap.financas.common.vo.GanhoVO;
@@ -57,6 +58,8 @@ public class GanhoSCN {
 		return null;
 		
 	}
+	
+
 	
 	private List<CategoriaVO> obterCategoriasPorId(Integer id){
 		
