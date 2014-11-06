@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
+		//SharedPreferences.Editor editor = settings.edit();
 		
 		if (settings.getBoolean("Lembrar", false) != false) {
 			edtUsuario = (EditText) findViewById(R.id.etUsuario);
@@ -41,44 +41,6 @@ public class LoginActivity extends Activity {
 			edtUsuario.setText(settings.getString("Usuario", ""));
 			edtSenha.setText(settings.getString("Senha", ""));
 			checkLembrar.setChecked(settings.getBoolean("Lembrar", false));
-		}
-		
-		if (settings.getBoolean("Bloqueado", false) == true) {
-			
-			Date dtHoraDesbloqueio = null;
-			Calendar clHoraDesbloqueio = new GregorianCalendar();
-			Calendar clHoraAtual = new GregorianCalendar();
-			
-			String horaBloqueio = settings.getString("HoraBloqueio", "");
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			try {
-				dtHoraDesbloqueio = sdf.parse(horaBloqueio);
-			}
-			catch (Exception e) {
-				Log.e("erro", e.getMessage());
-			}
-			
-			clHoraDesbloqueio.setTime(dtHoraDesbloqueio);
-			
-			//TODO Minute para teste, depois alterar para clHoraDesbloqueio.add(Calendar.HOUR, 1);
-			clHoraDesbloqueio.add(Calendar.MINUTE, 1);
-			
-			// se hora atual posterior hora bloqueio + 1 (desbloqueio)
-			if (clHoraAtual.getTime().after(clHoraDesbloqueio.getTime())) {
-				
-				editor.putBoolean("Bloqueado", false);
-				editor.putInt("Tentativa", 0);
-				editor.commit();
-				
-			}
-			
-			
-			dtHoraDesbloqueio = clHoraDesbloqueio.getTime();
-			String horaDepois = sdf.format(dtHoraDesbloqueio);
-			Log.i("Bloqueio", "Hora do bloqueio: " + horaBloqueio);			
-			Log.i("Bloqueio", "Hora do desbloqueio: " + horaDepois);
-			
 		}
 		
 	}
@@ -117,7 +79,10 @@ public class LoginActivity extends Activity {
 			if(edtUsuario.getText().toString().equals(settings.getString("Usuario", "")) && edtSenha.getText().toString().equals(settings.getString("Senha", "")) && !settings.getBoolean("Bloqueado", false)){
 				startActivity(i);
 			} else if (settings.getBoolean("Bloqueado", false)) {
-				alertaLogin(0);
+				if (desbloqueiaLogin())
+					startActivity(i);
+				else
+					alertaLogin(0);
 			} else { 
 				Integer tentativa = settings.getInt("Tentativa", 0);
 				tentativa++;
@@ -125,6 +90,7 @@ public class LoginActivity extends Activity {
 				if (tentativa >= 3) {
 					editor.putBoolean("Bloqueado", true);	
 					String horaBloqueio = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
+					Log.i("Bloqueio", "Bloqueou");
 					Log.i("HoraBloqueio", horaBloqueio);
 					editor.putString("HoraBloqueio", horaBloqueio);
 					alertaLogin(0);
@@ -171,6 +137,50 @@ public class LoginActivity extends Activity {
         alerta.show();
 		
 
+	}
+	
+	private boolean desbloqueiaLogin(){
+		
+		boolean desbloqueado = false;
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();		
+		
+		Date dtHoraDesbloqueio = null;
+		Calendar clHoraDesbloqueio = new GregorianCalendar();
+		Calendar clHoraAtual = new GregorianCalendar();
+		
+		String horaBloqueio = settings.getString("HoraBloqueio", "");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		try {
+			dtHoraDesbloqueio = sdf.parse(horaBloqueio);
+		}
+		catch (Exception e) {
+			Log.e("erro", e.getMessage());
+		}
+		
+		clHoraDesbloqueio.setTime(dtHoraDesbloqueio);
+		clHoraDesbloqueio.add(Calendar.HOUR, 1);
+		
+		// se hora atual posterior hora bloqueio + 1 (desbloqueio)
+		if (clHoraAtual.getTime().after(clHoraDesbloqueio.getTime())) {
+			
+			editor.putBoolean("Bloqueado", false);
+			editor.putInt("Tentativa", 0);
+			editor.commit();
+			
+			desbloqueado = true;
+			Log.i("Bloqueio", "Desbloqueou");					
+			
+		}
+		
+		dtHoraDesbloqueio = clHoraDesbloqueio.getTime();
+		String horaDepois = sdf.format(dtHoraDesbloqueio);
+		Log.i("Bloqueio", "Hora do bloqueio: " + horaBloqueio);			
+		Log.i("Bloqueio", "Hora do desbloqueio: " + horaDepois);		
+		
+		
+		return desbloqueado;
 	}
 
 }

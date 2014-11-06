@@ -57,6 +57,16 @@ public class GastoSCN {
 		return null;
 	}
 	
+	public Integer obterProximoId(){
+		GastoDAO gastoDao = new GastoDAO(context);
+		Integer maxId = gastoDao.selectMaxId();
+		gastoDao.close();
+		
+		Integer proxId = maxId + 1;
+		
+		return proxId;
+	}	
+	
 	private List<CategoriaVO> obterCategoriasPorId(Integer id){
 		
 		RegCatDAO rcDao = new RegCatDAO(context);

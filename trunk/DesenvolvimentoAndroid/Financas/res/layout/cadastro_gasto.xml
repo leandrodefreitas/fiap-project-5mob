@@ -68,8 +68,8 @@
                 android:id="@+id/lvCategoriasGasto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:choiceMode="multipleChoice" 
-                android:clickable="true">
+                android:choiceMode="multipleChoice"
+                android:clickable="true" >
             </ListView>
 
             <TextView
@@ -77,7 +77,8 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/lbl_ganho"
-                android:textAppearance="?android:attr/textAppearanceMedium" />            
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <Spinner
                 android:id="@+id/spnGanhoSelecao"
                 android:layout_width="match_parent"
@@ -119,26 +120,61 @@
                     android:inputType="number" >
                 </EditText>
             </LinearLayout>
-            
-            
-             <TextView
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/lbl_local"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-             
-             
-             
+
+            <CheckBox
+                android:id="@+id/chkLocal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chk_local" />
+
+            <TextView
+                android:id="@+id/txtLatitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:text="@string/lbl_latitude" />
+
+            <TextView
+                android:id="@+id/txtLongitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:text="@string/lbl_longitude" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/lbl_foto"
-                android:textAppearance="?android:attr/textAppearanceMedium" />             
-            
-            
-            
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btnTirarFoto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btn_foto" />
+                
+                <ImageView
+                    android:id="@+id/ivFoto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true" 
+                    android:contentDescription="@string/btn_foto"/>
+                                
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

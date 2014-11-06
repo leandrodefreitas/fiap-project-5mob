@@ -19,6 +19,8 @@ public class GastoVO {
 	private Integer numParcelas;
 	private GanhoVO ganhoDescontar;
 	private String local;
+	private Double latitude;
+	private Double longitude;
 	private String foto;
 	
 	public Integer getId() {
@@ -123,6 +125,40 @@ public class GastoVO {
 	}
 	
 	
+	public Double getLatitude() {
+		if (!local.equals("") && latitude == null){
+			
+			String lat = local.substring(0,local.indexOf(","));
+			
+			Log.i("GPS", "latitude: " + lat);
+			
+			latitude = Double.parseDouble(lat);
+
+		}
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+
+		if (!local.equals("") && longitude == null){
+			
+			String lng = local.substring(local.indexOf(",")+2,local.length());
+			
+			Log.i("GPS", "longitude: " + lng);
+			
+			longitude = Double.parseDouble(lng);
+		}
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
 	public String getFoto() {
 		return foto;
 	}
