@@ -5,11 +5,9 @@ import java.util.List;
 
 import android.content.Context;
 import br.com.fiap.financas.common.dao.GanhoDAO;
-import br.com.fiap.financas.common.dao.GastoDAO;
 import br.com.fiap.financas.common.dao.RegCatDAO;
 import br.com.fiap.financas.common.vo.CategoriaVO;
 import br.com.fiap.financas.common.vo.GanhoVO;
-import br.com.fiap.financas.common.vo.GastoVO;
 import br.com.fiap.financas.common.vo.RegCatVO;
 
 public class GanhoSCN {
@@ -54,12 +52,39 @@ public class GanhoSCN {
 	}
 	
 	public List<GanhoVO> obterGanhosPorMesAno(String data){
-		// TODO Implementar	METODO
-		return null;
 		
+		String mes = data.substring(5,	7);
+		String ano = data.substring(0, 4);
+		
+		GanhoDAO ganhoDao = new GanhoDAO(context);
+		List<GanhoVO> ganhos = ganhoDao.selectByMesAno(mes, ano);
+		ganhoDao.close();
+		
+		for (GanhoVO ganhoVO : ganhos) {
+			
+			CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
+			
+			ganhoVO.setCategoria(catVo);
+		}
+		
+		return ganhos;
 	}
 	
-
+	public List<GanhoVO> obterGanhosPorData(String data){
+		
+		GanhoDAO ganhoDao = new GanhoDAO(context);
+		List<GanhoVO> ganhos = ganhoDao.selectByData(data);
+		ganhoDao.close();
+		
+		for (GanhoVO ganhoVO : ganhos) {
+			
+			CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
+			
+			ganhoVO.setCategoria(catVo);
+		}
+		
+		return ganhos;
+	}
 	
 	private List<CategoriaVO> obterCategoriasPorId(Integer id){
 		
