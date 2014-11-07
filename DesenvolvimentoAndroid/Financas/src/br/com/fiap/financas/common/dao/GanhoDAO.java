@@ -17,6 +17,9 @@ public class GanhoDAO extends DataSource {
 	private static final String SELECT_ALL = "select id, descricao, valor, data, parcela, num_parcelas from "
 			+ TABLE_GANHOS;
 	
+	private static final String SELECT_ALL_BY_DATA = "select id, descricao, valor, data, parcela, num_parcelas from "
+			+ TABLE_GANHOS + " order by data desc";
+	
 	private static final String SELECT_BY_ID = "select id, descricao, valor, data, parcela, num_parcelas from "
 			+ TABLE_GANHOS + " where id = ?";
 	
@@ -62,7 +65,9 @@ public class GanhoDAO extends DataSource {
 
 		List<GanhoVO> list = new ArrayList<GanhoVO>();
 
-		Cursor cursor = database.rawQuery(SELECT_ALL, null);
+		/*Cursor cursor = database.rawQuery(SELECT_ALL, null);*/
+		
+		Cursor cursor = database.rawQuery(SELECT_ALL_BY_DATA, null);
 
 		if (cursor.moveToFirst()) {
 			do {

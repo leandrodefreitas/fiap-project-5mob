@@ -5,48 +5,37 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import br.com.fiap.R;
-import br.com.fiap.financas.adapter.FinancasGanhosListAdapter;
+import br.com.fiap.financas.adapter.FinancasGastosAdapter;
 import br.com.fiap.financas.common.vo.GastoVO;
 import br.com.fiap.financas.services.scn.GastoSCN;
 
-public class GastosFragment extends Fragment {
+import com.actionbarsherlock.app.SherlockFragment;
 
-	Context thiscontext;
+public class GastosFragment extends SherlockFragment {
 
-	private List<GastoVO> registroList = new ArrayList<GastoVO>();
-	private ListView listView;
-	private FinancasGanhosListAdapter adapter;
+	private List<GastoVO> gastoList = new ArrayList<GastoVO>();
+	Context context;
+	View rootView;
+	ListView list;
+	FinancasGastosAdapter adapter;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		thiscontext = container.getContext();
-		
 		View rootView = inflater.inflate(R.layout.financas_gastos, container, false);
-		
-		listView = (ListView) rootView.findViewById(R.id.list);
+		context =  getActivity(); 
 
-//		RegistroSCN registro = new RegistroSCN(thiscontext);
-//		registroList = (ArrayList<RegistroVO>) registro
-//				.obterRegistrosPorTipo(1);
-//		
-//		String descricao = registroList.get(0).getDescricao();
-//		Log.i("GASTOS", "REGISTRO):----------------------- " + descricao);
-//
-//		adapter = new FinancasGanhosListAdapter(this, registroList);
-//		listView.setAdapter(adapter);
+		GastoSCN gastoSCN =  new GastoSCN(context);
+		gastoList = gastoSCN.obterTodosGastos();
+		list = (ListView) rootView.findViewById(R.id.listview);
+		adapter = new FinancasGastosAdapter(getActivity(), gastoList);
+		list.setAdapter(adapter);
 
-		return listView;
-	}
-
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+		return rootView;
 	}
 }

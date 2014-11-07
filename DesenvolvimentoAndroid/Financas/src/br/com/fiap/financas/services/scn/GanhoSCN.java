@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import br.com.fiap.financas.common.dao.GanhoDAO;
 import br.com.fiap.financas.common.dao.RegCatDAO;
 import br.com.fiap.financas.common.vo.CategoriaVO;
@@ -42,9 +43,7 @@ public class GanhoSCN {
 		ganhoDao.close();
 		
 		for (GanhoVO ganhoVO : ganhos) {
-			
 			CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
-			
 			ganhoVO.setCategoria(catVo);
 		}
 		
@@ -78,9 +77,20 @@ public class GanhoSCN {
 		
 		for (GanhoVO ganhoVO : ganhos) {
 			
-			CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
 			
-			ganhoVO.setCategoria(catVo);
+			try {
+				CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
+				
+				if(catVo != null){
+					ganhoVO.setCategoria(catVo);
+				}else{
+					Log.i(GanhoSCN.class + " - GANHOS", "CATEGORIA NÃO ENCONTRADA.");
+				}
+				
+			} catch (Exception e) {
+				Log.i(GanhoSCN.class + " - GANHOS", "ERRO NA CONSULTA DE CATEGORIAS PARA GANHOS" + e);
+			}
+			
 		}
 		
 		return ganhos;

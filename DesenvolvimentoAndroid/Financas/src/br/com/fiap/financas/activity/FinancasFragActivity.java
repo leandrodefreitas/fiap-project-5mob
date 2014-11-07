@@ -1,73 +1,35 @@
 package br.com.fiap.financas.activity;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTabHost;
 import br.com.fiap.R;
-import br.com.fiap.financas.adapter.FinancasAdapter;
+import br.com.fiap.financas.util.Constantes;
 
-public class FinancasFragActivity extends FragmentActivity implements ActionBar.TabListener{
-    private ViewPager viewPager;
-    private FinancasAdapter mAdapter;
-    private ActionBar actionBar;
-    // Tab titles
-    private String[] tabs = { "Ganhos", "Gastos", "Totais" };
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+public class FinancasFragActivity extends SherlockFragmentActivity{
+
+	// Declare Variables
+	private FragmentTabHost mTabHost;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.financas_frag);
- 
-        // Inicializa a view
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        mAdapter = new FinancasAdapter(getSupportFragmentManager());
- 
-        viewPager.setAdapter(mAdapter);
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);       
- 
-        // Adiciona as tabs
-        for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
-                    .setTabListener(this));
-        }
- 
-        /**
-         * Define a tab selecionada
-         **/
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
- 
-            @Override
-            public void onPageSelected(int position) {
+		setContentView(R.layout.main_fragment);
+		
+		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
+		
+		mTabHost.setup(this, getSupportFragmentManager(), R.id.tabcontent);
 
-                actionBar.setSelectedNavigationItem(position);
-            }
- 
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
- 
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
-    }
- 
-    @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-    }
- 
-    @Override
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-    	
-        viewPager.setCurrentItem(tab.getPosition());
-    }
- 
-    @Override
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-    }
+		mTabHost.addTab(mTabHost.newTabSpec(Constantes.TABS[0].toString()).setIndicator(Constantes.TABS[0].toString()), 
+				GanhosFragment.class, null);
+		
+		mTabHost.addTab(mTabHost.newTabSpec(Constantes.TABS[1].toString()).setIndicator(Constantes.TABS[1].toString()),
+				GastosFragment.class, null);
+		
+		mTabHost.addTab(mTabHost.newTabSpec(Constantes.TABS[2].toString()).setIndicator(Constantes.TABS[2].toString()),
+				TotalFragment.class, null);
+		
+		}
+    
 }
