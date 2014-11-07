@@ -31,7 +31,7 @@ public class GastoSCN {
 			RegCatVO regCatVO = new RegCatVO();
 			regCatVO.setIdRegistro(idGasto);
 			regCatVO.setIdCategoria(catVO.getId());
-			regCatVO.setTipo(gasto.GASTO);
+			regCatVO.setTipo(GastoVO.GASTO);
 			regCatDao.insert(regCatVO);
 		}
 		regCatDao.close();
@@ -53,8 +53,32 @@ public class GastoSCN {
 	}
 
 	public List<GastoVO> obterGastosPorMesEAno(String data) {
-		// TODO Implementar	METODO
-		return null;
+		
+		String mes = data.substring(5,	7);
+		String ano = data.substring(0, 4);
+		
+		GastoDAO gastoDao = new GastoDAO(context);
+		List<GastoVO> gastos = gastoDao.selectByMesAno(mes, ano);
+		gastoDao.close();
+		
+		for(GastoVO gasto: gastos){
+			gasto.setCategorias(obterCategoriasPorId(gasto.getId()));
+		}
+		
+		return gastos;
+	}
+	
+	public List<GastoVO> obterGastosPorData(String data) {
+		
+		GastoDAO gastoDao = new GastoDAO(context);
+		List<GastoVO> gastos = gastoDao.selectByData(data);
+		gastoDao.close();
+		
+		for(GastoVO gasto: gastos){
+			gasto.setCategorias(obterCategoriasPorId(gasto.getId()));
+		}
+		
+		return gastos;
 	}
 	
 	public Integer obterProximoId(){
