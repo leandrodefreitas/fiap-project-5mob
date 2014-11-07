@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+ 
+    <!-- Texto - Ganho -->
+    <TextView
+        android:id="@+id/descricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dip"
+        android:paddingLeft="8dip"
+        android:paddingBottom="4dip"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+     
+    <!-- Data -->
+    <TextView android:id="@+id/data"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:paddingLeft="8dip"
+        android:paddingBottom="6dip"
+        android:textSize="15sp"
+        android:layout_below="@+id/descricao"/>
+		
+    <!-- Valor -->
+    <TextView android:id="@+id/valor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingTop="8dip"
+        android:paddingRight="8dip"
+        android:paddingBottom="4dip"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+     
+    <!-- Saldo Ganho -->
+    <TextView android:id="@+id/saldo_ganho"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="8dip"
+        android:paddingBottom="6dip"
+        android:textSize="15sp"
+        android:textColor="#ff00cc66"
+        android:layout_below="@+id/valor"/>	
+		
+</RelativeLayout>

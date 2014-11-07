@@ -1,15 +1,32 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GastosFragment" >
+    android:orientation="vertical" >
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/llRodape"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/list_divider"
-        android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_row_selector" />
+        android:orientation="vertical" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvRodape"
+            style="@style/TitleBarText"
+            android:layout_width="fill_parent"
+            android:background="@color/title_background"
+            android:text="@string/radape" />
+    </LinearLayout>
+
+</LinearLayout>

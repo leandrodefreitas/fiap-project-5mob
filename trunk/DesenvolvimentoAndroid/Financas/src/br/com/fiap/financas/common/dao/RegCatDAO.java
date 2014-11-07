@@ -6,8 +6,6 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
-import br.com.fiap.financas.common.vo.GanhoVO;
-import br.com.fiap.financas.common.vo.GastoVO;
 import br.com.fiap.financas.common.vo.RegCatVO;
 
 public class RegCatDAO extends DataSource{

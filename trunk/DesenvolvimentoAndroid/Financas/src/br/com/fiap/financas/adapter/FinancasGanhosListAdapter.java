@@ -2,22 +2,22 @@ package br.com.fiap.financas.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.com.fiap.R;
-import br.com.fiap.financas.activity.GastosFragment;
 import br.com.fiap.financas.common.vo.GastoVO;
 
 public class FinancasGanhosListAdapter extends BaseAdapter {
-	private GastosFragment gastosFragment;
-	private LayoutInflater inflater;
+	Context context;
 	private List<GastoVO> ganhosItems;
 
-	public FinancasGanhosListAdapter(GastosFragment gastosFragment, List<GastoVO> ganhosItems) {
-		this.gastosFragment = gastosFragment;
+	public FinancasGanhosListAdapter(Context context, List<GastoVO> ganhosItems) {
+		this.context  = context;
 		this.ganhosItems = ganhosItems;
 	}
 
@@ -33,18 +33,16 @@ public class FinancasGanhosListAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		return position;
+		return ganhosItems.indexOf(getItem(position));
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		if (inflater == null)
-//			inflater = (LayoutInflater) activity
-//			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			
-		if (convertView == null)
+		if (convertView == null){
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.list_row, null);
+		}
 
 		TextView descricao = (TextView) convertView.findViewById(R.id.descricao);
 		TextView local = (TextView) convertView.findViewById(R.id.local);

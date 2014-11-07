@@ -19,6 +19,9 @@ public class GastoDAO extends DataSource {
 	private static final String SELECT_ALL = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
 			+ TABLE_GASTOS;
 	
+	private static final String SELECT_ALL_BY_DATA = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
+			+ TABLE_GASTOS + " order by data desc";
+	
 	private static final String SELECT_MAX_ID = "select max(id) from " + TABLE_GASTOS;	
 	
 	private static final String SELECT_BY_DATA = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
@@ -58,7 +61,9 @@ public class GastoDAO extends DataSource {
 		
 		List<GastoVO> list = new ArrayList<GastoVO>();
 		
-		Cursor cursor = database.rawQuery(SELECT_ALL, null);
+		/*Cursor cursor = database.rawQuery(SELECT_ALL, null);*/
+		
+		Cursor cursor = database.rawQuery(SELECT_ALL_BY_DATA, null);
 		
 		if (cursor.moveToFirst()) {
 			do {
@@ -110,8 +115,9 @@ public class GastoDAO extends DataSource {
 		List<GastoVO> list = new ArrayList<GastoVO>();
 
 		String[] args = new String[]{data};
-		Cursor cursor = database.rawQuery(SELECT_BY_DATA, args);
 		
+		Cursor cursor = database.rawQuery(SELECT_BY_DATA, args);
+	
 		if (cursor.moveToFirst()) {
 			do {
 				GastoVO gasto = new GastoVO();
