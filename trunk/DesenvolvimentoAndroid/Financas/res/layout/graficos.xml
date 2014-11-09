@@ -50,5 +50,36 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
+    
+    <LinearLayout
+        android:id="@+id/linearLayoutButtons"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:measureWithLargestChild="true"
+        android:orientation="horizontal"
+        android:paddingLeft="2dip"
+        android:paddingRight="2dip"
+        android:paddingTop="0dip" >
+
+
+        <Button
+            android:id="@+id/btnGraficoBarra"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_graficoBarra" />
+        
+        <Button
+            android:id="@+id/btnGraficoPizza"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_graficoPizza" />        
+        
+    </LinearLayout>
 
 </LinearLayout>
