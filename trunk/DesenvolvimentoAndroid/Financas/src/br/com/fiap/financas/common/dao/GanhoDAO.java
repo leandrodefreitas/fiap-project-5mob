@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
 import br.com.fiap.financas.common.vo.GanhoVO;
 import br.com.fiap.financas.services.scn.GastoSCN;
 
@@ -15,9 +14,6 @@ public class GanhoDAO extends DataSource {
 	private static final String INSERT = "insert into "
 			+ TABLE_GANHOS
 			+ " (descricao, valor, data, parcela, num_parcelas) values (?, ?, ?, ?, ?)";
-
-	private static final String SELECT_ALL = "select id, descricao, valor, data, parcela, num_parcelas from "
-			+ TABLE_GANHOS;
 	
 	private static final String SELECT_ALL_BY_DATA = "select id, descricao, valor, data, parcela, num_parcelas from "
 			+ TABLE_GANHOS + " order by data desc";
@@ -42,16 +38,9 @@ public class GanhoDAO extends DataSource {
 		this.insertStmt.bindString(1, vo.getDescricao());
 		this.insertStmt.bindDouble(2, vo.getValor());
 		this.insertStmt.bindString(3, vo.getDataFormatted());
-		if ((vo.getParcela().equals(null)) || (vo.getParcela() == 0)){
-			this.insertStmt.bindNull(4);
-		} else {
-			this.insertStmt.bindLong(4, vo.getParcela());			
-		}
-		if ((vo.getNumParcelas().equals(null)) || (vo.getNumParcelas() == 0)) {
-			this.insertStmt.bindNull(5);
-		} else {
-			this.insertStmt.bindLong(5, vo.getNumParcelas());			
-		}
+		this.insertStmt.bindLong(4, vo.getParcela());
+		this.insertStmt.bindLong(5, vo.getNumParcelas());			
+		
 		return this.insertStmt.executeInsert();
 	}
 

@@ -26,14 +26,14 @@ public class LoginActivity extends Activity {
 	EditText edtUsuario;
 	EditText edtSenha;
 	CheckBox checkLembrar;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		//SharedPreferences.Editor editor = settings.edit();
-		
+		// SharedPreferences.Editor editor = settings.edit();
+
 		if (settings.getBoolean("Lembrar", false) != false) {
 			edtUsuario = (EditText) findViewById(R.id.etUsuario);
 			edtSenha = (EditText) findViewById(R.id.etSenhA);
@@ -42,7 +42,7 @@ public class LoginActivity extends Activity {
 			edtSenha.setText(settings.getString("Senha", ""));
 			checkLembrar.setChecked(settings.getBoolean("Lembrar", false));
 		}
-		
+
 	}
 
 	@Override
@@ -63,123 +63,136 @@ public class LoginActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
 
 	public void onClickEntrar(View v) {
-		
+
 		Log.i("Click", "Clicou botao entrar login");
-		
-		Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+
 		edtUsuario = (EditText) findViewById(R.id.etUsuario);
 		edtSenha = (EditText) findViewById(R.id.etSenhA);
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		
-		if (settings.getString("FirstLogin", "") != null && !(settings.getString("FirstLogin", "").equals(""))) {
-			if(edtUsuario.getText().toString().equals(settings.getString("Usuario", "")) && edtSenha.getText().toString().equals(settings.getString("Senha", "")) && !settings.getBoolean("Bloqueado", false)){
-				startActivity(i);
-			} else if (settings.getBoolean("Bloqueado", false)) {
-				if (desbloqueiaLogin())
-					startActivity(i);
-				else
-					alertaLogin(0);
-			} else { 
-				Integer tentativa = settings.getInt("Tentativa", 0);
-				tentativa++;
-				editor.putInt("Tentativa", tentativa);
-				if (tentativa >= 3) {
-					editor.putBoolean("Bloqueado", true);	
-					String horaBloqueio = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
-					Log.i("Bloqueio", "Bloqueou");
-					Log.i("HoraBloqueio", horaBloqueio);
-					editor.putString("HoraBloqueio", horaBloqueio);
-					alertaLogin(0);
-				} else		
-					alertaLogin(1);
-			}
-			
+
+		if (edtUsuario.getText().toString().length() == 0) {
+			edtUsuario.setError(getString(R.string.campo_obrigatorio));
+			edtUsuario.requestFocus();
+		} else if (edtSenha.getText().toString().length() == 0) {
+			edtSenha.setError(getString(R.string.campo_obrigatorio));
+			edtSenha.requestFocus();
 		} else {
-			editor.putString("FirstLogin", "N");
-			editor.putString("Usuario", edtUsuario.getText().toString());
-			editor.putString("Senha", edtSenha.getText().toString());
-			editor.putInt("Tentativa", 0);
-			editor.putBoolean("Bloqueado", false);
-			
-			startActivity(i);
+
+			Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+			SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+			SharedPreferences.Editor editor = settings.edit();
+
+			if (settings.getString("FirstLogin", "") != null
+					&& !(settings.getString("FirstLogin", "").equals(""))) {
+				if (edtUsuario.getText().toString()
+						.equals(settings.getString("Usuario", ""))
+						&& edtSenha.getText().toString()
+								.equals(settings.getString("Senha", ""))
+						&& !settings.getBoolean("Bloqueado", false)) {
+					startActivity(i);
+				} else if (settings.getBoolean("Bloqueado", false)) {
+					if (desbloqueiaLogin())
+						startActivity(i);
+					else
+						alertaLogin(0);
+				} else {
+					Integer tentativa = settings.getInt("Tentativa", 0);
+					tentativa++;
+					editor.putInt("Tentativa", tentativa);
+					if (tentativa >= 3) {
+						editor.putBoolean("Bloqueado", true);
+						String horaBloqueio = new SimpleDateFormat(
+								"dd/MM/yyyy HH:mm").format(new Date());
+						Log.i("Bloqueio", "Bloqueou");
+						Log.i("HoraBloqueio", horaBloqueio);
+						editor.putString("HoraBloqueio", horaBloqueio);
+						alertaLogin(0);
+					} else
+						alertaLogin(1);
+				}
+
+			} else {
+				editor.putString("FirstLogin", "N");
+				editor.putString("Usuario", edtUsuario.getText().toString());
+				editor.putString("Senha", edtSenha.getText().toString());
+				editor.putInt("Tentativa", 0);
+				editor.putBoolean("Bloqueado", false);
+
+				startActivity(i);
+			}
+
+			checkLembrar = (CheckBox) findViewById(R.id.chkLembrar);
+			editor.putBoolean("Lembrar", checkLembrar.isChecked());
+			editor.commit();
+
 		}
-		
-		checkLembrar = (CheckBox) findViewById(R.id.chkLembrar);
-		editor.putBoolean("Lembrar", checkLembrar.isChecked());
-		editor.commit();
 
 	}
-	
+
 	private void alertaLogin(Integer tipo) {
 		AlertDialog alerta = null;
-		
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Erro no Login");
-		
-		if(tipo == 0){
+
+		if (tipo == 0) {
 			builder.setMessage("Login Bloqueado");
 		} else {
-			builder.setMessage("Erro no usuario ou senha"); 	 
+			builder.setMessage("Erro no usuario ou senha");
 		}
-		
+
 		builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				
+
 			}
 		});
 		alerta = builder.create();
-        alerta.show();
-		
+		alerta.show();
 
 	}
-	
-	private boolean desbloqueiaLogin(){
-		
+
+	private boolean desbloqueiaLogin() {
+
 		boolean desbloqueado = false;
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();		
-		
+		SharedPreferences.Editor editor = settings.edit();
+
 		Date dtHoraDesbloqueio = null;
 		Calendar clHoraDesbloqueio = new GregorianCalendar();
 		Calendar clHoraAtual = new GregorianCalendar();
-		
+
 		String horaBloqueio = settings.getString("HoraBloqueio", "");
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		try {
 			dtHoraDesbloqueio = sdf.parse(horaBloqueio);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Log.e("erro", e.getMessage());
 		}
-		
+
 		clHoraDesbloqueio.setTime(dtHoraDesbloqueio);
 		clHoraDesbloqueio.add(Calendar.HOUR, 1);
-		
+
 		// se hora atual posterior hora bloqueio + 1 (desbloqueio)
 		if (clHoraAtual.getTime().after(clHoraDesbloqueio.getTime())) {
-			
+
 			editor.putBoolean("Bloqueado", false);
 			editor.putInt("Tentativa", 0);
 			editor.commit();
-			
+
 			desbloqueado = true;
-			Log.i("Bloqueio", "Desbloqueou");					
-			
+			Log.i("Bloqueio", "Desbloqueou");
+
 		}
-		
+
 		dtHoraDesbloqueio = clHoraDesbloqueio.getTime();
 		String horaDepois = sdf.format(dtHoraDesbloqueio);
-		Log.i("Bloqueio", "Hora do bloqueio: " + horaBloqueio);			
-		Log.i("Bloqueio", "Hora do desbloqueio: " + horaDepois);		
-		
-		
+		Log.i("Bloqueio", "Hora do bloqueio: " + horaBloqueio);
+		Log.i("Bloqueio", "Hora do desbloqueio: " + horaDepois);
+
 		return desbloqueado;
 	}
 
