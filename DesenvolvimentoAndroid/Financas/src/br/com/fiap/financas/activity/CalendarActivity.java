@@ -39,7 +39,8 @@ public class CalendarActivity extends Activity {
 
 	public CalendarAdapter adapter;
 	public Handler handler;
-	public ArrayList<String> items;
+	public ArrayList<String> itemsGanho;
+	public ArrayList<String> itemsGasto;
 	
 	private static final int GANHO_ID = Menu.FIRST;
 	private static final int GASTO_ID = Menu.FIRST + 1;
@@ -51,7 +52,8 @@ public class CalendarActivity extends Activity {
 		month = (GregorianCalendar) GregorianCalendar.getInstance();
 		itemmonth = (GregorianCalendar) month.clone();
 
-		items = new ArrayList<String>();
+		itemsGanho = new ArrayList<String>();
+		itemsGasto = new ArrayList<String>();
 		adapter = new CalendarAdapter(this, month);
 
 		GridView gridview = (GridView) findViewById(R.id.gridview);
@@ -175,7 +177,8 @@ public class CalendarActivity extends Activity {
 
 		@Override
 		public void run() {
-			items.clear();
+			itemsGanho.clear();
+			itemsGasto.clear();
 			itemmonth = (GregorianCalendar) month.clone();
 			
 			Double ganhoTotal = 0.0;
@@ -193,15 +196,15 @@ public class CalendarActivity extends Activity {
 			for (int i = 0; i < ganhos.size(); i++) {
 				String itemGanho = df.format(ganhos.get(i).getData().getTime());
 				ganhoTotal += ganhos.get(i).getValor();
-				items.add(itemGanho);
+				itemsGanho.add(itemGanho);
 			}
 			
 			GastoSCN gastosA = new GastoSCN(getApplicationContext());
 			List<GastoVO> gastos = gastosA.obterGastosPorMesEAno(itemvalue);
 			for (int i = 0; i < gastos.size(); i++) {
-				String itemGanho = df.format(gastos.get(i).getData().getTime());
+				String itemGasto = df.format(gastos.get(i).getData().getTime());
 				gastoTotal += gastos.get(i).getValor();
-				items.add(itemGanho);
+				itemsGasto.add(itemGasto);
 			}
 			
 			saldo = ganhoTotal - gastoTotal;
@@ -213,7 +216,8 @@ public class CalendarActivity extends Activity {
 			TextView lblsaldo = (TextView) findViewById(R.id.lblSaldo);
 			lblsaldo.setText("Saldo: " + saldo.toString());
 
-			adapter.setItems(items);
+			adapter.setGanhos(itemsGanho);
+			adapter.setGastos(itemsGasto);
 			adapter.notifyDataSetChanged();
 		}
 	};
