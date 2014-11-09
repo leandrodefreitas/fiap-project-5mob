@@ -71,10 +71,10 @@ public class CadastrarGastoActivity extends Activity {
 	private CheckBox checkLocal;
 	private TextView latitude;
 	private TextView longitude;
-	private String localizacao;
+	private String localizacao = "";
 	private Button btnTirarFoto;
 	private ImageView ivFoto;
-	private String fotoPath;
+	private String fotoPath = "";
 	
 
 	@Override
@@ -208,13 +208,12 @@ public class CadastrarGastoActivity extends Activity {
 						@Override
 						public void onProviderDisabled(String provider) {
 							
-							AlertDialog.Builder alert = new AlertDialog.Builder(CadastrarGastoActivity.this) ;
+							AlertDialog.Builder alert = new AlertDialog.Builder(CadastrarGastoActivity.this);
 
 							alert.setTitle("Atenção");
-							alert.setMessage("O GPS está desabilitado. Deseja abrir as configurações para ativá-lo?" );
+							alert.setMessage("O GPS está desabilitado. Deseja abrir as configurações para ativá-lo?");
 							
 							alert.setPositiveButton("Sim", new DialogInterface.OnClickListener(){
-
 								@Override
 								public void onClick(DialogInterface dialog,	int which) {
 									Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -345,7 +344,7 @@ public class CadastrarGastoActivity extends Activity {
 					gasto.setFoto(fotoPath);
 
 					GastoSCN controle = new GastoSCN(getApplicationContext());
-					Long id = controle.salvarGasto(gasto);				
+					Long id = controle.salvarGasto(gasto);
 					
 			    	if (id != -1) {
 			    		Toast.makeText(getApplicationContext(), "Gasto cadastrado.", Toast.LENGTH_SHORT).show();

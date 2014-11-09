@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -27,6 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import br.com.fiap.R;
 import br.com.fiap.financas.adapter.CalendarAdapter;
+import br.com.fiap.financas.common.vo.GanhoVO;
+import br.com.fiap.financas.common.vo.GastoVO;
+import br.com.fiap.financas.services.scn.GanhoSCN;
+import br.com.fiap.financas.services.scn.GastoSCN;
 import br.com.fiap.financas.util.Util;
 
 public class CalendarActivity extends Activity {
@@ -171,19 +176,42 @@ public class CalendarActivity extends Activity {
 		@Override
 		public void run() {
 			items.clear();
+			itemmonth = (GregorianCalendar) month.clone();
+			
+			Double ganhoTotal = 0.0;
+			Double gastoTotal = 0.0;
+			Double saldo = 0.0;
 
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 			String itemvalue;
-			for (int i = 0; i < 7; i++) {
-				itemvalue = df.format(itemmonth.getTime());
-				itemmonth.add(GregorianCalendar.DATE, 1);
-				items.add("2012-09-12");
-				items.add("2012-10-07");
-				items.add("2012-10-15");
-				items.add("2012-10-20");
-				items.add("2012-11-30");
-				items.add("2012-11-28");
+			
+			itemvalue = df.format(itemmonth.getTime());
+			itemmonth.add(GregorianCalendar.DATE, 1);
+			
+			GanhoSCN ganhosA = new GanhoSCN(getApplicationContext());
+			List<GanhoVO> ganhos = ganhosA.obterGanhosPorMesAno(itemvalue);
+			for (int i = 0; i < ganhos.size(); i++) {
+				String itemGanho = df.format(ganhos.get(i).getData().getTime());
+				ganhoTotal += ganhos.get(i).getValor();
+				items.add(itemGanho);
 			}
+			
+			GastoSCN gastosA = new GastoSCN(getApplicationContext());
+			List<GastoVO> gastos = gastosA.obterGastosPorMesEAno(itemvalue);
+			for (int i = 0; i < gastos.size(); i++) {
+				String itemGanho = df.format(gastos.get(i).getData().getTime());
+				gastoTotal += gastos.get(i).getValor();
+				items.add(itemGanho);
+			}
+			
+			saldo = ganhoTotal - gastoTotal;
+			
+			TextView lblganho = (TextView) findViewById(R.id.lblTotalGanhos);
+			lblganho.setText("Total de ganhos: " + ganhoTotal.toString());
+			TextView lblgasto = (TextView) findViewById(R.id.lblTotalGastos);
+			lblgasto.setText("Total de gastos: " + gastoTotal.toString());
+			TextView lblsaldo = (TextView) findViewById(R.id.lblSaldo);
+			lblsaldo.setText("Saldo: " + saldo.toString());
 
 			adapter.setItems(items);
 			adapter.notifyDataSetChanged();

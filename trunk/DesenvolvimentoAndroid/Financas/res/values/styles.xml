@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -27,14 +27,26 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/background</item>
     </style>
-
-    <!-- <style name="TitleBar">
-        <item name="android:windowNoTitle">true</item>
+    
+    <style name="cellLayout">
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">45dip</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:background">@color/title_background</item>
-    </style> -->
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">2dip</item>
+        <item name="android:background">@color/cinza_claro</item>
+    </style>
+    
+    <style name="cellText">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize"> 14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/background</item>
+        <item name="android:background">@color/cinza_claro</item>
+    </style>
 
     <style name="TitleBarText">
         <item name="android:layout_width">0dp</item>
