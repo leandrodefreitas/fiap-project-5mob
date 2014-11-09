@@ -46,9 +46,12 @@ public class FinancasGastosAdapter extends BaseAdapter {
 		TextView txtValor;
 		TextView txtGanhoDesconto;
 
-		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		View itemView = inflater.inflate(R.layout.gastos_listview_item, parent, false);
+		View itemView = convertView;		
+		
+		if (itemView == null){
+			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		    itemView = inflater.inflate(R.layout.gastos_listview_item, parent, false);
+		}
 
 		// Locate the TextViews in gastos_listview_item.xml
 		txtDescricao = (TextView) itemView.findViewById(R.id.descricao);
@@ -58,14 +61,18 @@ public class FinancasGastosAdapter extends BaseAdapter {
 		txtGanhoDesconto = (TextView) itemView.findViewById(R.id.ganho_desconto);
 		
 		GastoVO gastoVO = lstGasto.get(position);
-
-		txtDescricao.setText(gastoVO.getDescricao() + Constantes.ESPACO + 
-				gastoVO.getParcela() + Constantes.BARRA + gastoVO.getNumParcelas());
+		
+		if (gastoVO.getParcela() == 0 && gastoVO.getNumParcelas() == 0) {
+			txtDescricao.setText(gastoVO.getDescricao());
+		} else {
+			txtDescricao.setText(gastoVO.getDescricao() + Constantes.ESPACO + 
+					gastoVO.getParcela() + Constantes.BARRA + gastoVO.getNumParcelas());			
+		}
 		txtData.setText(Util.formataDiaDaSemana(gastoVO.getData()) + Constantes.HIFEN_COM_ESPACO + 
 				Util.imprimeDataFormatoBR(gastoVO.getDataFormatted()));
-		txtCategoria.setText(gastoVO.getGanhoDescontar().getDescricao());
-		txtValor.setText(Util.formataMoedaBRL(gastoVO.getGanhoDescontar().getValor()));
-		txtGanhoDesconto.setText("Salário (Teste)"/*gastoVO.getCategorias().get(0).getDescricao()*/);
+		txtCategoria.setText(gastoVO.getCategoriasString());
+		txtValor.setText(Util.formataMoedaBRL(gastoVO.getValor()));
+		txtGanhoDesconto.setText(gastoVO.getGanhoDescontar().getDescricao());
 		
 		return itemView;
 	}

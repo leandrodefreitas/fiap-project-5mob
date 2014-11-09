@@ -17,6 +17,7 @@ public class GanhoVO {
 	private CategoriaVO categoria;
 	private Integer parcela;
 	private Integer numParcelas;
+	private Double saldo;
 
 	
 	public Integer getId() {
@@ -94,6 +95,14 @@ public class GanhoVO {
 		this.numParcelas = numParcelas;
 	}
 	
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
 	@Override
 	public String toString() {
 

@@ -3,6 +3,7 @@ package br.com.fiap.financas.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,17 +44,21 @@ public class FinancasGanhosAdapter extends BaseAdapter {
 		TextView txtDescricao;
 		TextView txtData;
 		TextView txtValor;
-		TextView txtSaldoGranho;
+		TextView txtSaldoGanho;
 
-		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		View itemView = inflater.inflate(R.layout.ganhos_listview_item, parent, false);
+		
+		View itemView = convertView;		
+		
+		if (itemView == null){
+			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		    itemView = inflater.inflate(R.layout.ganhos_listview_item, parent, false);
+		}
 
 		// Locate the TextViews in ganhos_listview_item.xml
 		txtDescricao = (TextView) itemView.findViewById(R.id.descricao);
 		txtData = (TextView) itemView.findViewById(R.id.data);
 		txtValor = (TextView) itemView.findViewById(R.id.valor);
-		txtSaldoGranho = (TextView) itemView.findViewById(R.id.saldo_ganho);
+		txtSaldoGanho = (TextView) itemView.findViewById(R.id.saldo_ganho);
 		
 		GanhoVO ganhoVO = lstGanho.get(position);
 
@@ -61,7 +66,9 @@ public class FinancasGanhosAdapter extends BaseAdapter {
 		txtData.setText(Util.formataDiaDaSemana(ganhoVO.getData()) + Constantes.HIFEN_COM_ESPACO 
 				+ Util.imprimeDataFormatoBR(ganhoVO.getDataFormatted()));
 		txtValor.setText(Util.formataMoedaBRL(ganhoVO.getValor()));
-		txtSaldoGranho.setText(Util.formataMoedaBRL(ganhoVO.getValor()));
+		txtSaldoGanho.setText(Util.formataMoedaBRL(ganhoVO.getSaldo()));
+		
+		Log.i("Teste", "Saldo: " + ganhoVO.getSaldo() );
 		
 		return itemView;
 	}
