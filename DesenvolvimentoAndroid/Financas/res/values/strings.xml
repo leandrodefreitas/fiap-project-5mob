@@ -52,7 +52,9 @@
 
     <string name="lbl_totalGeral">TOTAL GERAL DO MÊS</string>
     <string name="lbl_ganhos">Total de ganhos:</string>
-	<string name="lbl_gastos">Total de gastos:</string>	
-	<string name="lbl_saldo">Saldo:</string>	
+	<string name="lbl_gastos">Total de gastos:</string>
+	<string name="lbl_saldo">Saldo:</string>
+	<string name="btn_graficoBarra">Barra</string>
+	<string name="btn_graficoPizza">Pizza</string>
 
 </resources>

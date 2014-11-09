@@ -1,16 +1,30 @@
 package br.com.fiap.financas.activity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
 
 import br.com.fiap.R;
+import br.com.fiap.financas.common.vo.GanhoVO;
+import br.com.fiap.financas.common.vo.GastoVO;
+import br.com.fiap.financas.services.scn.GanhoSCN;
+import br.com.fiap.financas.services.scn.GastoSCN;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.app.Activity;
 
 public class GraficosActivity extends Activity {
 	public GregorianCalendar month;
-	
+	Integer tipoGrafico; // 1 = barra; 2 = pizza;
 	WebView wvGrafico;
 	String strURL;
 
@@ -18,47 +32,137 @@ public class GraficosActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.graficos);
 		
-		strURL="http://chart.apis.google.com/chart?"+
-				"chxl=0:|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec" +
-				"&chxt=x,y" +
-				"&chs=300x300" +
-				"&cht=r" +
-				"&chco=FF0000" +
-				"&chd=t:63,64,67,73,77,81,85,86,85,81,74,67,63" +
-				"&chls=2,4,0" +
-				"&chm=B,FF000080,0,0,0";
+		month = (GregorianCalendar) GregorianCalendar.getInstance();
+		TextView title = (TextView) findViewById(R.id.title);
+		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month)
+				.toString().toUpperCase());
 		
+		RelativeLayout previous = (RelativeLayout) findViewById(R.id.previous);
+
+		previous.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setPreviousMonth();
+				refreshGrafico();
+				if (tipoGrafico == 1) {
+					montarGraficoBarra(month);
+				} else if (tipoGrafico == 2) {
+					montarGraficoPizza(month);
+				}
+			}
+		});
+
+		RelativeLayout next = (RelativeLayout) findViewById(R.id.next);
+		next.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setNextMonth();
+				refreshGrafico();
+				if (tipoGrafico == 1) {
+					montarGraficoBarra(month);
+				} else if (tipoGrafico == 2) {
+					montarGraficoPizza(month);
+				}
+			}
+		});
+		
+		Button btnBarra = (Button) findViewById(R.id.btnGraficoBarra);
+		btnBarra.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				montarGraficoBarra(month);
+			}
+		});
+		
+		Button btnPizza = (Button) findViewById(R.id.btnGraficoPizza);
+		btnPizza.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				montarGraficoPizza(month);
+			}
+		});
+		
+		montarGraficoBarra(month);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	protected void montarGraficoPizza(GregorianCalendar dataSel) {
+		tipoGrafico = 2;
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+		String itemvalue = df.format(month.getTime());
+		month.add(GregorianCalendar.DATE, 1);
+		GastoSCN gastosA = new GastoSCN(getApplicationContext());
+		List<GastoVO> gastos = gastosA.obterGastosPorMesEAno(itemvalue);
+		
+		ArrayList<String> categoria = new ArrayList<String>();
+		ArrayList<Double> gastoValor = new ArrayList<Double>();
+		for (int i = 0; i < gastos.size(); i++) {
+			if (categoria.contains(gastos.get(i).getCategoriasString())) {
+				int aux = categoria.indexOf(gastos.get(i).getCategoriasString());
+				Double auxSoma = gastoValor.get(aux) + gastos.get(i).getValor();
+				gastoValor.set(aux, auxSoma);
+			} else {
+				categoria.add(gastos.get(i).getCategoriasString());
+				gastoValor.add(gastos.get(i).getValor());
+			}
+		}
+		
+		String stringCat = categoria.toString().replace("[", "").replace("]", "").replace(", ", "|");
+		String stringVal = gastoValor.toString().replace("[", "").replace("]", "").replace(", ", ",");
 		strURL="http://chart.apis.google.com/chart?" +
 				"cht=p" +
-				"&chd=t:45,20,20,15,45,55" +
+				"&chd=t:" + stringVal +
 				"&chs=320x200" +
-				"&chdl=IE6|Firefox|IE7|Chrome|Safari|Opera" +
+				"&chdl=" + stringCat +
 				"&chco=c60000";
-		
-
-		/*strURL = "https://chart.googleapis.com/chart?" + "cht=lc&" + 
-					"chxt=x,y&" + // imprime os valores dos eixos X, Y
-					"chs=300x300&" + // define o tamanho da imagem
-					"chd=t:10,45,5,10,13,26&" + // valor de cada coluna do gráfico
-					"chl=Jan|Fev|Mar|Abr|Mai|Jun&" + // rótulo para cada coluna
-					"chdl=Vendas&" + // legenda do gráfico
-					"chxr=1,0,50&" + // define o valor de início e fim do eixo
-					"chds=0,50&" + // define o valor de escala dos dados
-					"chg=0,5,0,0&" + // desenha linha horizontal na grade
-					"chco=3D7930&" + // cor da linha do gráfico
-					"chtt=Vendas+x+1000&" + // cabeçalho do gráfico
-					"chm=B,FF000080,0,0,0";*/
-		
-		// Abaixo seguem outros exemplo de gráfico:
+		// grafico pizza 3d
 		strURL =
-		"https://chart.googleapis.com/chart?cht=lc&chxt=x,y&chs=300x300&chd=t:10,45,5,10,13,26&chl=Janeiro|Fevereiro|Marco|Abril|Maio|Junho&chdl=Vendas%20&chxr=1,0,50&chds=0,25&chg=0,5,0,0&chco=3D7930&chtt=Vendas+x+1000&chm=v,FF0000,0,::.10,4";
-		//strURL =
-		//"http://chart.apis.google.com/chart?cht=bhg&chs=550x400&chd=t:100,50,115,80|10,20,15,30&chxt=x,y&chxl=1:|Janeiro|Fevereiro|Marco|Abril&chxr=0,0,120&chds=0,120&chco=4D89F9&chbh=35,0,15&chg=8.33,0,5,0&chco=0A8C8A,EBB671&chdl=Vendas|Compras";
-		//strURL =
-		//"https://chart.googleapis.com/chart?cht=lc&chxt=x,y&chs=700x350&chd=t:10,45,5,10|30,35,30,15|10,10.5,30,35&chl=Janeiro|Fevereiro|Marco|Abril&chdl=Vendas|Compras|Outros&chxr=1,0,50&chds=0,50&chg=0,5,0,0&chco=DA3B15,3072F3,000000&chtt=grafico+de+vendas";
-		/*strURL =
-		"https://chart.googleapis.com/chart?cht=p3&chs=200x90&chd=t:40,45,5,10&chl=Jan|Fev|Mar|Abr";*/
+		"https://chart.googleapis.com/chart?cht=p3&chs=320x100" +
+		"&chd=t:" + stringVal +
+		"&chl=" + stringCat;
 		
+		wvGrafico = (WebView) findViewById(R.id.wvGrafico);
+		wvGrafico.loadUrl(strURL);
+	}
+	
+	protected void montarGraficoBarra(GregorianCalendar dataSel) {
+		tipoGrafico = 1;
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+		String itemvalue = df.format(month.getTime());
+		month.add(GregorianCalendar.DATE, 1);
+		
+		GanhoSCN ganhosA = new GanhoSCN(getApplicationContext());
+		List<GanhoVO> ganhosMAtual = ganhosA.obterGanhosPorMesAno(itemvalue);
+		List<GanhoVO> ganhosMPassado = ganhosA.obterGanhosPorMesAno(itemvalue);
+		List<GanhoVO> ganhosMFuturo = ganhosA.obterGanhosPorMesAno(itemvalue);
+		
+		GastoSCN gastosA = new GastoSCN(getApplicationContext());
+		List<GastoVO> gastosMAtual = gastosA.obterGastosPorMesEAno(itemvalue);
+		List<GastoVO> gastosMPassado = gastosA.obterGastosPorMesEAno(itemvalue);
+		List<GastoVO> gastosMFuturo = gastosA.obterGastosPorMesEAno(itemvalue);
+		
+		strURL="http://chart.apis.google.com/chart?" +
+				"cht=bhg" +
+				"&chs=350x400" +
+				"&chd=t:100,50,115,80|10,20,15,30" +
+				"&chxt=x,y" +
+				"&chxl=1:|Janeiro|Fevereiro|Marco|Abril" +
+				"&chxr=0,0,120" +
+				"&chds=0,120" +
+				"&chco=4D89F9" +
+				"&chbh=35,0,15" +
+				"&chg=8.33,0,5,0" +
+				"&chco=0AFF8A,FF2351" +
+				"&chdl=Ganhos|Gastos";
+
 		wvGrafico = (WebView) findViewById(R.id.wvGrafico);
 		wvGrafico.loadUrl(strURL);
 	}
@@ -69,10 +173,8 @@ public class GraficosActivity extends Activity {
 			month.set((month.get(GregorianCalendar.YEAR) + 1),
 					month.getActualMinimum(GregorianCalendar.MONTH), 1);
 		} else {
-			month.set(GregorianCalendar.MONTH,
-					month.get(GregorianCalendar.MONTH) + 1);
+			month.set(GregorianCalendar.MONTH, month.get(GregorianCalendar.MONTH) + 1);
 		}
-
 	}
 
 	protected void setPreviousMonth() {
@@ -81,16 +183,15 @@ public class GraficosActivity extends Activity {
 			month.set((month.get(GregorianCalendar.YEAR) - 1),
 					month.getActualMaximum(GregorianCalendar.MONTH), 1);
 		} else {
-			month.set(GregorianCalendar.MONTH,
-					month.get(GregorianCalendar.MONTH) - 1);
+			month.set(GregorianCalendar.MONTH, month.get(GregorianCalendar.MONTH) - 1);
 		}
-
+	}
+	
+	public void refreshGrafico() {
+		TextView title = (TextView) findViewById(R.id.title);
+		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month)
+				.toString().toUpperCase());
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	
 }
