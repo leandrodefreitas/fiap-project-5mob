@@ -6,7 +6,9 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 import br.com.fiap.financas.common.vo.GanhoVO;
+import br.com.fiap.financas.services.scn.GastoSCN;
 
 public class GanhoDAO extends DataSource {
 
@@ -78,6 +80,11 @@ public class GanhoDAO extends DataSource {
 				ganho.setData(cursor.getString(3));
 				ganho.setParcela(cursor.getInt(4));
 				ganho.setNumParcelas(cursor.getInt(5));
+				
+				GastoSCN gastoSCN = new GastoSCN(context);
+				Double somaGastos = gastoSCN.obterSomaGastosPorGanho(ganho.getId());
+				Double saldo = ganho.getValor() - somaGastos;
+				ganho.setSaldo(saldo);				
 
 				list.add(ganho);
 
@@ -107,6 +114,11 @@ public class GanhoDAO extends DataSource {
 				ganho.setParcela(cursor.getInt(4));
 				ganho.setNumParcelas(cursor.getInt(5));
 				
+				GastoSCN gastoSCN = new GastoSCN(context);
+				Double somaGastos = gastoSCN.obterSomaGastosPorGanho(ganho.getId());
+				Double saldo = ganho.getValor() - somaGastos;
+				ganho.setSaldo(saldo);
+				
 			} while (cursor.moveToNext());
 		}
 		if (cursor != null && !cursor.isClosed()) {
@@ -132,6 +144,11 @@ public class GanhoDAO extends DataSource {
 				ganho.setData(cursor.getString(3));
 				ganho.setParcela(cursor.getInt(4));
 				ganho.setNumParcelas(cursor.getInt(5));
+				
+				GastoSCN gastoSCN = new GastoSCN(context);
+				Double somaGastos = gastoSCN.obterSomaGastosPorGanho(ganho.getId());
+				Double saldo = ganho.getValor() - somaGastos;
+				ganho.setSaldo(saldo);				
 
 				list.add(ganho);
 
@@ -159,6 +176,11 @@ public class GanhoDAO extends DataSource {
 				ganho.setData(cursor.getString(3));
 				ganho.setParcela(cursor.getInt(4));
 				ganho.setNumParcelas(cursor.getInt(5));
+				
+				GastoSCN gastoSCN = new GastoSCN(context);
+				Double somaGastos = gastoSCN.obterSomaGastosPorGanho(ganho.getId());
+				Double saldo = ganho.getValor() - somaGastos;
+				ganho.setSaldo(saldo);				
 
 				list.add(ganho);
 

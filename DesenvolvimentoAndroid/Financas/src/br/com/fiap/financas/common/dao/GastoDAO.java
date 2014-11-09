@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 import br.com.fiap.financas.common.vo.GanhoVO;
 import br.com.fiap.financas.common.vo.GastoVO;
+import br.com.fiap.financas.services.scn.GanhoSCN;
 
 public class GastoDAO extends DataSource {
 
@@ -29,6 +30,9 @@ public class GastoDAO extends DataSource {
 	
 	private static final String SELECT_BY_MES_ANO = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
 			+ TABLE_GASTOS + " where substr(data,6,2) = ? and substr(data,1,4) = ? order by id";
+	
+	private static final String SELECT_SUM_BY_GANHO = "select sum(valor) from " + TABLE_GASTOS + " where id_ganho = ? order by id";
+	
 	
 	private SQLiteStatement insertStmt;
 
@@ -76,8 +80,8 @@ public class GastoDAO extends DataSource {
 				gasto.setNumParcelas(cursor.getInt(5));
 				
 				GanhoVO ganho = new GanhoVO();
-				GanhoDAO ganhoDao = new GanhoDAO(context);
-				ganho = ganhoDao.selectById(cursor.getInt(6));
+				GanhoSCN ganhoSCN = new GanhoSCN(context);
+				ganho = ganhoSCN.obterGanhoPorId(cursor.getInt(6));
 				gasto.setGanhoDescontar(ganho);
 				
 				gasto.setLocal(cursor.getString(7));
@@ -129,8 +133,8 @@ public class GastoDAO extends DataSource {
 				gasto.setNumParcelas(cursor.getInt(5));
 				
 				GanhoVO ganho = new GanhoVO();
-				GanhoDAO ganhoDao = new GanhoDAO(context);
-				ganho = ganhoDao.selectById(cursor.getInt(6));
+				GanhoSCN ganhoSCN = new GanhoSCN(context);
+				ganho = ganhoSCN.obterGanhoPorId(cursor.getInt(6));
 				gasto.setGanhoDescontar(ganho);
 				
 				gasto.setLocal(cursor.getString(7));
@@ -165,8 +169,8 @@ public class GastoDAO extends DataSource {
 				gasto.setNumParcelas(cursor.getInt(5));
 				
 				GanhoVO ganho = new GanhoVO();
-				GanhoDAO ganhoDao = new GanhoDAO(context);
-				ganho = ganhoDao.selectById(cursor.getInt(6));
+				GanhoSCN ganhoSCN = new GanhoSCN(context);
+				ganho = ganhoSCN.obterGanhoPorId(cursor.getInt(6));
 				gasto.setGanhoDescontar(ganho);
 				
 				gasto.setLocal(cursor.getString(7));
@@ -180,6 +184,22 @@ public class GastoDAO extends DataSource {
 			cursor.close();
 		}
 		return list;
+	}	
+	
+	public Double selectSumGastosByGanho(Integer idGanho) {
+		
+		Double somaValor = 0.0;
+		
+		String[] args = new String[]{String.valueOf(idGanho)};
+		Cursor cursor = database.rawQuery(SELECT_SUM_BY_GANHO, args);	
+		
+		if (cursor.moveToFirst()) {
+			somaValor = cursor.getDouble(0);
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}		
+		return somaValor;
 	}	
 
 }

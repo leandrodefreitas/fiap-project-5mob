@@ -50,6 +50,16 @@ public class GanhoSCN {
 		return ganhos;
 	}
 	
+	public GanhoVO obterGanhoPorId(Integer id){
+		GanhoVO ganho = new GanhoVO();
+		
+		GanhoDAO ganhoDao = new GanhoDAO(context);
+		ganho = ganhoDao.selectById(id);
+		ganhoDao.close();
+		
+		return ganho;
+	}
+	
 	public List<GanhoVO> obterGanhosPorMesAno(String data){
 		
 		String mes = data.substring(5,	7);

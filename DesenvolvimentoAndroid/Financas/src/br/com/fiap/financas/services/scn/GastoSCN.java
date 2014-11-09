@@ -91,6 +91,15 @@ public class GastoSCN {
 		return proxId;
 	}	
 	
+	public Double obterSomaGastosPorGanho(Integer idGanho){
+		
+		GastoDAO gastoDao = new GastoDAO(context);
+		Double somaGastos = gastoDao.selectSumGastosByGanho(idGanho);
+		gastoDao.close();
+		
+		return somaGastos;
+	}	
+	
 	private List<CategoriaVO> obterCategoriasPorId(Integer id){
 		
 		RegCatDAO rcDao = new RegCatDAO(context);
