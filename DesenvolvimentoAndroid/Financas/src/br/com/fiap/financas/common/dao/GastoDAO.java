@@ -17,9 +17,6 @@ public class GastoDAO extends DataSource {
 			+ " (descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto) values (?, ?, ?, ?, ?, ?, ?, ? )";
 	
 	
-	private static final String SELECT_ALL = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
-			+ TABLE_GASTOS;
-	
 	private static final String SELECT_ALL_BY_DATA = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
 			+ TABLE_GASTOS + " order by data desc";
 	
