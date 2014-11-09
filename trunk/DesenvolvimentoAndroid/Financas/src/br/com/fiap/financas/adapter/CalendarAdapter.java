@@ -39,7 +39,8 @@ public class CalendarAdapter extends BaseAdapter {
 	String itemvalue, curentDateString;
 	DateFormat df;
 
-	private ArrayList<String> items;
+	private ArrayList<String> ganhos;
+	private ArrayList<String> gastos;
 	public static List<String> dayString;
 	private View previousView;
 
@@ -50,19 +51,29 @@ public class CalendarAdapter extends BaseAdapter {
 		selectedDate = (GregorianCalendar) monthCalendar.clone();
 		mContext = c;
 		month.set(GregorianCalendar.DAY_OF_MONTH, 1);
-		this.items = new ArrayList<String>();
+		this.ganhos = new ArrayList<String>();
+		this.gastos = new ArrayList<String>();
 		df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 		curentDateString = df.format(selectedDate.getTime());
 		refreshDays();
 	}
 
-	public void setItems(ArrayList<String> items) {
-		for (int i = 0; i != items.size(); i++) {
-			if (items.get(i).length() == 1) {
-				items.set(i,"0" + items.get(i));
+	public void setGanhos(ArrayList<String> ganhos) {
+		for (int i = 0; i != ganhos.size(); i++) {
+			if (ganhos.get(i).length() == 1) {
+				ganhos.set(i,"0" + ganhos.get(i));
 			}
 		}
-		this.items = items;
+		this.ganhos = ganhos;
+	}
+	
+	public void setGastos(ArrayList<String> gastos) {
+		for (int i = 0; i != gastos.size(); i++) {
+			if (gastos.get(i).length() == 1) {
+				gastos.set(i,"0" + gastos.get(i));
+			}
+		}
+		this.gastos = gastos;
 	}
 
 	public int getCount() {
@@ -77,7 +88,7 @@ public class CalendarAdapter extends BaseAdapter {
 		return 0;
 	}
 
-	@SuppressLint("ResourceAsColor")
+	
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
 		TextView dayView;
@@ -119,9 +130,19 @@ public class CalendarAdapter extends BaseAdapter {
 			monthStr = "0" + monthStr;
 		}
 
-		LinearLayout diaData = (LinearLayout) v.findViewById(R.id.dateCampo);
-		if (date.length() > 0 && items != null && items.contains(date)) {
-			diaData.setBackgroundColor(R.color.vermelho);
+		TextView diaData = (TextView) v.findViewById(R.id.date);
+		if (date.length() > 0 && ganhos != null && ganhos.contains(date) && 
+				date.length() > 0 && gastos != null && gastos.contains(date)) {
+			diaData.setBackgroundColor(Color.BLUE);
+		} else {
+			if (date.length() > 0 && ganhos != null && ganhos.contains(date)) {
+				diaData.setBackgroundColor(Color.GREEN);
+			} else 
+			if (date.length() > 0 && gastos != null && gastos.contains(date)) {
+				diaData.setBackgroundColor(Color.RED);
+			} else {
+				diaData.setBackgroundColor(Color.TRANSPARENT);
+			}
 		}
 		
 		return v;
@@ -138,7 +159,8 @@ public class CalendarAdapter extends BaseAdapter {
 	}
 
 	public void refreshDays() {
-		items.clear();
+		ganhos.clear();
+		gastos.clear();
 		dayString.clear();
 		Locale.setDefault(Locale.US);
 		pmonth = (GregorianCalendar) month.clone();
