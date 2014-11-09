@@ -1,14 +1,20 @@
 package br.com.fiap.financas.activity;
 
+import java.io.File;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 import br.com.fiap.R;
+import br.com.fiap.financas.common.dao.DataSource;
+import br.com.fiap.financas.util.Backup;
 
 public class DashboardActivity extends Activity {
 
@@ -45,7 +51,21 @@ public class DashboardActivity extends Activity {
     	.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() {
     		@Override
     		public void onClick(DialogInterface dialog, int which) {
-    			trace("Backup");   
+    			try {
+    				
+    				File databasePath = getApplicationContext().getDatabasePath(DataSource.DATABASE_NAME).getParentFile();
+    				String backupPathString = (Environment.getExternalStorageDirectory( ).getPath( ) + File.separator + "Backup");
+    				File backupPath = new File(backupPathString);
+    				
+    				Backup bkp = new Backup();
+					bkp.copyDirectory(databasePath, backupPath);
+					
+					trace("Backup dos dados realizado");
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+    			
     		}
     	})
     	.setNegativeButton(getString(R.string.nao), null)
