@@ -210,11 +210,11 @@ public class CalendarActivity extends Activity {
 			saldo = ganhoTotal - gastoTotal;
 			
 			TextView lblganho = (TextView) findViewById(R.id.lblTotalGanhos);
-			lblganho.setText("Total de ganhos: " + ganhoTotal.toString());
+			lblganho.setText("Total de ganhos: " + Util.formataMoedaBRL(ganhoTotal));
 			TextView lblgasto = (TextView) findViewById(R.id.lblTotalGastos);
-			lblgasto.setText("Total de gastos: " + gastoTotal.toString());
+			lblgasto.setText("Total de gastos: " + Util.formataMoedaBRL(gastoTotal));
 			TextView lblsaldo = (TextView) findViewById(R.id.lblSaldo);
-			lblsaldo.setText("Saldo: " + saldo.toString());
+			lblsaldo.setText("Saldo: " + Util.formataMoedaBRL(saldo));
 
 			adapter.setGanhos(itemsGanho);
 			adapter.setGastos(itemsGasto);

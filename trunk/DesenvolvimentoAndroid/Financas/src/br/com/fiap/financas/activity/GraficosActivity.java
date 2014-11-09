@@ -1,5 +1,7 @@
 package br.com.fiap.financas.activity;
 
+import java.util.GregorianCalendar;
+
 import br.com.fiap.R;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +9,7 @@ import android.webkit.WebView;
 import android.app.Activity;
 
 public class GraficosActivity extends Activity {
+	public GregorianCalendar month;
 	
 	WebView wvGrafico;
 	String strURL;
@@ -58,6 +61,30 @@ public class GraficosActivity extends Activity {
 		
 		wvGrafico = (WebView) findViewById(R.id.wvGrafico);
 		wvGrafico.loadUrl(strURL);
+	}
+	
+	protected void setNextMonth() {
+		if (month.get(GregorianCalendar.MONTH) == month
+				.getActualMaximum(GregorianCalendar.MONTH)) {
+			month.set((month.get(GregorianCalendar.YEAR) + 1),
+					month.getActualMinimum(GregorianCalendar.MONTH), 1);
+		} else {
+			month.set(GregorianCalendar.MONTH,
+					month.get(GregorianCalendar.MONTH) + 1);
+		}
+
+	}
+
+	protected void setPreviousMonth() {
+		if (month.get(GregorianCalendar.MONTH) == month
+				.getActualMinimum(GregorianCalendar.MONTH)) {
+			month.set((month.get(GregorianCalendar.YEAR) - 1),
+					month.getActualMaximum(GregorianCalendar.MONTH), 1);
+		} else {
+			month.set(GregorianCalendar.MONTH,
+					month.get(GregorianCalendar.MONTH) - 1);
+		}
+
 	}
 
 	@Override
