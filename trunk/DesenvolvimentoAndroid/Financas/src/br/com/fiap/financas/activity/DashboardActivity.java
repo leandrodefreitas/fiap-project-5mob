@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 import br.com.fiap.R;
 import br.com.fiap.financas.common.dao.DataSource;
+import br.com.fiap.financas.services.scn.ExcluirDadosSCN;
 import br.com.fiap.financas.util.Backup;
 
 public class DashboardActivity extends Activity {
@@ -81,7 +82,14 @@ public class DashboardActivity extends Activity {
         	.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() {
         		@Override
         		public void onClick(DialogInterface dialog, int which) {
-        			trace("Excluindo Registros!");    
+        			
+        			ExcluirDadosSCN base = new ExcluirDadosSCN(getApplicationContext());
+        			base.excluiDadosRegCat();
+        			base.excluiDadosCategorias();
+        			base.excluiDadosGanhos();
+        			base.excluiDadosGastos();
+        			
+        			trace("Registros excluídos.");    
         		}
         	})
         	.setNegativeButton(getString(R.string.nao), null)
