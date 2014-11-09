@@ -50,6 +50,9 @@
     <string name="btn_salvar">Salvar</string>
     <string name="btn_voltar">Voltar</string>  
 
-    
+    <string name="lbl_totalGeral">TOTAL GERAL DO MÊS</string>
+    <string name="lbl_ganhos">Total de ganhos:</string>
+	<string name="lbl_gastos">Total de gastos:</string>	
+	<string name="lbl_saldo">Saldo:</string>	
 
 </resources>
