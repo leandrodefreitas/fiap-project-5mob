@@ -119,7 +119,31 @@ public class GanhoSCN {
 		}
 		
 		return categorias;
-	}	
+	}
+	
+	public Double obterTotalGanhosPorMesAno(String data) {
+		Double total = 0.0;
+		String mes = data.substring(5,	7);
+		String ano = data.substring(0, 4);
+		GanhoDAO ganhoDao = new GanhoDAO(context);
+		List<GanhoVO> ganhos = ganhoDao.selectByMesAno(mes, ano);
+		ganhoDao.close();
+		for(GanhoVO ganho: ganhos){
+			total += ganho.getValor();
+		}
+		return total;
+	}
+	
+	public Double obterTotalGanhosPorData(String data) {
+		GanhoDAO ganhoDao = new GanhoDAO(context);
+		List<GanhoVO> ganhos = ganhoDao.selectByData(data);
+		ganhoDao.close();
+		Double total = 0.0;
+		for(GanhoVO ganho: ganhos){
+			total += ganho.getValor();
+		}
+		return total;
+	}
 	
 	
 }
