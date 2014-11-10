@@ -113,6 +113,30 @@ public class GastoSCN {
 		}
 		
 		return categorias;
-	}	
+	}
+	
+	public Double obterTotalGastosPorMesAno(String data) {
+		Double total = 0.0;
+		String mes = data.substring(5,	7);
+		String ano = data.substring(0, 4);
+		GastoDAO gastoDao = new GastoDAO(context);
+		List<GastoVO> gastos = gastoDao.selectByMesAno(mes, ano);
+		gastoDao.close();
+		for(GastoVO gasto: gastos){
+			total += gasto.getValor();
+		}
+		return total;
+	}
+	
+	public Double obterTotalGastosPorData(String data) {
+		GastoDAO gastoDao = new GastoDAO(context);
+		List<GastoVO> gastos = gastoDao.selectByData(data);
+		gastoDao.close();
+		Double total = 0.0;
+		for(GastoVO gasto: gastos){
+			total += gasto.getValor();
+		}
+		return total;
+	}
 
 }

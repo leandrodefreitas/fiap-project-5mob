@@ -20,6 +20,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 public class GraficosActivity extends Activity {
@@ -34,8 +35,7 @@ public class GraficosActivity extends Activity {
 		
 		month = (GregorianCalendar) GregorianCalendar.getInstance();
 		TextView title = (TextView) findViewById(R.id.title);
-		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month)
-				.toString().toUpperCase());
+		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month).toString().toUpperCase());
 		
 		RelativeLayout previous = (RelativeLayout) findViewById(R.id.previous);
 
@@ -132,33 +132,71 @@ public class GraficosActivity extends Activity {
 		wvGrafico.loadUrl(strURL);
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	protected void montarGraficoBarra(GregorianCalendar dataSel) {
 		tipoGrafico = 1;
+		GregorianCalendar mesAuxP1 = setMesPassado(dataSel);
+		GregorianCalendar mesAuxP2 = setMesPassado(dataSel);
+		GregorianCalendar mesAuxP3 = setMesPassado(dataSel);
+		GregorianCalendar mesAuxF1 = setMesProximo(dataSel);
+		GregorianCalendar mesAuxF2 = setMesProximo(dataSel);
+		GregorianCalendar mesAuxF3 = setMesProximo(dataSel);
 		
+		mesAuxP1 = setMesPassado(mesAuxP1);
+		mesAuxP2 = setMesPassado(mesAuxP1);
+		mesAuxP3 = setMesPassado(mesAuxP2);
+		mesAuxF1 = setMesProximo(mesAuxF1);
+		mesAuxF2 = setMesProximo(mesAuxF1);
+		mesAuxF3 = setMesProximo(mesAuxF2);
+		
+		Locale.setDefault(new Locale("pt", "BR"));
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-		String itemvalue = df.format(month.getTime());
-		month.add(GregorianCalendar.DATE, 1);
+		String mesAtual = df.format(dataSel.getTime());
+		String mesPassado1 = df.format(mesAuxP1.getTime());
+		String mesPassado2 = df.format(mesAuxP2.getTime());
+		String mesPassado3 = df.format(mesAuxP3.getTime());
+		String mesFuturo1 = df.format(mesAuxF1.getTime());
+		String mesFuturo2 = df.format(mesAuxF2.getTime());
+		String mesFuturo3 = df.format(mesAuxF3.getTime());
 		
 		GanhoSCN ganhosA = new GanhoSCN(getApplicationContext());
-		List<GanhoVO> ganhosMAtual = ganhosA.obterGanhosPorMesAno(itemvalue);
-		List<GanhoVO> ganhosMPassado = ganhosA.obterGanhosPorMesAno(itemvalue);
-		List<GanhoVO> ganhosMFuturo = ganhosA.obterGanhosPorMesAno(itemvalue);
+		Double ganhosTA = ganhosA.obterTotalGanhosPorMesAno(mesAtual);
+		Double ganhosTP1 = ganhosA.obterTotalGanhosPorMesAno(mesPassado1);
+		Double ganhosTP2 = ganhosA.obterTotalGanhosPorMesAno(mesPassado2);
+		Double ganhosTP3 = ganhosA.obterTotalGanhosPorMesAno(mesPassado3);
+		Double ganhosTF1 = ganhosA.obterTotalGanhosPorMesAno(mesFuturo1);
+		Double ganhosTF2 = ganhosA.obterTotalGanhosPorMesAno(mesFuturo2);
+		Double ganhosTF3 = ganhosA.obterTotalGanhosPorMesAno(mesFuturo3);
 		
 		GastoSCN gastosA = new GastoSCN(getApplicationContext());
-		List<GastoVO> gastosMAtual = gastosA.obterGastosPorMesEAno(itemvalue);
-		List<GastoVO> gastosMPassado = gastosA.obterGastosPorMesEAno(itemvalue);
-		List<GastoVO> gastosMFuturo = gastosA.obterGastosPorMesEAno(itemvalue);
+		Double gastosTA = gastosA.obterTotalGastosPorMesAno(mesAtual);
+		Double gastosTP1 = gastosA.obterTotalGastosPorMesAno(mesPassado1);
+		Double gastosTP2 = gastosA.obterTotalGastosPorMesAno(mesPassado2);
+		Double gastosTP3 = gastosA.obterTotalGastosPorMesAno(mesPassado3);
+		Double gastosTF1 = gastosA.obterTotalGastosPorMesAno(mesFuturo1);
+		Double gastosTF2 = gastosA.obterTotalGastosPorMesAno(mesFuturo2);
+		Double gastosTF3 = gastosA.obterTotalGastosPorMesAno(mesFuturo3);
+		
+		DateFormat dtitulo = new SimpleDateFormat("MMMM yyyy");
+		
+		String tituloMeses = "|" + dtitulo.format(mesAuxP3.getTime()) + "|" + dtitulo.format(mesAuxP2.getTime()) + "|" + 
+				dtitulo.format(mesAuxP1.getTime()) + "|" + dtitulo.format(dataSel.getTime()) + "|" + dtitulo.format(mesAuxF1.getTime()) + "|" + 
+				dtitulo.format(mesAuxF2.getTime()) + "|" + dtitulo.format(mesAuxF3.getTime());
+		String valorMeses = ganhosTP3.toString() + "," + ganhosTP2.toString() + "," + ganhosTP1.toString() + "," + 
+				ganhosTA.toString() + "," + ganhosTF1.toString() + "," + ganhosTF2.toString() + "," + ganhosTF3.toString() + "|" + 
+				gastosTP3.toString() + "," + gastosTP2.toString() + "," + gastosTP1.toString() + "," +
+				gastosTA.toString() + "," + gastosTF1.toString() + "," + gastosTF2.toString() + "," + gastosTF3.toString();
 		
 		strURL="http://chart.apis.google.com/chart?" +
 				"cht=bhg" +
 				"&chs=350x400" +
-				"&chd=t:100,50,115,80|10,20,15,30" +
+				"&chd=t:"+ valorMeses +
 				"&chxt=x,y" +
-				"&chxl=1:|Janeiro|Fevereiro|Marco|Abril" +
-				"&chxr=0,0,120" +
-				"&chds=0,120" +
+				"&chxl=1:" + tituloMeses +
+				"&chxr=0,0,5000" +
+				"&chds=0,5000" +
 				"&chco=4D89F9" +
-				"&chbh=35,0,15" +
+				"&chbh=25,0,5" +
 				"&chg=8.33,0,5,0" +
 				"&chco=0AFF8A,FF2351" +
 				"&chdl=Ganhos|Gastos";
@@ -168,29 +206,44 @@ public class GraficosActivity extends Activity {
 	}
 	
 	protected void setNextMonth() {
-		if (month.get(GregorianCalendar.MONTH) == month
-				.getActualMaximum(GregorianCalendar.MONTH)) {
-			month.set((month.get(GregorianCalendar.YEAR) + 1),
-					month.getActualMinimum(GregorianCalendar.MONTH), 1);
+		if (month.get(GregorianCalendar.MONTH) == month.getActualMaximum(GregorianCalendar.MONTH)) {
+			month.set((month.get(GregorianCalendar.YEAR) + 1), month.getActualMinimum(GregorianCalendar.MONTH), 1);
 		} else {
 			month.set(GregorianCalendar.MONTH, month.get(GregorianCalendar.MONTH) + 1);
 		}
 	}
 
 	protected void setPreviousMonth() {
-		if (month.get(GregorianCalendar.MONTH) == month
-				.getActualMinimum(GregorianCalendar.MONTH)) {
-			month.set((month.get(GregorianCalendar.YEAR) - 1),
-					month.getActualMaximum(GregorianCalendar.MONTH), 1);
+		if (month.get(GregorianCalendar.MONTH) == month.getActualMinimum(GregorianCalendar.MONTH)) {
+			month.set((month.get(GregorianCalendar.YEAR) - 1), month.getActualMaximum(GregorianCalendar.MONTH), 1);
 		} else {
 			month.set(GregorianCalendar.MONTH, month.get(GregorianCalendar.MONTH) - 1);
 		}
 	}
 	
+	protected GregorianCalendar setMesProximo(GregorianCalendar data) {
+		GregorianCalendar mes = data;
+		if (mes.get(GregorianCalendar.MONTH) == mes.getActualMaximum(GregorianCalendar.MONTH)) {
+			mes.set((mes.get(GregorianCalendar.YEAR) + 1), mes.getActualMinimum(GregorianCalendar.MONTH), 1);
+		} else {
+			mes.set(GregorianCalendar.MONTH, mes.get(GregorianCalendar.MONTH) + 1);
+		}
+		return mes;
+	}
+	
+	protected GregorianCalendar setMesPassado(GregorianCalendar data) {
+		GregorianCalendar mes = data;
+		if (mes.get(GregorianCalendar.MONTH) == mes.getActualMinimum(GregorianCalendar.MONTH)) {
+			mes.set((mes.get(GregorianCalendar.YEAR) - 1),mes.getActualMaximum(GregorianCalendar.MONTH), 1);
+		} else {
+			mes.set(GregorianCalendar.MONTH, mes.get(GregorianCalendar.MONTH) - 1);
+		}
+		return mes;
+	}
+	
 	public void refreshGrafico() {
 		TextView title = (TextView) findViewById(R.id.title);
-		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month)
-				.toString().toUpperCase());
+		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month).toString().toUpperCase());
 	}
 
 	

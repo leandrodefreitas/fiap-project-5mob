@@ -255,5 +255,10 @@ public class CalendarActivity extends Activity {
 		}
 		return true;
 	}
+	
+	public void onClickMapa(View v) {
+		Intent i = new Intent(CalendarActivity.this, MapaActivity.class);
+		startActivity(i);
+	}
 
 }
