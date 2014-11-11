@@ -137,7 +137,7 @@
         
         <activity
             android:name="br.com.fiap.financas.activity.MapaActivity"
-            android:label="@string/lbl_local" 
+            android:label="@string/ic_localizacao" 
             android:icon="@drawable/localmapa">
             <intent-filter>
 				<category android:name="android.intent.category.DEFAULT" />

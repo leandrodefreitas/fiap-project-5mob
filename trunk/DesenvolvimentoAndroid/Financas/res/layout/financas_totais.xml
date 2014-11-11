@@ -1,48 +1,68 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout1"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/lbltitle"
+        style="@style/HomeText"
+        android:text="TOTAIS" />
+    
+    <WebView
+        android:id="@+id/wvGrafico"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/llRodape"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true" >
+        android:layout_gravity="center" />
+    
+    <RelativeLayout
+        android:id="@+id/detalheCalendar"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+        
+        <TextView
+            android:id="@+id/lblTotalGeralMes"
+            style="@style/HomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/lbl_totalGeral" />
 
-        <LinearLayout
-            android:id="@+id/LinearLayout1"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical" >
-            
-            <LinearLayout
-                android:id="@+id/LinearLayout3"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/lblTotalGanhos"
+            style="@style/HomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblTotalGeralMes"
+            android:text="@string/lbl_ganhos" />
 
-                <TextView
-                    android:id="@+id/lbltitle"
-                    style="@style/HomeText"
-                    android:text="TOTAIS" />
-            </LinearLayout>
-            
+        <TextView
+            android:id="@+id/lblTotalGastos"
+            style="@style/HomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblTotalGanhos"
+            android:text="@string/lbl_gastos" />
 
-            
-        </LinearLayout>
+        <TextView
+            android:id="@+id/lblSaldo"
+            style="@style/HomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblTotalGastos"
+            android:text="@string/lbl_saldo" />
+        
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/llRodape"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:orientation="vertical" >
 
         <TextView
@@ -53,4 +73,4 @@
             android:text="@string/radape" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

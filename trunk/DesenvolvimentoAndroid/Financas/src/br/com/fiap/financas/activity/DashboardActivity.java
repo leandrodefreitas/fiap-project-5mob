@@ -137,4 +137,9 @@ public class DashboardActivity extends Activity {
 		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 	}
 	
+	public void onClickMapa(View v) {
+		Intent i = new Intent(DashboardActivity.this, MapaActivity.class);
+		startActivity(i);
+	}
+	
 }

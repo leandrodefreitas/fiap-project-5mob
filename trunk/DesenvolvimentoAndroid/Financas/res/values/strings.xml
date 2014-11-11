@@ -19,6 +19,7 @@
     <string name="ic_backup">Backup</string>
     <string name="ic_excluir">Excluir dados</string>
     <string name="ic_informacoes">Informações</string>
+    <string name="ic_localizacao">Localização</string>
     
     <string name="btn_entrar">Entrar</string>
     <string name="chk_lembrar">Lembrar usuário</string>

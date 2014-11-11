@@ -95,16 +95,6 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/lblTotalGastos"
             android:text="@string/lbl_saldo" />
-
-        <ImageView
-            android:id="@+id/ivLocalizacao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/lblTotalGanhos"
-            android:contentDescription="@null"
-            android:onClick="onClickMapa"
-            android:src="@drawable/localmapa" />
         
     </RelativeLayout>
 
