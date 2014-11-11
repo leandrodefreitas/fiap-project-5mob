@@ -3,12 +3,12 @@ package br.com.fiap.financas.activity;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
 import br.com.fiap.R;
-import br.com.fiap.financas.common.vo.GanhoVO;
 import br.com.fiap.financas.common.vo.GastoVO;
 import br.com.fiap.financas.services.scn.GanhoSCN;
 import br.com.fiap.financas.services.scn.GastoSCN;
@@ -25,6 +25,7 @@ import android.app.Activity;
 
 public class GraficosActivity extends Activity {
 	public GregorianCalendar month;
+	public Date mesAuxP1, mesAuxP2, mesAuxP3, mesAuxF1, mesAuxF2, mesAuxF3;
 	Integer tipoGrafico; // 1 = barra; 2 = pizza;
 	WebView wvGrafico;
 	String strURL;
@@ -45,9 +46,9 @@ public class GraficosActivity extends Activity {
 				setPreviousMonth();
 				refreshGrafico();
 				if (tipoGrafico == 1) {
-					montarGraficoBarra(month);
+					montarGraficoBarra();
 				} else if (tipoGrafico == 2) {
-					montarGraficoPizza(month);
+					montarGraficoPizza();
 				}
 			}
 		});
@@ -59,9 +60,9 @@ public class GraficosActivity extends Activity {
 				setNextMonth();
 				refreshGrafico();
 				if (tipoGrafico == 1) {
-					montarGraficoBarra(month);
+					montarGraficoBarra();
 				} else if (tipoGrafico == 2) {
-					montarGraficoPizza(month);
+					montarGraficoPizza();
 				}
 			}
 		});
@@ -70,7 +71,7 @@ public class GraficosActivity extends Activity {
 		btnBarra.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				montarGraficoBarra(month);
+				montarGraficoBarra();
 			}
 		});
 		
@@ -78,11 +79,11 @@ public class GraficosActivity extends Activity {
 		btnPizza.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				montarGraficoPizza(month);
+				montarGraficoPizza();
 			}
 		});
 		
-		montarGraficoBarra(month);
+		montarGraficoBarra();
 	}
 	
 	@Override
@@ -92,7 +93,7 @@ public class GraficosActivity extends Activity {
 		return true;
 	}
 	
-	protected void montarGraficoPizza(GregorianCalendar dataSel) {
+	protected void montarGraficoPizza() {
 		tipoGrafico = 2;
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
@@ -123,64 +124,68 @@ public class GraficosActivity extends Activity {
 				"&chdl=" + stringCat +
 				"&chco=c60000";
 		// grafico pizza 3d
-		strURL =
+/*		strURL =
 		"https://chart.googleapis.com/chart?cht=p3&chs=320x100" +
 		"&chd=t:" + stringVal +
-		"&chl=" + stringCat;
+		"&chl=" + stringCat;*/
 		
 		wvGrafico = (WebView) findViewById(R.id.wvGrafico);
 		wvGrafico.loadUrl(strURL);
 	}
 	
 	@SuppressLint("SimpleDateFormat")
-	protected void montarGraficoBarra(GregorianCalendar dataSel) {
+	protected void montarGraficoBarra() {
 		tipoGrafico = 1;
-		GregorianCalendar mesAuxP1 = setMesPassado(dataSel);
-		GregorianCalendar mesAuxP2 = setMesPassado(dataSel);
-		GregorianCalendar mesAuxP3 = setMesPassado(dataSel);
-		GregorianCalendar mesAuxF1 = setMesProximo(dataSel);
-		GregorianCalendar mesAuxF2 = setMesProximo(dataSel);
-		GregorianCalendar mesAuxF3 = setMesProximo(dataSel);
 		
-		mesAuxP1 = setMesPassado(mesAuxP1);
-		mesAuxP2 = setMesPassado(mesAuxP1);
-		mesAuxP3 = setMesPassado(mesAuxP2);
-		mesAuxF1 = setMesProximo(mesAuxF1);
-		mesAuxF2 = setMesProximo(mesAuxF1);
-		mesAuxF3 = setMesProximo(mesAuxF2);
+		setPreviousMonth();
+		mesAuxF1 = month.getTime();
+		setPreviousMonth();
+		mesAuxF2 = month.getTime();
+		setPreviousMonth();
+		mesAuxF3 = month.getTime();
+		setNextMonth();setNextMonth();setNextMonth();
+		
+		setNextMonth();
+		mesAuxP1 = month.getTime();
+		setNextMonth();
+		mesAuxP2 = month.getTime();
+		setNextMonth();
+		mesAuxP3 = month.getTime();
+		setPreviousMonth();setPreviousMonth();setPreviousMonth();
+
 		
 		Locale.setDefault(new Locale("pt", "BR"));
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-		String mesAtual = df.format(dataSel.getTime());
-		String mesPassado1 = df.format(mesAuxP1.getTime());
-		String mesPassado2 = df.format(mesAuxP2.getTime());
-		String mesPassado3 = df.format(mesAuxP3.getTime());
-		String mesFuturo1 = df.format(mesAuxF1.getTime());
-		String mesFuturo2 = df.format(mesAuxF2.getTime());
-		String mesFuturo3 = df.format(mesAuxF3.getTime());
+		String mesAtual = df.format(month.getTime());
+		String mesP1 = df.format(mesAuxP1.getTime());
+		String mesP2 = df.format(mesAuxP2.getTime());
+		String mesP3 = df.format(mesAuxP3.getTime());
+		String mesF1 = df.format(mesAuxF1.getTime());
+		String mesF2 = df.format(mesAuxF2.getTime());
+		String mesF3 = df.format(mesAuxF3.getTime());
 		
 		GanhoSCN ganhosA = new GanhoSCN(getApplicationContext());
 		Double ganhosTA = ganhosA.obterTotalGanhosPorMesAno(mesAtual);
-		Double ganhosTP1 = ganhosA.obterTotalGanhosPorMesAno(mesPassado1);
-		Double ganhosTP2 = ganhosA.obterTotalGanhosPorMesAno(mesPassado2);
-		Double ganhosTP3 = ganhosA.obterTotalGanhosPorMesAno(mesPassado3);
-		Double ganhosTF1 = ganhosA.obterTotalGanhosPorMesAno(mesFuturo1);
-		Double ganhosTF2 = ganhosA.obterTotalGanhosPorMesAno(mesFuturo2);
-		Double ganhosTF3 = ganhosA.obterTotalGanhosPorMesAno(mesFuturo3);
+		Double ganhosTP1 = ganhosA.obterTotalGanhosPorMesAno(mesF1);
+		Double ganhosTP2 = ganhosA.obterTotalGanhosPorMesAno(mesF2);
+		Double ganhosTP3 = ganhosA.obterTotalGanhosPorMesAno(mesF3);
+		Double ganhosTF1 = ganhosA.obterTotalGanhosPorMesAno(mesP1);
+		Double ganhosTF2 = ganhosA.obterTotalGanhosPorMesAno(mesP2);
+		Double ganhosTF3 = ganhosA.obterTotalGanhosPorMesAno(mesP3);
 		
 		GastoSCN gastosA = new GastoSCN(getApplicationContext());
 		Double gastosTA = gastosA.obterTotalGastosPorMesAno(mesAtual);
-		Double gastosTP1 = gastosA.obterTotalGastosPorMesAno(mesPassado1);
-		Double gastosTP2 = gastosA.obterTotalGastosPorMesAno(mesPassado2);
-		Double gastosTP3 = gastosA.obterTotalGastosPorMesAno(mesPassado3);
-		Double gastosTF1 = gastosA.obterTotalGastosPorMesAno(mesFuturo1);
-		Double gastosTF2 = gastosA.obterTotalGastosPorMesAno(mesFuturo2);
-		Double gastosTF3 = gastosA.obterTotalGastosPorMesAno(mesFuturo3);
+		Double gastosTP1 = gastosA.obterTotalGastosPorMesAno(mesF1);
+		Double gastosTP2 = gastosA.obterTotalGastosPorMesAno(mesF2);
+		Double gastosTP3 = gastosA.obterTotalGastosPorMesAno(mesF3);
+		Double gastosTF1 = gastosA.obterTotalGastosPorMesAno(mesP1);
+		Double gastosTF2 = gastosA.obterTotalGastosPorMesAno(mesP2);
+		Double gastosTF3 = gastosA.obterTotalGastosPorMesAno(mesP3);
 		
 		DateFormat dtitulo = new SimpleDateFormat("MMMM yyyy");
 		
 		String tituloMeses = "|" + dtitulo.format(mesAuxP3.getTime()) + "|" + dtitulo.format(mesAuxP2.getTime()) + "|" + 
-				dtitulo.format(mesAuxP1.getTime()) + "|" + dtitulo.format(dataSel.getTime()) + "|" + dtitulo.format(mesAuxF1.getTime()) + "|" + 
+				dtitulo.format(mesAuxP1.getTime()) + "|" + dtitulo.format(month.getTime()) + "|" + dtitulo.format(mesAuxF1.getTime()) + "|" + 
 				dtitulo.format(mesAuxF2.getTime()) + "|" + dtitulo.format(mesAuxF3.getTime());
 		String valorMeses = ganhosTP3.toString() + "," + ganhosTP2.toString() + "," + ganhosTP1.toString() + "," + 
 				ganhosTA.toString() + "," + ganhosTF1.toString() + "," + ganhosTF2.toString() + "," + ganhosTF3.toString() + "|" + 
@@ -219,26 +224,6 @@ public class GraficosActivity extends Activity {
 		} else {
 			month.set(GregorianCalendar.MONTH, month.get(GregorianCalendar.MONTH) - 1);
 		}
-	}
-	
-	protected GregorianCalendar setMesProximo(GregorianCalendar data) {
-		GregorianCalendar mes = data;
-		if (mes.get(GregorianCalendar.MONTH) == mes.getActualMaximum(GregorianCalendar.MONTH)) {
-			mes.set((mes.get(GregorianCalendar.YEAR) + 1), mes.getActualMinimum(GregorianCalendar.MONTH), 1);
-		} else {
-			mes.set(GregorianCalendar.MONTH, mes.get(GregorianCalendar.MONTH) + 1);
-		}
-		return mes;
-	}
-	
-	protected GregorianCalendar setMesPassado(GregorianCalendar data) {
-		GregorianCalendar mes = data;
-		if (mes.get(GregorianCalendar.MONTH) == mes.getActualMinimum(GregorianCalendar.MONTH)) {
-			mes.set((mes.get(GregorianCalendar.YEAR) - 1),mes.getActualMaximum(GregorianCalendar.MONTH), 1);
-		} else {
-			mes.set(GregorianCalendar.MONTH, mes.get(GregorianCalendar.MONTH) - 1);
-		}
-		return mes;
 	}
 	
 	public void refreshGrafico() {

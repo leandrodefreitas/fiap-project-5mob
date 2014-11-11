@@ -1,5 +1,7 @@
 package br.com.fiap.financas.activity;
 
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -11,6 +13,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import br.com.fiap.R;
+import br.com.fiap.financas.common.vo.GastoVO;
+import br.com.fiap.financas.services.scn.GastoSCN;
+import br.com.fiap.financas.util.Util;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,7 +33,7 @@ public class MapaActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mapa_locais);
-		setMapLocalizaFiap();
+		setMapLocaliza();
 	}
 
 	@Override
@@ -39,31 +44,47 @@ public class MapaActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		setMapLocalizaFiap();
+		setMapLocaliza();
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@SuppressLint("NewApi")
-	private void setMapLocalizaFiap() {
+	private void setMapLocaliza() {
 		if (map == null) {
 			map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 			if (map != null) {
-				map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+				map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 				map.setIndoorEnabled(false);
-				Location loc = ((LocationManager) getSystemService(LOCATION_SERVICE))
+				
+				Location localvc = ((LocationManager) getSystemService(LOCATION_SERVICE))
 						.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 				
-				loc.setLatitude(-23.57442600000013);
-				loc.setLongitude(-46.62321400000036);
-				
 				map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-						new LatLng(loc.getLatitude(), loc.getLongitude()), 18.0f));
+						new LatLng(localvc.getLatitude(), localvc.getLongitude()), 12.0f));
 				
-				MarkerOptions moFiap = new MarkerOptions();
-				moFiap.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher));
-				moFiap.position(new LatLng( loc.getLatitude(), loc.getLongitude()));
+				MarkerOptions moVC = new MarkerOptions();
+				moVC.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher));
+				moVC.position(new LatLng( localvc.getLatitude(), localvc.getLongitude()));
+				moVC.title("Você está aqui!");
 				
-				map.addMarker(moFiap.title("Fiap"));
+				map.addMarker(moVC);
+				
+				GastoSCN gastosA = new GastoSCN(getApplicationContext());
+				List<GastoVO> gastos = gastosA.obterTodosGastos();
+				
+				MarkerOptions moGasto = new MarkerOptions();
+				moGasto.icon(BitmapDescriptorFactory.fromResource(R.drawable.localmapa));
+				
+				for (int i = 0; i < gastos.size(); i++) {
+					if(gastos.get(i).getLatitude() != null && gastos.get(i).getLongitude() != null) {
+						moGasto.position(new LatLng(gastos.get(i).getLatitude(), gastos.get(i).getLongitude()));
+						String conteudo = gastos.get(i).getDescricao() + "\n" + gastos.get(i).getDataFormatted() + 
+								" - " + Util.formataMoedaBRL(gastos.get(i).getValor());
+						moGasto.title(conteudo);
+						map.addMarker(moGasto);
+					}
+				}
+				
 
 			}
 		}
@@ -78,7 +99,7 @@ public class MapaActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		String text = GooglePlayServicesUtil.getOpenSourceSoftwareLicenseInfo(this);
-		new AlertDialog.Builder(this).setTitle("Fiap Google Maps").setMessage(text)
+		new AlertDialog.Builder(this).setTitle("Google Maps").setMessage(text)
 				.setNeutralButton("Cancel", null).show();
 		return true ;
 	}
