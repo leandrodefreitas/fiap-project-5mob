@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/lbltitle"
         style="@style/HomeText"
-        android:text="TOTAIS" />
+        android:text="@string/lbl_total" />
     
     <WebView
         android:id="@+id/wvGrafico"
@@ -22,21 +22,11 @@
         android:layout_height="match_parent">
         
         <TextView
-            android:id="@+id/lblTotalGeralMes"
-            style="@style/HomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/lbl_totalGeral" />
-
-        <TextView
             android:id="@+id/lblTotalGanhos"
             style="@style/HomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/lblTotalGeralMes"
             android:text="@string/lbl_ganhos" />
 
         <TextView

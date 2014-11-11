@@ -145,5 +145,16 @@ public class GanhoSCN {
 		return total;
 	}
 	
+	public Double obterTotalGanhos() {
+		GanhoDAO ganhoDao = new GanhoDAO(context);
+		List<GanhoVO> ganhos = ganhoDao.selectAll();
+		ganhoDao.close();
+		Double total = 0.0;
+		for (GanhoVO ganho : ganhos) {
+			total += ganho.getValor();
+		}
+		return total;
+	}
+	
 	
 }

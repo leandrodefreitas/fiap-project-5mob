@@ -39,7 +39,6 @@ public class GastoSCN {
 		return id;
 	}
 
-
 	public List<GastoVO> obterTodosGastos() {
 		GastoDAO gastoDao = new GastoDAO(context);
 		List<GastoVO> gastos = gastoDao.selectAll();
@@ -131,6 +130,17 @@ public class GastoSCN {
 	public Double obterTotalGastosPorData(String data) {
 		GastoDAO gastoDao = new GastoDAO(context);
 		List<GastoVO> gastos = gastoDao.selectByData(data);
+		gastoDao.close();
+		Double total = 0.0;
+		for(GastoVO gasto: gastos){
+			total += gasto.getValor();
+		}
+		return total;
+	}
+	
+	public Double obterTotalGastos() {
+		GastoDAO gastoDao = new GastoDAO(context);
+		List<GastoVO> gastos = gastoDao.selectAll();
 		gastoDao.close();
 		Double total = 0.0;
 		for(GastoVO gasto: gastos){

@@ -5,7 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.TextView;
 import br.com.fiap.R;
+import br.com.fiap.financas.services.scn.GanhoSCN;
+import br.com.fiap.financas.services.scn.GastoSCN;
+import br.com.fiap.financas.util.Util;
 
 import com.actionbarsherlock.app.SherlockFragment;
  
@@ -19,11 +23,36 @@ public class TotalFragment extends SherlockFragment {
             Bundle savedInstanceState) {
  
         View rootView = inflater.inflate(R.layout.financas_totais, container, false);
-         
-        strURL="http://chart.apis.google.com/chart?chxt=x,y&cht=bvs&chd=t:60,70,85,65,40&chco=76A4FB&chls=2.0&chs=180x150&chxl=0:|Jan|Fev|Mar|Abr|Mai";
+        
+		GanhoSCN ganhoA = new GanhoSCN(rootView.getContext());
+		GastoSCN gastoA = new GastoSCN(rootView.getContext());
+		Double ganhoTotal = ganhoA.obterTotalGanhos();
+		Double gastoTotal = gastoA.obterTotalGastos();
+		Double saldo = ganhoTotal - gastoTotal;
+		
+		strURL="http://chart.apis.google.com/chart?" +
+        		"chxt=x,y" +
+        		"&chs=300x250" +
+        		"&cht=bvs" +
+        		"&chd=t:"+ gastoTotal + "," + saldo +
+        		"&chxr=0,0,"+ ganhoTotal +
+				"&chds=0," + ganhoTotal +
+				"&chco=4D89F9" +
+				"&chbh=25,0,5" +
+				"&chg=8.33,0,5,0" +
+        		"&chco=FF2351,0AFF8A" +
+        		"&chs=300x250" +
+        		"&chxl=0:|Gastos|Saldo";
         
         wvGrafico = (WebView) rootView.findViewById(R.id.wvGrafico);
 		wvGrafico.loadUrl(strURL);
+		
+		TextView lblganho = (TextView) rootView.findViewById(R.id.lblTotalGanhos);
+		lblganho.setText("Total de ganhos: " + Util.formataMoedaBRL(ganhoTotal));
+		TextView lblgasto = (TextView) rootView.findViewById(R.id.lblTotalGastos);
+		lblgasto.setText("Total de gastos: " + Util.formataMoedaBRL(gastoTotal));
+		TextView lblsaldo = (TextView) rootView.findViewById(R.id.lblSaldo);
+		lblsaldo.setText("Saldo: " + Util.formataMoedaBRL(saldo));
         	
         return rootView;
     }
