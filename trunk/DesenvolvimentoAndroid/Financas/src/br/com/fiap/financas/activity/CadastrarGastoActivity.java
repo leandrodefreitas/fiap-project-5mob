@@ -67,7 +67,6 @@ public class CadastrarGastoActivity extends Activity {
 	private ArrayList<CategoriaVO> categoriasSelecionadas = new ArrayList<CategoriaVO>();
 	private Spinner spnGanhos;
 	private List<GanhoVO> listaGanhos;
-	private List<String> listaGanhosString;
 	private CheckBox checkLocal;
 	private TextView latitude;
 	private TextView longitude;
@@ -108,7 +107,7 @@ public class CadastrarGastoActivity extends Activity {
 		calculeHeightListView();
 		
 		if (listaCategorias.isEmpty()) {
-			Log.i("Spinner", "lista categorias vazia..");
+			Log.i("Script", "lista categorias vazia..");
 			Toast.makeText(getApplicationContext(),
 					"Nenhuma categoria cadastrada...", Toast.LENGTH_SHORT).show();
 			finish();
@@ -117,15 +116,14 @@ public class CadastrarGastoActivity extends Activity {
 		// Populando spinner de ganhos
 		GanhoSCN controleGanho = new GanhoSCN(getApplicationContext());
 		listaGanhos = controleGanho.obterTodosGanhos();
-		listaGanhosString = new ArrayList<String>();
-		for (GanhoVO ganho: listaGanhos){
-			listaGanhosString.add(ganho.getDescricao() + " de " + Util.imprimeDataFormatoBR(ganho.getDataFormatted()));
-		}
 		
-		
-		if (listaGanhosString.isEmpty()) {
-			Log.i("Spinner", "lista ganhos vazia..");
-		}
+		if (listaGanhos.isEmpty()) {
+			Log.i("Script", "lista Ganhos vazia..");
+			Toast.makeText(getApplicationContext(),
+					"Nenhum ganho cadastrado...", Toast.LENGTH_SHORT).show();
+			finish();
+		}				
+
 		spnGanhos = (Spinner) findViewById(R.id.spnGanhoSelecao);
 		ArrayAdapter<GanhoVO> ganhoAdapter = new ArrayAdapter<GanhoVO>(this, android.R.layout.simple_spinner_dropdown_item, listaGanhos);
 		spnGanhos.setAdapter(ganhoAdapter);
@@ -342,6 +340,9 @@ public class CadastrarGastoActivity extends Activity {
 					gasto.setLocal(localizacao);
 					
 					gasto.setFoto(fotoPath);
+					
+					
+					
 
 					GastoSCN controle = new GastoSCN(getApplicationContext());
 					Long id = controle.salvarGasto(gasto);

@@ -2,13 +2,19 @@ package br.com.fiap.financas.activity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -23,6 +29,39 @@ public class DashboardActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
+		
+		boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
+		
+		if(alarmeAtivo){
+			Log.i("Script", "Novo alarme");
+			
+			Intent intent = new Intent("ALARME_DISPARADO");
+			PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
+			
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(System.currentTimeMillis());
+			c.add(Calendar.SECOND, 3);
+			
+			
+			Calendar calStart = new GregorianCalendar();
+			calStart.setTime(new Date());
+			calStart.set(Calendar.HOUR_OF_DAY, 8);
+			calStart.set(Calendar.MINUTE, 0);
+			calStart.set(Calendar.SECOND, 0);
+			calStart.set(Calendar.MILLISECOND, 0);
+			calStart.add(Calendar.DAY_OF_YEAR, 1); 
+			
+			Log.i("Script", "Data é "+ calStart.getTime().toString());
+			
+			long interval = AlarmManager.INTERVAL_DAY;
+			
+			AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
+			alarme.setRepeating(AlarmManager.RTC_WAKEUP, calStart.getTimeInMillis(), interval, p);
+			
+		}
+		else{
+			Log.i("Script", "Alarme já ativo");
+		}		
 		
 	}
 
