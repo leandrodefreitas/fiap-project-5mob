@@ -44,6 +44,7 @@ public class NotificationConfirmGastoActivity extends Activity {
         btnCancelar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(), "Gasto cancelado.", Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		});

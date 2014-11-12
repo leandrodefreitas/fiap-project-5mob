@@ -1,60 +1,50 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/lvCategoriasLista"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </ListView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="?android:attr/dividerVertical" />
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingTop="10dp" >
+        android:gravity="bottom"
+        android:measureWithLargestChild="true"
+        android:orientation="horizontal"
+        android:paddingLeft="2dip"
+        android:paddingRight="2dip"
+        android:paddingTop="0dip" >
 
+        <Button
+            android:id="@+id/btnSairListaCategoria"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onSairCategoria"
+            android:text="@string/btn_voltar" />
+        
         <Button
             android:id="@+id/btnNovaCategoria"
-            android:layout_width="wrap_content"
+			style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:text="Nova Categoria"
-            android:width="100dp" 
             android:onClick="onClickNova"/>
-
-        <Button
-            android:id="@+id/btnListaCategoria"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.9"
-            android:text="Lista de Categorias"
-            android:width="100dp" 
-            android:onClick="onClickLista"/>
-
+        
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/llRodape"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true" >
-
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/llRodape"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/tvRodape"
-            style="@style/TitleBarText"
-            android:layout_width="fill_parent"
-            android:background="@color/title_background"
-            android:text="@string/radape" />
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

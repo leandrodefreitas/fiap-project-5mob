@@ -3,8 +3,6 @@ package br.com.fiap.financas.activity;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -16,7 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -34,7 +31,7 @@ public class DashboardActivity extends Activity {
 		
 		scheduleAlarm();
 		
-		boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
+		/*boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
 		
 		if(alarmeAtivo){
 			Log.i("Script", "Novo alarme");
@@ -65,7 +62,7 @@ public class DashboardActivity extends Activity {
 		}
 		else{
 			Log.i("Script", "Alarme já ativo");
-		}		
+		}*/
 		
 	}
 
@@ -176,20 +173,18 @@ public class DashboardActivity extends Activity {
 	}
 	
 	public void scheduleAlarm(){
+        
+        TelephonyManager tm = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE); 
+        String number = tm.getLine1Number();
 
-        TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-        String telephoneNumber = telephonyManager.getLine1Number();
-
-        AlarmManager alarmMgr;
-        PendingIntent alarmIntent;
-        alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        intent.putExtra("PhoneNumber", telephoneNumber);
-        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        AlarmManager alarmMgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), AlarmSms.class);
+        intent.putExtra("PhoneNumber", number);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.HOUR_OF_DAY, 11);
         calendar.set(Calendar.MINUTE, 0);
 
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),

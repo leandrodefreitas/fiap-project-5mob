@@ -431,8 +431,8 @@ public class CadastrarGastoActivity extends Activity {
         Notification notifica = new Notification.Builder(this)
                 .setContentTitle("Novo gasto")
                 .setContentText("Confirme ou cancele esse novo registro.").setSmallIcon(R.drawable.rf_icon)
-                .setContentIntent(pIntent)
-                .addAction(R.drawable.appicon, "btn1", pIntent).build();
+                .setContentIntent(pIntent).build();
+                //.addAction(R.drawable.appicon, "btn1", pIntent).build();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -450,8 +450,7 @@ public class CadastrarGastoActivity extends Activity {
         Notification notifica = new Notification.Builder(this)
                 .setContentTitle("Gasto parcelado")
                 .setContentText("Confirme ou cancele o gasto parcelado.").setSmallIcon(R.drawable.rf_icon)
-                .setContentIntent(pIntent)
-                .addAction(R.drawable.appicon, "btn1", pIntent).build();
+                .setContentIntent(pIntent).build();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -467,8 +466,7 @@ public class CadastrarGastoActivity extends Activity {
         Notification notifica = new Notification.Builder(this)
                 .setContentTitle("Saldo negativo")
                 .setContentText("Seu saldo está negativo, cadastre um ganho o quanto antes.").setSmallIcon(R.drawable.rf_icon)
-                .setContentIntent(pIntent)
-                .addAction(R.drawable.appicon, "btn1", pIntent).build();
+                .setContentIntent(pIntent).build();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notifica.flags |= Notification.FLAG_AUTO_CANCEL;

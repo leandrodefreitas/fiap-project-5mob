@@ -31,14 +31,14 @@ public class TotalFragment extends SherlockFragment {
 		Double saldo = ganhoTotal - gastoTotal;
 		
 		strURL="http://chart.apis.google.com/chart?" +
-        		"chxt=x,y" +
         		"&chs=300x250" +
         		"&cht=bvs" +
         		"&chd=t:"+ gastoTotal + "," + saldo +
         		"&chxr=0,0,"+ ganhoTotal +
 				"&chds=0," + ganhoTotal +
         		"&chxl=0:|Gastos|Saldo" + 
-        		"&chco=FF2351,0AFF8A";
+        		"&chco=FF2351|0AFF8A";
+		
         
         wvGrafico = (WebView) rootView.findViewById(R.id.wvGrafico);
 		wvGrafico.loadUrl(strURL);
