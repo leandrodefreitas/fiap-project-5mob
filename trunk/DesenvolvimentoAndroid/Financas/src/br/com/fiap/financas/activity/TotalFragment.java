@@ -37,12 +37,8 @@ public class TotalFragment extends SherlockFragment {
         		"&chd=t:"+ gastoTotal + "," + saldo +
         		"&chxr=0,0,"+ ganhoTotal +
 				"&chds=0," + ganhoTotal +
-				"&chco=4D89F9" +
-				"&chbh=25,0,5" +
-				"&chg=8.33,0,5,0" +
-        		"&chco=FF2351,0AFF8A" +
-        		"&chs=300x250" +
-        		"&chxl=0:|Gastos|Saldo";
+        		"&chxl=0:|Gastos|Saldo" + 
+        		"&chco=FF2351,0AFF8A";
         
         wvGrafico = (WebView) rootView.findViewById(R.id.wvGrafico);
 		wvGrafico.loadUrl(strURL);
