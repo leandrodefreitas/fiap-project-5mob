@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.SmsManager;
 
-public class AlarmReceiver extends BroadcastReceiver {
+public class AlarmSms extends BroadcastReceiver {
 
 	public void onReceive(Context context, Intent intent) {
 		
@@ -18,10 +18,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Double gastoTotal = gastoA.obterTotalGastos();
 		Double saldo = ganhoTotal - gastoTotal;
 		
-		String phoneNumberReciver=intent.getStringExtra("PhoneNumber");
+		String phoneNumberR = intent.getStringExtra("PhoneNumber");
         String message="Seu saldo é de " + Util.formataMoedaBRL(saldo);
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(phoneNumberReciver, null, message, null, null);
+        sms.sendTextMessage(phoneNumberR, null, message, null, null);
 	}
 
 }

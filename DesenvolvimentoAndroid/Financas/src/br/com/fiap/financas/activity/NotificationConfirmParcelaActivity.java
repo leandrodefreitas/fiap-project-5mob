@@ -31,7 +31,7 @@ public class NotificationConfirmParcelaActivity extends Activity {
         
         titulo.setText("Deseja confirmar esse gasto, com 5 ou mais parcelas?");
         descricao.setText(gastoC.getDescricao());
-        valor.setText(Util.formataMoedaBRL(gastoC.getValor()));
+        valor.setText(Util.formataMoedaBRL(gastoC.getValor()) + " x" + gastoC.getNumParcelas());
         data.setText(Util.formataDataPadrao(gastoC.getData()));
         
         if (gastoC.getFoto() != null) {
@@ -44,6 +44,7 @@ public class NotificationConfirmParcelaActivity extends Activity {
         btnCancelar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(), "Gasto cancelado.", Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		});
@@ -57,7 +58,6 @@ public class NotificationConfirmParcelaActivity extends Activity {
 				
 		    	if (id != -1) {
 		    		Toast.makeText(getApplicationContext(), "Gasto cadastrado.", Toast.LENGTH_SHORT).show();
-		    		//TODO Criar notifications
 		    	} else {
 		    		Toast.makeText(getApplicationContext(), "Erro no cadastro do Gasto. Tente novamente.", Toast.LENGTH_SHORT).show();				    		
 		    	}
