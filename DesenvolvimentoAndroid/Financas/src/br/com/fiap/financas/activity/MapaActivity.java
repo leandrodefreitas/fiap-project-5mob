@@ -59,15 +59,19 @@ public class MapaActivity extends Activity {
 				Location localvc = ((LocationManager) getSystemService(LOCATION_SERVICE))
 						.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 				
-				map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-						new LatLng(localvc.getLatitude(), localvc.getLongitude()), 12.0f));
-				
-				MarkerOptions moVC = new MarkerOptions();
-				moVC.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher));
-				moVC.position(new LatLng( localvc.getLatitude(), localvc.getLongitude()));
-				moVC.title("Você está aqui!");
-				
-				map.addMarker(moVC);
+				if (localvc == null) {
+					map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+							new LatLng(-23.57442600000013, -46.62321400000036), 12.0f));
+				} else {
+					map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+							new LatLng(localvc.getLatitude(), localvc.getLongitude()), 12.0f));
+					
+					MarkerOptions moVC = new MarkerOptions();
+					moVC.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher));
+					moVC.position(new LatLng( localvc.getLatitude(), localvc.getLongitude()));
+					moVC.title("Você está aqui!");
+					map.addMarker(moVC);
+				}
 				
 				GastoSCN gastosA = new GastoSCN(getApplicationContext());
 				List<GastoVO> gastos = gastosA.obterTodosGastos();
@@ -85,7 +89,6 @@ public class MapaActivity extends Activity {
 					}
 				}
 				
-
 			}
 		}
 	}

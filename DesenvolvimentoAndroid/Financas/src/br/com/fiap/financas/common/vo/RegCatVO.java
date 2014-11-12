@@ -1,6 +1,10 @@
 package br.com.fiap.financas.common.vo;
 
-public class RegCatVO {
+import java.io.Serializable;
+
+public class RegCatVO implements Serializable {
+	
+	private static final long serialVersionUID = -6188973525980065778L;
 	
 	private Integer id;
 	private Integer idRegistro;

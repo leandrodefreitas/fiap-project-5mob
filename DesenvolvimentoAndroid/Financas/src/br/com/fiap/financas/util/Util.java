@@ -1,8 +1,8 @@
 package br.com.fiap.financas.util;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
 
@@ -39,6 +39,13 @@ public class Util {
 			dataFormatada = diaDaSemana(dia);
 		}
 
+		return dataFormatada;
+	}
+	
+	public static String formataDataPadrao(Date data){
+		String dataFormatada = "";
+		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+		dataFormatada = dt.format(data);
 		return dataFormatada;
 	}
 

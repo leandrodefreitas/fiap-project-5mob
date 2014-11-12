@@ -46,10 +46,13 @@
 	<string name="lbl_longitude">Longitude:</string>	
 	<string name="lbl_foto">Foto:</string>
 	<string name="lbl_hint_categoria">Digite a nova Categoria</string>
+	<string name="lbl_data">Data:</string>
 	
     <string name="btn_foto">Tirar Foto</string>
     <string name="btn_salvar">Salvar</string>
-    <string name="btn_voltar">Voltar</string>  
+    <string name="btn_voltar">Voltar</string>
+    <string name="btn_confirmar">Confirmar</string>
+    <string name="btn_cancelar">Cancelar</string> 
 
     <string name="lbl_totalGeral">TOTAL GERAL DO MÊS</string>
     <string name="lbl_ganhos">Total de ganhos:</string>

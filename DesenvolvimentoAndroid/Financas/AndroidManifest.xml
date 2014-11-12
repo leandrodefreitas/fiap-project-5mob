@@ -13,6 +13,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <permission
         android:name="br.com.fiap.financas.mappingv2.permission.MAPS_RECEIVE"
@@ -133,7 +137,6 @@
 				<category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="org.achartengine.GraphicalActivity" />
         
         <activity
             android:name="br.com.fiap.financas.activity.MapaActivity"
@@ -143,6 +146,10 @@
 				<category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+        <activity android:name="br.com.fiap.financas.activity.NotificationConfirmGastoActivity" />
+        <activity android:name="br.com.fiap.financas.activity.NotificationConfirmGanhoActivity" />
+        <activity android:name="br.com.fiap.financas.activity.NotificationConfirmParcelaActivity" />
         
     </application>
     

@@ -1,6 +1,10 @@
 package br.com.fiap.financas.common.vo;
 
-public class CategoriaVO {
+import java.io.Serializable;
+
+public class CategoriaVO implements Serializable {
+	
+	private static final long serialVersionUID = 8306358434780595447L;
 	
 	private Integer id;
 	private String descricao;
