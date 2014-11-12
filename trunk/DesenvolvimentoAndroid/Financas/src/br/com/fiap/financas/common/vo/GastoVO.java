@@ -1,13 +1,16 @@
 package br.com.fiap.financas.common.vo;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import android.util.Log;
 
-public class GastoVO {
+public class GastoVO implements Serializable {
 	
+	private static final long serialVersionUID = 55162102414220105L;
+
 	public final static int GASTO = 2;	
 	
 	private Integer id;

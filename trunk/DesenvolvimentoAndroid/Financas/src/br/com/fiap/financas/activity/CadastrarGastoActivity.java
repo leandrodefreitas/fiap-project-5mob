@@ -6,6 +6,9 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -301,6 +304,8 @@ public class CadastrarGastoActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				
+				gasto = new GastoVO();
 
 				if (edtDescricao.getText().toString().length() == 0){
 					edtDescricao.setError(getString(R.string.campo_obrigatorio));
@@ -341,19 +346,17 @@ public class CadastrarGastoActivity extends Activity {
 					
 					gasto.setFoto(fotoPath);
 					
-					
-					
-
-					GastoSCN controle = new GastoSCN(getApplicationContext());
-					Long id = controle.salvarGasto(gasto);
-					
-			    	if (id != -1) {
-			    		Toast.makeText(getApplicationContext(), "Gasto cadastrado.", Toast.LENGTH_SHORT).show();
-			    		//TODO Criar notifications
-			    	} else {
-			    		Toast.makeText(getApplicationContext(), "Erro no cadastro do Gasto. Tente novamente.", Toast.LENGTH_SHORT).show();				    		
-			    	}
-			    	
+					GastoSCN gastoScn = new GastoSCN(getApplicationContext());
+					GanhoSCN ganhoScn = new GanhoSCN(getApplicationContext());
+					Double ganhoTotal = ganhoScn.obterTotalGanhos();
+					Double gastoTotal = gastoScn.obterTotalGastos();
+					Double saldo = ganhoTotal - gastoTotal;
+					if (saldo < 0) { createNotificationSaldoNegativo(); }
+					if (gasto.getNumParcelas() >= 5) {
+						createNotificationConfirmParcelas();
+					} else {
+						createNotificationConfirm();
+					}
 			    	finish();
 				}
 			}
@@ -417,6 +420,59 @@ public class CadastrarGastoActivity extends Activity {
                 + (listViewCategorias.getDividerHeight() * (adapter.getCount() - 1));  
         listViewCategorias.setLayoutParams(params);  
         listViewCategorias.requestLayout();  
-    }  	
+    }
+    
+    public void createNotificationConfirm(){
+    	
+        Intent intent = new Intent(this, NotificationConfirmGastoActivity.class);
+        intent.putExtra("vo", gasto);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,0);
+
+        Notification notifica = new Notification.Builder(this)
+                .setContentTitle("Novo gasto")
+                .setContentText("Confirme ou cancele esse novo registro.").setSmallIcon(R.drawable.rf_icon)
+                .setContentIntent(pIntent)
+                .addAction(R.drawable.appicon, "btn1", pIntent).build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        notifica.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        notificationManager.notify(0, notifica);
+    }
+    
+    public void createNotificationConfirmParcelas(){
+    	
+        Intent intent = new Intent(this, NotificationConfirmParcelaActivity.class);
+        intent.putExtra("vo", gasto);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,0);
+
+        Notification notifica = new Notification.Builder(this)
+                .setContentTitle("Gasto parcelado")
+                .setContentText("Confirme ou cancele o gasto parcelado.").setSmallIcon(R.drawable.rf_icon)
+                .setContentIntent(pIntent)
+                .addAction(R.drawable.appicon, "btn1", pIntent).build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        notifica.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        notificationManager.notify(0, notifica);
+    }
+    
+    public void createNotificationSaldoNegativo(){
+    	
+        Intent intent = new Intent(this, CalendarActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,0);
+        Notification notifica = new Notification.Builder(this)
+                .setContentTitle("Saldo negativo")
+                .setContentText("Seu saldo está negativo, cadastre um ganho o quanto antes.").setSmallIcon(R.drawable.rf_icon)
+                .setContentIntent(pIntent)
+                .addAction(R.drawable.appicon, "btn1", pIntent).build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notifica.flags |= Notification.FLAG_AUTO_CANCEL;
+        notificationManager.notify(0, notifica);
+    }
 
 }

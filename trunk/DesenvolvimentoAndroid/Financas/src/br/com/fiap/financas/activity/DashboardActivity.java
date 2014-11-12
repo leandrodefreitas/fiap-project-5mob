@@ -10,10 +10,12 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ public class DashboardActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
+		
+		scheduleAlarm();
 		
 		boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
 		
@@ -139,16 +143,6 @@ public class DashboardActivity extends Activity {
 	private AlertDialog alerta;
 
 	public void onClickInfo(View v) {
-		/*Intent i = new Intent(DashboardActivity.this, InformacoesActivity.class);
-		startActivity(i);*/
-		
-		/*new AlertDialog.Builder(this)
-    	.setTitle("Informações")
-    	.setMessage("Desenvolvedores: \n \n Flavio Ota \n Leandro de Freitas \n Rodrigo Ota \n Wellington Santos")
-    	.setIcon(R.drawable.ic_informacoes)
-    	.setNegativeButton("Voltar", null)
-    	.show();*/
-		
 		//LayoutInflater é utilizado para inflar nosso layout em uma view. 
 		//-pegamos nossa instancia da classe 
 		LayoutInflater li = getLayoutInflater(); 
@@ -180,5 +174,26 @@ public class DashboardActivity extends Activity {
 		Intent i = new Intent(DashboardActivity.this, MapaActivity.class);
 		startActivity(i);
 	}
+	
+	public void scheduleAlarm(){
+
+        TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        String telephoneNumber = telephonyManager.getLine1Number();
+
+        AlarmManager alarmMgr;
+        PendingIntent alarmIntent;
+        alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        intent.putExtra("PhoneNumber", telephoneNumber);
+        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 0);
+
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                1000 * 60 * 60 * 24, alarmIntent);
+    }
 	
 }

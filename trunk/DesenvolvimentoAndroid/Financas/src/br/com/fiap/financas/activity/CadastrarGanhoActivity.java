@@ -3,6 +3,10 @@ package br.com.fiap.financas.activity;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +23,6 @@ import br.com.fiap.R;
 import br.com.fiap.financas.common.vo.CategoriaVO;
 import br.com.fiap.financas.common.vo.GanhoVO;
 import br.com.fiap.financas.services.scn.CategoriaSCN;
-import br.com.fiap.financas.services.scn.GanhoSCN;
 import br.com.fiap.financas.util.Util;
 
 public class CadastrarGanhoActivity extends Activity {
@@ -100,6 +103,8 @@ public class CadastrarGanhoActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				
+				ganho = new GanhoVO();
 
 				if (edtDescricao.getText().toString().length() == 0) {
 					edtDescricao
@@ -129,20 +134,10 @@ public class CadastrarGanhoActivity extends Activity {
 					} else {
 						ganho.setNumParcelas(0);
 					}
-
-					GanhoSCN controleGanho = new GanhoSCN(
-							getApplicationContext());
-					Long id = controleGanho.salvarGanho(ganho);
-
-					// se salvou
-			    	if (id != -1) {
-			    		Toast.makeText(getApplicationContext(), "Ganho cadastrado.", Toast.LENGTH_SHORT).show();
-			    		//TODO Criar notifications
-			    	} else {
-			    		Toast.makeText(getApplicationContext(), "Erro no cadastro do Ganho. Tente novamente.", Toast.LENGTH_SHORT).show();				    		
-			    	}
-			    	
-			    	finish();
+					
+					createNotificationConfirm();
+					
+					finish();
 				}
 			}
 		});
@@ -155,6 +150,25 @@ public class CadastrarGanhoActivity extends Activity {
 				finish();
 			}
 		});
-
 	}
+	
+	public void createNotificationConfirm(){
+    	
+        Intent intent = new Intent(this, NotificationConfirmGanhoActivity.class);
+        intent.putExtra("vo", ganho);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,0);
+
+        Notification notf = new Notification.Builder(this)
+                .setContentTitle("Novo ganho")
+                .setContentText("Confirme ou cancele esse novo registro.").setSmallIcon(R.drawable.rf_icon)
+                .setContentIntent(pIntent)
+                .addAction(R.drawable.appicon, "btn1", pIntent).build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        notf.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        notificationManager.notify(0, notf);
+    }
+	
 }

@@ -1,13 +1,16 @@
 package br.com.fiap.financas.common.vo;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.util.Log;
 import br.com.fiap.financas.util.Util;
 
-public class GanhoVO {
+public class GanhoVO implements Serializable {
 	
+	private static final long serialVersionUID = -8046547588551202374L;
+
 	public final static int GANHO = 1;
 	
 	private Integer id;
