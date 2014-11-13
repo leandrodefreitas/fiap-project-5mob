@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 import br.com.fiap.financas.common.vo.GanhoVO;
+import br.com.fiap.financas.services.scn.GanhoSCN;
 import br.com.fiap.financas.services.scn.GastoSCN;
 
 public class GanhoDAO extends DataSource {
@@ -73,7 +74,10 @@ public class GanhoDAO extends DataSource {
 				GastoSCN gastoSCN = new GastoSCN(context);
 				Double somaGastos = gastoSCN.obterSomaGastosPorGanho(ganho.getId());
 				Double saldo = ganho.getValor() - somaGastos;
-				ganho.setSaldo(saldo);				
+				ganho.setSaldo(saldo);
+				
+				GanhoSCN ganhoSCN = new GanhoSCN(context);
+				ganho.setCategoria(ganhoSCN.obterCategoriasPorId(cursor.getInt(0)).get(0));
 
 				list.add(ganho);
 
@@ -108,6 +112,9 @@ public class GanhoDAO extends DataSource {
 				Double saldo = ganho.getValor() - somaGastos;
 				ganho.setSaldo(saldo);
 				
+				GanhoSCN ganhoSCN = new GanhoSCN(context);
+				ganho.setCategoria(ganhoSCN.obterCategoriasPorId(cursor.getInt(0)).get(0));				
+				
 			} while (cursor.moveToNext());
 		}
 		if (cursor != null && !cursor.isClosed()) {
@@ -137,7 +144,10 @@ public class GanhoDAO extends DataSource {
 				GastoSCN gastoSCN = new GastoSCN(context);
 				Double somaGastos = gastoSCN.obterSomaGastosPorGanho(ganho.getId());
 				Double saldo = ganho.getValor() - somaGastos;
-				ganho.setSaldo(saldo);				
+				ganho.setSaldo(saldo);	
+				
+				GanhoSCN ganhoSCN = new GanhoSCN(context);
+				ganho.setCategoria(ganhoSCN.obterCategoriasPorId(cursor.getInt(0)).get(0));					
 
 				list.add(ganho);
 
@@ -169,7 +179,10 @@ public class GanhoDAO extends DataSource {
 				GastoSCN gastoSCN = new GastoSCN(context);
 				Double somaGastos = gastoSCN.obterSomaGastosPorGanho(ganho.getId());
 				Double saldo = ganho.getValor() - somaGastos;
-				ganho.setSaldo(saldo);				
+				ganho.setSaldo(saldo);
+				
+				GanhoSCN ganhoSCN = new GanhoSCN(context);
+				ganho.setCategoria(ganhoSCN.obterCategoriasPorId(cursor.getInt(0)).get(0));					
 
 				list.add(ganho);
 

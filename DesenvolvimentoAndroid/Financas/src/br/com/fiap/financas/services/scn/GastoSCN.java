@@ -43,11 +43,7 @@ public class GastoSCN {
 		GastoDAO gastoDao = new GastoDAO(context);
 		List<GastoVO> gastos = gastoDao.selectAll();
 		gastoDao.close();
-		
-		for(GastoVO gasto: gastos){
-			gasto.setCategorias(obterCategoriasPorId(gasto.getId()));
-		}
-		
+				
 		return gastos;
 	}
 
@@ -60,10 +56,6 @@ public class GastoSCN {
 		List<GastoVO> gastos = gastoDao.selectByMesAno(mes, ano);
 		gastoDao.close();
 		
-		for(GastoVO gasto: gastos){
-			gasto.setCategorias(obterCategoriasPorId(gasto.getId()));
-		}
-		
 		return gastos;
 	}
 	
@@ -72,10 +64,6 @@ public class GastoSCN {
 		GastoDAO gastoDao = new GastoDAO(context);
 		List<GastoVO> gastos = gastoDao.selectByData(data);
 		gastoDao.close();
-		
-		for(GastoVO gasto: gastos){
-			gasto.setCategorias(obterCategoriasPorId(gasto.getId()));
-		}
 		
 		return gastos;
 	}
@@ -99,7 +87,7 @@ public class GastoSCN {
 		return somaGastos;
 	}	
 	
-	private List<CategoriaVO> obterCategoriasPorId(Integer id){
+	public List<CategoriaVO> obterCategoriasPorId(Integer id){
 		
 		RegCatDAO rcDao = new RegCatDAO(context);
 		List<RegCatVO> rcLista = rcDao.selectByIdTipo(id, GastoVO.GASTO);
@@ -148,5 +136,27 @@ public class GastoSCN {
 		}
 		return total;
 	}
+	
+	
+	public List<GastoVO> obterGastosPorCategoria(CategoriaVO categoria) {
+		
+		
+		// pegar a lista de categorias-registros
+		RegCatDAO rcDao = new RegCatDAO(context);
+		List<RegCatVO> rcList = rcDao.selectByIdCategoria(categoria.getId(), GastoVO.GASTO);
+		rcDao.close();
+		
+		GastoDAO gastoDao = new GastoDAO(context);
+		List<GastoVO> gastos = new ArrayList<GastoVO>();
+		
+		for (RegCatVO regCatVO : rcList) {
+			GastoVO gasto = new GastoVO();
+			gasto = gastoDao.selectById(regCatVO.getIdRegistro());
+			gastos.add(gasto);
+		}
+		gastoDao.close();
+		
+		return gastos;
+	}	
 
 }
