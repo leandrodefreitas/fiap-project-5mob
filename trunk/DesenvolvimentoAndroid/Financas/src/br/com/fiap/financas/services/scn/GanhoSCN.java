@@ -42,11 +42,6 @@ public class GanhoSCN {
 		List<GanhoVO> ganhos = ganhoDao.selectAll();
 		ganhoDao.close();
 		
-		for (GanhoVO ganhoVO : ganhos) {
-			CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
-			ganhoVO.setCategoria(catVo);
-		}
-		
 		return ganhos;
 	}
 	
@@ -69,13 +64,6 @@ public class GanhoSCN {
 		List<GanhoVO> ganhos = ganhoDao.selectByMesAno(mes, ano);
 		ganhoDao.close();
 		
-		for (GanhoVO ganhoVO : ganhos) {
-			
-			CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
-			
-			ganhoVO.setCategoria(catVo);
-		}
-		
 		return ganhos;
 	}
 	
@@ -85,28 +73,10 @@ public class GanhoSCN {
 		List<GanhoVO> ganhos = ganhoDao.selectByData(data);
 		ganhoDao.close();
 		
-		for (GanhoVO ganhoVO : ganhos) {
-			
-			
-			try {
-				CategoriaVO catVo = obterCategoriasPorId(ganhoVO.getId()).get(0);
-				
-				if(catVo != null){
-					ganhoVO.setCategoria(catVo);
-				}else{
-					Log.i(GanhoSCN.class + " - GANHOS", "CATEGORIA NÃO ENCONTRADA.");
-				}
-				
-			} catch (Exception e) {
-				Log.i(GanhoSCN.class + " - GANHOS", "ERRO NA CONSULTA DE CATEGORIAS PARA GANHOS" + e);
-			}
-			
-		}
-		
 		return ganhos;
 	}
 	
-	private List<CategoriaVO> obterCategoriasPorId(Integer id){
+	public List<CategoriaVO> obterCategoriasPorId(Integer id){
 		
 		RegCatDAO rcDao = new RegCatDAO(context);
 		List<RegCatVO> rcLista = rcDao.selectByIdTipo(id, GanhoVO.GANHO);

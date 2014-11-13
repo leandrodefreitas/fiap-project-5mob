@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteStatement;
 import br.com.fiap.financas.common.vo.GanhoVO;
 import br.com.fiap.financas.common.vo.GastoVO;
 import br.com.fiap.financas.services.scn.GanhoSCN;
+import br.com.fiap.financas.services.scn.GastoSCN;
 
 public class GastoDAO extends DataSource {
 
@@ -19,6 +20,9 @@ public class GastoDAO extends DataSource {
 	
 	private static final String SELECT_ALL_BY_DATA = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
 			+ TABLE_GASTOS + " order by data desc";
+	
+	private static final String SELECT_BY_ID = "select id, descricao, valor, data, parcela, num_parcelas, id_ganho, local, foto from "
+			+ TABLE_GASTOS + " where id = ?";
 	
 	private static final String SELECT_MAX_ID = "select max(id) from " + TABLE_GASTOS;	
 	
@@ -83,6 +87,9 @@ public class GastoDAO extends DataSource {
 				
 				gasto.setLocal(cursor.getString(7));
 				gasto.setFoto(cursor.getString(8));
+				
+				GastoSCN gastoSCN = new GastoSCN(context);
+				gasto.setCategorias(gastoSCN.obterCategoriasPorId(cursor.getInt(0)));				
 
 				list.add(gasto);
 				
@@ -136,6 +143,9 @@ public class GastoDAO extends DataSource {
 				
 				gasto.setLocal(cursor.getString(7));
 				gasto.setFoto(cursor.getString(8));
+				
+				GastoSCN gastoSCN = new GastoSCN(context);
+				gasto.setCategorias(gastoSCN.obterCategoriasPorId(cursor.getInt(0)));				
 
 				list.add(gasto);
 				
@@ -147,6 +157,41 @@ public class GastoDAO extends DataSource {
 		return list;
 	}
 	
+	public GastoVO selectById(int id) {
+		
+		GastoVO gasto = new GastoVO();
+
+		String[] args = new String[] { String.valueOf(id) };
+		Cursor cursor = database.rawQuery(SELECT_BY_ID, args);
+	
+		if (cursor.moveToFirst()) {
+			do {
+				gasto.setId(cursor.getInt(0));
+				gasto.setDescricao(cursor.getString(1));
+				gasto.setValor(cursor.getDouble(2));
+				gasto.setData(cursor.getString(3));
+				gasto.setParcela(cursor.getInt(4));
+				gasto.setNumParcelas(cursor.getInt(5));
+				
+				GanhoVO ganho = new GanhoVO();
+				GanhoSCN ganhoSCN = new GanhoSCN(context);
+				ganho = ganhoSCN.obterGanhoPorId(cursor.getInt(6));
+				gasto.setGanhoDescontar(ganho);
+				
+				gasto.setLocal(cursor.getString(7));
+				gasto.setFoto(cursor.getString(8));
+				
+				GastoSCN gastoSCN = new GastoSCN(context);
+				gasto.setCategorias(gastoSCN.obterCategoriasPorId(cursor.getInt(0)));
+				
+				
+			} while (cursor.moveToNext());
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}
+		return gasto;
+	}		
 	
 	public List<GastoVO> selectByMesAno(String mes, String ano) {
 		
@@ -172,6 +217,9 @@ public class GastoDAO extends DataSource {
 				
 				gasto.setLocal(cursor.getString(7));
 				gasto.setFoto(cursor.getString(8));
+				
+				GastoSCN gastoSCN = new GastoSCN(context);
+				gasto.setCategorias(gastoSCN.obterCategoriasPorId(cursor.getInt(0)));				
 
 				list.add(gasto);
 				

@@ -109,7 +109,7 @@ public class GanhoVO implements Serializable {
 	@Override
 	public String toString() {
 
-		return this.getDescricao() + " de " + Util.imprimeDataFormatoBR(this.getDataFormatted());
+		return this.categoria.getDescricao() + ": " + this.getDescricao() + " de " + Util.imprimeDataFormatoBR(this.getDataFormatted());
 	}
 
 }

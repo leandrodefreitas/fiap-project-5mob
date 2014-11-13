@@ -42,7 +42,29 @@ public class LoginActivity extends Activity {
 			edtSenha.setText(settings.getString("Senha", ""));
 			checkLembrar.setChecked(settings.getBoolean("Lembrar", false));
 		}
+		
+		if(isHorarioComercial()){
+			
+		}
+		
+		if(isFDS()){
+			
+		}
+		
 
+	}
+	
+	private boolean isHorarioComercial(){
+		boolean horarioPermitido = true;
+		
+		
+		return horarioPermitido;
+	}
+	
+	private boolean isFDS(){
+		boolean fds = true;
+		
+		return fds;
 	}
 
 	@Override

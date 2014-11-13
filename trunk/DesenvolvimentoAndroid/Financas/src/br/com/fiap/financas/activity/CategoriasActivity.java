@@ -4,15 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.util.EventLog.Event;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -31,6 +26,10 @@ public class CategoriasActivity extends Activity {
 	private CategoriaSCN controleCategoria;
 	
 	private EditText edtCategoria; 
+	
+	private ListView lista;
+	
+	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +104,26 @@ public class CategoriasActivity extends Activity {
     	ArrayAdapter<CategoriaVO> catAdapter = new ArrayAdapter<CategoriaVO>(this,android.R.layout.simple_spinner_dropdown_item, listaCategorias);
     	
     	lvCategorias.setAdapter(catAdapter);
+    	
+    	lvCategorias.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				categoria = (CategoriaVO) parent.getItemAtPosition(position);
+				
+				setContentView(R.layout.categoria_lista);
+				List<GastoVO> gastosList = new ArrayList<GastoVO>();
+		    	GastoSCN gastoSCN =  new GastoSCN(getApplicationContext());
+		    	gastosList = gastoSCN.obterGastosPorCategoria(categoria);
+		    	
+				lista = (ListView) findViewById(R.id.lvGastosCategorias);
+				FinancasGastosAdapter adapter = new FinancasGastosAdapter(getApplicationContext(), gastosList);
+				lista.setAdapter(adapter);		    	
+				
+			}
+		});
     	
     	/*lvCategorias.setOnClickListener(
                 (new OnClickListener() {
