@@ -215,4 +215,8 @@ public class DashboardActivity extends Activity {
 		}*/
     }
 	
+	public void sairDashboard(View v) {
+		finish();
+	}
+	
 }

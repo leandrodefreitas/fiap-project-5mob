@@ -161,8 +161,7 @@ public class CadastrarGanhoActivity extends Activity {
         Notification notf = new Notification.Builder(this)
                 .setContentTitle("Novo ganho")
                 .setContentText("Confirme ou cancele esse novo registro.").setSmallIcon(R.drawable.rf_icon)
-                .setContentIntent(pIntent)
-                .addAction(R.drawable.appicon, "btn1", pIntent).build();
+                .setContentIntent(pIntent).build();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
