@@ -82,7 +82,7 @@ public class MapaActivity extends Activity {
 				for (int i = 0; i < gastos.size(); i++) {
 					if(gastos.get(i).getLatitude() != null && gastos.get(i).getLongitude() != null) {
 						moGasto.position(new LatLng(gastos.get(i).getLatitude(), gastos.get(i).getLongitude()));
-						String conteudo = gastos.get(i).getDescricao() + "\n" + gastos.get(i).getDataFormatted() + 
+						String conteudo = gastos.get(i).getDescricao() + "\n - " + Util.imprimeDataFormatoBR(gastos.get(i).getDataFormatted()) + 
 								" - " + Util.formataMoedaBRL(gastos.get(i).getValor());
 						moGasto.title(conteudo);
 						map.addMarker(moGasto);
