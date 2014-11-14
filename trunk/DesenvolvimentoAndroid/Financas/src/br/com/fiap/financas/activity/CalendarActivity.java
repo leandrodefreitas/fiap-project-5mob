@@ -235,7 +235,6 @@ public class CalendarActivity extends Activity {
 			Log.i("teste","acao1 " + GANHO_ID);
 			String selectedGridDate = CalendarAdapter.dayString
 					.get(index);
-			showToast(selectedGridDate);
 			Intent i = new Intent(CalendarActivity.this, CadastrarGanhoActivity.class);
 			i.putExtra("data", selectedGridDate);
 			startActivity(i);
@@ -245,7 +244,6 @@ public class CalendarActivity extends Activity {
 			Log.i("teste","acao2 " + GASTO_ID);
 			String selectedGridDate = CalendarAdapter.dayString
 					.get(index);
-			showToast(selectedGridDate);
 			Intent i = new Intent(CalendarActivity.this, CadastrarGastoActivity.class);
 			i.putExtra("data", selectedGridDate);
 			startActivity(i);
@@ -254,6 +252,13 @@ public class CalendarActivity extends Activity {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		
+		refreshCalendar();
 	}
 	
 	

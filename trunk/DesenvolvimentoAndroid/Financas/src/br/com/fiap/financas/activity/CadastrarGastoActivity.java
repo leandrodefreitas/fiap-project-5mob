@@ -216,75 +216,78 @@ public class CadastrarGastoActivity extends Activity {
 						
 						Log.i("GPS", "latitude em double: " + Double.parseDouble(lat));	
 						Log.i("GPS", "longitude em double: " + Double.parseDouble(lng));	
-					}
-					
-					/*locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
-						
-						@Override
-						public void onStatusChanged(String provider, int status, Bundle extras) {
-							Toast.makeText(getApplicationContext(), "Status alterado", Toast.LENGTH_SHORT).show();	
-						}
-						
-						@Override
-						public void onProviderEnabled(String provider) {
-							Toast.makeText(getApplicationContext(), "GPS Habilitado!", Toast.LENGTH_SHORT).show();
-						}
-						
-						@Override
-						public void onProviderDisabled(String provider) {
-							
-							AlertDialog.Builder alert = new AlertDialog.Builder(CadastrarGastoActivity.this);
+					} 
+					else {
 
-							alert.setTitle("Atenção");
-							alert.setMessage("O GPS está desabilitado. Deseja abrir as configurações para ativá-lo?");
+						locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
 							
-							alert.setPositiveButton("Sim", new DialogInterface.OnClickListener(){
-								@Override
-								public void onClick(DialogInterface dialog,	int which) {
-									Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-									startActivity(intent);
-								}
-							});
+							@Override
+							public void onStatusChanged(String provider, int status, Bundle extras) {
+								Toast.makeText(getApplicationContext(), "Status alterado", Toast.LENGTH_SHORT).show();	
+							}
 							
-							alert.setNegativeButton("Não", new DialogInterface.OnClickListener(){
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									//checkLocal.setChecked(false);
-									dialog.dismiss();
-								}
-							});
-							alert.show( ) ;							
+							@Override
+							public void onProviderEnabled(String provider) {
+								Toast.makeText(getApplicationContext(), "GPS Habilitado!", Toast.LENGTH_SHORT).show();
+							}
 							
-						}
-						
-						@Override
-						public void onLocationChanged(Location location) {
-
-							if( location != null ){
-								Log.i("GPS","location ok");
-								latitude.setText( "Latitude: "+location.getLatitude() );
-								longitude.setText( "Longitude: "+location.getLongitude() );
+							@Override
+							public void onProviderDisabled(String provider) {
 								
-								localizacao = location.getLatitude() + ", " + location.getLongitude();
-								Log.i("GPS","localizacao: "+ localizacao);
+								AlertDialog.Builder alert = new AlertDialog.Builder(CadastrarGastoActivity.this);
+	
+								alert.setTitle("Atenção");
+								alert.setMessage("O GPS está desabilitado. Deseja abrir as configurações para ativá-lo?");
 								
+								alert.setPositiveButton("Sim", new DialogInterface.OnClickListener(){
+									@Override
+									public void onClick(DialogInterface dialog,	int which) {
+										Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+										startActivity(intent);
+									}
+								});
 								
-								String lat = localizacao.substring(0,localizacao.indexOf(","));
-								
-								Log.i("GPS", "latitude: " + lat);
-								
-								String lng = localizacao.substring(localizacao.indexOf(",")+1,localizacao.length());
-								
-								Log.i("GPS", "longitude: " + lng);
-
-								
-								Log.i("GPS", "latitude em double: " + Double.parseDouble(lat));	
-								Log.i("GPS", "longitude em double: " + Double.parseDouble(lng));	
+								alert.setNegativeButton("Não", new DialogInterface.OnClickListener(){
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										//checkLocal.setChecked(false);
+										dialog.dismiss();
+									}
+								});
+								alert.show( ) ;							
 								
 							}
 							
-						}
-					}, null);*/				
+							@Override
+							public void onLocationChanged(Location location) {
+	
+								if( location != null ){
+									Log.i("GPS","location ok");
+									latitude.setText( "Latitude: "+location.getLatitude() );
+									longitude.setText( "Longitude: "+location.getLongitude() );
+									
+									localizacao = location.getLatitude() + ", " + location.getLongitude();
+									Log.i("GPS","localizacao: "+ localizacao);
+									
+									
+									String lat = localizacao.substring(0,localizacao.indexOf(","));
+									
+									Log.i("GPS", "latitude: " + lat);
+									
+									String lng = localizacao.substring(localizacao.indexOf(",")+1,localizacao.length());
+									
+									Log.i("GPS", "longitude: " + lng);
+	
+									
+									Log.i("GPS", "latitude em double: " + Double.parseDouble(lat));	
+									Log.i("GPS", "longitude em double: " + Double.parseDouble(lng));	
+									
+								}
+								
+							}
+						}, null);	
+					
+					}
 										
 				} else {
 					latitude.setText("Latitude: ");
@@ -374,6 +377,10 @@ public class CadastrarGastoActivity extends Activity {
 					} else {
 						createNotificationConfirm();
 					}
+					
+					Toast.makeText(getApplicationContext(),
+							"Uma notificação foi enviada para confirmação do registro.", Toast.LENGTH_SHORT).show();	
+					
 			    	finish();
 				}
 			}

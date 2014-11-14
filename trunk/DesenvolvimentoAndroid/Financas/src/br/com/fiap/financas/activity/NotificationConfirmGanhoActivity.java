@@ -49,7 +49,6 @@ public class NotificationConfirmGanhoActivity extends Activity {
 				
 		    	if (id != -1) {
 		    		Toast.makeText(getApplicationContext(), "Ganho cadastrado.", Toast.LENGTH_SHORT).show();
-		    		//TODO Criar notifications
 		    	} else {
 		    		Toast.makeText(getApplicationContext(), "Erro no cadastro do Ganho. Tente novamente.", Toast.LENGTH_SHORT).show();				    		
 		    	}
