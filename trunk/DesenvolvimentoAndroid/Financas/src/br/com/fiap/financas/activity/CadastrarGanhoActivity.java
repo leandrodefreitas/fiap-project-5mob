@@ -156,7 +156,7 @@ public class CadastrarGanhoActivity extends Activity {
     	
         Intent intent = new Intent(this, NotificationConfirmGanhoActivity.class);
         intent.putExtra("vo", ganho);
-        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Notification notf = new Notification.Builder(this)
                 .setContentTitle("Novo ganho")

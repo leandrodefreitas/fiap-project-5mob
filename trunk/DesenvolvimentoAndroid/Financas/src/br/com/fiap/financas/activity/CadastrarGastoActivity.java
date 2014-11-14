@@ -297,7 +297,6 @@ public class CadastrarGastoActivity extends Activity {
 		});
 		
 		
-	
 
 		btnSalvar = (Button) findViewById(R.id.btnSalvarGasto);
 		btnSalvar.setOnClickListener(new OnClickListener() {
@@ -426,7 +425,7 @@ public class CadastrarGastoActivity extends Activity {
     	
         Intent intent = new Intent(this, NotificationConfirmGastoActivity.class);
         intent.putExtra("vo", gasto);
-        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Notification notifica = new Notification.Builder(this)
                 .setContentTitle("Novo gasto")
@@ -445,7 +444,7 @@ public class CadastrarGastoActivity extends Activity {
     	
         Intent intent = new Intent(this, NotificationConfirmParcelaActivity.class);
         intent.putExtra("vo", gasto);
-        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Notification notifica = new Notification.Builder(this)
                 .setContentTitle("Gasto parcelado")
@@ -462,7 +461,7 @@ public class CadastrarGastoActivity extends Activity {
     public void createNotificationSaldoNegativo(){
     	
         Intent intent = new Intent(this, CalendarActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
         Notification notifica = new Notification.Builder(this)
                 .setContentTitle("Saldo negativo")
                 .setContentText("Seu saldo está negativo, cadastre um ganho o quanto antes.").setSmallIcon(R.drawable.rf_icon)
