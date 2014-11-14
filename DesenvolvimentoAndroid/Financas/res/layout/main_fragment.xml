@@ -2,30 +2,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+    
+	<android.support.v4.app.FragmentTabHost
+		android:id="@android:id/tabhost"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+	    
+	    <ScrollView
+	        android:id="@+id/scrollView1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1" >
+	
+	    <FrameLayout
+	    	android:id="@+id/tabcontent"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	    
+	    </ScrollView>
+	</android.support.v4.app.FragmentTabHost>
+	
 
-    <android.support.v4.app.FragmentTabHost
-        android:id="@android:id/tabhost"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <FrameLayout
-            android:id="@+id/tabcontent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </android.support.v4.app.FragmentTabHost>
-
-    <LinearLayout
-        android:id="@+id/llRodape"
+    <RelativeLayout
+        android:id="@+id/rlRodape"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:gravity="bottom" >
 
-        <TextView
-            android:id="@+id/tvRodape"
-            style="@style/TitleBarText"
-            android:layout_width="fill_parent"
-            android:background="@color/title_background"
-            android:text="@string/radape" />
-    </LinearLayout>
+        <Button
+			android:id="@+id/btnVoltarDashboard"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:onClick="voltarDashboard"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:text="@string/btn_voltar" />
+        
+    </RelativeLayout>
 
 </LinearLayout>

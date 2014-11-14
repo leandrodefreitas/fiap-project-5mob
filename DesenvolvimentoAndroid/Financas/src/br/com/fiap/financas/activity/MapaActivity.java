@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import br.com.fiap.R;
 import br.com.fiap.financas.common.vo.GastoVO;
 import br.com.fiap.financas.services.scn.GastoSCN;
@@ -105,6 +106,10 @@ public class MapaActivity extends Activity {
 		new AlertDialog.Builder(this).setTitle("Google Maps").setMessage(text)
 				.setNeutralButton("Cancel", null).show();
 		return true ;
+	}
+	
+	public void voltarDashboard(View v) {
+		finish();
 	}
 
 }

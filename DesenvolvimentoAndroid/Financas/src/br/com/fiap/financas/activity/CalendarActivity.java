@@ -255,5 +255,11 @@ public class CalendarActivity extends Activity {
 		}
 		return true;
 	}
+	
+	
+	public void voltarDashboard(View v) {
+		finish();
+	}
+	
 
 }

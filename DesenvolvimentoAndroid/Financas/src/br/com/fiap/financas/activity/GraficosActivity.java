@@ -230,6 +230,10 @@ public class GraficosActivity extends Activity {
 		TextView title = (TextView) findViewById(R.id.title);
 		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month).toString().toUpperCase());
 	}
+	
+	public void voltarDashboard(View v) {
+		finish();
+	}
 
 	
 }

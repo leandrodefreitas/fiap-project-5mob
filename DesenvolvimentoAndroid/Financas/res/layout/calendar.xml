@@ -44,57 +44,74 @@
                 android:background="@drawable/arrow_right" />
         </RelativeLayout>
     </RelativeLayout>
-
+    
     <GridView
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
-        android:layout_height="325dp"
+        android:layout_height="275dp"
         android:layout_gravity="center_horizontal"
         android:listSelector="@android:color/transparent"
         android:numColumns="7"
         android:stretchMode="columnWidth" />
-    
-    <RelativeLayout
-        android:id="@+id/detalheCalendar"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent">
         
-        <TextView
-            android:id="@+id/lblTotalGeralMes"
-            style="@style/HomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/lbl_totalGeral" />
-
-        <TextView
-            android:id="@+id/lblTotalGanhos"
-            style="@style/HomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/lblTotalGeralMes"
-            android:text="@string/lbl_ganhos" />
-
-        <TextView
-            android:id="@+id/lblTotalGastos"
-            style="@style/HomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/lblTotalGanhos"
-            android:text="@string/lbl_gastos" />
-
-        <TextView
-            android:id="@+id/lblSaldo"
-            style="@style/HomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/lblTotalGastos"
-            android:text="@string/lbl_saldo" />
+	<RelativeLayout
+        android:id="@+id/infoTotalMes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
         
-    </RelativeLayout>
+            <TextView
+	            android:id="@+id/lblTotalGeralMes"
+	            style="@style/HomeText"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_centerHorizontal="true"
+	            android:layout_marginTop="5dp"
+	            android:text="@string/lbl_totalGeral" />
+
+	        <TextView
+	            android:id="@+id/lblTotalGanhos"
+	            style="@style/HomeText"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_marginLeft="5dp"
+	            android:layout_below="@+id/lblTotalGeralMes"
+	            android:text="@string/lbl_ganhos" />
+	        
+	        <TextView
+	            android:id="@+id/lblTotalGastos"
+	            style="@style/HomeText"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_marginLeft="5dp"
+	            android:layout_below="@+id/lblTotalGanhos"
+	            android:text="@string/lbl_gastos" />
+	
+	        <TextView
+	            android:id="@+id/lblSaldo"
+	            style="@style/HomeText"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_marginLeft="5dp"
+	            android:layout_below="@+id/lblTotalGastos"
+	            android:text="@string/lbl_saldo" />
+	        
+	        
+	    <Button
+			android:id="@+id/btnVoltarDashboard"
+		    style="?android:attr/buttonBarButtonStyle"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentBottom="true"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentRight="true"
+		    android:onClick="voltarDashboard"
+		    android:text="@string/btn_voltar" />
+
+	</RelativeLayout>
 
 </LinearLayout>

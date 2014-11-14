@@ -345,12 +345,6 @@ public class CadastrarGastoActivity extends Activity {
 					
 					gasto.setFoto(fotoPath);
 					
-					GastoSCN gastoScn = new GastoSCN(getApplicationContext());
-					GanhoSCN ganhoScn = new GanhoSCN(getApplicationContext());
-					Double ganhoTotal = ganhoScn.obterTotalGanhos();
-					Double gastoTotal = gastoScn.obterTotalGastos();
-					Double saldo = ganhoTotal - gastoTotal;
-					if (saldo < 0) { createNotificationSaldoNegativo(); }
 					if (gasto.getNumParcelas() >= 5) {
 						createNotificationConfirmParcelas();
 					} else {
@@ -458,18 +452,4 @@ public class CadastrarGastoActivity extends Activity {
         notificationManager.notify(0, notifica);
     }
     
-    public void createNotificationSaldoNegativo(){
-    	
-        Intent intent = new Intent(this, CalendarActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
-        Notification notifica = new Notification.Builder(this)
-                .setContentTitle("Saldo negativo")
-                .setContentText("Seu saldo está negativo, cadastre um ganho o quanto antes.").setSmallIcon(R.drawable.rf_icon)
-                .setContentIntent(pIntent).build();
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notifica.flags |= Notification.FLAG_AUTO_CANCEL;
-        notificationManager.notify(0, notifica);
-    }
-
 }

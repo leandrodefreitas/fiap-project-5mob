@@ -22,5 +22,7 @@
     <color name="cinza_escuro">#8B8989</color>
     
     <color name="transparent">#00000000</color>
+    <color name="branco">#FFFFFF</color>
+    <color name="branco_cinza">#e5e5e5</color>
 
 </resources>
