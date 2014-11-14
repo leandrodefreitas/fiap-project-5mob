@@ -30,7 +30,6 @@ public class CategoriasActivity extends Activity {
 	private ListView lista;
 	
 	
-	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,29 +41,6 @@ public class CategoriasActivity extends Activity {
     	setContentView(R.layout.cadastro_categoria);
     	Toast.makeText(getApplicationContext(), "Nova Categoria", Toast.LENGTH_SHORT).show();
     }
-
-    public void onClickLista(View v){
-    	setContentView(R.layout.categoria_lista);
-    	String categoria_selecionada = "";
-    	List<GastoVO> gastoList = new ArrayList<GastoVO>();
-    	GastoSCN gastoSCN =  new GastoSCN(getApplicationContext());
-    	List<GastoVO> gastoListTodos = gastoSCN.obterTodosGastos();
-		
-		for (int i = 0; i < gastoListTodos.size(); i++) {
-			if (gastoListTodos.get(i).getCategoriasString().contains(categoria_selecionada)) {
-				gastoList.add(gastoListTodos.get(i));
-			}
-		}
-		
-		ListView listGastos = (ListView) findViewById(R.id.lvGastosCategorias);
-    	
-    	ArrayAdapter<GastoVO> gastosAdapter = new ArrayAdapter<GastoVO>(this,android.R.layout.simple_spinner_dropdown_item, gastoList);
-    	
-    	listGastos.setAdapter(gastosAdapter);
-    	
-    	Toast.makeText(getApplicationContext(), "Lista de gastos por categoria", Toast.LENGTH_SHORT).show();
-    }
-    
     
     public void onSalvarCategoria(View v){
     	edtCategoria = (EditText) findViewById(R.id.fCategoria);
@@ -120,37 +96,12 @@ public class CategoriasActivity extends Activity {
 		    	
 				lista = (ListView) findViewById(R.id.lvGastosCategorias);
 				FinancasGastosAdapter adapter = new FinancasGastosAdapter(getApplicationContext(), gastosList);
-				lista.setAdapter(adapter);		    	
+				lista.setAdapter(adapter);
+				
+				Toast.makeText(getApplicationContext(), "Lista de gastos por categoria", Toast.LENGTH_SHORT).show();
 				
 			}
 		});
     	
-    	/*lvCategorias.setOnClickListener(
-                (new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						setContentView(R.layout.categoria_lista);
-				    	String categoria_selecionada = v.toString();
-				    	List<GastoVO> gastoList = new ArrayList<GastoVO>();
-				    	GastoSCN gastoSCN =  new GastoSCN(getApplicationContext());
-				    	List<GastoVO> gastoListTodos = gastoSCN.obterTodosGastos();
-						
-						for (int i = 0; i < gastoListTodos.size(); i++) {
-							if (gastoListTodos.get(i).getCategoriasString().contains(categoria_selecionada)) {
-								gastoList.add(gastoListTodos.get(i));
-							}
-						}
-						
-						ListView listGastos = (ListView) findViewById(R.id.lvGastosCategorias);
-				    	
-				    	ArrayAdapter<GastoVO> gastosAdapter = 
-				    			new ArrayAdapter<GastoVO>(this,android.R.layout.simple_spinner_dropdown_item, gastoList);
-				    	
-				    	listGastos.setAdapter(gastosAdapter);
-				    	
-				    	Toast.makeText(getApplicationContext(), "Lista de gastos por categoria", Toast.LENGTH_SHORT).show();
-						
-					}
-                }));*/
     }
 }

@@ -189,12 +189,36 @@ public class CadastrarGastoActivity extends Activity {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				
 				latitude = (TextView) findViewById(R.id.txtLatitude);
-				longitude = (TextView) findViewById(R.id.txtLongitude);		
+				longitude = (TextView) findViewById(R.id.txtLongitude);	
+				LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
 				
 				if (isChecked) {
 					
-					LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
-					locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
+					Location location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+					
+					if( location != null ){
+						Log.i("GPS","location ok");
+						latitude.setText( "Latitude: "+location.getLatitude() );
+						longitude.setText( "Longitude: "+location.getLongitude() );
+						
+						localizacao = location.getLatitude() + ", " + location.getLongitude();
+						Log.i("GPS","localizacao: "+ localizacao);
+						
+						
+						String lat = localizacao.substring(0,localizacao.indexOf(","));
+						
+						Log.i("GPS", "latitude: " + lat);
+						
+						String lng = localizacao.substring(localizacao.indexOf(",")+1,localizacao.length());
+						
+						Log.i("GPS", "longitude: " + lng);
+
+						
+						Log.i("GPS", "latitude em double: " + Double.parseDouble(lat));	
+						Log.i("GPS", "longitude em double: " + Double.parseDouble(lng));	
+					}
+					
+					/*locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
 						
 						@Override
 						public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -225,8 +249,8 @@ public class CadastrarGastoActivity extends Activity {
 							alert.setNegativeButton("Não", new DialogInterface.OnClickListener(){
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									checkLocal.setChecked(false);
-									dialog.dismiss( ) ;
+									//checkLocal.setChecked(false);
+									dialog.dismiss();
 								}
 							});
 							alert.show( ) ;							
@@ -260,7 +284,7 @@ public class CadastrarGastoActivity extends Activity {
 							}
 							
 						}
-					}, null);				
+					}, null);*/				
 										
 				} else {
 					latitude.setText("Latitude: ");

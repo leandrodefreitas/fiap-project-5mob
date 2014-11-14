@@ -3,7 +3,12 @@ package br.com.fiap.financas.activity;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -14,6 +19,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -29,40 +35,7 @@ public class DashboardActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
 		
-		scheduleAlarm();
-		
-		/*boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
-		
-		if(alarmeAtivo){
-			Log.i("Script", "Novo alarme");
-			
-			Intent intent = new Intent("ALARME_DISPARADO");
-			PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
-			
-			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(System.currentTimeMillis());
-			c.add(Calendar.SECOND, 3);
-			
-			
-			Calendar calStart = new GregorianCalendar();
-			calStart.setTime(new Date());
-			calStart.set(Calendar.HOUR_OF_DAY, 8);
-			calStart.set(Calendar.MINUTE, 0);
-			calStart.set(Calendar.SECOND, 0);
-			calStart.set(Calendar.MILLISECOND, 0);
-			calStart.add(Calendar.DAY_OF_YEAR, 1); 
-			
-			Log.i("Script", "Data é "+ calStart.getTime().toString());
-			
-			long interval = AlarmManager.INTERVAL_DAY;
-			
-			AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
-			alarme.setRepeating(AlarmManager.RTC_WAKEUP, calStart.getTimeInMillis(), interval, p);
-			
-		}
-		else{
-			Log.i("Script", "Alarme já ativo");
-		}*/
+		executarAlarm();
 		
 	}
 
@@ -139,6 +112,7 @@ public class DashboardActivity extends Activity {
 	
 	private AlertDialog alerta;
 
+	@SuppressLint("InflateParams")
 	public void onClickInfo(View v) {
 		//LayoutInflater é utilizado para inflar nosso layout em uma view. 
 		//-pegamos nossa instancia da classe 
@@ -172,11 +146,27 @@ public class DashboardActivity extends Activity {
 		startActivity(i);
 	}
 	
-	public void scheduleAlarm(){
+	public void executarAlarm(){
         
         TelephonyManager tm = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE); 
         String number = tm.getLine1Number();
+        number = "964095505";
+        if (number.equals("") || number.equals(null)) {
+        	AccountManager am = AccountManager.get(this);
+        	Account[] accounts = am.getAccounts();
+        	String acname, actype = ""; String phoneNumber = "";
 
+        	for (Account ac : accounts) {
+        	    acname = ac.name;
+        	    actype = ac.type;
+        	    System.out.println(ac.toString());
+        	    if(actype.equals("com.whatsapp")){
+            	    phoneNumber = ac.toString();
+            	    System.out.println(phoneNumber +"Accounts : " + acname + ", " + actype);
+            	}
+        	}
+        }
+        
         AlarmManager alarmMgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getApplicationContext(), AlarmSms.class);
         intent.putExtra("PhoneNumber", number);
@@ -184,11 +174,45 @@ public class DashboardActivity extends Activity {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 11);
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
         calendar.set(Calendar.MINUTE, 0);
 
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 1000 * 60 * 60 * 24, alarmIntent);
+        
+        /*
+        boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
+		
+		if(alarmeAtivo){
+			Log.i("Script", "Novo alarme");
+			
+			Intent intent1 = new Intent("ALARME_DISPARADO");
+			PendingIntent p = PendingIntent.getBroadcast(this, 0, intent1, Intent.FLAG_ACTIVITY_NEW_TASK);
+			
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(System.currentTimeMillis());
+			c.add(Calendar.SECOND, 3);
+			
+			
+			Calendar calStart = new GregorianCalendar();
+			calStart.setTime(new Date());
+			calStart.set(Calendar.HOUR_OF_DAY, 12);
+			calStart.set(Calendar.MINUTE, 0);
+			calStart.set(Calendar.SECOND, 0);
+			calStart.set(Calendar.MILLISECOND, 0);
+			calStart.add(Calendar.DAY_OF_YEAR, 1); 
+			
+			Log.i("Script", "Data é "+ calStart.getTime().toString());
+			
+			long interval = AlarmManager.INTERVAL_DAY;
+			
+			AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
+			alarme.setRepeating(AlarmManager.RTC_WAKEUP, calStart.getTimeInMillis(), interval, p);
+			
+		}
+		else{
+			Log.i("Script", "Alarme já ativo");
+		}*/
     }
 	
 }
