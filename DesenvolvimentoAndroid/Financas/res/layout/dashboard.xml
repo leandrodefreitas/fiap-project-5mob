@@ -233,13 +233,13 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/tvRodape"
+        <Button 
+            android:id="@+id/btnSair"
             style="@style/TitleBarText"
             android:layout_width="fill_parent"
             android:background="@color/title_background"
-            android:text="@string/radape" />
+            android:onClick="sairDashboard"
+            android:text="@string/sair" />
     </LinearLayout>
 
 </RelativeLayout>
