@@ -43,29 +43,17 @@ public class LoginActivity extends Activity {
 			checkLembrar.setChecked(settings.getBoolean("Lembrar", false));
 		}
 		
-		if(isHorarioComercial()){
-			
+		if(isFDS()) {
+			alertaLogin(3);			
 		}
-		
-		if(isFDS()){
-			
+		else if(!isHorarioComercial()) {
+			alertaLogin(2);			
 		}
-		
+
 
 	}
 	
-	private boolean isHorarioComercial(){
-		boolean horarioPermitido = true;
-		
-		
-		return horarioPermitido;
-	}
-	
-	private boolean isFDS(){
-		boolean fds = true;
-		
-		return fds;
-	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,7 +80,7 @@ public class LoginActivity extends Activity {
 
 		edtUsuario = (EditText) findViewById(R.id.etUsuario);
 		edtSenha = (EditText) findViewById(R.id.etSenhA);
-
+		
 		if (edtUsuario.getText().toString().length() == 0) {
 			edtUsuario.setError(getString(R.string.campo_obrigatorio));
 			edtUsuario.requestFocus();
@@ -154,21 +142,35 @@ public class LoginActivity extends Activity {
 
 	private void alertaLogin(Integer tipo) {
 		AlertDialog alerta = null;
+		final Integer tipoAux = tipo;
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Erro no Login");
-
-		if (tipo == 0) {
-			builder.setMessage("Login Bloqueado");
-		} else {
-			builder.setMessage("Erro no usuario ou senha");
+		builder.setTitle("Bloqueio de Login");
+		
+		switch (tipo) {
+		case 0:
+			builder.setMessage("Login Bloqueado");			
+			break;
+		case 1:
+			builder.setMessage("Erro no usuário ou senha");
+			break;
+		case 2:
+			builder.setMessage("Acesso somente em horário comercial: 8h às 18h");
+			break;
+		case 3:
+			builder.setMessage("Acesso bloqueado de final de semana.");
+			break;			
+		default:
+			break;
 		}
 
-		builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+		builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-
+				if (tipoAux==2 || tipoAux==3){
+					finish();
+				}
 			}
 		});
 		alerta = builder.create();
@@ -217,5 +219,43 @@ public class LoginActivity extends Activity {
 
 		return desbloqueado;
 	}
-
+	
+	private boolean isHorarioComercial(){
+		boolean horarioPermitido = false;
+		
+		Calendar horarioInicial = new GregorianCalendar();
+		horarioInicial.set(Calendar.HOUR_OF_DAY, 8);
+		horarioInicial.set(Calendar.MINUTE, 0);
+		horarioInicial.set(Calendar.SECOND, 0);
+		horarioInicial.set(Calendar.MILLISECOND, 0);
+		
+		Calendar horarioFinal = new GregorianCalendar();
+		horarioFinal.set(Calendar.HOUR_OF_DAY, 18);
+		horarioFinal.set(Calendar.MINUTE, 0);
+		horarioFinal.set(Calendar.SECOND, 0);
+		horarioFinal.set(Calendar.MILLISECOND, 0);	
+		
+		Calendar horaAtual = new GregorianCalendar();
+		
+		if  (horaAtual.after(horarioInicial) && horaAtual.before(horarioFinal)){
+			horarioPermitido = true;
+		}
+		
+		return horarioPermitido;
+	}
+	
+	private boolean isFDS(){
+		boolean fds = false;
+		
+		Calendar diaAtual = new GregorianCalendar();
+		//Verifica se é sabado
+		if (diaAtual.get(Calendar.DAY_OF_WEEK)==7){
+			fds = true;
+		}	
+		//Verifica se é domingo
+		if (diaAtual.get(Calendar.DAY_OF_WEEK)==1){
+			fds = true;
+		}		
+		return fds;
+	}
 }
