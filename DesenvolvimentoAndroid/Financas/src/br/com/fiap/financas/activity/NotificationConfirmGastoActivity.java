@@ -63,7 +63,6 @@ public class NotificationConfirmGastoActivity extends Activity {
 				
 		    	if (id != -1) {
 		    		Toast.makeText(getApplicationContext(), "Gasto cadastrado.", Toast.LENGTH_SHORT).show();
-		    		//TODO Criar notifications
 		    		GastoSCN gastoScn = new GastoSCN(getApplicationContext());
 					GanhoSCN ganhoScn = new GanhoSCN(getApplicationContext());
 					Double ganhoTotal = ganhoScn.obterTotalGanhos();

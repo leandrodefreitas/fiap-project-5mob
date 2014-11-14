@@ -47,7 +47,7 @@ public class LoginActivity extends Activity {
 			alertaLogin(3);			
 		}
 		else if(!isHorarioComercial()) {
-			alertaLogin(2);			
+		//	alertaLogin(2);			// TODO Essa linha ta comentada para nao bloquear, NÃO esquecer de descomentar.
 		}
 
 
@@ -241,7 +241,7 @@ public class LoginActivity extends Activity {
 			horarioPermitido = true;
 		}
 		
-		return true;
+		return horarioPermitido;
 	}
 	
 	private boolean isFDS(){

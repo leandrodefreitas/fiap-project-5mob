@@ -137,6 +137,9 @@ public class CadastrarGanhoActivity extends Activity {
 					
 					createNotificationConfirm();
 					
+					Toast.makeText(getApplicationContext(),
+							"Uma notificação foi enviada para confirmação do registro.", Toast.LENGTH_SHORT).show();	
+					
 					finish();
 				}
 			}
