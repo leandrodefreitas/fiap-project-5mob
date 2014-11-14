@@ -2,12 +2,13 @@ package br.com.fiap.financas.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
+import android.view.View;
 import br.com.fiap.R;
 import br.com.fiap.financas.util.Constantes;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-public class FinancasFragActivity extends SherlockFragmentActivity{
+public class FinancasFragActivity extends SherlockFragmentActivity {
 
 	// Declare Variables
 	private FragmentTabHost mTabHost;
@@ -30,6 +31,10 @@ public class FinancasFragActivity extends SherlockFragmentActivity{
 		mTabHost.addTab(mTabHost.newTabSpec(Constantes.TABS[2].toString()).setIndicator(Constantes.TABS[2].toString()),
 				TotalFragment.class, null);
 		
-		}
+	}
+    
+    public void voltarDashboard(View v) {
+		finish();
+	}
     
 }

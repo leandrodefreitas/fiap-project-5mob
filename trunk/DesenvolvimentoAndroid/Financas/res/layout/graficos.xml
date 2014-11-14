@@ -44,15 +44,31 @@
                 android:background="@drawable/arrow_right" />
         </RelativeLayout>
     </RelativeLayout>
-
-    <WebView
-        android:id="@+id/wvGrafico"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
     
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.36"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingTop="0dip" >
+
+	    <WebView
+	        android:id="@+id/wvGrafico"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="top"
+	        android:paddingTop="0dip" />
+    
+    </ScrollView>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="?android:attr/dividerVertical" />
+
     <LinearLayout
-        android:id="@+id/linearLayoutButtons"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +78,15 @@
         android:paddingLeft="2dip"
         android:paddingRight="2dip"
         android:paddingTop="0dip" >
-
+    
+        <Button
+	        android:id="@+id/btnVoltarDashboard"
+	        style="?android:attr/buttonBarButtonStyle"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:onClick="voltarDashboard"
+	        android:text="@string/btn_voltar" />
 
         <Button
             android:id="@+id/btnGraficoBarra"
@@ -78,8 +102,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btn_graficoPizza" />        
-        
+            android:text="@string/btn_graficoPizza" />
     </LinearLayout>
 
 </LinearLayout>

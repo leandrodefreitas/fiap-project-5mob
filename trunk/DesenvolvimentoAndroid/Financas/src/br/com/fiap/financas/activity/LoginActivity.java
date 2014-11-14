@@ -241,7 +241,7 @@ public class LoginActivity extends Activity {
 			horarioPermitido = true;
 		}
 		
-		return horarioPermitido;
+		return true;
 	}
 	
 	private boolean isFDS(){
@@ -251,11 +251,11 @@ public class LoginActivity extends Activity {
 		//Verifica se é sabado
 		if (diaAtual.get(Calendar.DAY_OF_WEEK)==7){
 			fds = true;
-		}	
+		}
 		//Verifica se é domingo
 		if (diaAtual.get(Calendar.DAY_OF_WEEK)==1){
 			fds = true;
-		}		
+		}
 		return fds;
 	}
 }

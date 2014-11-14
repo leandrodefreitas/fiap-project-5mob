@@ -49,18 +49,4 @@
         
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/llRodape"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/tvRodape"
-            style="@style/TitleBarText"
-            android:layout_width="fill_parent"
-            android:background="@color/title_background"
-            android:text="@string/radape" />
-    </LinearLayout>
-
 </LinearLayout>
