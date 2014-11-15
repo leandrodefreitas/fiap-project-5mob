@@ -40,8 +40,13 @@ public class NotificationConfirmGastoActivity extends Activity {
         data.setText(Util.formataDataPadrao(gastoC.getData()));
         
         if (gastoC.getFoto() != null) {
-        	Bitmap bitmap = BitmapFactory.decodeFile(gastoC.getFoto());
-            ImageView ivFoto = (ImageView) findViewById(R.id.ivFoto);
+        	ImageView ivFoto = (ImageView) findViewById(R.id.ivFoto);
+        	
+        	BitmapFactory.Options o2 = new BitmapFactory.Options();
+	        o2.inSampleSize = 10;
+	        o2.inScaled = true;
+        	
+        	Bitmap bitmap = BitmapFactory.decodeFile(gastoC.getFoto(), o2);
     		ivFoto.setImageBitmap(bitmap);
         }
         

@@ -167,7 +167,7 @@ public class DashboardActivity extends Activity {
         	}
         }
         
-        AlarmManager alarmMgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        /*AlarmManager alarmMgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getApplicationContext(), AlarmSms.class);
         intent.putExtra("PhoneNumber", number);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
@@ -178,9 +178,9 @@ public class DashboardActivity extends Activity {
         calendar.set(Calendar.MINUTE, 0);
 
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                1000 * 60 * 60 * 24, alarmIntent);
+                1000 * 60 * 60 * 24, alarmIntent);*/
         
-        /*
+        
         boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
 		
 		if(alarmeAtivo){
@@ -196,8 +196,8 @@ public class DashboardActivity extends Activity {
 			
 			Calendar calStart = new GregorianCalendar();
 			calStart.setTime(new Date());
-			calStart.set(Calendar.HOUR_OF_DAY, 12);
-			calStart.set(Calendar.MINUTE, 0);
+			calStart.set(Calendar.HOUR_OF_DAY, 3);
+			calStart.set(Calendar.MINUTE, 5);
 			calStart.set(Calendar.SECOND, 0);
 			calStart.set(Calendar.MILLISECOND, 0);
 			calStart.add(Calendar.DAY_OF_YEAR, 1); 
@@ -212,11 +212,23 @@ public class DashboardActivity extends Activity {
 		}
 		else{
 			Log.i("Script", "Alarme já ativo");
-		}*/
+		}
     }
 	
 	public void sairDashboard(View v) {
-		finish();
+		
+		new AlertDialog.Builder(this)
+    	.setTitle("Sair")
+    	.setMessage("Deseja realmente sair do registro de finanças?")
+    	.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() {
+    		@Override
+    		public void onClick(DialogInterface dialog, int which) {
+    			finish();
+    			trace("Obrigado por utilizar este app.");    
+    		}
+    	})
+    	.setNegativeButton(getString(R.string.nao), null)
+    	.show();
 	}
 	
 }

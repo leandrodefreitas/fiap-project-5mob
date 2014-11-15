@@ -404,7 +404,7 @@ public class CadastrarGastoActivity extends Activity {
 						
 			Bitmap bitmap = BitmapFactory.decodeFile(fotoPath);
 			ivFoto = (ImageView) findViewById(R.id.ivFoto);
-			ivFoto.setImageBitmap(bitmap);			
+			ivFoto.setImageBitmap(bitmap);
 		}
 	}
 	
