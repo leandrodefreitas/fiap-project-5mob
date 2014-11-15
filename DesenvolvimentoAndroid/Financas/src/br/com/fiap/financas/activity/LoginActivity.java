@@ -256,6 +256,7 @@ public class LoginActivity extends Activity {
 		if (diaAtual.get(Calendar.DAY_OF_WEEK)==1){
 			fds = true;
 		}
-		return fds;
+		//return fds;
+		return false;
 	}
 }

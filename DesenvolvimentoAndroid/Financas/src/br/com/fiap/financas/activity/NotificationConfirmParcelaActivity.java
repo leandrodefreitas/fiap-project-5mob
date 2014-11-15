@@ -35,7 +35,12 @@ public class NotificationConfirmParcelaActivity extends Activity {
         data.setText(Util.formataDataPadrao(gastoC.getData()));
         
         if (gastoC.getFoto() != null) {
-        	Bitmap bitmap = BitmapFactory.decodeFile(gastoC.getFoto());
+        	
+        	BitmapFactory.Options o2 = new BitmapFactory.Options();
+	        o2.inSampleSize = 10;
+	        o2.inScaled = true;
+        	
+        	Bitmap bitmap = BitmapFactory.decodeFile(gastoC.getFoto(), o2);
             ImageView ivFoto = (ImageView) findViewById(R.id.ivFoto);
     		ivFoto.setImageBitmap(bitmap);
         }
