@@ -86,11 +86,14 @@ public class NotificationConfirmGastoActivity extends Activity {
     }
 	
 	public void createNotificationSaldoNegativo(){
+		
+		Intent intent = new Intent(this, TotalFragment.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Notification notifica = new Notification.Builder(this)
-                .setContentTitle("Saldo negativo")
-                .setContentText("Seu saldo está negativo, cadastre um ganho o quanto antes.")
-                .setSmallIcon(R.drawable.rf_icon).setAutoCancel(true).build();
+                .setContentTitle("Aviso!")
+                .setContentText("Seu saldo está negativo.")
+                .setSmallIcon(R.drawable.rf_icon).setContentIntent(pIntent).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notifica.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(0, notifica);
