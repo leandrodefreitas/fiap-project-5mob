@@ -231,4 +231,19 @@ public class DashboardActivity extends Activity {
     	.show();
 	}
 	
+	public void onBackPressed() { 
+		new AlertDialog.Builder(this)
+    	.setTitle("Sair")
+    	.setMessage("Deseja realmente sair do registro de finanças?")
+    	.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() {
+    		@Override
+    		public void onClick(DialogInterface dialog, int which) {
+    			finish();
+    			trace("Obrigado por utilizar este app.");    
+    		}
+    	})
+    	.setNegativeButton(getString(R.string.nao), null)
+    	.show();
+	}
+	
 }

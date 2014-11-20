@@ -190,11 +190,13 @@ public class CadastrarGastoActivity extends Activity {
 				
 				latitude = (TextView) findViewById(R.id.txtLatitude);
 				longitude = (TextView) findViewById(R.id.txtLongitude);	
+				
+				Location localvc = null;
 				LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
 				
 				if (isChecked) {
 					
-					Location location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+					Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 					
 					if( location != null ){
 						Log.i("GPS","location ok");

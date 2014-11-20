@@ -2,13 +2,11 @@ package br.com.fiap.financas.activity;
 
 import java.util.List;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +24,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapaActivity extends Activity {
+public class MapaActivity extends Activity implements LocationListener {
 	
 	private GoogleMap map;
 
@@ -48,8 +46,6 @@ public class MapaActivity extends Activity {
 		setMapLocaliza();
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	@SuppressLint("NewApi")
 	private void setMapLocaliza() {
 		if (map == null) {
 			map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -57,8 +53,10 @@ public class MapaActivity extends Activity {
 				map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 				map.setIndoorEnabled(false);
 				
-				Location localvc = ((LocationManager) getSystemService(LOCATION_SERVICE))
-						.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+				Location localvc = null;
+				LocationManager locationManager= ((LocationManager) getSystemService(LOCATION_SERVICE));
+				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+				localvc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 				
 				if (localvc == null) {
 					map.moveCamera(CameraUpdateFactory.newLatLngZoom(
@@ -110,6 +108,30 @@ public class MapaActivity extends Activity {
 	
 	public void voltarDashboard(View v) {
 		finish();
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
