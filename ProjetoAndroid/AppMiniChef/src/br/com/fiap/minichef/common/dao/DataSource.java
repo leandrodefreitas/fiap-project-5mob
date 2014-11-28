@@ -16,9 +16,11 @@ public class DataSource extends SQLiteOpenHelper {
 	public static final String DATABASE_NAME_JOURNAL = "minichef.db-journal";
 	public static final int DATABASE_VERSION = 3;
 	
-	protected static final String TABLE_INGREDIENTES = "INGREDIENTES";
 	protected static final String TABLE_RECEITAS = "RECEITAS";
+	protected static final String TABLE_INGREDIENTES = "INGREDIENTES";
 	protected static final String TABLE_ITEM_INGREDIENTES = "ITEM_INGREDIENTES";
+	protected static final String TABLE_CATEGORIAS = "CATEGORIAS";
+	protected static final String TABLE_RECEITA_CATEGORIA = "RECEITA_CATEGORIA";
 
 	static {
 		if (br.com.fiap.minichef.util.Environment.DEVELOPMENT) {
@@ -71,12 +73,26 @@ public class DataSource extends SQLiteOpenHelper {
 				+ "tipo INTEGER NOT NULL, " 
 				+ "quantidade INTEGER NOT NULL, " 
 				+ "unidadeMedida TEXT NOT NULL )");
+		
+		db.execSQL( "CREATE TABLE "
+				+ TABLE_CATEGORIAS
+				+ " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " 
+				+ "descricao TEXT NOT NULL )" );
+		
+		db.execSQL( "CREATE TABLE "
+				+ TABLE_RECEITA_CATEGORIA
+				+ " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+				+ "id_receita INTEGER, "
+				+ "id_categoria INTEGER, "
+				+ "tipo INTEGER NOT NULL )");
 	}
 
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTES);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECEITAS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEM_INGREDIENTES);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORIAS);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECEITA_CATEGORIA);
 		onCreate(db);
 	}
 
