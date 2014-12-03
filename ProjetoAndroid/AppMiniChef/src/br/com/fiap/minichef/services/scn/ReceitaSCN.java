@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import br.com.fiap.minichef.common.dao.ReceitaCategoriaDAO;
 import br.com.fiap.minichef.common.dao.ReceitaDAO;
 import br.com.fiap.minichef.common.dao.ItemIngredienteDAO;
+import br.com.fiap.minichef.common.vo.CategoriaVO;
 import br.com.fiap.minichef.common.vo.IngredienteVO;
+import br.com.fiap.minichef.common.vo.ReceitaCategoriaVO;
 import br.com.fiap.minichef.common.vo.ReceitaVO;
 import br.com.fiap.minichef.common.vo.ItemIngredienteVO;
 
@@ -18,20 +21,20 @@ public class ReceitaSCN {
 		this.context = context;
 	}
 
-	public long salvarReceita(ReceitaVO gasto) {
+	public long salvarReceita(ReceitaVO receita) {
 
 		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		Long id = receitaDao.insert(gasto);
+		Long id = receitaDao.insert(receita);
 		receitaDao.close();
 
 		ItemIngredienteDAO itemIngredienteDao = new ItemIngredienteDAO(context);
 		Integer idReceita = Integer.valueOf(id.toString());
 
-		for (IngredienteVO catVO : gasto.getIngredientes()) {
+		for (IngredienteVO catVO : receita.getIngredientes()) {
 			ItemIngredienteVO itemIngredienteVO = new ItemIngredienteVO();
 			itemIngredienteVO.setIdReceita(idReceita);
 			itemIngredienteVO.setIdIngrediente(catVO.getId());
-			itemIngredienteVO.setTipo(ReceitaVO.GASTO);
+			itemIngredienteVO.setTipo(ReceitaVO.RECEITA);
 			itemIngredienteDao.insert(itemIngredienteVO);
 		}
 		itemIngredienteDao.close();
@@ -41,10 +44,10 @@ public class ReceitaSCN {
 
 	public List<ReceitaVO> obterTodosReceitas() {
 		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> gastos = receitaDao.selectAll();
+		List<ReceitaVO> receitas = receitaDao.selectAll();
 		receitaDao.close();
 				
-		return gastos;
+		return receitas;
 	}
 
 	public List<ReceitaVO> obterReceitasPorMesEAno(String data) {
@@ -53,19 +56,19 @@ public class ReceitaSCN {
 		String ano = data.substring(0, 4);
 		
 		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> gastos = receitaDao.selectByMesAno(mes, ano);
+		List<ReceitaVO> receitas = receitaDao.selectByMesAno(mes, ano);
 		receitaDao.close();
 		
-		return gastos;
+		return receitas;
 	}
 	
 	public List<ReceitaVO> obterReceitasPorData(String data) {
 		
 		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> gastos = receitaDao.selectByData(data);
+		List<ReceitaVO> receitas = receitaDao.selectByData(data);
 		receitaDao.close();
 		
-		return gastos;
+		return receitas;
 	}
 	
 	public Integer obterProximoId(){
@@ -81,7 +84,7 @@ public class ReceitaSCN {
 	public List<IngredienteVO> obterIngredientesPorId(Integer id){
 		
 		ItemIngredienteDAO itemIngDao = new ItemIngredienteDAO(context);
-		List<ItemIngredienteVO> itemIngLista = itemIngDao.selectByIdTipo(id, ReceitaVO.GASTO);
+		List<ItemIngredienteVO> itemIngLista = itemIngDao.selectByIdTipo(id, ReceitaVO.RECEITA);
 		itemIngDao.close();
 		
 		List<IngredienteVO> ingredientes = new ArrayList<IngredienteVO>();
@@ -98,32 +101,32 @@ public class ReceitaSCN {
 		String mes = data.substring(5,	7);
 		String ano = data.substring(0, 4);
 		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> gastos = receitaDao.selectByMesAno(mes, ano);
+		List<ReceitaVO> receitas = receitaDao.selectByMesAno(mes, ano);
 		receitaDao.close();
-		for(ReceitaVO gasto: gastos){
-			total += gasto.getValor();
+		for(ReceitaVO receita: receitas){
+			total += receita.getValor();
 		}
 		return total;
 	}
 	
 	public Double obterTotalReceitasPorData(String data) {
 		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> gastos = receitaDao.selectByData(data);
+		List<ReceitaVO> receitas = receitaDao.selectByData(data);
 		receitaDao.close();
 		Double total = 0.0;
-		for(ReceitaVO gasto: gastos){
-			total += gasto.getValor();
+		for(ReceitaVO receita: receitas){
+			total += receita.getValor();
 		}
 		return total;
 	}
 	
 	public Double obterTotalReceitas() {
 		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> gastos = receitaDao.selectAll();
+		List<ReceitaVO> receitas = receitaDao.selectAll();
 		receitaDao.close();
 		Double total = 0.0;
-		for(ReceitaVO gasto: gastos){
-			total += gasto.getValor();
+		for(ReceitaVO receita: receitas){
+			total += receita.getValor();
 		}
 		return total;
 	}
@@ -131,23 +134,42 @@ public class ReceitaSCN {
 	
 	public List<ReceitaVO> obterReceitasPorIngrediente(IngredienteVO ingrediente) {
 		
-		
 		// pegar a lista de ingredientes-receitas
 		ItemIngredienteDAO itemIngDao = new ItemIngredienteDAO(context);
-		List<ItemIngredienteVO> rcList = itemIngDao.selectByIdIngrediente(ingrediente.getId(), ReceitaVO.GASTO);
+		List<ItemIngredienteVO> rcList = itemIngDao.selectByIdIngrediente(ingrediente.getId(), ReceitaVO.RECEITA);
 		itemIngDao.close();
 		
 		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> gastos = new ArrayList<ReceitaVO>();
+		List<ReceitaVO> receitas = new ArrayList<ReceitaVO>();
 		
 		for (ItemIngredienteVO itemIngredienteVO : rcList) {
-			ReceitaVO gasto = new ReceitaVO();
-			gasto = receitaDao.selectById(itemIngredienteVO.getIdReceita());
-			gastos.add(gasto);
+			ReceitaVO receita = new ReceitaVO();
+			receita = receitaDao.selectById(itemIngredienteVO.getIdReceita());
+			receitas.add(receita);
 		}
 		receitaDao.close();
 		
-		return gastos;
+		return receitas;
+	}
+	
+	public List<ReceitaVO> obterReceitasPorCategoria(CategoriaVO categoria) {
+		
+		// pegar a lista de categorias-receitas
+		ReceitaCategoriaDAO recCatDao = new ReceitaCategoriaDAO(context);
+		List<ReceitaCategoriaVO> rcList = recCatDao.selectByIdCategoria(categoria.getId(), ReceitaVO.RECEITA);
+		recCatDao.close();
+		
+		ReceitaDAO receitaDao = new ReceitaDAO(context);
+		List<ReceitaVO> receitas = new ArrayList<ReceitaVO>();
+		
+		for (ReceitaCategoriaVO receitaCategoriaVO : rcList) {
+			ReceitaVO receita = new ReceitaVO();
+			receita = receitaDao.selectById(receitaCategoriaVO.getIdReceita());
+			receitas.add(receita);
+		}
+		receitaDao.close();
+		
+		return receitas;
 	}
 
 }
