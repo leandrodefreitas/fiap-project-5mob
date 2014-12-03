@@ -11,7 +11,7 @@ public class ReceitaVO implements Serializable {
 	
 	private static final long serialVersionUID = 55162102414220105L;
 
-	public final static int GASTO = 2;	
+	public final static int RECEITA = 2;	
 	
 	private Integer id;
 	private String nome;

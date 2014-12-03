@@ -66,32 +66,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>              
-        <activity
-            android:name="br.com.fiap.minichef.activity.ConsultarConcursoActivity"
-            android:label="@string/title_activity_consultar_concurso"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="br.com.fiap.minichef.activity.CadastrarJogoActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/title_activity_cadastrar_jogo"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="br.com.fiap.minichef.activity.EscolherJogoActivity"
-            android:label="@string/title_activity_escolher_jogo"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="br.com.fiap.minichef.activity.ConferirJogoActivity"
-            android:label="@string/title_activity_conferir_jogo"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="br.com.fiap.minichef.activity.GerarSurpresinhaActivity"
-            android:label="@string/title_activity_gerar_surpresinha"
-            android:screenOrientation="portrait" >
-        </activity>
+        
     </application>
 
 </manifest>
