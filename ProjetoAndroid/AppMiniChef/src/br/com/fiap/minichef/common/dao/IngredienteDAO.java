@@ -18,6 +18,9 @@ public class IngredienteDAO extends DataSource {
 	
 	private static final String SELECT_BY_ID = "select id, descricao from "
 			+ TABLE_INGREDIENTES + " where id = ? ";
+	
+	private static final String SELECT_BY_DESCRICAO = "select id, descricao from "
+			+ TABLE_INGREDIENTES + " where descricao = ? ";
 
 	private SQLiteStatement insertStmt;
 
@@ -77,6 +80,19 @@ public class IngredienteDAO extends DataSource {
 			
 			return null;
 		}
-	}	
+	}
+	
+	public IngredienteVO selectByNome(String nome) {
+		String[] args = {String.valueOf(nome)};
+		Cursor cursor = database.rawQuery(SELECT_BY_DESCRICAO, args);
+		if (cursor.moveToFirst()) {
+			IngredienteVO ingrediente = new IngredienteVO();
+			ingrediente.setId(cursor.getInt(0));
+			ingrediente.setDescricao(cursor.getString(1));
+			return ingrediente;
+		} else {
+			return null;
+		}
+	}
 
 }

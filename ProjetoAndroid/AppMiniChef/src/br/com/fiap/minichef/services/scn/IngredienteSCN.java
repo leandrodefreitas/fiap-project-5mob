@@ -31,12 +31,29 @@ public class IngredienteSCN {
 	}
 	
 	public IngredienteVO obterIngredientePorId(Integer id) {
-		
 		IngredienteDAO ingDao = new IngredienteDAO(context);
 		IngredienteVO ingrediente = ingDao.selectById(id);
 		ingDao.close();
 		return ingrediente;
-	}	
+	}
+	
+	public IngredienteVO obterIngredientePorNome(String nome) {
+		IngredienteDAO ingDao = new IngredienteDAO(context);
+		IngredienteVO ingrediente = ingDao.selectByNome(nome);
+		ingDao.close();
+		return ingrediente;
+	}
+	
+	public Boolean verSetemIngrediente(String nome) {
+		IngredienteDAO ingDao = new IngredienteDAO(context);
+		IngredienteVO ingrediente = ingDao.selectByNome(nome);
+		ingDao.close();
+		if (ingrediente != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	
 }

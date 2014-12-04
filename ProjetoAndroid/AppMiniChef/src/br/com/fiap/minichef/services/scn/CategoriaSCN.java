@@ -36,7 +36,24 @@ public class CategoriaSCN {
 		CategoriaVO categoria = ingDao.selectById(id);
 		ingDao.close();
 		return categoria;
-	}	
+	}
 	
+	public CategoriaVO obterCategoriaPorDescricao(String descricao) {
+		CategoriaDAO ingDao = new CategoriaDAO(context);
+		CategoriaVO categoria = ingDao.selectByDescricao(descricao);
+		ingDao.close();
+		return categoria;
+	}
+	
+	public Boolean verSeTemCategoria(String descricao) {
+		CategoriaDAO ingDao = new CategoriaDAO(context);
+		CategoriaVO categoria = ingDao.selectByDescricao(descricao);
+		ingDao.close();
+		if (categoria != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 }

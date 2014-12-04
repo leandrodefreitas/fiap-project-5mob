@@ -18,6 +18,9 @@ public class CategoriaDAO extends DataSource {
 	
 	private static final String SELECT_BY_ID = "select id, descricao from "
 			+ TABLE_CATEGORIAS + " where id = ? ";
+	
+	private static final String SELECT_BY_DESCRICAO = "select id, descricao from "
+			+ TABLE_CATEGORIAS + " where descricao = ? ";
 
 	private SQLiteStatement insertStmt;
 
@@ -75,6 +78,19 @@ public class CategoriaDAO extends DataSource {
 			
 		} else {
 			
+			return null;
+		}
+	}
+	
+	public CategoriaVO selectByDescricao(String descricao) {
+		String[] args = {String.valueOf(descricao)};
+		Cursor cursor = database.rawQuery(SELECT_BY_DESCRICAO, args);
+		if (cursor.moveToFirst()) {
+			CategoriaVO categoria = new CategoriaVO();
+			categoria.setId(cursor.getInt(0));
+			categoria.setDescricao(cursor.getString(1));
+			return categoria;
+		} else {
 			return null;
 		}
 	}	

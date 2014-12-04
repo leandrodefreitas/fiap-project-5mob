@@ -10,7 +10,7 @@ public class ItemIngredienteVO implements Serializable {
 	private Integer idReceita;
 	private Integer idIngrediente;
 	private Integer tipo;
-	private Integer quantidade;
+	private Double quantidade;
 	private String unidadeMedida;
 	
 	public Integer getId() {
@@ -45,11 +45,11 @@ public class ItemIngredienteVO implements Serializable {
 		this.idIngrediente = idIngrediente;
 	}
 
-	public Integer getQuantidade() {
+	public Double getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Integer quantidade) {
+	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
 

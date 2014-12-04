@@ -30,6 +30,8 @@ public class ReceitaDAO extends DataSource {
 	private static final String SELECT_BY_MES_ANO = "select id, nome, descricao, valor, data, tempo, nota, categoria, foto from "
 			+ TABLE_RECEITAS + " where substr(data,6,2) = ? and substr(data,1,4) = ? order by id";
 	
+	private static final String SELECT_BY_NOME = "select id, nome, descricao, valor, data, tempo, nota, categoria, foto from "
+			+ TABLE_RECEITAS + " where nome = ?";
 	
 	private SQLiteStatement insertStmt;
 
@@ -205,6 +207,49 @@ public class ReceitaDAO extends DataSource {
 			cursor.close();
 		}
 		return list;
+	}
+	
+	public ReceitaVO selectByNome(String nome) {
+		ReceitaVO receita = new ReceitaVO();
+
+		String[] args = new String[] { String.valueOf(nome) };
+		Cursor cursor = database.rawQuery(SELECT_BY_NOME, args);
+
+		if (cursor.moveToFirst()) {
+			do {
+				receita.setId(cursor.getInt(0));
+				receita.setNome(cursor.getString(1));
+				receita.setDescricao(cursor.getString(2));
+				receita.setValor(cursor.getDouble(3));
+				receita.setData(cursor.getString(4));
+				receita.setTempo(cursor.getInt(5));
+				receita.setNota(cursor.getInt(6));
+				receita.setCategoria(cursor.getString(7));
+				receita.setFoto(cursor.getString(8));
+				
+				ReceitaSCN receitaSCN = new ReceitaSCN(context);
+				receita.setIngredientes(receitaSCN.obterIngredientesPorId(cursor.getInt(0)));
+				
+				
+			} while (cursor.moveToNext());
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}
+		return receita;
+	}
+	
+	public Boolean checksForByNome(String nome) {
+		Boolean retorno = true;
+		String[] args = new String[] { String.valueOf(nome) };
+		Cursor cursor = database.rawQuery(SELECT_BY_NOME, args);
+		if (cursor.moveToFirst()) {
+			retorno = false;
+		}
+		if (cursor != null && !cursor.isClosed()) {
+			cursor.close();
+		}
+		return retorno;
 	}	
 
 }

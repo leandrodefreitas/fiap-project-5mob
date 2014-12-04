@@ -30,14 +30,26 @@ public class ReceitaSCN {
 		ItemIngredienteDAO itemIngredienteDao = new ItemIngredienteDAO(context);
 		Integer idReceita = Integer.valueOf(id.toString());
 
-		for (IngredienteVO catVO : receita.getIngredientes()) {
+		for (IngredienteVO ingVO : receita.getIngredientes()) {
 			ItemIngredienteVO itemIngredienteVO = new ItemIngredienteVO();
 			itemIngredienteVO.setIdReceita(idReceita);
-			itemIngredienteVO.setIdIngrediente(catVO.getId());
+			itemIngredienteVO.setIdIngrediente(ingVO.getId());
 			itemIngredienteVO.setTipo(ReceitaVO.RECEITA);
+			itemIngredienteVO.setQuantidade(ingVO.getQuantidade());
+			itemIngredienteVO.setUnidadeMedida(ingVO.getUnidadeMedida());
 			itemIngredienteDao.insert(itemIngredienteVO);
 		}
 		itemIngredienteDao.close();
+		
+		ReceitaCategoriaDAO receitaCatDAO = new ReceitaCategoriaDAO(context);
+		for (CategoriaVO catVO : receita.getCategorias()) {
+			ReceitaCategoriaVO recCatVO = new ReceitaCategoriaVO();
+			recCatVO.setIdReceita(idReceita);
+			recCatVO.setIdCategoria(catVO.getId());
+			recCatVO.setTipo(ReceitaVO.RECEITA);
+			receitaCatDAO.insert(recCatVO);
+		}
+		receitaCatDAO.close();
 
 		return id;
 	}
@@ -170,6 +182,13 @@ public class ReceitaSCN {
 		receitaDao.close();
 		
 		return receitas;
+	}
+	
+	public Boolean verSeTemReceita(String nome) {
+		Boolean retorno;
+		ReceitaDAO receitaDao = new ReceitaDAO(context);
+		retorno = receitaDao.checksForByNome(nome);
+		return retorno;
 	}
 
 }

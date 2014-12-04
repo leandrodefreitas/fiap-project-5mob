@@ -22,6 +22,7 @@ public class ReceitaVO implements Serializable {
 	private Integer tempo;
 	private Integer nota;
 	private String categoria;
+	private List<CategoriaVO> categorias;
 	private String foto;
 	
 	
@@ -132,6 +133,14 @@ public class ReceitaVO implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<CategoriaVO> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<CategoriaVO> categorias) {
+		this.categorias = categorias;
 	}
 	
 	
