@@ -33,7 +33,7 @@ public class ItemIngredienteDAO extends DataSource{
 		this.insertStmt.bindLong(1, vo.getIdReceita());
 		this.insertStmt.bindLong(2, vo.getIdIngrediente());
 		this.insertStmt.bindLong(3, vo.getTipo());
-		this.insertStmt.bindLong(4, vo.getQuantidade());
+		this.insertStmt.bindDouble(4, vo.getQuantidade());
 		this.insertStmt.bindString(5, vo.getUnidadeMedida());
 		return this.insertStmt.executeInsert();
 	}
@@ -60,7 +60,7 @@ public class ItemIngredienteDAO extends DataSource{
 				itemIngrediente.setIdReceita(cursor.getInt(1));
 				itemIngrediente.setIdIngrediente(cursor.getInt(2));
 				itemIngrediente.setTipo(cursor.getInt(3));
-				itemIngrediente.setQuantidade(cursor.getInt(4));
+				itemIngrediente.setQuantidade(cursor.getDouble(4));
 				itemIngrediente.setUnidadeMedida(cursor.getString(5));
 				list.add(itemIngrediente);
 
@@ -86,7 +86,7 @@ public class ItemIngredienteDAO extends DataSource{
 				itemIngrediente.setIdReceita(cursor.getInt(1));
 				itemIngrediente.setIdIngrediente(cursor.getInt(2));
 				itemIngrediente.setTipo(cursor.getInt(3));
-				itemIngrediente.setQuantidade(cursor.getInt(4));
+				itemIngrediente.setQuantidade(cursor.getDouble(4));
 				itemIngrediente.setUnidadeMedida(cursor.getString(5));
 				list.add(itemIngrediente);
 
@@ -112,7 +112,7 @@ public class ItemIngredienteDAO extends DataSource{
 				itemIngrediente.setIdReceita(cursor.getInt(1));
 				itemIngrediente.setIdIngrediente(cursor.getInt(2));
 				itemIngrediente.setTipo(cursor.getInt(3));
-				itemIngrediente.setQuantidade(cursor.getInt(4));
+				itemIngrediente.setQuantidade(cursor.getDouble(4));
 				itemIngrediente.setUnidadeMedida(cursor.getString(5));
 				list.add(itemIngrediente);
 

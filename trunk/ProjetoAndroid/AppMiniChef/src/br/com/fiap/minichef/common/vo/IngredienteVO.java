@@ -8,6 +8,8 @@ public class IngredienteVO implements Serializable {
 	
 	private Integer id;
 	private String descricao;
+	private Double quantidade;
+	private String unidadeMedida;
 	
 	public Integer getId() {
 		return id;
@@ -29,6 +31,22 @@ public class IngredienteVO implements Serializable {
 	public String toString() {
 
 		return descricao;
+	}
+
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public String getUnidadeMedida() {
+		return unidadeMedida;
+	}
+
+	public void setUnidadeMedida(String unidadeMedida) {
+		this.unidadeMedida = unidadeMedida;
 	}
 
 }
