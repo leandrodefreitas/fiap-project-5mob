@@ -5,19 +5,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
-import com.parse.*;
 
 public class Splash extends Activity implements Runnable {
 	
 	private final int splashTime = 3000;
-	private final String applicationId = "vZRcNsJgJTUArSJx6lEOIHa336uIOdC2Bvv3N05J";
-	private final String clientKey = "fc2okWxf4ZFb8ck26sHLOKiadR36Q0i7V0lFp1ZQ";
-	private final String javascriptKey = "ootFWZmzhMf6amSRY0mGbgNU6Htcm7FnCOrrL1et";
-	private String URL = "https://" + applicationId + ":javascript-key=" + javascriptKey + "@api.parse.com/1/classes/RECEITAS";
+	//private final String applicationId = "vZRcNsJgJTUArSJx6lEOIHa336uIOdC2Bvv3N05J";
+	//private final String javascriptKey = "ootFWZmzhMf6amSRY0mGbgNU6Htcm7FnCOrrL1et";
+	//private String URL = "https://" + applicationId + ":javascript-key=" + javascriptKey + "@api.parse.com/1/classes/RECEITAS";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +28,10 @@ public class Splash extends Activity implements Runnable {
 	}
 
 	public void run() {
-		/*Parse.enableLocalDatastore(getApplicationContext());
-		Parse.initialize(this, applicationId, clientKey);
-		ParseObject RECEITAS = new  ParseObject ("RECEITAS");*/
-		
-		Uri uri = Uri.parse(URL);
 		
 		PersistenciaAsyncTask task = new PersistenciaAsyncTask(this);
 		if (isConnected()){
-			task.execute(URL);
+			task.execute();
 			startActivity(new Intent(".MenuActivity"));
 			finish();
 		} else {
