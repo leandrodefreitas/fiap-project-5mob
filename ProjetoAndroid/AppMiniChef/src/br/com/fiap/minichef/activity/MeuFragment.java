@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import br.com.fiap.minichef.common.vo.IngredienteVO;
+import br.com.fiap.minichef.services.scn.IngredienteSCN;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -30,8 +33,8 @@ public class MeuFragment extends Fragment {
 	private HashMap<String, List<String>> listData;
 	private Context context;
 	
-    private SearchView searchView;
-    private ListView listView;
+    private SearchView mSearchView;
+    private ListView mListView;
     private Filter f;  
     private ArrayAdapter<String> adapter;
     
@@ -121,18 +124,18 @@ public class MeuFragment extends Fragment {
                 
                 Collections.sort(listaReceitas);
 
-                searchView = (SearchView) view.findViewById(R.id.search_view);
-                listView = (ListView) view.findViewById(R.id.list_view);
+                mSearchView = (SearchView) view.findViewById(R.id.search_view);
+                mListView = (ListView) view.findViewById(R.id.list_view);
                 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                         R.layout.search_list_item,
                         listaReceitas);
                 
-                listView.setAdapter(adapter);
+                mListView.setAdapter(adapter);
                 
                 f = adapter.getFilter();
                 
-                listView.setTextFilterEnabled(true);
+                mListView.setTextFilterEnabled(true);
                 
                 setupSearchView();  
                 break ;
@@ -143,19 +146,31 @@ public class MeuFragment extends Fragment {
                 List<String> listaIngredientes = Arrays.asList(ingredientes);
                 
                 Collections.sort(listaIngredientes);
+                
+                
+                IngredienteSCN ingSCN = new IngredienteSCN(context);
+                List<IngredienteVO> listaIng = ingSCN.obterTodasIngredientes();
+                
+                if (listaIng.isEmpty()){
+                	Log.i("Erro","lista de ingredientes vazia");
+                }
 
-                searchView = (SearchView) view.findViewById(R.id.search_view);
-                listView = (ListView) view.findViewById(R.id.list_view);
+                mSearchView = (SearchView) view.findViewById(R.id.search_view);
+                mListView = (ListView) view.findViewById(R.id.list_view);
                 
                 adapter = new ArrayAdapter<String>(context,
                         R.layout.search_list_item,
                         listaIngredientes);
                 
-                listView.setAdapter(adapter);
+                ArrayAdapter<IngredienteVO> ingAdapter = new ArrayAdapter<IngredienteVO>(context,
+                        R.layout.search_list_item,
+                        listaIng);
                 
-                f = adapter.getFilter();
+                mListView.setAdapter(ingAdapter);
                 
-                listView.setTextFilterEnabled(true);
+                f = ingAdapter.getFilter();
+                
+                mListView.setTextFilterEnabled(true);
                 
                 setupSearchView(); 
                 break ;
@@ -169,12 +184,12 @@ public class MeuFragment extends Fragment {
 	
     private void setupSearchView() {
     	
-        searchView.setIconifiedByDefault(false);
-        searchView.setOnQueryTextListener(new SearchFiltro());
-        searchView.setQueryHint("O que procura?");
+        mSearchView.setIconifiedByDefault(false);
+        mSearchView.setOnQueryTextListener(new SearchFiltro());
+        mSearchView.setQueryHint("O que procura?");
 
-		int id = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
-		TextView textView = (TextView) searchView.findViewById(id);
+		int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+		TextView textView = (TextView) mSearchView.findViewById(id);
 		textView.setTextColor(Color.parseColor("#CC0001"));
 		textView.setHintTextColor(Color.WHITE);
 
