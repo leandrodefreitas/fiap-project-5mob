@@ -16,8 +16,13 @@ import br.com.fiap.minichef.services.scn.CategoriaSCN;
 import br.com.fiap.minichef.services.scn.IngredienteSCN;
 import br.com.fiap.minichef.services.scn.ReceitaSCN;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,6 +35,14 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
 	
 	public PersistenciaAsyncTask(Context context) {
 		this.context = context;
+		
+		if (!isConnected()){
+			Toast.makeText(((Activity) context).getBaseContext(), "Sem acesso à internet. Favor verificar.",
+					Toast.LENGTH_LONG).show();
+			this.cancel(true);
+			context.startActivity(new Intent(".MenuActivity"));
+			((Activity) context).finish();
+		}
 	}
 
 	@Override
@@ -135,8 +148,21 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
             	}
             }
         }
-		
 		dialog.dismiss();
+		context.startActivity(new Intent(".MenuActivity"));
+		((Activity) context).finish();
 	}
+	
+	
+	// método para verificar conexão com a internet
+    public boolean isConnected() {
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;           	
+        } else {
+            return false;              	
+        }
+    }
 
 }
