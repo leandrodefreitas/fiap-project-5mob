@@ -61,7 +61,12 @@
             android:name="br.com.fiap.minichef.activity.EscolherPratoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-        </activity>              
+        </activity>
+        <activity
+            android:name="br.com.fiap.minichef.activity.DetalheReceita"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>     
         
     </application>
 
