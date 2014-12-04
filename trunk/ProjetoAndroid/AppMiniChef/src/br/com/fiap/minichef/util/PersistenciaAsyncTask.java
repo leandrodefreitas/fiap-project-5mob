@@ -91,10 +91,15 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
                 	receita.setNome((String) receitaParse.get("nome"));
                 	receita.setDescricao((String) receitaParse.get("descricao"));
                 	receita.setData((Date) receitaParse.get("updatedAt"));
+                	receita.setData(new Date()); // Corrigir depois
                 	receita.setTempo((Integer) receitaParse.get("tempo"));
                 	receita.setNota((Integer) receitaParse.get("nota"));
                 	ParseFile fotoFile = (ParseFile) receitaParse.get("foto");
-                	receita.setFoto(fotoFile.getUrl());
+                	if (fotoFile != null) {
+                		receita.setFoto(fotoFile.getUrl());
+                	} else {
+                		receita.setFoto("sem imagem");
+                	}
                 	
                 	ArrayList<String> categoriasParse = new ArrayList<String>();
                 	categoriasParse = (ArrayList<String>) receitaParse.get("categorias");

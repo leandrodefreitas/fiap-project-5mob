@@ -1,5 +1,8 @@
 package br.com.fiap.minichef.activity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 import br.com.fiap.minichef.adapter.MeuFragmentPagerAdapter;
 
@@ -67,4 +71,21 @@ public class MenuActivity extends FragmentActivity {
 		}
 		
 	}
+	
+	public void onBackPressed() { 
+		new AlertDialog.Builder(this)
+    	.setTitle("Sair")
+    	.setMessage("Deseja realmente sair do Mini Chef?")
+    	.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() {
+    		@Override
+    		public void onClick(DialogInterface dialog, int which) {
+    			finish();
+    			Toast.makeText(getBaseContext(), "Obrigado por utilizar este app.",
+    					Toast.LENGTH_LONG).show();
+    		}
+    	})
+    	.setNegativeButton(getString(R.string.nao), null)
+    	.show();
+	}
+	
 }

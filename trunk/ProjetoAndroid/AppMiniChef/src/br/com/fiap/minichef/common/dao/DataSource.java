@@ -14,7 +14,7 @@ public class DataSource extends SQLiteOpenHelper {
 	public static String DATABASE_COMPLETE = "";
 	public static final String DATABASE_NAME = "minichef.db";
 	public static final String DATABASE_NAME_JOURNAL = "minichef.db-journal";
-	public static final int DATABASE_VERSION = 3;
+	public static final int DATABASE_VERSION = 1;
 	
 	protected static final String TABLE_RECEITAS = "RECEITAS";
 	protected static final String TABLE_INGREDIENTES = "INGREDIENTES";
