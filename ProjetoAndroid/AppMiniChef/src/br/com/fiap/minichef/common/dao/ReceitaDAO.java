@@ -13,7 +13,7 @@ public class ReceitaDAO extends DataSource {
 
 	private static final String INSERT = "insert into "
 			+ TABLE_RECEITAS
-			+ " (nome, descricao, data, tempo, nota, categoria, foto) values (?, ?, ?, ?, ?, ?, ?, ? )";
+			+ " (nome, descricao, data, tempo, nota, categoria, foto) values (?, ?, ?, ?, ?, ?, ? )";
 	
 	
 	private static final String SELECT_ALL_BY_DATA = "select id, nome, descricao, data, tempo, nota, categoria, foto from "

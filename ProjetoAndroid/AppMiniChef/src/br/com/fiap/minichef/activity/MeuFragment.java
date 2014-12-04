@@ -1,13 +1,13 @@
 package br.com.fiap.minichef.activity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import br.com.fiap.minichef.common.vo.IngredienteVO;
+import br.com.fiap.minichef.common.vo.ReceitaVO;
 import br.com.fiap.minichef.services.scn.IngredienteSCN;
+import br.com.fiap.minichef.services.scn.ReceitaSCN;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,22 +29,12 @@ import android.widget.TextView;
 public class MeuFragment extends Fragment {
 	
 	private int mPaginaAtual;
-	private List<String> listGroup;
-	private HashMap<String, List<String>> listData;
 	private Context context;
 	
     private SearchView mSearchView;
     private ListView mListView;
     private Filter f;  
     private ArrayAdapter<String> adapter;
-    
-    public static final String[] receitas = {"Bolo de fubá", "Nega Maluca", "Omelete", "Salada de Cenoura", "Lasanha Quatro Queijos"
-    };
-    
-    public static final String[] ingredientes = {"Ovo", "Fubá", "Cebola", "Chocolate", "Farinha", "Manteiga", "Abobrinha", "Teste", 
-    	"Chocolate em Pó", "Casca de Ovo", "Queijo Parmesão"
-    };    
-	
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -62,8 +52,6 @@ public class MeuFragment extends Fragment {
         // Pega o valor a pï¿½gina atual passada por parï¿½metro via Bubdle 
         mPaginaAtual = data.getInt("pagina_atual", 0);
         
-
-	      
 	}
 	
 	@Override
@@ -82,46 +70,16 @@ public class MeuFragment extends Fragment {
                 break ;
                 
             case 2:
-            	/*
-                view = inflater.inflate(R.layout.ingredient_list, container, false);
                 
-        		buildList();
-        		
-        		ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-        		expandableListView.setAdapter(new br.com.fiap.minichef.adapter.ExpandableAdapter(context.getApplicationContext(), listGroup, listData));
-        		
-        		expandableListView.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
-        		
-        		expandableListView.setOnChildClickListener(new OnChildClickListener(){
-        			@Override
-        			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-        				//Toast.makeText(context, "Group: "+groupPosition+"| Item: "+childPosition, Toast.LENGTH_SHORT).show();
-        				return false;
-        			}
-        		});
-        		
-        		expandableListView.setOnGroupExpandListener(new OnGroupExpandListener(){
-        			@Override
-        			public void onGroupExpand(int groupPosition) {
-        				//Toast.makeText(context, "Group (Expand): "+groupPosition, Toast.LENGTH_SHORT).show();
-        			}
-        		});
-        		
-        		expandableListView.setOnGroupCollapseListener(new OnGroupCollapseListener(){
-        			@Override
-        			public void onGroupCollapse(int groupPosition) {
-        				//Toast.makeText(context, "Group (Collapse): "+groupPosition, Toast.LENGTH_SHORT).show();
-        			}
-        		});
-        		
-        		expandableListView.setGroupIndicator(getResources().getDrawable(R.drawable.icon_group));               
-                break ;
-                */
+                view = inflater.inflate(R.layout.lista_receitas, container, false);
                 
-                view = inflater.inflate(R.layout.lista_receitas, container, false);  
+                ArrayList<String> listaReceitas = new ArrayList<String>();
                 
-                List<String> listaReceitas = Arrays.asList(receitas);
-                
+                ReceitaSCN recSCN = new ReceitaSCN(context);
+                List<ReceitaVO> receitas = recSCN.obterTodosReceitas();
+                for (ReceitaVO recVO : receitas) {
+                	listaReceitas.add(recVO.getNome());
+                }
                 Collections.sort(listaReceitas);
 
                 mSearchView = (SearchView) view.findViewById(R.id.search_view);
@@ -143,17 +101,18 @@ public class MeuFragment extends Fragment {
             case 3:
                 view = inflater.inflate(R.layout.lista_ingredientes, container, false);  
                 
-                List<String> listaIngredientes = Arrays.asList(ingredientes);
-                
-                Collections.sort(listaIngredientes);
-                
-                
+                ArrayList<String> listaIngredientes = new ArrayList<String>();
                 IngredienteSCN ingSCN = new IngredienteSCN(context);
                 List<IngredienteVO> listaIng = ingSCN.obterTodasIngredientes();
                 
                 if (listaIng.isEmpty()){
                 	Log.i("Erro","lista de ingredientes vazia");
+                } else {
+                	for (IngredienteVO ingVO : listaIng) {
+                		listaIngredientes.add(ingVO.getDescricao());
+                    }
                 }
+                Collections.sort(listaIngredientes);
 
                 mSearchView = (SearchView) view.findViewById(R.id.search_view);
                 mListView = (ListView) view.findViewById(R.id.list_view);
@@ -183,7 +142,6 @@ public class MeuFragment extends Fragment {
 	}
 	
     private void setupSearchView() {
-    	
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(new SearchFiltro());
         mSearchView.setQueryHint("O que procura?");
@@ -192,51 +150,9 @@ public class MeuFragment extends Fragment {
 		TextView textView = (TextView) mSearchView.findViewById(id);
 		textView.setTextColor(Color.parseColor("#CC0001"));
 		textView.setHintTextColor(Color.WHITE);
-
-    }	
-	
-	public void buildList(){
-		listGroup = new ArrayList<String>();
-		listData = new HashMap<String, List<String>>();
-		
-		// GROUP
-			listGroup.add("A");
-			listGroup.add("B");
-			listGroup.add("C");
-			listGroup.add("D");
-			
-		// CHILDREN
-			List<String> auxList = new ArrayList<String>();
-			auxList.add("Arroz");
-			auxList.add("Atum");
-			auxList.add("Acai’");
-			auxList.add("Azeitona");
-			listData.put(listGroup.get(0), auxList);
-			
-			auxList = new ArrayList<String>();
-			auxList.add("Batata");
-			auxList.add("Baunilha");
-			auxList.add("Bife");
-			auxList.add("Bombom");
-			listData.put(listGroup.get(1), auxList);
-			
-			auxList = new ArrayList<String>();
-			auxList.add("Cebola");
-			auxList.add("Champignon");
-			auxList.add("Chourico");
-			auxList.add("Costela de Porco");
-			listData.put(listGroup.get(2), auxList);
-			
-			auxList = new ArrayList<String>();
-			auxList.add("Damasco");
-			auxList.add("Doce de Leite");
-			auxList.add("Danone");
-			auxList.add("Doritos");
-			listData.put(listGroup.get(3), auxList);
-	}	
-	
+    }
+    
 	private class SearchFiltro implements OnQueryTextListener{
-
 		@Override
 		public boolean onQueryTextSubmit(String query) {
 			Log.i("SearchView", "onQueryTextSubmit -> "+query);
@@ -254,7 +170,7 @@ public class MeuFragment extends Fragment {
 	        }
 	        return true;
 		}
-		
 	}
+	
 
 }
