@@ -11,7 +11,7 @@ import br.com.fiap.minichef.activity.MeuFragment;
 public class MeuFragmentPagerAdapter extends FragmentPagerAdapter {
 	
 	// 10 p�ginas
-	final int TOTAL_PAGINAS = 2;
+	final int TOTAL_PAGINAS = 3;
 
 	public MeuFragmentPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -44,11 +44,14 @@ public class MeuFragmentPagerAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:
-                msg =  "Categoria";
+                msg =  "Categorias";
                 break ;
             case 1:
-                msg =  "Ingrediente";
+                msg =  "Receitas";
                 break ;
+            case 2:
+                msg =  "Ingredientes";
+                break ;                
             default:
                 break ;
         }

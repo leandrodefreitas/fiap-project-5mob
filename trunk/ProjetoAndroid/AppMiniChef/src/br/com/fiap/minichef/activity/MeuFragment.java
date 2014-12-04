@@ -1,20 +1,27 @@
 package br.com.fiap.minichef.activity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
+import android.widget.TextView;
 
 public class MeuFragment extends Fragment {
 	
@@ -22,6 +29,19 @@ public class MeuFragment extends Fragment {
 	private List<String> listGroup;
 	private HashMap<String, List<String>> listData;
 	private Context context;
+	
+    private SearchView searchView;
+    private ListView listView;
+    private Filter f;  
+    private ArrayAdapter<String> adapter;
+    
+    public static final String[] receitas = {"Bolo de fubá", "Nega Maluca", "Omelete", "Salada de Cenoura", "Lasanha Quatro Queijos"
+    };
+    
+    public static final String[] ingredientes = {"Ovo", "Fubá", "Cebola", "Chocolate", "Farinha", "Manteiga", "Abobrinha", "Teste", 
+    	"Chocolate em Pó", "Casca de Ovo", "Queijo Parmesão"
+    };    
+	
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -54,9 +74,12 @@ public class MeuFragment extends Fragment {
         switch (mPaginaAtual)
         {
             case 1:
+            	
                 view = inflater.inflate(R.layout.categoria_layout, container, false);
                 break ;
+                
             case 2:
+            	/*
                 view = inflater.inflate(R.layout.ingredient_list, container, false);
                 
         		buildList();
@@ -90,12 +113,72 @@ public class MeuFragment extends Fragment {
         		
         		expandableListView.setGroupIndicator(getResources().getDrawable(R.drawable.icon_group));               
                 break ;
+                */
+                
+                view = inflater.inflate(R.layout.lista_receitas, container, false);  
+                
+                List<String> listaReceitas = Arrays.asList(receitas);
+                
+                Collections.sort(listaReceitas);
+
+                searchView = (SearchView) view.findViewById(R.id.search_view);
+                listView = (ListView) view.findViewById(R.id.list_view);
+                
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        R.layout.search_list_item,
+                        listaReceitas);
+                
+                listView.setAdapter(adapter);
+                
+                f = adapter.getFilter();
+                
+                listView.setTextFilterEnabled(true);
+                
+                setupSearchView();  
+                break ;
+                
+            case 3:
+                view = inflater.inflate(R.layout.lista_ingredientes, container, false);  
+                
+                List<String> listaIngredientes = Arrays.asList(ingredientes);
+                
+                Collections.sort(listaIngredientes);
+
+                searchView = (SearchView) view.findViewById(R.id.search_view);
+                listView = (ListView) view.findViewById(R.id.list_view);
+                
+                adapter = new ArrayAdapter<String>(context,
+                        R.layout.search_list_item,
+                        listaIngredientes);
+                
+                listView.setAdapter(adapter);
+                
+                f = adapter.getFilter();
+                
+                listView.setTextFilterEnabled(true);
+                
+                setupSearchView(); 
+                break ;
+            	
             default:
                 break ;
         }
 
         return view;
 	}
+	
+    private void setupSearchView() {
+    	
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(new SearchFiltro());
+        searchView.setQueryHint("O que procura?");
+
+		int id = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+		TextView textView = (TextView) searchView.findViewById(id);
+		textView.setTextColor(Color.parseColor("#CC0001"));
+		textView.setHintTextColor(Color.WHITE);
+
+    }	
 	
 	public void buildList(){
 		listGroup = new ArrayList<String>();
@@ -136,5 +219,27 @@ public class MeuFragment extends Fragment {
 			auxList.add("Doritos");
 			listData.put(listGroup.get(3), auxList);
 	}	
+	
+	private class SearchFiltro implements OnQueryTextListener{
+
+		@Override
+		public boolean onQueryTextSubmit(String query) {
+			Log.i("SearchView", "onQueryTextSubmit -> "+query);
+			return false;
+		}
+
+		@Override
+		public boolean onQueryTextChange(String newText) {
+	        if (TextUtils.isEmpty(newText)) {
+	            //mListView.clearTextFilter();
+	            f.filter(null);
+	        } else {
+	            //mListView.setFilterText(newText.toString());
+	            f.filter(newText);
+	        }
+	        return true;
+		}
+		
+	}
 
 }

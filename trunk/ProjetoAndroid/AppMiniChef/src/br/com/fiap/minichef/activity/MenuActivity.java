@@ -33,11 +33,12 @@ public class MenuActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        /*getMenuInflater().inflate(R.menu.menu, menu);
         
+
 		SearchView sv = (SearchView) menu.findItem(R.id.item1).getActionView();
 		sv.setOnQueryTextListener(new SearchFiltro());
-		
+		*/
         return true;
     }
 
@@ -50,6 +51,8 @@ public class MenuActivity extends FragmentActivity {
     }
     
 	private class SearchFiltro implements OnQueryTextListener{
+		
+		
 
 		@Override
 		public boolean onQueryTextSubmit(String query) {
