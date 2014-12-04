@@ -63,7 +63,7 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
 		query.orderByDescending("_updated_at");
 		try {
 			receitas = query.find();
-			
+			persistenciaDados();
 		} catch (ParseException e) {
 			Log.d("Falha chamada no parse.", e.getLocalizedMessage());
 			Log.e("parseReceita", "Erro ao buscar o resultado no parse");
@@ -74,7 +74,26 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
 	
 	@Override
 	protected void onPostExecute(Void result) {
-		CategoriaVO categoria;
+		dialog.dismiss();
+		context.startActivity(new Intent(".MenuActivity"));
+		((Activity) context).finish();
+	}
+	
+	
+	// metodo para verificar conexao com a internet
+    public boolean isConnected() {
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;           	
+        } else {
+            return false;              	
+        }
+    }
+    
+    // metodo que realiza a persistencia de dados
+    public void persistenciaDados() {
+    	CategoriaVO categoria;
 		IngredienteVO ingrediente;
 		ReceitaVO receita;
 		
@@ -149,21 +168,6 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
                 	receitaSCN.salvarReceita(receita);
             	}
             }
-        }
-		dialog.dismiss();
-		context.startActivity(new Intent(".MenuActivity"));
-		((Activity) context).finish();
-	}
-	
-	
-	// método para verificar conexão com a internet
-    public boolean isConnected() {
-        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Activity.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            return true;           	
-        } else {
-            return false;              	
         }
     }
 
