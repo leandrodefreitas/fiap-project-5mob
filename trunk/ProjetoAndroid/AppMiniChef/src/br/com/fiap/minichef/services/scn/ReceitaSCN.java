@@ -108,42 +108,6 @@ public class ReceitaSCN {
 		return ingredientes;
 	}
 	
-	public Double obterTotalReceitasPorMesAno(String data) {
-		Double total = 0.0;
-		String mes = data.substring(5,	7);
-		String ano = data.substring(0, 4);
-		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> receitas = receitaDao.selectByMesAno(mes, ano);
-		receitaDao.close();
-		for(ReceitaVO receita: receitas){
-			total += receita.getValor();
-		}
-		return total;
-	}
-	
-	public Double obterTotalReceitasPorData(String data) {
-		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> receitas = receitaDao.selectByData(data);
-		receitaDao.close();
-		Double total = 0.0;
-		for(ReceitaVO receita: receitas){
-			total += receita.getValor();
-		}
-		return total;
-	}
-	
-	public Double obterTotalReceitas() {
-		ReceitaDAO receitaDao = new ReceitaDAO(context);
-		List<ReceitaVO> receitas = receitaDao.selectAll();
-		receitaDao.close();
-		Double total = 0.0;
-		for(ReceitaVO receita: receitas){
-			total += receita.getValor();
-		}
-		return total;
-	}
-	
-	
 	public List<ReceitaVO> obterReceitasPorIngrediente(IngredienteVO ingrediente) {
 		
 		// pegar a lista de ingredientes-receitas
