@@ -58,10 +58,9 @@ public class DataSource extends SQLiteOpenHelper {
 				+ " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
 				+ "nome TEXT NOT NULL, "
 				+ "descricao TEXT NOT NULL, "
-				+ "valor DOUBLE NOT NULL, "
-				+ "data TEXT NOT NULL, "
+				+ "data TEXT, "
 				+ "tempo INTEGER, "
-				+ "nota INTEGER NOT NULL, "
+				+ "nota INTEGER, "
 				+ "categoria TEXT, "
 				+ "foto TEXT )");
 		
