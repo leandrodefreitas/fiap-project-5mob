@@ -44,10 +44,10 @@ public class LoginActivity extends Activity {
 		}
 		
 		if(isFDS()) {
-			alertaLogin(3);			
+			//alertaLogin(3);			
 		}
 		else if(!isHorarioComercial()) {
-		//	alertaLogin(2);			// TODO Essa linha ta comentada para nao bloquear, NÃO esquecer de descomentar.
+			//alertaLogin(2);			// TODO Essa linha ta comentada para nao bloquear, NÃO esquecer de descomentar.
 		}
 
 
@@ -256,7 +256,6 @@ public class LoginActivity extends Activity {
 		if (diaAtual.get(Calendar.DAY_OF_WEEK)==1){
 			fds = true;
 		}
-		//return fds;
-		return false;
+		return fds;
 	}
 }

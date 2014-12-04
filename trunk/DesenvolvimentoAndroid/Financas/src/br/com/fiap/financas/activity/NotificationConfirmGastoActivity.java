@@ -87,7 +87,7 @@ public class NotificationConfirmGastoActivity extends Activity {
 	
 	public void createNotificationSaldoNegativo(){
 		
-		Intent intent = new Intent(this, TotalFragment.class);
+		Intent intent = new Intent(this, FinancasFragActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this,0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Notification notifica = new Notification.Builder(this)
