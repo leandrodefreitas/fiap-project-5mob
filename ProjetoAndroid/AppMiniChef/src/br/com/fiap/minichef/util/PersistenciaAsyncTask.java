@@ -116,8 +116,6 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
             		}
                 	
                 	receita.setCategoria((categoriasParse).toString());
-                	
-                	//Long idreceita = receitaSCN.salvarReceita(receita);
 
                 	ArrayList<String> ingredientesParse = new ArrayList<String>();
                 	ingredientesParse = (ArrayList<String>) receitaParse.get("ingredientes");

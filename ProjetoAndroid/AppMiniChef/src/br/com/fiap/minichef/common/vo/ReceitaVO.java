@@ -16,7 +16,6 @@ public class ReceitaVO implements Serializable {
 	private Integer id;
 	private String nome;
 	private String descricao;
-	private Double valor;
 	private Date data;
 	private List<IngredienteVO> ingredientes;
 	private Integer tempo;
@@ -42,16 +41,6 @@ public class ReceitaVO implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
-	public Double getValor() {
-		return valor;
-	}
-	
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-	
 	
 	public Date getData() {
 		return data;
