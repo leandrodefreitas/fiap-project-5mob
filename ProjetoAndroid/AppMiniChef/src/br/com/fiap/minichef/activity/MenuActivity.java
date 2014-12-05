@@ -45,66 +45,52 @@ public class MenuActivity extends FragmentActivity {
     public void onClickMassas(View view) {
         Log.i("Click", "Categoria massas");
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipoPrato", "Massas");
+        intentPrato.putExtra("tipo", "Massas");
         startActivity(intentPrato);
     }
     public void onClickLanches(View view) {
         Log.i("Click", "Categoria lanches");
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipoPrato", "Lanches");
+        intentPrato.putExtra("tipo", "Lanches");
         startActivity(intentPrato);
     }
     public void onClickCarnes(View view) {
         Log.i("Click", "Categoria carnes");
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipoPrato", "Carnes");
+        intentPrato.putExtra("tipo", "Carnes");
         startActivity(intentPrato);
     }
     public void onClickSaladas(View view) {
         Log.i("Click", "Categoria saladas");
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipoPrato", "Saladas");
+        intentPrato.putExtra("tipo", "Saladas");
         startActivity(intentPrato);
     }
     public void onClickSopas(View view) {
         Log.i("Click", "Categoria sopas");
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipoPrato", "Sopas");
+        intentPrato.putExtra("tipo", "Sopas");
         startActivity(intentPrato);
     }
     public void onClickPetiscos(View view) {
         Log.i("Click", "Categoria massas");
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipoPrato", "Massas");
+        intentPrato.putExtra("tipo", "Massas");
         startActivity(intentPrato);
     }
     public void onClickSobremesas(View view) {
         Log.i("Click", "Categoria sobremesas");
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipoPrato", "Sobremesas");
+        intentPrato.putExtra("tipo", "Sobremesas");
         startActivity(intentPrato);
     }
     public void onClickCompletos(View view) {
         Log.i("Click", "Categoria completos");
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipoPrato", "Completos");
+        intentPrato.putExtra("tipo", "Completos");
         startActivity(intentPrato);
     }
     
-	private class SearchFiltro implements OnQueryTextListener {
-		
-		@Override
-		public boolean onQueryTextSubmit(String query) {
-			Log.i("SearchView", "onQueryTextSubmit -> "+query);
-			return false;
-		}
-
-		@Override
-		public boolean onQueryTextChange(String newText) {
-			Log.i("SearchView", "onQueryTextChange -> "+newText);
-			return false;
-		}
-	}
 	
 	public void onBackPressed() { 
 		new AlertDialog.Builder(this)
