@@ -3,22 +3,26 @@ package br.com.fiap.minichef.activity;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import br.com.fiap.minichef.common.vo.IngredienteVO;
 import br.com.fiap.minichef.common.vo.ReceitaVO;
 import br.com.fiap.minichef.services.scn.ReceitaSCN;
 
-public class ListaReceitaActivity extends Activity{
+public class ListaReceitaActivity extends Activity {
 	
     private SearchView mSearchView;
     private ListView mListView;
@@ -55,7 +59,19 @@ public class ListaReceitaActivity extends Activity{
 	        
 	        f = recAdapter.getFilter();
 	        mListView.setTextFilterEnabled(true);
-	        setupSearchView(); 
+	        setupSearchView();
+	        
+	        mListView.setOnItemClickListener(new OnItemClickListener() {
+            	@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					ReceitaVO recVO = (ReceitaVO) parent.getItemAtPosition(position);
+					
+					Intent i = new Intent(getApplicationContext() ,DetalheReceitaActivity.class);
+					i.putExtra("vo", recVO);
+                    startActivity(i);
+				}
+            });
 	        
 		} else if (origem == "categoria") {
 			
@@ -95,5 +111,6 @@ public class ListaReceitaActivity extends Activity{
 	        }
 	        return true;
 		}
-	}	
+	}
+	
 }
