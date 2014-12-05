@@ -1,46 +1,55 @@
 package br.com.fiap.minichef.activity;
 
+import br.com.fiap.minichef.common.vo.ReceitaVO;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 public class DetalheReceitaActivity extends Activity {
 
-	private EditText nameText;
-	private int position;
+	private TextView tvnome;
+	private TextView tvdescricao;
+	private TextView tvdata;
+	private TextView tvtempo;
+	private TextView tvnota;
+	private TextView tvfoto;
+	private TextView tvcategoria;
+	private TextView tvingrediente;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		ReceitaVO receitavo = ((ReceitaVO)getIntent().getSerializableExtra("vo"));
 
 		setContentView(R.layout.detalhe_receita);
 		setTitle("Blabla");
 
-		nameText = (EditText) findViewById(R.id.name);
+		tvnome = (TextView) findViewById(R.id.tvNome);
+		tvdescricao = (TextView) findViewById(R.id.tvDescricao);
+		tvdata = (TextView) findViewById(R.id.tvData);
+		tvtempo = (TextView) findViewById(R.id.tvTempo);
+		tvnota = (TextView) findViewById(R.id.tvNota);
+		tvfoto = (TextView) findViewById(R.id.tvFoto);
+		tvcategoria = (TextView) findViewById(R.id.tvCategoria);
+		tvingrediente = (TextView) findViewById(R.id.tvIngrediente);
 
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			String name = extras.getString("descricao");
-			position = extras.getInt("position");
-
-			if (name != null) {
-				nameText.setText(name);
-			}
+		if (receitavo != null) {
+			tvnome.setText(receitavo.getNome());
+			tvdescricao.setText(receitavo.getDescricao());
+			tvdata.setText(receitavo.getDataFormatted());
+			tvtempo.setText(receitavo.getTempo().toString());
+			tvnota.setText(receitavo.getNota().toString());
+			tvfoto.setText(receitavo.getFoto());
+			tvcategoria.setText(receitavo.getCategoria());
+			tvingrediente.setText(receitavo.getIngredientesString());
 		}
 
-		Button confirmButton = (Button) findViewById(R.id.confirm);
-		confirmButton.setOnClickListener(new View.OnClickListener() {
+		Button voltarButton = (Button) findViewById(R.id.voltar);
+		voltarButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				Bundle bundle = new Bundle();
-				bundle.putString("descricao", nameText.getText().toString());
-				bundle.putInt("position", position);
-
-				Intent intent = new Intent();
-				intent.putExtras(bundle);
-				setResult(RESULT_OK, intent);
 				finish();
 			}
 		});

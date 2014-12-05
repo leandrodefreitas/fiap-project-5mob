@@ -29,7 +29,6 @@ public class MenuActivity extends FragmentActivity {
 
         // Seta o adapter do ViewPager
         viewPager.setAdapter(adapter);
-
     }
 
     @Override
@@ -37,7 +36,6 @@ public class MenuActivity extends FragmentActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         /*getMenuInflater().inflate(R.menu.menu, menu);
         
-
 		SearchView sv = (SearchView) menu.findItem(R.id.item1).getActionView();
 		sv.setOnQueryTextListener(new SearchFiltro());
 		*/
