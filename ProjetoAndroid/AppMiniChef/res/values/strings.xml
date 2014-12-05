@@ -58,5 +58,15 @@
     <string name="btnPetiscos">Petiscos</string>
     <string name="btnSobremesas">Sobremesas</string>
     <string name="btnRefeicaoCompleta">Completos</string>
+    
+    <string name="sobreInformacoes">
+Esse App foi feito e desenvolvido por \n
+Flávio Mitsuyoshi Ota \n
+Leandro de Freitas \n
+Rodrigo Ota \n
+Wellington S. M. Santos \n
+Com a finalidade de ser apresentado na matéria de Projeto Android, sendo essa apenas a primeira sprint. \n
+Sobre o MiniChef: é um aplicativo para auxiliar as pessoas na cozinha de forma que apresente sugestões de receitas por categoria ou ingredientes, tendo com enfâse modificar o jeito como aplicativos de receitas auxiliam o cozinheiro.
+    </string>
         
 </resources>
