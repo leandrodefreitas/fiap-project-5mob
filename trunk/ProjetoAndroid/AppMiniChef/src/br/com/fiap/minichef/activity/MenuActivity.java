@@ -1,6 +1,5 @@
 package br.com.fiap.minichef.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 import br.com.fiap.minichef.adapter.MeuFragmentPagerAdapter;
@@ -46,18 +44,57 @@ public class MenuActivity extends FragmentActivity {
         return true;
     }
 
-    public void onClickMassa(View view) {
-        Log.i("Click", "Clicou na opção massa");
-
+    public void onClickMassas(View view) {
+        Log.i("Click", "Categoria massas");
         Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
         intentPrato.putExtra("tipoPrato", "Massas");
         startActivity(intentPrato);
     }
+    public void onClickLanches(View view) {
+        Log.i("Click", "Categoria lanches");
+        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        intentPrato.putExtra("tipoPrato", "Lanches");
+        startActivity(intentPrato);
+    }
+    public void onClickCarnes(View view) {
+        Log.i("Click", "Categoria carnes");
+        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        intentPrato.putExtra("tipoPrato", "Carnes");
+        startActivity(intentPrato);
+    }
+    public void onClickSaladas(View view) {
+        Log.i("Click", "Categoria saladas");
+        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        intentPrato.putExtra("tipoPrato", "Saladas");
+        startActivity(intentPrato);
+    }
+    public void onClickSopas(View view) {
+        Log.i("Click", "Categoria sopas");
+        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        intentPrato.putExtra("tipoPrato", "Sopas");
+        startActivity(intentPrato);
+    }
+    public void onClickPetiscos(View view) {
+        Log.i("Click", "Categoria massas");
+        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        intentPrato.putExtra("tipoPrato", "Massas");
+        startActivity(intentPrato);
+    }
+    public void onClickSobremesas(View view) {
+        Log.i("Click", "Categoria sobremesas");
+        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        intentPrato.putExtra("tipoPrato", "Sobremesas");
+        startActivity(intentPrato);
+    }
+    public void onClickCompletos(View view) {
+        Log.i("Click", "Categoria completos");
+        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        intentPrato.putExtra("tipoPrato", "Completos");
+        startActivity(intentPrato);
+    }
     
-	private class SearchFiltro implements OnQueryTextListener{
+	private class SearchFiltro implements OnQueryTextListener {
 		
-		
-
 		@Override
 		public boolean onQueryTextSubmit(String query) {
 			Log.i("SearchView", "onQueryTextSubmit -> "+query);
@@ -69,7 +106,6 @@ public class MenuActivity extends FragmentActivity {
 			Log.i("SearchView", "onQueryTextChange -> "+newText);
 			return false;
 		}
-		
 	}
 	
 	public void onBackPressed() { 

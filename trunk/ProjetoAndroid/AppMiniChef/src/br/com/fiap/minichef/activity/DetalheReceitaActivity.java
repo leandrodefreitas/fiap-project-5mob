@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class DetalheReceita extends Activity {
+public class DetalheReceitaActivity extends Activity {
 
 	private EditText nameText;
 	private int position;
