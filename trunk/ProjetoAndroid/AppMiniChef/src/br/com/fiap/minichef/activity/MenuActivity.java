@@ -46,49 +46,49 @@ public class MenuActivity extends FragmentActivity {
 
     public void onClickMassas(View view) {
         Log.i("Click", "Categoria massas");
-        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
         intentPrato.putExtra("tipoPrato", "Massas");
         startActivity(intentPrato);
     }
     public void onClickLanches(View view) {
         Log.i("Click", "Categoria lanches");
-        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
         intentPrato.putExtra("tipoPrato", "Lanches");
         startActivity(intentPrato);
     }
     public void onClickCarnes(View view) {
         Log.i("Click", "Categoria carnes");
-        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
         intentPrato.putExtra("tipoPrato", "Carnes");
         startActivity(intentPrato);
     }
     public void onClickSaladas(View view) {
         Log.i("Click", "Categoria saladas");
-        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
         intentPrato.putExtra("tipoPrato", "Saladas");
         startActivity(intentPrato);
     }
     public void onClickSopas(View view) {
         Log.i("Click", "Categoria sopas");
-        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
         intentPrato.putExtra("tipoPrato", "Sopas");
         startActivity(intentPrato);
     }
     public void onClickPetiscos(View view) {
         Log.i("Click", "Categoria massas");
-        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
         intentPrato.putExtra("tipoPrato", "Massas");
         startActivity(intentPrato);
     }
     public void onClickSobremesas(View view) {
         Log.i("Click", "Categoria sobremesas");
-        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
         intentPrato.putExtra("tipoPrato", "Sobremesas");
         startActivity(intentPrato);
     }
     public void onClickCompletos(View view) {
         Log.i("Click", "Categoria completos");
-        Intent intentPrato = new Intent(this,EscolherPratoActivity.class);
+        Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
         intentPrato.putExtra("tipoPrato", "Completos");
         startActivity(intentPrato);
     }
