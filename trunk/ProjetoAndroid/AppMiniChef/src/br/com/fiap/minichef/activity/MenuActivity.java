@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import br.com.fiap.minichef.adapter.MeuFragmentPagerAdapter;
 import br.com.fiap.minichef.common.vo.CategoriaVO;
@@ -50,9 +51,10 @@ public class MenuActivity extends FragmentActivity {
         {
         case R.id.menu_info:
         	new AlertDialog.Builder(this)
-        	.setTitle("Informações")
-        	.setMessage(R.string.sobreInformacoes).show();
-
+        	.setTitle("Informações").setIcon(android.R.drawable.ic_menu_info_details)
+        	.setMessage(getString(R.string.sobreInformacoes))
+        	.setNegativeButton(getString(R.string.voltar), null)
+        	.show();
             return true;
  
         case R.id.menu_sair:
