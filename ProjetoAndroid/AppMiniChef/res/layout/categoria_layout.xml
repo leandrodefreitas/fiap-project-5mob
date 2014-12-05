@@ -19,7 +19,7 @@
             android:id="@+id/id_massa"
             android:text="@string/btnMassas"
             android:drawableTop="@drawable/img_btn_massa"
-            android:onClick="onClickMassa"
+            android:onClick="onClickMassas"
             android:textColor="#cfff101a"
             android:textSize="20sp" />
         <Button
@@ -29,7 +29,7 @@
             android:id="@+id/id_lanche"
             android:text="@string/btnLanches"
             android:drawableTop="@drawable/img_btn_lanche"
-            android:onClick="2"
+            android:onClick="onClickLanches"
             android:textColor="#cfff101a"
             android:textSize="20sp" />
         <Button
@@ -39,7 +39,7 @@
             android:id="@+id/id_carne"
             android:text="@string/btnCarnes"
             android:drawableTop="@drawable/img_btn_carne"
-            android:onClick="3"
+            android:onClick="onClickCarnes"
             android:textColor="#cfff101a"
             android:textSize="20sp" />
         <Button
@@ -49,7 +49,7 @@
             android:id="@+id/id_salada"
             android:text="@string/btnSaladas"
             android:drawableTop="@drawable/img_btn_salada"
-            android:onClick="4"
+            android:onClick="onClickSaladas"
             android:textColor="#cfff101a"
             android:textSize="20sp" />
         <Button
@@ -59,7 +59,7 @@
             android:id="@+id/id_sopa"
             android:text="@string/btnSopas"
             android:drawableTop="@drawable/img_btn_sopa"
-            android:onClick="5"
+            android:onClick="onClickSopas"
             android:textColor="#cfff101a"
             android:textSize="20sp" />
         <Button
@@ -69,7 +69,7 @@
             android:id="@+id/id_petisco"
             android:text="@string/btnPetiscos"
             android:drawableTop="@drawable/img_btn_petisco"
-            android:onClick="6"
+            android:onClick="onClickPetiscos"
             android:textColor="#cfff101a"
             android:textSize="20sp" />
         <Button
@@ -79,7 +79,7 @@
             android:id="@+id/id_sobremesa"
             android:text="@string/btnSobremesas"
             android:drawableTop="@drawable/img_btn_sobremesa"
-            android:onClick="7"
+            android:onClick="onClickSobremesas"
             android:textColor="#cfff101a"
             android:textSize="20sp" />
         <Button
@@ -89,7 +89,7 @@
             android:id="@+id/id_refeicao_completa"
             android:text="@string/btnRefeicaoCompleta"
             android:drawableTop="@drawable/img_btn_refeicao_completa"
-            android:onClick="8"
+            android:onClick="onClickCompletos"
             android:textColor="#cfff101a"
             android:textSize="20sp" />
 

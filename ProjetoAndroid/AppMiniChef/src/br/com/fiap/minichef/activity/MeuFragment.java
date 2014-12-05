@@ -11,6 +11,7 @@ import br.com.fiap.minichef.services.scn.ReceitaSCN;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ListView;
@@ -73,27 +76,35 @@ public class MeuFragment extends Fragment {
                 
                 view = inflater.inflate(R.layout.lista_receitas, container, false);
                 
-                ArrayList<String> listaReceitas = new ArrayList<String>();
-                
                 ReceitaSCN recSCN = new ReceitaSCN(context);
                 List<ReceitaVO> receitas = recSCN.obterTodosReceitas();
-                for (ReceitaVO recVO : receitas) {
-                	listaReceitas.add(recVO.getNome());
-                }
-                Collections.sort(listaReceitas);
 
                 mSearchView = (SearchView) view.findViewById(R.id.search_view);
                 mListView = (ListView) view.findViewById(R.id.list_view);
                 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                ArrayAdapter<ReceitaVO> adapterReceitas = new ArrayAdapter<ReceitaVO>(context,
                         R.layout.search_list_item,
-                        listaReceitas);
+                        receitas);
                 
-                mListView.setAdapter(adapter);
+                mListView.setAdapter(adapterReceitas);
                 
-                f = adapter.getFilter();
+                f = adapterReceitas.getFilter();
                 
                 mListView.setTextFilterEnabled(true);
+                
+                mListView.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						ReceitaVO recVO = (ReceitaVO) parent.getItemAtPosition(position);
+						
+						Intent i = new Intent(context,DetalheReceitaActivity.class);
+						//i.putExtra(name, value)
+						//i.putExtra(recVO);
+                        startActivity(i);
+					}
+                });
+                
                 
                 setupSearchView();  
                 break ;

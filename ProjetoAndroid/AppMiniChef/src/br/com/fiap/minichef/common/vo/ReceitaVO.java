@@ -132,6 +132,9 @@ public class ReceitaVO implements Serializable {
 		this.categorias = categorias;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return nome;
+	}
 
 }

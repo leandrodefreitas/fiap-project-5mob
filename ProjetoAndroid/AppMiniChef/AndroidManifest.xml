@@ -63,7 +63,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.fiap.minichef.activity.DetalheReceita"
+            android:name="br.com.fiap.minichef.activity.DetalheReceitaActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>     
