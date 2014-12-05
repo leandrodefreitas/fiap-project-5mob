@@ -20,7 +20,6 @@
     <color name="holo_orange_dark">#ffff8800</color>
     <color name="holo_blue_bright">#ff00ddff</color>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Configuração</string>
     
     <string name="txt_splash">MiniChef</string>
