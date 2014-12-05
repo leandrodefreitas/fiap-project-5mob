@@ -54,5 +54,17 @@ public class DetalheReceitaActivity extends Activity {
 			}
 		});
 	}
+	
+//	public static void textSpeech(String descricao){
+	
+//		String[] descArray = descricao.split(".");
+//		TextToSpeech tts = new TextToSpeech(this, this);
+//		tts.setLanguage(new Locale("pt_BR"));
+//		for (int i = 0; i < descArray.length; i++) {
+//			tts.speak(descArray[i], TextToSpeech.QUEUE_ADD, null);
+//			Thread.sleep(1000);
+//		}
+
+//	}
 
 }
