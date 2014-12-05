@@ -94,14 +94,13 @@ public class MeuFragment extends Fragment {
                 mListView.setTextFilterEnabled(true);
                 
                 mListView.setOnItemClickListener(new OnItemClickListener() {
-					@Override
+                	@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						ReceitaVO recVO = (ReceitaVO) parent.getItemAtPosition(position);
 						
 						Intent i = new Intent(context,DetalheReceitaActivity.class);
-						//i.putExtra(name, value)
-						//i.putExtra(recVO);
+						i.putExtra("vo", recVO);
                         startActivity(i);
 					}
                 });
