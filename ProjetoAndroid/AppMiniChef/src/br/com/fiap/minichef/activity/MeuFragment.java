@@ -181,7 +181,7 @@ public class MeuFragment extends Fragment {
 		int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
 		TextView textView = (TextView) mSearchView.findViewById(id);
 		textView.setTextColor(Color.parseColor("#CC0001"));
-		textView.setHintTextColor(Color.WHITE);
+		textView.setHintTextColor(Color.BLACK);
     }
     
 	private class SearchFiltro implements OnQueryTextListener{
