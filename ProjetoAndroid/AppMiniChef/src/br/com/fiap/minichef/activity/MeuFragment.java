@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import br.com.fiap.minichef.common.vo.IngredienteVO;
-import br.com.fiap.minichef.common.vo.ReceitaVO;
-import br.com.fiap.minichef.services.scn.IngredienteSCN;
-import br.com.fiap.minichef.services.scn.ReceitaSCN;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +23,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
+import br.com.fiap.minichef.common.vo.IngredienteVO;
+import br.com.fiap.minichef.common.vo.ReceitaVO;
+import br.com.fiap.minichef.services.scn.IngredienteSCN;
+import br.com.fiap.minichef.services.scn.ReceitaSCN;
 
 public class MeuFragment extends Fragment {
 	
@@ -38,6 +37,8 @@ public class MeuFragment extends Fragment {
     private ListView mListView;
     private Filter f;  
     private ArrayAdapter<String> adapter;
+    
+    private IngredienteVO ingrediente = new IngredienteVO();
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -61,8 +62,8 @@ public class MeuFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Infla o layout do fragment
-        System.out.println("mPaginaAtual: " + mPaginaAtual);
-
+		final LayoutInflater inflaterAux = inflater;
+		final ViewGroup containerAux = container;
         View view = null;
 
         switch (mPaginaAtual)
@@ -107,6 +108,8 @@ public class MeuFragment extends Fragment {
                 
                 
                 setupSearchView();  
+                
+                
                 break ;
                 
             case 3:
@@ -128,9 +131,9 @@ public class MeuFragment extends Fragment {
                 mSearchView = (SearchView) view.findViewById(R.id.search_view);
                 mListView = (ListView) view.findViewById(R.id.list_view);
                 
-                adapter = new ArrayAdapter<String>(context,
+                /*adapter = new ArrayAdapter<String>(context,
                         R.layout.search_list_item,
-                        listaIngredientes);
+                        listaIngredientes);*/
                 
                 ArrayAdapter<IngredienteVO> ingAdapter = new ArrayAdapter<IngredienteVO>(context,
                         R.layout.search_list_item,
@@ -143,6 +146,24 @@ public class MeuFragment extends Fragment {
                 mListView.setTextFilterEnabled(true);
                 
                 setupSearchView(); 
+
+                mListView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						
+						ingrediente = (IngredienteVO) parent.getItemAtPosition(position);
+						
+				        Intent intent = new Intent(context, ListaReceitaActivity.class);
+				        intent.putExtra("vo", ingrediente);
+						startActivity(intent);
+						
+						
+						
+					}
+				});
+                
                 break ;
             	
             default:

@@ -58,7 +58,7 @@
             </intent-filter>
         </activity>        
         <activity
-            android:name="br.com.fiap.minichef.activity.EscolherPratoActivity"
+            android:name="br.com.fiap.minichef.activity.ListaReceitaActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
