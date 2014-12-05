@@ -102,7 +102,11 @@ public class ReceitaSCN {
 		List<IngredienteVO> ingredientes = new ArrayList<IngredienteVO>();
 		for (ItemIngredienteVO itemIngredienteVO : itemIngLista) {
 			IngredienteSCN ingSCN = new IngredienteSCN(context);
-			ingredientes.add(ingSCN.obterIngredientePorId(itemIngredienteVO.getIdIngrediente()));
+			IngredienteVO ingredienteVO = new IngredienteVO();
+			ingredienteVO = ingSCN.obterIngredientePorId(itemIngredienteVO.getIdIngrediente());
+			ingredienteVO.setQuantidade(itemIngredienteVO.getQuantidade());
+			ingredienteVO.setUnidadeMedida(itemIngredienteVO.getUnidadeMedida());
+			ingredientes.add(ingredienteVO);
 		}
 		
 		return ingredientes;

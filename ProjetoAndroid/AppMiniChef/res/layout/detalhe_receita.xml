@@ -16,22 +16,20 @@
 	        android:layout_height="0dp"
 	        android:orientation="vertical"
 	        android:layout_margin="5dp" >
-		    
-		    <TextView
-		        android:id="@+id/tvDescricao"
+	        
+            <ImageView
+		        android:id="@+id/ivFoto"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" />
+            
+            <TextView
+		        android:id="@+id/tvCategoria"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        style="@style/textPadrao"
 		        android:text="" />
-		    
-		    <TextView
-		        android:id="@+id/tvData"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        style="@style/textPadrao"
-		        android:text="" />
-		    
-		    <TextView
+            
+            <TextView
 		        android:id="@+id/tvTempo"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
@@ -46,25 +44,19 @@
 		        android:text="" />
 		    
 		    <TextView
-		        android:id="@+id/tvFoto"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="" />
-		    
-		    <TextView
-		        android:id="@+id/tvCategoria"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        style="@style/textPadrao"
-		        android:text="" />
-		    
-		    <TextView
 		        android:id="@+id/tvIngrediente"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        style="@style/textPadrao"
 		        android:text="" />
-	    
+		    
+		    <TextView
+		        android:id="@+id/tvDescricao"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        style="@style/textPadrao"
+		        android:text="" />
+		    
 	    </LinearLayout>
     </ScrollView>
     

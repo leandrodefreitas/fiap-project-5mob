@@ -1,22 +1,33 @@
 package br.com.fiap.minichef.activity;
 
+import java.io.InputStream;
+import java.util.List;
 import java.util.Locale;
 
+import br.com.fiap.minichef.common.vo.IngredienteVO;
 import br.com.fiap.minichef.common.vo.ReceitaVO;
+import br.com.fiap.minichef.services.scn.ReceitaSCN;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetalheReceitaActivity extends Activity {
 
 	private TextView tvdescricao;
-	private TextView tvdata;
 	private TextView tvtempo;
 	private TextView tvnota;
-	private TextView tvfoto;
+	private ImageView ivfoto;
 	private TextView tvcategoria;
 	private TextView tvingrediente;
 	
@@ -40,23 +51,60 @@ public class DetalheReceitaActivity extends Activity {
 
 		setContentView(R.layout.detalhe_receita);
 		setTitle(receitavo.getNome());
-
+		
+		ivfoto = (ImageView) findViewById(R.id.ivFoto);
 		tvdescricao = (TextView) findViewById(R.id.tvDescricao);
-		tvdata = (TextView) findViewById(R.id.tvData);
 		tvtempo = (TextView) findViewById(R.id.tvTempo);
 		tvnota = (TextView) findViewById(R.id.tvNota);
-		tvfoto = (TextView) findViewById(R.id.tvFoto);
 		tvcategoria = (TextView) findViewById(R.id.tvCategoria);
 		tvingrediente = (TextView) findViewById(R.id.tvIngrediente);
 
 		if (receitavo != null) {
+			if (receitavo.getFoto().contains("http")) {
+				new DownloadImageTask(ivfoto).execute(receitavo.getFoto());
+			} else {
+				ivfoto.setImageResource(R.drawable.sraminichef);
+			}
+			
+			String categoriasS = receitavo.getCategoria();
+			categoriasS = categoriasS.substring(1, categoriasS.length() - 1);
+			tvcategoria.setText("Categoria: "+categoriasS+".");
+			
+			Integer tempoPrep = receitavo.getTempo();
+			tempoPrep = tempoPrep/60;
+			tvtempo.setText("Tempo de preparo: " + tempoPrep + "min.");
+			
+			String estrelas = "★ ★ ★ ★ ★";
+			switch (receitavo.getNota()) {
+	        	case 1:
+	        		estrelas = "★ ☆ ☆ ☆ ☆";
+	        		break;
+	        	case 2:
+	        		estrelas = "★ ★ ☆ ☆ ☆";
+	        		break;
+	        	case 3:
+	        		estrelas = "★ ★ ★ ☆ ☆";
+	        		break;
+	        	case 4:
+	        		estrelas = "★ ★ ★ ★ ☆";
+	        		break;
+	        	case 5:
+	        		estrelas = "★ ★ ★ ★ ★";
+	        		break;
+	        	default: estrelas = "☆ ☆ ☆ ☆ ☆";
+	        }
+			tvnota.setText("Nota: " + estrelas +"\n");
+			
+			ReceitaSCN recscn = new ReceitaSCN(getApplicationContext());
+			List<IngredienteVO> listaIng = recscn.obterIngredientesPorId(receitavo.getId());
+			String ingredientesString = "";
+			for (IngredienteVO ingVO : listaIng) {
+				ingredientesString += "   • " + ingVO.getQuantidade().intValue() + " " 
+						+ ingVO.getUnidadeMedida() + " de " + ingVO.getDescricao() + "\n";
+			}
+			tvingrediente.setText("Ingredientes: \n" + ingredientesString);
+			
 			tvdescricao.setText(receitavo.getDescricao());
-			tvdata.setText(receitavo.getDataFormatted());
-			tvtempo.setText(receitavo.getTempo().toString());
-			tvnota.setText(receitavo.getNota().toString());
-			tvfoto.setText(receitavo.getFoto());
-			tvcategoria.setText(receitavo.getCategoria());
-			tvingrediente.setText(receitavo.getIngredientesString());
 		}
 
 		Button voltarButton = (Button) findViewById(R.id.voltar);
@@ -70,20 +118,35 @@ public class DetalheReceitaActivity extends Activity {
 		Button lerButton = (Button) findViewById(R.id.ler);
 		lerButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				
-				//String[] descArray = ((String) tvdescricao.getText()).split(".");
 				tts.setLanguage(new Locale("pt_BR"));
-				/*for (int i = 0; i < descArray.length; i++) {
-					tts.speak(descArray[i], TextToSpeech.QUEUE_ADD, null);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}*/
 				tts.speak(((String) tvdescricao.getText()), TextToSpeech.QUEUE_ADD, null);
 			}
 		});
 	}
+	
+	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	    ImageView bmImage;
 
+	    public DownloadImageTask(ImageView bmImage) {
+	        this.bmImage = bmImage;
+	    }
+
+	    protected Bitmap doInBackground(String... urls) {
+	        String urldisplay = urls[0];
+	        Bitmap mIcon11 = null;
+	        try {
+	            InputStream in = new java.net.URL(urldisplay).openStream();
+	            mIcon11 = BitmapFactory.decodeStream(in);
+	        } catch (Exception e) {
+	            Log.e("Error", e.getMessage());
+	            e.printStackTrace();
+	        }
+	        return mIcon11;
+	    }
+
+	    protected void onPostExecute(Bitmap result) {
+	        bmImage.setImageBitmap(result);
+	    }
+	}
+	
 }
