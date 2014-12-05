@@ -122,10 +122,12 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
                 	
                 	ArrayList<String> categoriasParse = new ArrayList<String>();
                 	categoriasParse = (ArrayList<String>) receitaParse.get("categorias");
+                	
+        			List<CategoriaVO> listaCat = new ArrayList<CategoriaVO>();         
+        			
                 	for (String catParse : categoriasParse) {
             			categoria = new CategoriaVO();
-            			List<CategoriaVO> listaCat = new ArrayList<CategoriaVO>();
-            			
+
             			if (!categoriaSCN.verSeTemCategoria(catParse)) {
             				categoria.setDescricao(catParse);
                 			Long idcat = categoriaSCN.salvarCategoria(categoria);
@@ -135,20 +137,20 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
                 			categoria = categoriaSCN.obterCategoriaPorDescricao(catParse);
                 			listaCat.add(categoria);
                 		}
-                		receita.setCategorias(listaCat);
-            			
             		}
+            		receita.setCategorias(listaCat);
                 	
                 	receita.setCategoria((categoriasParse).toString());
 
                 	ArrayList<String> ingredientesParse = new ArrayList<String>();
                 	ingredientesParse = (ArrayList<String>) receitaParse.get("ingredientes");
                 	
+            		List<IngredienteVO> listaIng = new ArrayList<IngredienteVO>();    
+            		
                 	for (String ingParse : ingredientesParse) {
                 		ingrediente = new IngredienteVO();
                 		String IngSep[] = ingParse.split(";");
-                		List<IngredienteVO> listaIng = new ArrayList<IngredienteVO>();
-                		
+
                 		if (!ingredienteSCN.verSetemIngrediente(IngSep[0])) {
                 			ingrediente.setDescricao(IngSep[0]);
                 			Long iding = ingredienteSCN.salvarIngrediente(ingrediente);
@@ -162,8 +164,8 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
                 			ingrediente.setUnidadeMedida(IngSep[2]);
                 			listaIng.add(ingrediente);
                 		}
-                		receita.setIngredientes(listaIng);
                 	}
+            		receita.setIngredientes(listaIng);
                 	
                 	receitaSCN.salvarReceita(receita);
             	}
