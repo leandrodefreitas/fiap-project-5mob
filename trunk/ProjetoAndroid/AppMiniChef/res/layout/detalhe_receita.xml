@@ -20,7 +20,8 @@
             <ImageView
 		        android:id="@+id/ivFoto"
 		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content" />
+		        android:layout_height="wrap_content" 
+		        android:background="@drawable/border"/>
             
             <TextView
 		        android:id="@+id/tvCategoria"
@@ -83,7 +84,8 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/voltar" />
+            android:text="@string/voltar" 
+            android:background="@drawable/border"/>
 
         <Button
             android:id="@+id/ler"
@@ -92,7 +94,8 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/ler" />
+            android:text="@string/ler" 
+            android:background="@drawable/border"/>
     </LinearLayout>
 
 </LinearLayout>
