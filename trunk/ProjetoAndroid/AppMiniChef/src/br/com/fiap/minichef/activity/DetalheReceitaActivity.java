@@ -8,10 +8,10 @@ import br.com.fiap.minichef.common.vo.IngredienteVO;
 import br.com.fiap.minichef.common.vo.ReceitaVO;
 import br.com.fiap.minichef.services.scn.ReceitaSCN;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class DetalheReceitaActivity extends Activity {
 
@@ -60,7 +59,7 @@ public class DetalheReceitaActivity extends Activity {
 		tvingrediente = (TextView) findViewById(R.id.tvIngrediente);
 
 		if (receitavo != null) {
-			if (receitavo.getFoto().contains("http")) {
+			if (receitavo.getFoto().contains("http") && isConnected()) {
 				new DownloadImageTask(ivfoto).execute(receitavo.getFoto());
 			} else {
 				ivfoto.setImageResource(R.drawable.sraminichef);
@@ -148,5 +147,16 @@ public class DetalheReceitaActivity extends Activity {
 	        bmImage.setImageBitmap(result);
 	    }
 	}
+	
+	// metodo para verificar conexao com a internet
+    public boolean isConnected() {
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;           	
+        } else {
+            return false;              	
+        }
+    }
 	
 }
