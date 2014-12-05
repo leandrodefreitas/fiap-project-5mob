@@ -13,8 +13,13 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 import br.com.fiap.minichef.adapter.MeuFragmentPagerAdapter;
+import br.com.fiap.minichef.common.vo.CategoriaVO;
+import br.com.fiap.minichef.services.scn.CategoriaSCN;
 
 public class MenuActivity extends FragmentActivity {
+	
+	private CategoriaVO categoria = new CategoriaVO();
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,50 +49,106 @@ public class MenuActivity extends FragmentActivity {
 
     public void onClickMassas(View view) {
         Log.i("Click", "Categoria massas");
+        
+        String strCategoria = String.valueOf(view.getResources().getText(R.string.btnMassas));
+        
+        CategoriaSCN catSCN = new CategoriaSCN(getApplicationContext());
+        categoria = catSCN.obterCategoriaPorDescricao(strCategoria);
+        
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipo", "Massas");
+        intentPrato.putExtra("tipo", strCategoria);
+        intentPrato.putExtra("vo", categoria);
         startActivity(intentPrato);
     }
     public void onClickLanches(View view) {
         Log.i("Click", "Categoria lanches");
+        
+        String strCategoria = String.valueOf(view.getResources().getText(R.string.btnLanches));  
+        
+        CategoriaSCN catSCN = new CategoriaSCN(getApplicationContext());
+        categoria = catSCN.obterCategoriaPorDescricao(strCategoria);
+        
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipo", "Lanches");
+        intentPrato.putExtra("tipo", strCategoria);
+        intentPrato.putExtra("vo", categoria);       
         startActivity(intentPrato);
     }
     public void onClickCarnes(View view) {
         Log.i("Click", "Categoria carnes");
+        
+        String strCategoria = String.valueOf(view.getResources().getText(R.string.btnCarnes));  
+        
+        CategoriaSCN catSCN = new CategoriaSCN(getApplicationContext());
+        categoria = catSCN.obterCategoriaPorDescricao(strCategoria);
+        
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipo", "Carnes");
+        intentPrato.putExtra("tipo", strCategoria);
+        intentPrato.putExtra("vo", categoria); 
         startActivity(intentPrato);
     }
     public void onClickSaladas(View view) {
         Log.i("Click", "Categoria saladas");
+        
+        String strCategoria = String.valueOf(view.getResources().getText(R.string.btnSaladas));  
+        
+        CategoriaSCN catSCN = new CategoriaSCN(getApplicationContext());
+        categoria = catSCN.obterCategoriaPorDescricao(strCategoria);
+        
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipo", "Saladas");
+        intentPrato.putExtra("tipo", strCategoria);
+        intentPrato.putExtra("vo", categoria); 
         startActivity(intentPrato);
     }
     public void onClickSopas(View view) {
         Log.i("Click", "Categoria sopas");
+        
+        String strCategoria = String.valueOf(view.getResources().getText(R.string.btnSopas));  
+        
+        CategoriaSCN catSCN = new CategoriaSCN(getApplicationContext());
+        categoria = catSCN.obterCategoriaPorDescricao(strCategoria);
+        
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipo", "Sopas");
+        intentPrato.putExtra("tipo", strCategoria);
+        intentPrato.putExtra("vo", categoria); 
         startActivity(intentPrato);
     }
     public void onClickPetiscos(View view) {
-        Log.i("Click", "Categoria massas");
+        Log.i("Click", "Categoria petiscos");
+        
+        String strCategoria = String.valueOf(view.getResources().getText(R.string.btnPetiscos));  
+        
+        CategoriaSCN catSCN = new CategoriaSCN(getApplicationContext());
+        categoria = catSCN.obterCategoriaPorDescricao(strCategoria);
+        
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipo", "Massas");
+        intentPrato.putExtra("tipo", strCategoria);
+        intentPrato.putExtra("vo", categoria); 
         startActivity(intentPrato);
     }
     public void onClickSobremesas(View view) {
         Log.i("Click", "Categoria sobremesas");
+        
+        String strCategoria = String.valueOf(view.getResources().getText(R.string.btnSobremesas));  
+        
+        CategoriaSCN catSCN = new CategoriaSCN(getApplicationContext());
+        categoria = catSCN.obterCategoriaPorDescricao(strCategoria);
+        
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipo", "Sobremesas");
+        intentPrato.putExtra("tipo", strCategoria);
+        intentPrato.putExtra("vo", categoria); 
         startActivity(intentPrato);
     }
     public void onClickCompletos(View view) {
         Log.i("Click", "Categoria completos");
+        
+        String strCategoria = String.valueOf(view.getResources().getText(R.string.btnRefeicaoCompleta));  
+        
+        CategoriaSCN catSCN = new CategoriaSCN(getApplicationContext());
+        categoria = catSCN.obterCategoriaPorDescricao(strCategoria);
+        
         Intent intentPrato = new Intent(this,ListaReceitaActivity.class);
-        intentPrato.putExtra("tipo", "Completos");
+        intentPrato.putExtra("tipo", strCategoria);
+        intentPrato.putExtra("vo", categoria); 
         startActivity(intentPrato);
     }
     
