@@ -5,6 +5,17 @@
     android:background="@drawable/background_gradiente"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/textViewSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC0001"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:textColor="#fff" 
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
     <SearchView
             android:id="@+id/search_view"
             android:layout_width="wrap_content"
@@ -15,5 +26,32 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="?android:attr/dividerVertical" />
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:measureWithLargestChild="true"
+        android:orientation="horizontal"
+        android:paddingLeft="2dip"
+        android:paddingRight="2dip"
+        android:paddingTop="0dip" >
+
+        <Button
+            android:id="@+id/voltarSearch"
+            style="?android:attr/buttonBarButtonStyle"
+            android:textColor="#cfff101a"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/voltar" />
+
+    </LinearLayout>    
 
 </LinearLayout>

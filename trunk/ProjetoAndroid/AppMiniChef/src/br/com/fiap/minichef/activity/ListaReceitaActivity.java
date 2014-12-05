@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
+import br.com.fiap.minichef.common.vo.CategoriaVO;
 import br.com.fiap.minichef.common.vo.IngredienteVO;
 import br.com.fiap.minichef.common.vo.ReceitaVO;
 import br.com.fiap.minichef.services.scn.ReceitaSCN;
@@ -27,6 +29,8 @@ public class ListaReceitaActivity extends Activity {
     private SearchView mSearchView;
     private ListView mListView;
     private Filter f;  	
+    private TextView tvSearch;
+    private List<ReceitaVO> receitas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,48 +41,59 @@ public class ListaReceitaActivity extends Activity {
 
 		String origem = extras.getString("tipo");
 		
-		Toast.makeText(getApplicationContext(),
-				"ORIGEM: " + origem, Toast.LENGTH_SHORT).show();
+		tvSearch = (TextView) findViewById(R.id.textViewSearch);
+		
 		
 		if (origem.equals("ingrediente")){
 			
 			IngredienteVO ingrediente = (IngredienteVO) extras.getSerializable("vo");
 			
-			//IngredienteVO ingrediente = ((IngredienteVO)getIntent().getSerializableExtra("vo"));
+			tvSearch.setText("Receitas com " + ingrediente.getDescricao());			
 			
 			ReceitaSCN recSCN = new ReceitaSCN(getApplicationContext());
-			List<ReceitaVO> receitas = recSCN.obterReceitasPorIngrediente(ingrediente);
+			receitas = recSCN.obterReceitasPorIngrediente(ingrediente);
 	        
-			mSearchView = (SearchView) findViewById(R.id.search_view);
-	        mListView = (ListView) findViewById(R.id.list_view);	
-	        
-	        ArrayAdapter<ReceitaVO> recAdapter = new ArrayAdapter<ReceitaVO>(getApplicationContext(), 
-	        		R.layout.search_list_item, 
-	        		receitas);
-	        mListView.setAdapter(recAdapter);
-	        
-	        f = recAdapter.getFilter();
-	        mListView.setTextFilterEnabled(true);
-	        setupSearchView();
-	        
-	        mListView.setOnItemClickListener(new OnItemClickListener() {
-            	@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					ReceitaVO recVO = (ReceitaVO) parent.getItemAtPosition(position);
-					
-					Intent i = new Intent(getApplicationContext() ,DetalheReceitaActivity.class);
-					i.putExtra("vo", recVO);
-                    startActivity(i);
-				}
-            });
-	        
-		} else if (origem == "categoria") {
-			
 		} else {
-			Toast.makeText(getApplicationContext(),
-					"Categoria: " + origem, Toast.LENGTH_SHORT).show();
+			
+			CategoriaVO categoria = (CategoriaVO) extras.getSerializable("vo");
+
+			tvSearch.setText(origem);
+			
+			ReceitaSCN recSCN = new ReceitaSCN(getApplicationContext());
+			receitas = recSCN.obterReceitasPorCategoria(categoria);
 		}
+		
+		mSearchView = (SearchView) findViewById(R.id.search_view);
+        mListView = (ListView) findViewById(R.id.list_view);	
+        
+        ArrayAdapter<ReceitaVO> recAdapter = new ArrayAdapter<ReceitaVO>(getApplicationContext(), 
+        		R.layout.search_list_item, 
+        		receitas);
+        mListView.setAdapter(recAdapter);
+        
+        f = recAdapter.getFilter();
+        mListView.setTextFilterEnabled(true);
+        setupSearchView();
+        
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+        	@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ReceitaVO recVO = (ReceitaVO) parent.getItemAtPosition(position);
+				
+				Intent i = new Intent(getApplicationContext() ,DetalheReceitaActivity.class);
+				i.putExtra("vo", recVO);
+                startActivity(i);
+			}
+        });		
+		
+		
+		Button voltarButton = (Button) findViewById(R.id.voltarSearch);
+		voltarButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				finish();
+			}
+		});		
 		 
 	}
 	
