@@ -98,12 +98,17 @@ public class DetalheReceitaActivity extends Activity {
 			List<IngredienteVO> listaIng = recscn.obterIngredientesPorId(receitavo.getId());
 			String ingredientesString = "";
 			for (IngredienteVO ingVO : listaIng) {
-				ingredientesString += "   • " + ingVO.getQuantidade().intValue() + " " 
-						+ ingVO.getUnidadeMedida() + " de " + ingVO.getDescricao() + "\n";
+				if(ingVO.getQuantidade().toString().contains(".0")) {
+					ingredientesString += "   • " + ingVO.getQuantidade().intValue() + " " 
+							+ ingVO.getUnidadeMedida() + " de " + ingVO.getDescricao() + "\n";
+				} else {
+					ingredientesString += "   • " + ingVO.getQuantidade().toString() + " " 
+							+ ingVO.getUnidadeMedida() + " de " + ingVO.getDescricao() + "\n";
+				}
 			}
 			tvingrediente.setText("Ingredientes: \n" + ingredientesString);
 			
-			tvdescricao.setText(receitavo.getDescricao());
+			tvdescricao.setText(receitavo.getDescricao() + "\n");
 		}
 
 		Button voltarButton = (Button) findViewById(R.id.voltar);
