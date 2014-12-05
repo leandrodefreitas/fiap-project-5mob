@@ -62,6 +62,7 @@ public class DetalheReceitaActivity extends Activity {
 		Button voltarButton = (Button) findViewById(R.id.voltar);
 		voltarButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
+				tts.shutdown();
 				finish();
 			}
 		});
