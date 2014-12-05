@@ -1,7 +1,5 @@
 package br.com.fiap.minichef.activity;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -36,7 +34,7 @@ public class MeuFragment extends Fragment {
     private SearchView mSearchView;
     private ListView mListView;
     private Filter f;  
-    private ArrayAdapter<String> adapter;
+
     
     private IngredienteVO ingrediente = new IngredienteVO();
 	
@@ -62,8 +60,7 @@ public class MeuFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Infla o layout do fragment
-		final LayoutInflater inflaterAux = inflater;
-		final ViewGroup containerAux = container;
+
         View view = null;
 
         switch (mPaginaAtual)
@@ -114,26 +111,12 @@ public class MeuFragment extends Fragment {
             case 3:
                 view = inflater.inflate(R.layout.lista_ingredientes, container, false);  
                 
-                ArrayList<String> listaIngredientes = new ArrayList<String>();
                 IngredienteSCN ingSCN = new IngredienteSCN(context);
-                List<IngredienteVO> listaIng = ingSCN.obterTodasIngredientes();
+                List<IngredienteVO> listaIng = ingSCN.obterTodosIngredientes();
                 
-                if (listaIng.isEmpty()){
-                	Log.i("Erro","lista de ingredientes vazia");
-                } else {
-                	for (IngredienteVO ingVO : listaIng) {
-                		listaIngredientes.add(ingVO.getDescricao());
-                    }
-                }
-                Collections.sort(listaIngredientes);
-
                 mSearchView = (SearchView) view.findViewById(R.id.search_view);
                 mListView = (ListView) view.findViewById(R.id.list_view);
-                
-                /*adapter = new ArrayAdapter<String>(context,
-                        R.layout.search_list_item,
-                        listaIngredientes);*/
-                
+                                
                 ArrayAdapter<IngredienteVO> ingAdapter = new ArrayAdapter<IngredienteVO>(context,
                         R.layout.search_list_item,
                         listaIng);

@@ -14,7 +14,7 @@ public class IngredienteDAO extends DataSource {
 			+ " (descricao) values (?)";
 
 	private static final String SELECT_ALL = "select id, descricao from "
-			+ TABLE_INGREDIENTES + " order by descricao";
+			+ TABLE_INGREDIENTES + " order by upper(descricao)";
 	
 	private static final String SELECT_BY_ID = "select id, descricao from "
 			+ TABLE_INGREDIENTES + " where id = ? ";
