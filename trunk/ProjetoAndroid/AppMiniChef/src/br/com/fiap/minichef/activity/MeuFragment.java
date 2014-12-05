@@ -53,7 +53,7 @@ public class MeuFragment extends Fragment {
 		// Pega os argumentos do objeto Bundle
         Bundle data = getArguments();
  
-        // Pega o valor a p�gina atual passada por par�metro via Bubdle 
+        // Pega o valor a pagina atual passada por parametro via Bubdle 
         mPaginaAtual = data.getInt("pagina_atual", 0);
         
 	}
@@ -156,6 +156,7 @@ public class MeuFragment extends Fragment {
 						ingrediente = (IngredienteVO) parent.getItemAtPosition(position);
 						
 				        Intent intent = new Intent(context, ListaReceitaActivity.class);
+				        intent.putExtra("tipo", "ingrediente");
 				        intent.putExtra("vo", ingrediente);
 						startActivity(intent);
 						

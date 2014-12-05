@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import br.com.fiap.minichef.common.vo.IngredienteVO;
@@ -26,27 +27,43 @@ public class ListaReceitaActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.lista_receitas);
+		setContentView(R.layout.lista_receita_activity);
 		
-		IngredienteVO ingrediente = ((IngredienteVO)getIntent().getSerializableExtra("vo"));
+		Bundle extras = getIntent().getExtras();
+
+		String origem = extras.getString("tipo");
 		
-		ReceitaSCN recSCN = new ReceitaSCN(getApplicationContext());
-		List<ReceitaVO> receitas = recSCN.obterReceitasPorIngrediente(ingrediente);
-        
-		mSearchView = (SearchView) findViewById(R.id.search_view);
-        mListView = (ListView) findViewById(R.id.list_view);	
-        
-        ArrayAdapter<ReceitaVO> recAdapter = new ArrayAdapter<ReceitaVO>(getApplicationContext(), 
-        		R.layout.search_list_item, 
-        		receitas);
-        mListView.setAdapter(recAdapter);
-        
-        f = recAdapter.getFilter();
-        mListView.setTextFilterEnabled(true);
-        setupSearchView(); 		
+		Toast.makeText(getApplicationContext(),
+				"ORIGEM: " + origem, Toast.LENGTH_SHORT).show();
 		
-		
-		
+		if (origem.equals("ingrediente")){
+			
+			IngredienteVO ingrediente = (IngredienteVO) extras.getSerializable("vo");
+			
+			//IngredienteVO ingrediente = ((IngredienteVO)getIntent().getSerializableExtra("vo"));
+			
+			ReceitaSCN recSCN = new ReceitaSCN(getApplicationContext());
+			List<ReceitaVO> receitas = recSCN.obterReceitasPorIngrediente(ingrediente);
+	        
+			mSearchView = (SearchView) findViewById(R.id.search_view);
+	        mListView = (ListView) findViewById(R.id.list_view);	
+	        
+	        ArrayAdapter<ReceitaVO> recAdapter = new ArrayAdapter<ReceitaVO>(getApplicationContext(), 
+	        		R.layout.search_list_item, 
+	        		receitas);
+	        mListView.setAdapter(recAdapter);
+	        
+	        f = recAdapter.getFilter();
+	        mListView.setTextFilterEnabled(true);
+	        setupSearchView(); 
+	        
+		} else if (origem == "categoria") {
+			
+		} else {
+			Toast.makeText(getApplicationContext(),
+					"Categoria: " + origem, Toast.LENGTH_SHORT).show();
+		}
+		 
 	}
 	
     private void setupSearchView() {
