@@ -23,7 +23,7 @@ public class IngredienteSCN {
 		return id;
 	}	
 
-	public List<IngredienteVO> obterTodasIngredientes() {
+	public List<IngredienteVO> obterTodosIngredientes() {
 		IngredienteDAO ingredienteDao = new IngredienteDAO(context);
 		List<IngredienteVO> ingredientes = ingredienteDao.selectAll();
 		ingredienteDao.close();

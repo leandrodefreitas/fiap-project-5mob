@@ -16,8 +16,8 @@ public class ReceitaDAO extends DataSource {
 			+ " (nome, descricao, data, tempo, nota, categoria, foto) values (?, ?, ?, ?, ?, ?, ? )";
 	
 	
-	private static final String SELECT_ALL_BY_DATA = "select id, nome, descricao, data, tempo, nota, categoria, foto from "
-			+ TABLE_RECEITAS + " order by data desc";
+	private static final String SELECT_ALL_BY_NOME = "select id, nome, descricao, data, tempo, nota, categoria, foto from "
+			+ TABLE_RECEITAS + " order by upper(nome)";
 	
 	private static final String SELECT_BY_ID = "select id, nome, descricao, data, tempo, nota, categoria, foto from "
 			+ TABLE_RECEITAS + " where id = ?";
@@ -65,7 +65,7 @@ public class ReceitaDAO extends DataSource {
 		
 		/*Cursor cursor = database.rawQuery(SELECT_ALL, null);*/
 		
-		Cursor cursor = database.rawQuery(SELECT_ALL_BY_DATA, null);
+		Cursor cursor = database.rawQuery(SELECT_ALL_BY_NOME, null);
 		
 		if (cursor.moveToFirst()) {
 			do {
