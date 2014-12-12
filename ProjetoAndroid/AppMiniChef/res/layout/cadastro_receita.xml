@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayoutGasto"
+    android:id="@+id/linearLayoutReceita"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -15,77 +15,79 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
+            
             <TextView
-                android:id="@+id/lblDataGasto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
+                android:id="@+id/lblAutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="descricao"
+                android:text="@string/lblAutor"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
             <EditText
-                android:id="@+id/fDescricaoGasto"
+                android:id="@+id/etAutor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="descricao"
+                android:hint=""
                 android:inputType="text" >
-
                 <requestFocus />
             </EditText>
-
-            <TextView
-                android:id="@+id/lblValor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:text="valor"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/fValorGasto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="valor"
-                android:inputType="numberDecimal" >
-            </EditText>
-
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="categoria"
+                android:text="@string/lblCategoria"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
             <ListView
-                android:id="@+id/lvCategoriasGasto"
+                android:id="@+id/lvCategorias"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:choiceMode="multipleChoice"
                 android:clickable="true" >
             </ListView>
-
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="ganho"
+                android:text="@string/lblTempoPreparo"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/etTempoPreparo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:inputType="number" >
+            </EditText>
 
-            <Spinner
-                android:id="@+id/spnGanhoSelecao"
+
+			<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/lblFoto"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp" />
+                android:layout_height="wrap_content" >
+                <Button
+                    android:id="@+id/btnTirarFoto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btnFoto" />
+                <ImageView
+                    android:id="@+id/ivFoto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true" 
+                    android:contentDescription="" />
+            </LinearLayout>
+            
 
             <LinearLayout
-                android:id="@+id/layoutParcelas"
+                android:id="@+id/layoutIngredientes"
                 android:layout_width="318dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp" >
@@ -94,87 +96,60 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:text="parcelas"
+                    android:text="@string/lblNome"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
-
                 <EditText
-                    android:id="@+id/fParcelaGasto"
+                    android:id="@+id/etIngredienteNome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="parcela"
-                    android:inputType="number" >
+                    android:hint="@string/exeIngrediente"
+                    android:inputType="text" >
                 </EditText>
-
+                
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:text="barra"
+                    android:text="@string/lblQuantidade"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
-
                 <EditText
-                    android:id="@+id/fNumParcelasGasto"
+                    android:id="@+id/etQuantidade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="total"
                     android:inputType="number" >
                 </EditText>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:text="local"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <CheckBox
-                android:id="@+id/chkLocal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="local" />
-
-            <TextView
-                android:id="@+id/txtLatitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="2dp"
-                android:text="latitude" />
-
-            <TextView
-                android:id="@+id/txtLongitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="2dp"
-                android:text="longitude" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:text="foto"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <Button
-                    android:id="@+id/btnTirarFoto"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="foto" />
                 
-                <ImageView
-                    android:id="@+id/ivFoto"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true" 
-                    android:contentDescription="btn_foto"/>
-                                
+                    android:paddingTop="10dp"
+                    android:text="@string/lblUnidadeMedida"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <EditText
+                    android:id="@+id/etUnidadeMedida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/exeUnidadeMedida"
+                    android:inputType="text" >
+                </EditText>
+
             </LinearLayout>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/lblModoPreparo"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/etDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:inputType="text" >
+            </EditText>
+            
+            
         </LinearLayout>
     </ScrollView>
 
@@ -196,7 +171,7 @@
         android:paddingTop="0dip" >
 
         <Button
-            android:id="@+id/btnSairGasto"
+            android:id="@+id/btnSairReceita"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -204,12 +179,12 @@
             android:text="@string/voltar" />
 
         <Button
-            android:id="@+id/btnSalvarGasto"
+            android:id="@+id/btnEnviarReceita"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/salvar" />
+            android:text="@string/enviar" />
     </LinearLayout>
 
 </LinearLayout>

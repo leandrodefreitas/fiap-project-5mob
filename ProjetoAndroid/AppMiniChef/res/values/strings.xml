@@ -33,9 +33,22 @@
     <string name="menuAddReceita">Adicionar receita</string>
     <string name="menuAtualizarBase">Atualizar base</string>
     
+    <string name="lblAutor">Autor (seu apelido):</string>
+    <string name="lblCategoria">Categorias:</string>
+    <string name="lblTempoPreparo">Tempo de preparo (min):</string>
+    <string name="lblFoto">Foto:</string>
+    <string name="lblIngredientes">Ingredientes:</string>
+    <string name="lblModoPreparo">Modo de preparo:</string>
+    <string name="lblQuantidade">Quantidade:</string>
+    <string name="lblUnidadeMedida">Unidade de medida:</string>
+    
+    <string name="exeIngrediente">Ex.: batata, cenoura, frango, ovo, alface...</string>
+    <string name="exeUnidadeMedida">Ex.: unid, grama, kg, litro, xícara, colher...</string>
+    
     <string name="consultar">Consultar</string>
     <string name="data">Data:</string>
     <string name="limpar">Limpar</string>
+    <string name="enviar">Enviar</string>
     <string name="salvar">Salvar</string>
 	<string name="voltar">Voltar</string>
     <string name="ler">Ler</string>
@@ -59,6 +72,7 @@
     <string name="btnPetiscos">Petiscos</string>
     <string name="btnSobremesas">Sobremesas</string>
     <string name="btnRefeicaoCompleta">Completos</string>
+    <string name="btnFoto">Foto</string>
     
     <string name="sobreInformacoes">
 App desenvolvido por: \n  • Flavio M. T. Ota \n  • Leandro de Freitas \n  • Rodrigo T. Y. Ota \n  • Wellington S. M. Santos\n
