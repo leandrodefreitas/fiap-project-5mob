@@ -1,6 +1,8 @@
 package br.com.fiap.minichef.services.scn;
 
+import br.com.fiap.minichef.common.dao.CategoriaDAO;
 import br.com.fiap.minichef.common.dao.IngredienteDAO;
+import br.com.fiap.minichef.common.dao.ReceitaCategoriaDAO;
 import br.com.fiap.minichef.common.dao.ReceitaDAO;
 import br.com.fiap.minichef.common.dao.ItemIngredienteDAO;
 import android.content.Context;
@@ -29,6 +31,18 @@ public class ExcluirDadosSCN {
 		ItemIngredienteDAO itemIngDao = new ItemIngredienteDAO(context);
 		itemIngDao.deleteAll();
 		itemIngDao.close();
+	}
+	
+	public void excluiDadosCategorias(){
+		CategoriaDAO catDao = new CategoriaDAO(context);
+		catDao.deleteAll();
+		catDao.close();
+	}
+	
+	public void excluiDadosReceitaCategorias(){
+		ReceitaCategoriaDAO recCatDao = new ReceitaCategoriaDAO(context);
+		recCatDao.deleteAll();
+		recCatDao.close();
 	}
 	
 }

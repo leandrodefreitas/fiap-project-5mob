@@ -13,6 +13,7 @@ import br.com.fiap.minichef.common.vo.CategoriaVO;
 import br.com.fiap.minichef.common.vo.IngredienteVO;
 import br.com.fiap.minichef.common.vo.ReceitaVO;
 import br.com.fiap.minichef.services.scn.CategoriaSCN;
+import br.com.fiap.minichef.services.scn.ExcluirDadosSCN;
 import br.com.fiap.minichef.services.scn.IngredienteSCN;
 import br.com.fiap.minichef.services.scn.ReceitaSCN;
 
@@ -43,6 +44,27 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
 			((Activity) context).finish();
 		}
 	}
+	
+	public PersistenciaAsyncTask(Context context, Boolean atualizacao) {
+		this.context = context;
+		
+		if (!isConnected()){
+			Toast.makeText(((Activity) context).getBaseContext(), "Sem acesso à internet. Favor verificar.",
+					Toast.LENGTH_LONG).show();
+			this.cancel(true);
+			context.startActivity(new Intent(".MenuActivity"));
+			((Activity) context).finish();
+		} else {
+			if (atualizacao) {
+				ExcluirDadosSCN base = new ExcluirDadosSCN(context);
+				base.excluiDadosItemIngredientes();
+    			base.excluiDadosIngredientes();
+    			base.excluiDadosReceitas();
+    			base.excluiDadosReceitaCategorias();
+    			base.excluiDadosCategorias();
+			}
+		}
+	}
 
 	@Override
 	protected void onPreExecute() {
@@ -61,6 +83,7 @@ public class PersistenciaAsyncTask extends AsyncTask<Void, Void, Void> {
 	protected Void doInBackground(Void... params) {
 		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("RECEITAS");
 		query.orderByDescending("_updated_at");
+		query.whereNotEqualTo("aprovado", false);
 		try {
 			receitas = query.find();
 			persistenciaDados();
