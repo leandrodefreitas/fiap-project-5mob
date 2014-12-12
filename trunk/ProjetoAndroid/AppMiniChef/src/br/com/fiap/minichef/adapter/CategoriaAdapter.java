@@ -6,16 +6,11 @@ import br.com.fiap.minichef.activity.R;
 import br.com.fiap.minichef.common.vo.CategoriaVO;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.CheckedTextView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class CategoriaAdapter extends BaseAdapter {
 	
@@ -45,7 +40,7 @@ public class CategoriaAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		final int auxposition = position;
+		//final int auxposition = position;
 		
 		View v = convertView;		
 		

@@ -246,8 +246,8 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 			
 			break;
 		case 2:
-			Toast.makeText(getBaseContext(), "Add.",
-					Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(this, CadastrarReceitaActivity.class);       
+	        startActivity(intent);
 			break;
 		case 3:
 			new AlertDialog.Builder(this)
